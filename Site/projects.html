@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projects — Connor Chiu</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <nav>
+      <a class="brand" href="index.html">Connor Chiu</a>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a class="active" href="projects.html">Projects</a>
+        <a href="https://www.linkedin.com/in/connor-chiu-3b9094372/" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section style="padding-top: 60px; padding-bottom: 20px;">
+      <div class="wrap">
+        <h2>Projects</h2>
+        <p class="section-sub">Four projects, roughly in order of how they build on each other</p>
+
+        <div class="feature-banner">
+          <div>
+            <h3>Live Demo: Sports Analytics Dashboard</h3>
+            <p>Combines the FIFA transfer-value and Super Bowl ad-revenue projects into one interactive, runs-in-your-browser dashboard with charts and sortable tables.</p>
+          </div>
+          <a class="btn" href="../Notebooks/dashboard.html" target="_blank" rel="noopener">Open Dashboard</a>
+        </div>
+
+        <div class="grid">
+
+          <div class="card">
+            <div class="tag blue">Project 1</div>
+            <h3>Soccer Player Transfer Values</h3>
+            <p>
+              Explores FIFA World Cup 2026 player data — cleaning a 70+ column dataset
+              down to what matters, aggregating per-player stats, and charting market
+              value by position and goals scored.
+            </p>
+            <div class="stack">pandas · matplotlib</div>
+            <div class="links">
+              <a class="primary" href="../Notebooks/01_soccer_transfer_values.ipynb">Open Notebook</a>
+              <a href="../DataSets/fifa_world_cup_2026_player_performance.csv">Dataset</a>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="tag red">Project 2</div>
+            <h3>Super Bowl Ad Revenue</h3>
+            <p>
+              Cleans 52 years (1967–2018) of Super Bowl data — parsing dates, stripping
+              formatted numbers — then analyzes how 30-second ad costs and viewership
+              have grown over time, broken down by network.
+            </p>
+            <div class="stack">pandas · matplotlib</div>
+            <div class="links">
+              <a class="primary" href="../Notebooks/02_superbowl_ad_revenue.ipynb">Open Notebook</a>
+              <a href="../DataSets/ThrowbackDataThursday%202019%20Week%205%20-%20Super%20Bowl.csv">Dataset</a>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="tag blue">Project 3</div>
+            <h3>NFL API Exploration</h3>
+            <p>
+              Pulls live data from ESPN's public NFL API — scoreboard, teams, standings,
+              and full rosters — then joins the results into pandas DataFrames to compare
+              team records, roster experience, and point differentials.
+            </p>
+            <div class="stack">Python · requests · pandas · REST APIs</div>
+            <div class="links">
+              <a class="primary" href="../Notebooks/nfl_api_exploration.ipynb">Open Notebook</a>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="tag red">Project 4</div>
+            <h3>Sports Business Operations Analysis</h3>
+            <p>
+              A business-operations lens on a synthetic 12-team basketball league:
+              ticket pricing vs. demand, wins per payroll dollar, player contract value,
+              and revenue trends by market size.
+            </p>
+            <div class="stack">pandas · Plotly</div>
+            <div class="links">
+              <a class="primary" href="../Notebooks/sports_ops_exploration.ipynb">Open Notebook</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <span>&copy; 2026 Connor Chiu</span>
+      <div class="foot-links">
+        <a href="about.html">About</a>
+        <a href="projects.html">Projects</a>
+        <a href="https://www.linkedin.com/in/connor-chiu-3b9094372/" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

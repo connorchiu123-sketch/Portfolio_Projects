@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Sports Analytics Dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:Arial,sans-serif;background:#f0f4f8;color:#222;padding:24px}
+    h1{text-align:center;font-size:26px;color:#1a3a6b;margin-bottom:4px}
+    .subtitle{text-align:center;color:#666;font-size:13px;margin-bottom:28px}
+    .badge{display:inline-block;padding:4px 14px;border-radius:4px;font-size:11px;
+      font-weight:bold;letter-spacing:1.2px;text-transform:uppercase;color:#fff;margin-bottom:14px}
+    .blue{background:#1a3a6b} .red{background:#8b0000}
+    .kpi-row{display:flex;gap:14px;margin-bottom:18px;flex-wrap:wrap}
+    .kpi{background:#fff;border-radius:10px;padding:16px 20px;flex:1;min-width:150px;
+      box-shadow:0 2px 8px rgba(0,0,0,.07)}
+    .kpi.bk{border-left:4px solid #1a3a6b}
+    .kpi.rk{border-left:4px solid #8b0000}
+    .kpi .lbl{font-size:11px;color:#888;margin-bottom:5px}
+    .kpi .val{font-size:22px;font-weight:bold;color:#1a3a6b}
+    .kpi.rk .val{color:#8b0000}
+    .kpi .sub{font-size:11px;color:#aaa;margin-top:3px}
+    .row{display:flex;gap:18px;margin-bottom:24px;flex-wrap:wrap}
+    .card{background:#fff;border-radius:10px;padding:18px;flex:1;min-width:300px;
+      box-shadow:0 2px 8px rgba(0,0,0,.07)}
+    .card h3{font-size:13px;color:#333;margin-bottom:2px}
+    .card p{font-size:11px;color:#999;margin-bottom:12px}
+    table{width:100%;border-collapse:collapse;font-size:12px;background:#fff;
+      border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.07);margin-bottom:28px}
+    .bt thead{background:#1a3a6b}
+    .rt thead{background:#8b0000}
+    thead{color:#fff}
+    thead th{padding:9px 12px;text-align:left;font-size:11px}
+    .bt tbody tr:nth-child(even){background:#f0f6fc}
+    .rt tbody tr:nth-child(even){background:#fff5f5}
+    tbody td{padding:8px 12px}
+    hr{border:none;border-top:2px solid #dde6f0;margin:28px 0}
+  </style>
+</head>
+<body>
+<h1>Sports Analytics Dashboard</h1>
+<p class="subtitle">FIFA World Cup 2026 Player Transfer Values &nbsp;|&nbsp; Super Bowl Ad Revenue 1967&#8211;2018</p>
+
+<div class="badge blue">Project 1 &#8212; Soccer Player Transfer Values (FIFA World Cup 2026)</div>
+<div class="kpi-row" id="kf"></div>
+<div class="row">
+  <div class="card">
+    <h3>Average Market Value by Position (&#8364;M)</h3>
+    <p>Which position commands the highest transfer value?</p>
+    <canvas id="c1" height="210"></canvas>
+  </div>
+  <div class="card">
+    <h3>Goals vs. Market Value &#8212; Top 50 Players</h3>
+    <p>Colored by position. Do scorers earn higher valuations?</p>
+    <canvas id="c2" height="210"></canvas>
+  </div>
+</div>
+<div class="badge blue" style="margin-bottom:10px">Top 10 Players by Market Value</div><br/>
+<table class="bt" id="ft"><thead><tr>
+  <th>#</th><th>Player</th><th>Nationality</th><th>Club</th><th>Position</th>
+  <th>Goals</th><th>Assists</th><th>Rating</th><th>Market Value</th>
+</tr></thead><tbody></tbody></table>
+
+<hr/>
+
+<div class="badge red">Project 2 &#8212; Super Bowl Ad Revenue (1967&#8211;2018)</div>
+<div class="kpi-row" id="ks"></div>
+<div class="row">
+  <div class="card">
+    <h3>30-Second Ad Cost Over Time ($K)</h3>
+    <p>From $40K in 1967 to $5,000K in 2018 &#8212; a 12,400% increase.</p>
+    <canvas id="c3" height="220"></canvas>
+  </div>
+  <div class="card">
+    <h3>U.S. Viewership Over Time (Millions)</h3>
+    <p>More eyeballs = more advertiser demand = higher prices.</p>
+    <canvas id="c4" height="220"></canvas>
+  </div>
+</div>
+<div class="row">
+  <div class="card">
+    <h3>Average Ad Cost by Network ($K)</h3>
+    <p>Fox averaged the highest Super Bowl ad rates.</p>
+    <canvas id="c5" height="220"></canvas>
+  </div>
+  <div class="card">
+    <h3>Viewership vs. Ad Cost (each dot = one Super Bowl)</h3>
+    <p>Hover over a dot to see which game it was.</p>
+    <canvas id="c6" height="220"></canvas>
+  </div>
+</div>
+<div class="badge red" style="margin-bottom:10px">All 52 Super Bowls</div><br/>
+<table class="rt" id="st"><thead><tr>
+  <th>Game</th><th>Year</th><th>Winner</th><th>Network</th>
+  <th>Ad Cost ($K)</th><th>Viewers (M)</th><th>TV Rating</th><th>Attendance</th>
+</tr></thead><tbody></tbody></table>
+
+<script>
+const D = {"top10_mv": [{"name": "Houssem Mokrani", "goals": 2, "assists": 5, "rating": 4.9, "mv_m": 200.0, "position": "Midfielder", "nationality": "Algerian", "club": "Gor Mahia"}, {"name": "Saleh Al-Qahtani", "goals": 13, "assists": 9, "rating": 4.7, "mv_m": 200.0, "position": "Forward", "nationality": "Saudi", "club": "Kawasaki Frontale"}, {"name": "Romelu Onana", "goals": 2, "assists": 9, "rating": 4.2, "mv_m": 200.0, "position": "Midfielder", "nationality": "Belgian", "club": "Brondby"}, {"name": "Dominik Kramaric", "goals": 15, "assists": 9, "rating": 5.0, "mv_m": 190.7, "position": "Forward", "nationality": "Croatian", "club": "Midtjylland"}, {"name": "Jesus Reyes", "goals": 6, "assists": 6, "rating": 4.4, "mv_m": 170.8, "position": "Midfielder", "nationality": "Mexican", "club": "Forge FC"}, {"name": "Memphis Zerrouki", "goals": 24, "assists": 9, "rating": 4.6, "mv_m": 154.4, "position": "Forward", "nationality": "Dutch", "club": "Fenerbahce"}, {"name": "Rasmus Andersen", "goals": 2, "assists": 1, "rating": 3.4, "mv_m": 148.1, "position": "Defender", "nationality": "Danish", "club": "Feyenoord"}, {"name": "Ali Al-Buraikan", "goals": 3, "assists": 4, "rating": 5.4, "mv_m": 147.2, "position": "Midfielder", "nationality": "Saudi", "club": "Melbourne City"}, {"name": "Gianluca Pe\u00f1a", "goals": 4, "assists": 7, "rating": 4.0, "mv_m": 146.9, "position": "Midfielder", "nationality": "Peruvian", "club": "Universidad de Chile"}, {"name": "Burak Soyuncu", "goals": 5, "assists": 4, "rating": 4.2, "mv_m": 142.1, "position": "Forward", "nationality": "Turkish", "club": "Grasshoppers"}], "avg_pos": {"Goalkeeper": 12.4, "Midfielder": 22.9, "Forward": 26.4, "Defender": 15.3}, "scatter": [{"name": "Houssem Mokrani", "goals": 2, "assists": 5, "rating": 4.9, "mv_m": 200.0, "position": "Midfielder", "nationality": "Algerian", "club": "Gor Mahia"}, {"name": "Saleh Al-Qahtani", "goals": 13, "assists": 9, "rating": 4.7, "mv_m": 200.0, "position": "Forward", "nationality": "Saudi", "club": "Kawasaki Frontale"}, {"name": "Romelu Onana", "goals": 2, "assists": 9, "rating": 4.2, "mv_m": 200.0, "position": "Midfielder", "nationality": "Belgian", "club": "Brondby"}, {"name": "Dominik Kramaric", "goals": 15, "assists": 9, "rating": 5.0, "mv_m": 190.7, "position": "Forward", "nationality": "Croatian", "club": "Midtjylland"}, {"name": "Jesus Reyes", "goals": 6, "assists": 6, "rating": 4.4, "mv_m": 170.8, "position": "Midfielder", "nationality": "Mexican", "club": "Forge FC"}, {"name": "Memphis Zerrouki", "goals": 24, "assists": 9, "rating": 4.6, "mv_m": 154.4, "position": "Forward", "nationality": "Dutch", "club": "Fenerbahce"}, {"name": "Rasmus Andersen", "goals": 2, "assists": 1, "rating": 3.4, "mv_m": 148.1, "position": "Defender", "nationality": "Danish", "club": "Feyenoord"}, {"name": "Ali Al-Buraikan", "goals": 3, "assists": 4, "rating": 5.4, "mv_m": 147.2, "position": "Midfielder", "nationality": "Saudi", "club": "Melbourne City"}, {"name": "Gianluca Pe\u00f1a", "goals": 4, "assists": 7, "rating": 4.0, "mv_m": 146.9, "position": "Midfielder", "nationality": "Peruvian", "club": "Universidad de Chile"}, {"name": "Burak Soyuncu", "goals": 5, "assists": 4, "rating": 4.2, "mv_m": 142.1, "position": "Forward", "nationality": "Turkish", "club": "Grasshoppers"}, {"name": "Mohamed Gomaa", "goals": 7, "assists": 3, "rating": 4.1, "mv_m": 139.8, "position": "Forward", "nationality": "Egyptian", "club": "Orlando Pirates"}, {"name": "Mohammed Al-Rubaie", "goals": 3, "assists": 9, "rating": 4.6, "mv_m": 138.5, "position": "Midfielder", "nationality": "Saudi", "club": "Bunyodkor"}, {"name": "Abdelaziz Abdulla", "goals": 13, "assists": 6, "rating": 4.6, "mv_m": 135.3, "position": "Forward", "nationality": "Qatari", "club": "Al-Hilal"}, {"name": "Federico Colpani", "goals": 12, "assists": 8, "rating": 4.0, "mv_m": 132.3, "position": "Forward", "nationality": "Italian", "club": "Juventus"}, {"name": "Mathew Behich", "goals": 0, "assists": 0, "rating": 4.3, "mv_m": 130.6, "position": "Defender", "nationality": "Australian", "club": "Western Sydney Wanderers"}, {"name": "Gavi Ramos", "goals": 1, "assists": 7, "rating": 4.4, "mv_m": 125.0, "position": "Midfielder", "nationality": "Spanish", "club": "AIK"}, {"name": "Gianluigi Calafiori", "goals": 13, "assists": 8, "rating": 3.9, "mv_m": 123.7, "position": "Forward", "nationality": "Italian", "club": "Atletico Madrid"}, {"name": "Anibal Sanchez", "goals": 10, "assists": 12, "rating": 4.3, "mv_m": 121.2, "position": "Forward", "nationality": "Panamanian", "club": "Cruz Azul"}, {"name": "Marcus Chilwell", "goals": 5, "assists": 5, "rating": 5.3, "mv_m": 121.1, "position": "Midfielder", "nationality": "English", "club": "FC Basel"}, {"name": "Jorge Lozano", "goals": 1, "assists": 7, "rating": 3.3, "mv_m": 119.3, "position": "Midfielder", "nationality": "Mexican", "club": "Guadalajara"}, {"name": "Cody Lang", "goals": 10, "assists": 6, "rating": 4.7, "mv_m": 118.5, "position": "Forward", "nationality": "Dutch", "club": "Dinamo Zagreb"}, {"name": "Bryan Leiton", "goals": 2, "assists": 4, "rating": 3.9, "mv_m": 113.2, "position": "Midfielder", "nationality": "Costa Rican", "club": "Vancouver Whitecaps"}, {"name": "Stephan Guglielmo", "goals": 0, "assists": 1, "rating": 4.7, "mv_m": 112.2, "position": "Defender", "nationality": "Italian", "club": "Brondby"}, {"name": "Josko Bradaric", "goals": 0, "assists": 0, "rating": 3.9, "mv_m": 111.7, "position": "Defender", "nationality": "Croatian", "club": "FC Basel"}, {"name": "Ali Ali", "goals": 3, "assists": 7, "rating": 4.5, "mv_m": 110.8, "position": "Midfielder", "nationality": "Qatari", "club": "Al-Ittihad"}, {"name": "Ramiz Boufantin", "goals": 1, "assists": 3, "rating": 3.7, "mv_m": 110.7, "position": "Midfielder", "nationality": "Algerian", "club": "JS Kabylie"}, {"name": "Timothy Weah", "goals": 12, "assists": 4, "rating": 4.3, "mv_m": 106.3, "position": "Forward", "nationality": "American", "club": "CF Montreal"}, {"name": "Sam James", "goals": 4, "assists": 6, "rating": 4.1, "mv_m": 103.8, "position": "Midfielder", "nationality": "Canadian", "club": "Guadalajara"}, {"name": "Harry Leckie", "goals": 1, "assists": 0, "rating": 4.3, "mv_m": 98.5, "position": "Defender", "nationality": "Australian", "club": "Erbil SC"}, {"name": "Lautaro Sosa", "goals": 2, "assists": 3, "rating": 4.3, "mv_m": 98.3, "position": "Midfielder", "nationality": "Argentine", "club": "Universidad de Chile"}, {"name": "Granit Kobal", "goals": 6, "assists": 4, "rating": 4.3, "mv_m": 98.0, "position": "Forward", "nationality": "Swiss", "club": "Lech Poznan"}, {"name": "Mateusz Kozlowski", "goals": 5, "assists": 5, "rating": 3.7, "mv_m": 96.3, "position": "Midfielder", "nationality": "Polish", "club": "Bayern Munich"}, {"name": "Son Hong", "goals": 3, "assists": 3, "rating": 4.9, "mv_m": 96.1, "position": "Midfielder", "nationality": "South Korean", "club": "Al-Ittihad"}, {"name": "Hwang Choi", "goals": 1, "assists": 2, "rating": 4.5, "mv_m": 95.4, "position": "Midfielder", "nationality": "South Korean", "club": "Kawasaki Frontale"}, {"name": "Paolo Gonzalez", "goals": 13, "assists": 6, "rating": 4.2, "mv_m": 95.3, "position": "Forward", "nationality": "Peruvian", "club": "Atletico Nacional"}, {"name": "Randal Duarte", "goals": 14, "assists": 6, "rating": 4.3, "mv_m": 94.1, "position": "Forward", "nationality": "Costa Rican", "club": "CF Montreal"}, {"name": "Yassine Amrabat", "goals": 5, "assists": 4, "rating": 3.9, "mv_m": 93.9, "position": "Forward", "nationality": "Moroccan", "club": "Club Africain"}, {"name": "Mehdi Arefi", "goals": 6, "assists": 10, "rating": 4.8, "mv_m": 92.4, "position": "Midfielder", "nationality": "Iranian", "club": "Urawa Red Diamonds"}, {"name": "Hidajat Ghoddos", "goals": 5, "assists": 8, "rating": 4.5, "mv_m": 92.4, "position": "Forward", "nationality": "Iranian", "club": "Yokohama F. Marinos"}, {"name": "Memphis Simons", "goals": 0, "assists": 0, "rating": 4.3, "mv_m": 89.6, "position": "Defender", "nationality": "Dutch", "club": "RB Salzburg"}, {"name": "Houssem Brahimi", "goals": 9, "assists": 4, "rating": 5.1, "mv_m": 89.3, "position": "Forward", "nationality": "Algerian", "club": "MC Alger"}, {"name": "David Ulmer", "goals": 6, "assists": 3, "rating": 4.8, "mv_m": 86.0, "position": "Midfielder", "nationality": "Austrian", "club": "Rapid Vienna"}, {"name": "Davinson Mina", "goals": 7, "assists": 3, "rating": 3.8, "mv_m": 85.0, "position": "Forward", "nationality": "Colombian", "club": "River Plate"}, {"name": "Luis Cartagena", "goals": 3, "assists": 9, "rating": 3.9, "mv_m": 84.9, "position": "Midfielder", "nationality": "Peruvian", "club": "Nacional"}, {"name": "Jose Cavani", "goals": 10, "assists": 9, "rating": 4.8, "mv_m": 84.5, "position": "Forward", "nationality": "Uruguayan", "club": "Millonarios"}, {"name": "Ismaila Ba", "goals": 1, "assists": 0, "rating": 4.7, "mv_m": 84.4, "position": "Defender", "nationality": "Senegalese", "club": "Al-Masry"}, {"name": "Sadio Koulibaly", "goals": 0, "assists": 0, "rating": 1.1, "mv_m": 84.4, "position": "Goalkeeper", "nationality": "Senegalese", "club": "MC Alger"}, {"name": "Granit Rodriguez", "goals": 0, "assists": 2, "rating": 3.4, "mv_m": 83.3, "position": "Defender", "nationality": "Swiss", "club": "Ajax"}, {"name": "Mohammed Otoo", "goals": 6, "assists": 7, "rating": 4.8, "mv_m": 83.0, "position": "Midfielder", "nationality": "Ghanaian", "club": "Kaizer Chiefs"}, {"name": "Yevhen Kryvtsov", "goals": 3, "assists": 3, "rating": 3.9, "mv_m": 82.7, "position": "Midfielder", "nationality": "Ukrainian", "club": "Bayern Munich"}], "sb": [{"year": 1967, "game": "I", "cost_k": 40.0, "viewers_m": 51.2, "rating": 41.1, "attendance": 61946, "network": "CBS/NBC", "winner": "Green Bay Packers"}, {"year": 1968, "game": "II", "cost_k": 54.5, "viewers_m": 39.1, "rating": 36.8, "attendance": 75546, "network": "CBS", "winner": "Green Bay Packers"}, {"year": 1969, "game": "III", "cost_k": 55.0, "viewers_m": 41.7, "rating": 36.0, "attendance": 75389, "network": "NBC", "winner": "New York Jets"}, {"year": 1970, "game": "IV", "cost_k": 78.2, "viewers_m": 44.3, "rating": 39.4, "attendance": 80562, "network": "CBS", "winner": "Kansas City Chiefs"}, {"year": 1971, "game": "V", "cost_k": 72.5, "viewers_m": 46.0, "rating": 39.9, "attendance": 79204, "network": "NBC", "winner": "Baltimore Colts"}, {"year": 1972, "game": "VI", "cost_k": 86.1, "viewers_m": 56.6, "rating": 44.2, "attendance": 81023, "network": "CBS", "winner": "Dallas Cowboys"}, {"year": 1973, "game": "VII", "cost_k": 88.1, "viewers_m": 53.3, "rating": 42.7, "attendance": 90182, "network": "NBC", "winner": "Miami Dolphins"}, {"year": 1974, "game": "VIII", "cost_k": 103.5, "viewers_m": 51.7, "rating": 41.6, "attendance": 71882, "network": "CBS", "winner": "Miami Dolphins"}, {"year": 1975, "game": "IX", "cost_k": 107.0, "viewers_m": 56.0, "rating": 42.4, "attendance": 80997, "network": "NBC", "winner": "Pittsburgh Steelers"}, {"year": 1976, "game": "X", "cost_k": 110.0, "viewers_m": 57.7, "rating": 42.3, "attendance": 80187, "network": "CBS", "winner": "Pittsburgh Steelers"}, {"year": 1977, "game": "XI", "cost_k": 125.0, "viewers_m": 62.0, "rating": 44.4, "attendance": 103438, "network": "NBC", "winner": "Oakland Raiders"}, {"year": 1978, "game": "XII", "cost_k": 162.3, "viewers_m": 78.9, "rating": 47.2, "attendance": 76400, "network": "CBS", "winner": "Dallas Cowboys"}, {"year": 1979, "game": "XIII", "cost_k": 185.0, "viewers_m": 74.7, "rating": 47.1, "attendance": 79484, "network": "NBC", "winner": "Pittsburgh Steelers"}, {"year": 1980, "game": "XIV", "cost_k": 222.0, "viewers_m": 76.2, "rating": 46.3, "attendance": 103985, "network": "CBS", "winner": "Pittsburgh Steelers"}, {"year": 1981, "game": "XV", "cost_k": 275.0, "viewers_m": 68.3, "rating": 44.4, "attendance": 76135, "network": "NBC", "winner": "Oakland Raiders"}, {"year": 1982, "game": "XVI", "cost_k": 324.3, "viewers_m": 85.2, "rating": 49.1, "attendance": 81270, "network": "CBS", "winner": "San Francisco 49er"}, {"year": 1983, "game": "XVII", "cost_k": 400.0, "viewers_m": 81.8, "rating": 48.6, "attendance": 103667, "network": "NBC", "winner": "Washington Redskins"}, {"year": 1984, "game": "XVIII", "cost_k": 368.2, "viewers_m": 77.6, "rating": 46.4, "attendance": 72920, "network": "CBS", "winner": "Los Angeles Raiders"}, {"year": 1985, "game": "XIX", "cost_k": 525.0, "viewers_m": 85.5, "rating": 46.4, "attendance": 84059, "network": "ABC", "winner": "San Francisco 49ers"}, {"year": 1986, "game": "XX", "cost_k": 550.0, "viewers_m": 92.6, "rating": 48.3, "attendance": 73818, "network": "NBC", "winner": "Chicago Bears"}, {"year": 1987, "game": "XXI", "cost_k": 600.0, "viewers_m": 87.2, "rating": 45.8, "attendance": 101063, "network": "CBS", "winner": "New York Giants"}, {"year": 1988, "game": "XXII", "cost_k": 645.0, "viewers_m": 80.1, "rating": 41.9, "attendance": 73302, "network": "ABC", "winner": "Washington Redskins"}, {"year": 1989, "game": "XXIII", "cost_k": 675.0, "viewers_m": 81.6, "rating": 43.5, "attendance": 75129, "network": "NBC", "winner": "San Francisco 49ers"}, {"year": 1990, "game": "XXIV", "cost_k": 700.4, "viewers_m": 73.9, "rating": 39.0, "attendance": 72919, "network": "CBS", "winner": "San Francisco 49ers"}, {"year": 1991, "game": "XXV", "cost_k": 800.0, "viewers_m": 79.5, "rating": 41.9, "attendance": 73813, "network": "ABC", "winner": "New York Giants"}, {"year": 1992, "game": "XXVI", "cost_k": 850.0, "viewers_m": 79.6, "rating": 40.3, "attendance": 63130, "network": "CBS", "winner": "Washington Redskins"}, {"year": 1993, "game": "XXVII", "cost_k": 850.0, "viewers_m": 91.0, "rating": 45.1, "attendance": 98374, "network": "NBC", "winner": "Dallas Cowboys"}, {"year": 1994, "game": "XXVIII", "cost_k": 900.0, "viewers_m": 90.0, "rating": 45.5, "attendance": 72817, "network": "NBC", "winner": "Dallas Cowboys"}, {"year": 1995, "game": "XXIX", "cost_k": 1150.0, "viewers_m": 83.4, "rating": 41.3, "attendance": 74107, "network": "ABC", "winner": "San Francisco 49ers"}, {"year": 1996, "game": "XXX", "cost_k": 1085.0, "viewers_m": 94.1, "rating": 46.0, "attendance": 76347, "network": "NBC", "winner": "Dallas Cowboys"}, {"year": 1997, "game": "XXXI", "cost_k": 1200.0, "viewers_m": 87.9, "rating": 43.3, "attendance": 72301, "network": "Fox", "winner": "Green Bay Packers"}, {"year": 1998, "game": "XXXII", "cost_k": 1291.1, "viewers_m": 90.0, "rating": 44.5, "attendance": 68912, "network": "NBC", "winner": "Denver Broncos"}, {"year": 1999, "game": "XXXIII", "cost_k": 1600.0, "viewers_m": 83.7, "rating": 40.2, "attendance": 74803, "network": "Fox", "winner": "Denver Broncos"}, {"year": 2000, "game": "XXXIV", "cost_k": 2100.0, "viewers_m": 88.5, "rating": 43.3, "attendance": 72625, "network": "ABC", "winner": "St. Louis Rams"}, {"year": 2001, "game": "XXXV", "cost_k": 2200.0, "viewers_m": 84.3, "rating": 40.4, "attendance": 71921, "network": "CBS", "winner": "Baltimore Ravens"}, {"year": 2002, "game": "XXXVI", "cost_k": 2200.0, "viewers_m": 86.8, "rating": 40.4, "attendance": 72922, "network": "Fox", "winner": "New England Patriots"}, {"year": 2003, "game": "XXXVII", "cost_k": 2200.0, "viewers_m": 88.6, "rating": 40.7, "attendance": 67603, "network": "ABC", "winner": "Tampa Bay Buccaneers"}, {"year": 2004, "game": "XXXVIII", "cost_k": 2302.2, "viewers_m": 89.8, "rating": 41.4, "attendance": 71525, "network": "CBS", "winner": "New England Patriots"}, {"year": 2005, "game": "XXXIX", "cost_k": 2400.0, "viewers_m": 86.1, "rating": 41.1, "attendance": 78125, "network": "Fox", "winner": "New England Patriots"}, {"year": 2006, "game": "XL", "cost_k": 2500.0, "viewers_m": 90.7, "rating": 41.6, "attendance": 68206, "network": "ABC", "winner": "Pittsburgh Steelers"}, {"year": 2007, "game": "XLI", "cost_k": 2385.4, "viewers_m": 93.2, "rating": 42.6, "attendance": 74512, "network": "CBS", "winner": "Indianapolis Colts"}, {"year": 2008, "game": "XLII", "cost_k": 2700.0, "viewers_m": 97.4, "rating": 43.1, "attendance": 71101, "network": "Fox", "winner": "New York Giants"}, {"year": 2009, "game": "XLIII", "cost_k": 3000.0, "viewers_m": 98.7, "rating": 42.0, "attendance": 70774, "network": "NBC", "winner": "Pittsburgh Steelers"}, {"year": 2010, "game": "XLIV", "cost_k": 2800.0, "viewers_m": 106.5, "rating": 45.0, "attendance": 74059, "network": "CBS", "winner": "New Orleans Saints"}, {"year": 2011, "game": "XLV", "cost_k": 3100.0, "viewers_m": 111.0, "rating": 46.0, "attendance": 103219, "network": "Fox", "winner": "Green Bay Packers"}, {"year": 2012, "game": "XLVI", "cost_k": 3500.0, "viewers_m": 111.3, "rating": 47.0, "attendance": 68658, "network": "NBC", "winner": "New York Giants"}, {"year": 2013, "game": "XLVII", "cost_k": 4000.0, "viewers_m": 108.7, "rating": 46.4, "attendance": 71024, "network": "CBS", "winner": "Baltimore Ravens"}, {"year": 2014, "game": "XLVIII", "cost_k": 4000.0, "viewers_m": 112.2, "rating": 46.7, "attendance": 82529, "network": "Fox", "winner": "Seattle Seahawks"}, {"year": 2015, "game": "XLIX", "cost_k": 4500.0, "viewers_m": 114.4, "rating": 71.0, "attendance": 70288, "network": "NBC", "winner": "New England Patriots"}, {"year": 2016, "game": "50", "cost_k": 5000.0, "viewers_m": 111.9, "rating": 46.6, "attendance": 71088, "network": "CBS", "winner": "Denver Broncos"}, {"year": 2017, "game": "LI", "cost_k": 5000.0, "viewers_m": 111.3, "rating": 45.3, "attendance": 70807, "network": "Fox", "winner": "New England Patriots"}, {"year": 2018, "game": "LII", "cost_k": 5000.0, "viewers_m": 103.4, "rating": 68.0, "attendance": 67612, "network": "NBC", "winner": "Philadelphia Eagles"}], "avg_net": {"CBS": 1241.5, "NBC": 1258.8, "ABC": 1417.1, "Fox": 2775.0}, "kpi_fifa": {"players": 1245, "avg_mv": 19.9, "max_mv": 200.0, "top_player": "Houssem Mokrani", "total_goals": 3024}, "kpi_sb": {"games": 52, "first_cost": 40.0, "last_cost": 5000.0, "max_viewers": 114.4, "avg_attend": 77456}};
+
+// FIFA KPIs
+const fk=D.kpi_fifa;
+document.getElementById('kf').innerHTML=[
+  {l:'Players Tracked',v:fk.players.toLocaleString(),s:'FIFA World Cup 2026'},
+  {l:'Avg Market Value',v:'\u20ac'+fk.avg_mv+'M',s:'Per player'},
+  {l:'Highest Value',v:'\u20ac'+fk.max_mv+'M',s:fk.top_player},
+  {l:'Total Goals',v:fk.total_goals.toLocaleString(),s:'Across tournament'},
+].map(c=>`<div class="kpi bk"><div class="lbl">${c.l}</div><div class="val">${c.v}</div><div class="sub">${c.s}</div></div>`).join('');
+
+// SB KPIs
+const sk=D.kpi_sb;
+document.getElementById('ks').innerHTML=[
+  {l:'Super Bowls Tracked',v:sk.games,s:'1967 to 2018'},
+  {l:'Ad Cost 1967',v:'$'+sk.first_cost+'K',s:'30-second spot'},
+  {l:'Ad Cost 2018',v:'$'+sk.last_cost.toLocaleString()+'K',s:'30-second spot'},
+  {l:'Peak Viewership',v:sk.max_viewers+'M',s:'U.S. viewers'},
+].map(c=>`<div class="kpi rk"><div class="lbl">${c.l}</div><div class="val">${c.v}</div><div class="sub">${c.s}</div></div>`).join('');
+
+// Chart 1 - avg MV by position
+const ap=D.avg_pos;
+new Chart(document.getElementById('c1'),{type:'bar',
+  data:{labels:Object.keys(ap),datasets:[{label:'Avg Value (\u20acM)',data:Object.values(ap),
+    backgroundColor:['#1a3a6b','#2e86c1','#5dade2','#a9cce3'],borderRadius:6}]},
+  options:{plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,title:{display:true,text:'\u20ac Millions'}}}}
+});
+
+// Chart 2 - goals vs MV scatter
+const pc={Forward:'#e74c3c',Midfielder:'#1a3a6b',Defender:'#27ae60',Goalkeeper:'#f39c12'};
+const byp={};
+D.scatter.forEach(p=>{if(!byp[p.position])byp[p.position]=[];byp[p.position].push({x:p.goals,y:p.mv_m,label:p.name});});
+new Chart(document.getElementById('c2'),{type:'scatter',
+  data:{datasets:Object.entries(byp).map(([pos,pts])=>({label:pos,data:pts,backgroundColor:pc[pos]||'#999',pointRadius:6}))},
+  options:{plugins:{legend:{position:'bottom'},tooltip:{callbacks:{label:ctx=>`${ctx.raw.label}: ${ctx.raw.x} goals | \u20ac${ctx.raw.y}M`}}},
+    scales:{x:{title:{display:true,text:'Goals Scored'}},y:{title:{display:true,text:'Market Value (\u20acM)'}}}}
+});
+
+// FIFA table
+const fb=document.querySelector('#ft tbody');
+D.top10_mv.forEach((p,i)=>{fb.innerHTML+=`<tr><td>${i+1}</td><td><strong>${p.name}</strong></td>
+  <td>${p.nationality}</td><td>${p.club}</td><td>${p.position}</td>
+  <td>${p.goals}</td><td>${p.assists}</td><td>${p.rating}</td>
+  <td><strong>\u20ac${p.mv_m}M</strong></td></tr>`;});
+
+// Chart 3 - ad cost over time
+const sy=D.sb.map(r=>r.year),sc=D.sb.map(r=>r.cost_k),sv=D.sb.map(r=>r.viewers_m);
+new Chart(document.getElementById('c3'),{type:'line',
+  data:{labels:sy,datasets:[{label:'Ad Cost ($K)',data:sc,borderColor:'#8b0000',backgroundColor:'rgba(139,0,0,.1)',fill:true,tension:.3,pointRadius:3}]},
+  options:{plugins:{legend:{display:false}},scales:{y:{title:{display:true,text:'Cost ($K)'}}}}
+});
+
+// Chart 4 - viewership
+new Chart(document.getElementById('c4'),{type:'line',
+  data:{labels:sy,datasets:[{label:'Viewers (M)',data:sv,borderColor:'#c0392b',backgroundColor:'rgba(192,57,43,.1)',fill:true,tension:.3,pointRadius:3}]},
+  options:{plugins:{legend:{display:false}},scales:{y:{title:{display:true,text:'U.S. Viewers (M)'}}}}
+});
+
+// Chart 5 - avg cost by network
+const an=D.avg_net;
+new Chart(document.getElementById('c5'),{type:'bar',
+  data:{labels:Object.keys(an),datasets:[{label:'Avg Cost ($K)',data:Object.values(an),
+    backgroundColor:['#8b0000','#c0392b','#e74c3c','#f1948a'],borderRadius:6}]},
+  options:{plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,title:{display:true,text:'Avg Cost ($K)'}}}}
+});
+
+// Chart 6 - viewers vs cost scatter
+new Chart(document.getElementById('c6'),{type:'scatter',
+  data:{datasets:[{label:'SB',data:D.sb.map(r=>({x:r.viewers_m,y:r.cost_k,label:`SB ${r.game} (${r.year})`})),
+    backgroundColor:'rgba(139,0,0,.65)',pointRadius:6}]},
+  options:{plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>`${ctx.raw.label}: ${ctx.raw.x}M viewers | $${ctx.raw.y}K`}}},
+    scales:{x:{title:{display:true,text:'Viewers (M)'}},y:{title:{display:true,text:'Ad Cost ($K)'}}}}
+});
+
+// SB table
+const sb2=document.querySelector('#st tbody');
+D.sb.forEach(r=>{sb2.innerHTML+=`<tr><td><strong>${r.game}</strong></td><td>${r.year}</td>
+  <td>${r.winner}</td><td>${r.network}</td><td>$${r.cost_k.toLocaleString()}K</td>
+  <td>${r.viewers_m}M</td><td>${r.rating}</td><td>${r.attendance.toLocaleString()}</td></tr>`;});
+</script>
+</body>
+</html>
