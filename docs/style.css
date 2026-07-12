@@ -590,6 +590,7 @@ a.featured-card:hover {
    parent — otherwise the canvas and its container resize each other in a loop. */
 .chart-canvas-wrap { position: relative; width: 100%; height: 300px; }
 .chart-tall .chart-canvas-wrap { height: 400px; }
+.chart-xl .chart-canvas-wrap { height: 480px; }
 .chart-canvas-wrap canvas { position: absolute; top: 0; left: 0; width: 100% !important; height: 100% !important; }
 
 .tabs { display: flex; gap: 8px; margin-bottom: 18px; flex-wrap: wrap; }

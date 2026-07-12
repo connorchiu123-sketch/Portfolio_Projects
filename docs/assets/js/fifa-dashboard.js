@@ -73,11 +73,12 @@ async function main() {
   }
 
   // ---- Section: Team Dashboard ----
-  const top15Teams = data.teams.slice(0, 15);
-  horizBarChart("chart-team-value", top15Teams.map((t) => t.team), top15Teams.map((t) => t.total_market_value_eur), FIFA_COLORS.blue, "Total market value", eur);
-  horizBarChart("chart-team-goals", top15Teams.map((t) => t.team), top15Teams.map((t) => t.total_goals), FIFA_COLORS.green, "Goals");
-  horizBarChart("chart-team-pass", top15Teams.map((t) => t.team), top15Teams.map((t) => t.avg_pass_accuracy), FIFA_COLORS.purple, "Pass accuracy (0-1)");
-  horizBarChart("chart-team-cards", top15Teams.map((t) => t.team), top15Teams.map((t) => t.total_cards), FIFA_COLORS.red, "Cards");
+  // Top 10 (not 15) keeps ~40px per bar instead of ~27px, so team names stay legible.
+  const top10Teams = data.teams.slice(0, 10);
+  horizBarChart("chart-team-value", top10Teams.map((t) => t.team), top10Teams.map((t) => t.total_market_value_eur), FIFA_COLORS.blue, "Total market value", eur);
+  horizBarChart("chart-team-goals", top10Teams.map((t) => t.team), top10Teams.map((t) => t.total_goals), FIFA_COLORS.green, "Goals");
+  horizBarChart("chart-team-pass", top10Teams.map((t) => t.team), top10Teams.map((t) => t.avg_pass_accuracy), FIFA_COLORS.purple, "Pass accuracy (0-1)");
+  horizBarChart("chart-team-cards", top10Teams.map((t) => t.team), top10Teams.map((t) => t.total_cards), FIFA_COLORS.red, "Cards");
 
   // ---- Radar: top 5 teams ----
   const radarCtx = document.getElementById("chart-team-radar");
@@ -178,10 +179,11 @@ async function main() {
   }
 
   // ---- Value Score leaderboard ----
+  // Top 10 instead of 15 for the same legibility reason as the team charts above.
   horizBarChart(
     "chart-top15",
-    data.top15_players.map((p) => `${p.player_name} (${p.team})`),
-    data.top15_players.map((p) => p.value_score),
+    data.top10_players.map((p) => `${p.player_name} (${p.team})`),
+    data.top10_players.map((p) => p.value_score),
     FIFA_COLORS.blue,
     "Value Score (0-100)"
   );
@@ -198,7 +200,7 @@ async function main() {
       color,
       "Value Score"
     );
-    document.getElementById("position-chart-title").textContent = `Top 8 ${pos}s`;
+    document.getElementById("position-chart-title").textContent = `Top 6 ${pos}s`;
   }
   renderPositionChart("Forward");
 
@@ -222,14 +224,16 @@ async function main() {
   }
 
   // ---- Correlation with market value ----
-  const corr = data.correlation_with_value;
+  // Only the 14 strongest correlates (of 24 candidates) — the rest cluster near zero
+  // and just add clutter without changing the takeaway.
+  const corr = data.correlation_with_value.slice(0, 14);
   const ctxCorr = document.getElementById("chart-correlation");
   if (ctxCorr) {
     new Chart(ctxCorr, {
       type: "bar",
       data: {
         labels: corr.map((c) => c.metric),
-        datasets: [{ data: corr.map((c) => c.correlation), backgroundColor: corr.map((c) => (c.correlation >= 0 ? FIFA_COLORS.green : FIFA_COLORS.red)), borderRadius: 4, barThickness: 14 }],
+        datasets: [{ data: corr.map((c) => c.correlation), backgroundColor: corr.map((c) => (c.correlation >= 0 ? FIFA_COLORS.green : FIFA_COLORS.red)), borderRadius: 4, barThickness: 18 }],
       },
       options: {
         indexAxis: "y",
@@ -263,13 +267,23 @@ async function main() {
   const importance = data.feature_importance.slice(0, 12);
   horizBarChart("chart-importance", importance.map((f) => f.feature), importance.map((f) => f.importance), FIFA_COLORS.blue, "Relative importance");
 
-  // ---- Best deals ----
-  const bestDeals = data.best_deals_top15;
+  // ---- Best deals (and the contrasting "overvalued" side of the same coin) ----
+  const bestDeals = data.best_deals_top12;
   horizBarChart(
     "chart-best-deals",
     bestDeals.map((b) => `${b.player_name} (${b.team})`),
     bestDeals.map((b) => b.value_gap_pct),
     FIFA_COLORS.green,
+    "Projected value gap (%)",
+    (v) => v.toFixed(0) + "%"
+  );
+
+  const overvalued = data.most_overvalued_top10;
+  horizBarChart(
+    "chart-overvalued",
+    overvalued.map((b) => `${b.player_name} (${b.team})`),
+    overvalued.map((b) => b.value_gap_pct),
+    FIFA_COLORS.red,
     "Projected value gap (%)",
     (v) => v.toFixed(0) + "%"
   );

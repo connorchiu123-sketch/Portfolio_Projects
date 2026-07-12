@@ -64,14 +64,15 @@
           columns were checked against a manual sum of the match rows — they didn't
           match closely enough to rely on, so every figure here (goals, cards, market
           value, everything) was rebuilt from scratch off the raw match-level data instead.
-          The four panels below rank the top 15 squads by total market value; the radar
-          chart lines up the top 5 on five very different scales at once.
+          The four panels below narrow it to the top 10 squads by total market value, kept
+          deliberately short so every bar is still readable; the radar chart lines up the
+          top 5 on five very different scales at once.
         </p>
         <div class="grid grid-2">
-          <div class="chart-card chart-tall"><h3>Total Squad Market Value</h3><div class="sub">Top 15 teams, EUR</div><div class="chart-canvas-wrap"><canvas id="chart-team-value"></canvas></div></div>
-          <div class="chart-card chart-tall"><h3>Total Goals Scored</h3><div class="sub">Top 15 teams by squad value</div><div class="chart-canvas-wrap"><canvas id="chart-team-goals"></canvas></div></div>
-          <div class="chart-card chart-tall"><h3>Average Squad Pass Accuracy</h3><div class="sub">Top 15 teams by squad value</div><div class="chart-canvas-wrap"><canvas id="chart-team-pass"></canvas></div></div>
-          <div class="chart-card chart-tall"><h3>Total Cards (Yellow + Red)</h3><div class="sub">Top 15 teams by squad value</div><div class="chart-canvas-wrap"><canvas id="chart-team-cards"></canvas></div></div>
+          <div class="chart-card chart-tall"><h3>Total Squad Market Value</h3><div class="sub">Top 10 teams, EUR</div><div class="chart-canvas-wrap"><canvas id="chart-team-value"></canvas></div></div>
+          <div class="chart-card chart-tall"><h3>Total Goals Scored</h3><div class="sub">Top 10 teams by squad value</div><div class="chart-canvas-wrap"><canvas id="chart-team-goals"></canvas></div></div>
+          <div class="chart-card chart-tall"><h3>Average Squad Pass Accuracy</h3><div class="sub">Top 10 teams by squad value</div><div class="chart-canvas-wrap"><canvas id="chart-team-pass"></canvas></div></div>
+          <div class="chart-card chart-tall"><h3>Total Cards (Yellow + Red)</h3><div class="sub">Top 10 teams by squad value</div><div class="chart-canvas-wrap"><canvas id="chart-team-cards"></canvas></div></div>
         </div>
 
         <div class="chart-card chart-tall" style="margin-top:20px;">
@@ -118,7 +119,7 @@
           dataset's built-in rating &mdash; it isn't measuring noise.
         </p>
         <div class="chart-card chart-tall" style="margin-bottom:20px;">
-          <h3>Tournament-Wide Top 15</h3>
+          <h3>Tournament-Wide Top 10</h3>
           <div class="sub">Value Score, 0&ndash;100, every position mixed together</div>
           <div class="chart-canvas-wrap"><canvas id="chart-top15"></canvas></div>
         </div>
@@ -129,8 +130,8 @@
           <button class="tab-btn" data-pos="Defender">Defender</button>
           <button class="tab-btn" data-pos="Goalkeeper">Goalkeeper</button>
         </div>
-        <div class="chart-card chart-tall">
-          <h3 id="position-chart-title">Top 8 Forwards</h3>
+        <div class="chart-card">
+          <h3 id="position-chart-title">Top 6 Forwards</h3>
           <div class="sub">Ranked within their own position group</div>
           <div class="chart-canvas-wrap"><canvas id="chart-position"></canvas></div>
         </div>
@@ -144,11 +145,13 @@
         <p>
           Market value is badly skewed &mdash; a handful of superstar valuations drag the
           whole scale &mdash; so it's log-transformed before comparing it against every
-          per-90 stat on offer. Green bars below climb with value, red bars fall with it.
+          per-90 stat on offer. Of the 24 candidate metrics tested, these 14 correlate most
+          strongly (in either direction) with value; the rest sat close enough to zero to
+          not be worth cluttering the chart with. Green climbs with value, red falls with it.
           The headline: end product (goals, assists, xG/xA, overall rating) tracks value
           far more tightly than the unglamorous defensive work that actually wins matches.
         </p>
-        <div class="chart-card chart-tall">
+        <div class="chart-card chart-xl">
           <div class="chart-canvas-wrap"><canvas id="chart-correlation"></canvas></div>
         </div>
       </div>
@@ -192,13 +195,20 @@
           adjustment, not a black box) is compared against what they're worth today, as a
           <strong>percentage</strong> gap rather than a flat euro amount &mdash; a &euro;5M
           swing means a completely different thing for a &euro;2M academy prospect than for
-          an &euro;80M superstar. Dots above the dashed line in the scatter chart are the
-          model's undervalued picks.
+          an &euro;80M superstar. It cuts both ways, too: the second chart flips the list
+          upside down to show who the model thinks is priced <em>above</em> their output.
         </p>
-        <div class="chart-card chart-tall" style="margin-bottom:20px;">
-          <h3>The League-Wide Shortlist</h3>
-          <div class="sub">Top 15 by projected value gap, as a % of current market value</div>
-          <div class="chart-canvas-wrap"><canvas id="chart-best-deals"></canvas></div>
+        <div class="grid grid-2" style="margin-bottom:20px;">
+          <div class="chart-card chart-tall">
+            <h3>The Undervalued Shortlist</h3>
+            <div class="sub">Top 12 by projected value gap, as a % of current market value</div>
+            <div class="chart-canvas-wrap"><canvas id="chart-best-deals"></canvas></div>
+          </div>
+          <div class="chart-card chart-tall">
+            <h3>The Overvalued Watchlist</h3>
+            <div class="sub">Bottom 10 &mdash; priced above what the model projects for 2027</div>
+            <div class="chart-canvas-wrap"><canvas id="chart-overvalued"></canvas></div>
+          </div>
         </div>
         <div class="chart-card chart-tall" style="margin-bottom:20px;">
           <h3>Today's Price vs. Tomorrow's Projection</h3>
@@ -224,7 +234,7 @@
           <div class="finding-item"><div class="n">02</div><p><strong>Position context beats raw totals.</strong> Judging every player on one universal scale flattens the differences between roles; scoring within position produces leaderboards that actually pass the smell test.</p></div>
           <div class="finding-item"><div class="n">03</div><p><strong>Flash sells.</strong> Goals, assists, and match rating correlate with market value far more than defensive workrate does &mdash; the transfer market rewards what shows up on a highlight reel.</p></div>
           <div class="finding-item"><div class="n">04</div><p><strong>Half the story, not the whole thing.</strong> The regression model accounts for roughly half of the variation in log market value out of sample &mdash; good enough to flag relative value, not to price a transfer to the euro.</p></div>
-          <div class="finding-item"><div class="n">05</div><p><strong>A simple age curve surfaces real sleeper picks.</strong> Layering age-based adjustment on top of the model's raw prediction pushes young overperformers to the top of the "best deal" list instead of aging veterans.</p></div>
+          <div class="finding-item"><div class="n">05</div><p><strong>The gap cuts both directions.</strong> The same age-adjusted projection that surfaces young, undervalued sleepers also flags the players priced well above what their output supports &mdash; useful either way you're shopping.</p></div>
         </div>
       </div>
     </section>
