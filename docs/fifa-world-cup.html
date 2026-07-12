@@ -30,214 +30,202 @@
         </div>
         <h1>⚽ FIFA World Cup 2026: Team &amp; Player Value Research Dashboard</h1>
         <p class="lead">
-          A fully-worked research notebook built so that every step is explained, not just
-          run. Each section below pairs the chart it produced with a short plain-English
-          summary of what it shows and why it was built that way.
+          What started as a pandas cleanup exercise on ~54,600 match rows turned into a
+          full scouting report: a homegrown Player Value Score, a look at what actually
+          moves a transfer price, and a regression model that puts a euro figure on where
+          every player might land by 2027. Everything below is wired up to the notebook's
+          real output — pick a team, flip between positions, hover a bar.
         </p>
-
-        <div class="dataset-facts">
-          <div><strong>54,600</strong>match rows</div>
-          <div><strong>1,248</strong>unique players</div>
-          <div><strong>48</strong>teams</div>
-        </div>
-
-        <div class="stack">pandas · numpy · matplotlib · seaborn · scikit-learn · ipywidgets</div>
-
+        <div class="stack">pandas · numpy · matplotlib · seaborn · scikit-learn · Chart.js</div>
         <div class="case-links">
-          <a class="primary" href="../Notebooks/World_Cup_Research_Dashboard.ipynb">Open Full Notebook</a>
+          <a class="primary" href="https://github.com/connorchiu123-sketch/Portfolio_Projects/blob/master/Notebooks/World_Cup_Research_Dashboard.ipynb" target="_blank" rel="noopener">View Code (GitHub)</a>
           <a href="../DataSets/fifa_world_cup_2026_player_performance.csv">Download Dataset</a>
         </div>
       </div>
     </section>
 
-    <section class="case-section">
+    <section class="case-section" style="padding-top: 24px; padding-bottom: 24px;">
       <div class="wrap">
-        <span class="step">Step 1</span>
-        <h2>Data Quality First</h2>
-        <p>
-          The raw dataset has one row per player <em>per match</em>, so a player who played
-          every game appears dozens of times. Before aggregating anything, the notebook
-          checks whether the dataset's own pre-built "tournament total" columns can be
-          trusted. They couldn't — the totals didn't reliably match a manual sum of the
-          match-level rows. So every player and team statistic used from this point on was
-          rebuilt directly from the raw match data, collapsing ~54,600 match rows into 1,248
-          player rows and 48 team rows, so every number is traceable back to its source.
-        </p>
-      </div>
-    </section>
-
-    <section class="case-section">
-      <div class="wrap">
-        <span class="step">Step 2</span>
-        <h2>Team Dashboard</h2>
-        <p>
-          A "dashboard within the dashboard" comparing all 48 squads on attacking output,
-          discipline, physical profile, and squad value. The radar chart normalizes five very
-          different metrics (goals, market value, pass accuracy, etc.) onto the same 0–100
-          scale so the top 5 teams can be compared at a glance. A live version also lets you
-          pick any team from a dropdown and see it plotted against the tournament average —
-          that part needs a running notebook kernel, so it isn't shown here.
-        </p>
-        <div class="case-img-grid">
-          <figure class="chart-fig">
-            <img src="assets/fifa/team-dashboard-overview.png" alt="Team dashboard: total squad market value, total goals scored, average pass accuracy, and total cards for the top 15 teams" loading="lazy" />
-            <figcaption>Top 15 teams by squad market value, goals, pass accuracy, and discipline</figcaption>
-          </figure>
-          <figure class="chart-fig">
-            <img src="assets/fifa/team-radar-comparison.png" alt="Radar chart comparing the top 5 teams by squad value across five normalized metrics" loading="lazy" />
-            <figcaption>Top 5 teams, five metrics, all scaled 0–100 for a fair comparison</figcaption>
-          </figure>
+        <div class="grid grid-4" id="overview-stats">
+          <div class="metric-box"><div class="val">&mdash;</div><div class="lbl">Match rows crunched</div></div>
+          <div class="metric-box"><div class="val">&mdash;</div><div class="lbl">Players profiled</div></div>
+          <div class="metric-box"><div class="val">&mdash;</div><div class="lbl">Squads compared</div></div>
+          <div class="metric-box"><div class="val">&mdash;</div><div class="lbl">Model R&sup2; on held-out data</div></div>
         </div>
       </div>
     </section>
 
     <section class="case-section">
       <div class="wrap">
-        <span class="step">Step 3</span>
-        <h2>Player Value Score — Methodology</h2>
+        <span class="step" style="color:#5b9dff;">&#9881;&#65039; Behind the Numbers</span>
+        <h2>How 48 Squads Stack Up</h2>
         <p>
-          Rather than ranking players by raw goals or the dataset's own rating, this
-          notebook builds a transparent Value Score from scratch. Stats are converted to
-          per-90-minute rates first, so a player who only played 800 minutes isn't penalized
-          against one who played 1,700. Those rates are then converted to percentile ranks
-          <em>within each position group</em> — a defender is judged against other defenders,
-          not against forwards — and combined using position-specific weights (goalkeepers
-          get their own simplified formula). As a sanity check, the resulting score
-          correlates positively with the dataset's own player rating, which is reassuring
-          evidence it's measuring something real.
+          Before any of this could be trusted, the dataset's own "tournament total"
+          columns were checked against a manual sum of the match rows — they didn't
+          match closely enough to rely on, so every figure here (goals, cards, market
+          value, everything) was rebuilt from scratch off the raw match-level data instead.
+          The four panels below rank the top 15 squads by total market value; the radar
+          chart lines up the top 5 on five very different scales at once.
         </p>
-      </div>
-    </section>
+        <div class="grid grid-2">
+          <div class="chart-card chart-tall"><h3>Total Squad Market Value</h3><div class="sub">Top 15 teams, EUR</div><div class="chart-canvas-wrap"><canvas id="chart-team-value"></canvas></div></div>
+          <div class="chart-card chart-tall"><h3>Total Goals Scored</h3><div class="sub">Top 15 teams by squad value</div><div class="chart-canvas-wrap"><canvas id="chart-team-goals"></canvas></div></div>
+          <div class="chart-card chart-tall"><h3>Average Squad Pass Accuracy</h3><div class="sub">Top 15 teams by squad value</div><div class="chart-canvas-wrap"><canvas id="chart-team-pass"></canvas></div></div>
+          <div class="chart-card chart-tall"><h3>Total Cards (Yellow + Red)</h3><div class="sub">Top 15 teams by squad value</div><div class="chart-canvas-wrap"><canvas id="chart-team-cards"></canvas></div></div>
+        </div>
 
-    <section class="case-section">
-      <div class="wrap">
-        <span class="step">Step 4</span>
-        <h2>Top Players Leaderboard</h2>
-        <p>
-          With a defensible Value Score in hand, the leaderboard is shown two ways: an
-          overall top 15 across the whole tournament, and a per-position breakdown, since
-          comparing a goalkeeper's score directly against a forward's is only meaningful
-          relative to their own peers.
-        </p>
-        <div class="case-img-grid">
-          <figure class="chart-fig">
-            <img src="assets/fifa/top15-value-score.png" alt="Bar chart of the top 15 players overall by Value Score, colored by position" loading="lazy" />
-            <figcaption>Top 15 players tournament-wide by Value Score</figcaption>
-          </figure>
-          <figure class="chart-fig">
-            <img src="assets/fifa/top-players-by-position.png" alt="Four panel chart showing the top 8 players by Value Score within each position" loading="lazy" />
-            <figcaption>Top 8 players within each position group</figcaption>
-          </figure>
+        <div class="chart-card chart-tall" style="margin-top:20px;">
+          <h3>Top 5 Squads, Five Metrics at Once</h3>
+          <div class="sub">Every axis rescaled 0&ndash;100 relative to all 48 teams so the shapes stay comparable</div>
+          <div class="chart-canvas-wrap"><canvas id="chart-team-radar"></canvas></div>
         </div>
-      </div>
-    </section>
 
-    <section class="case-section">
-      <div class="wrap">
-        <span class="step">Step 5</span>
-        <h2>What Drives Market Value?</h2>
-        <p>
-          Market value is heavily right-skewed (a handful of superstar valuations stretch the
-          scale), so it's log-transformed before running correlations — this turns a
-          lopsided distribution into a much more symmetric one, which is what a linear
-          correlation or regression assumes. Pearson correlation is then used to see which
-          performance stats move together with market value the most.
-        </p>
-        <div class="case-img-grid">
-          <figure class="chart-fig">
-            <img src="assets/fifa/market-value-distribution.png" alt="Two histograms comparing the raw and log-transformed distribution of player market value" loading="lazy" />
-            <figcaption>Raw vs. log-transformed market value — log is far more symmetric</figcaption>
-          </figure>
-          <figure class="chart-fig">
-            <img src="assets/fifa/correlation-with-market-value.png" alt="Horizontal bar chart of Pearson correlation between performance metrics and log market value" loading="lazy" />
-            <figcaption>Green = positively correlated with value, red = negatively correlated</figcaption>
-          </figure>
+        <div class="chart-card table-scroll" style="margin-top:20px;">
+          <h3 style="margin-bottom:4px;">Who Carries Each Squad</h3>
+          <div class="sub">The single highest Value Score on each national team &mdash; top 10 shown</div>
+          <table class="data-table" id="table-best-per-team">
+            <thead><tr><th>Team</th><th>Player</th><th>Position</th><th>Value Score</th></tr></thead>
+            <tbody></tbody>
+          </table>
         </div>
-        <p style="margin-top: 20px;">Top strongest correlates of market value:</p>
-        <div class="corr-list">
-          <div><strong>Consistency Score</strong><span>0.84</span></div>
-          <div><strong>Clutch Performance Score</strong><span>0.63</span></div>
-          <div><strong>Key Passes /90</strong><span>0.53</span></div>
-          <div><strong>Stamina Score</strong><span>0.49</span></div>
-          <div><strong>Successful Dribbles /90</strong><span>0.49</span></div>
-          <div><strong>Creativity Score</strong><span>0.49</span></div>
-        </div>
-        <p>
-          Attacking output and overall match rating showed the strongest positive
-          relationship with market value — consistent with how transfer markets behave in
-          real football, where visible end-product tends to get rewarded more than
-          unglamorous defensive work. Correlation isn't causation, though, and position is a
-          likely confounding variable worth controlling for separately.
-        </p>
-      </div>
-    </section>
 
-    <section class="case-section">
-      <div class="wrap">
-        <span class="step">Step 6</span>
-        <h2>Predicting 2027 Market Value</h2>
-        <p>
-          Two regression models — Linear Regression and a Random Forest — were trained on
-          performance stats to learn the relationship with current market value, evaluated
-          on a held-out test set so the score reflects how well the model generalizes, not
-          just how well it memorized the training data. Worth being upfront about a
-          limitation: this dataset is a single tournament snapshot, so this is a
-          "performance-implied value," not a true year-over-year forecast.
-        </p>
-        <div class="metrics-row">
-          <div class="metric-box"><div class="lbl">Linear Regression MAE</div><div class="val">€9.80M</div></div>
-          <div class="metric-box"><div class="lbl">Random Forest MAE</div><div class="val">€9.84M</div></div>
-          <div class="metric-box"><div class="lbl">RMSE (Linear)</div><div class="val">€18.65M</div></div>
-          <div class="metric-box"><div class="lbl">R² (log space)</div><div class="val">0.447</div></div>
-        </div>
-        <div class="case-img-grid">
-          <figure class="chart-fig">
-            <img src="assets/fifa/model-predicted-vs-actual.png" alt="Scatter plot of Random Forest predicted market value versus actual market value on the test set" loading="lazy" />
-            <figcaption>Predicted vs. actual value — closer to the dashed line is a better prediction</figcaption>
-          </figure>
-          <figure class="chart-fig">
-            <img src="assets/fifa/feature-importance.png" alt="Horizontal bar chart of Random Forest feature importances" loading="lazy" />
-            <figcaption>Which stats the Random Forest leaned on most heavily</figcaption>
-          </figure>
+        <div class="chart-card chart-tall" style="margin-top:20px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap; margin-bottom:16px;">
+            <div>
+              <h3 style="margin-bottom:4px;">Compare Any Team</h3>
+              <div class="sub" style="margin-bottom:0;">Benchmarked against the tournament-wide average, not raw units</div>
+            </div>
+            <select id="team-select" class="tab-btn" style="cursor:pointer;"></select>
+          </div>
+          <div class="chart-canvas-wrap"><canvas id="chart-team-explorer"></canvas></div>
+          <p id="team-explorer-meta" style="margin-top:14px; color:#6b7690; font-size:0.85rem;"></p>
         </div>
       </div>
     </section>
 
     <section class="case-section">
       <div class="wrap">
-        <span class="step">Step 7</span>
-        <h2>Finding the Best Deals</h2>
+        <span class="step" style="color:#a78bfa;">&#129518; Custom Metric</span>
+        <h2>Building a Player Value Score From Scratch</h2>
         <p>
-          Each player's projected 2027 value is compared against their current market value
-          as a <strong>percentage</strong> gap rather than a raw euro difference — a €5M gap
-          means very different things for a €2M player versus an €80M player, and percentage
-          puts every price tier on a level playing field.
+          Instead of trusting the dataset's own rating column, every player is scored on
+          five percentile-ranked categories &mdash; attacking, creativity, defensive work,
+          physical output, and reliability &mdash; using per-90-minute rates so a sub who
+          only played 800 minutes isn't punished next to a player who logged 1,700.
+          Weights shift by position (a center-back's defensive percentile matters far more
+          than a striker's), and goalkeepers get their own shot-stopping-plus-distribution
+          formula entirely. As a gut check, the score still correlates strongly with the
+          dataset's built-in rating &mdash; it isn't measuring noise.
         </p>
-        <div class="case-img-grid">
-          <figure class="chart-fig">
-            <img src="assets/fifa/best-deals-leaguewide.png" alt="Bar chart of the top 15 league-wide best deal players by projected value gap percentage" loading="lazy" />
-            <figcaption>Top 15 "best deal" players league-wide by projected value gap</figcaption>
-          </figure>
-          <figure class="chart-fig">
-            <img src="assets/fifa/current-vs-projected-value.png" alt="Scatter plot of current market value versus projected 2027 value for all players, with top best deals labeled" loading="lazy" />
-            <figcaption>Every player: current vs. projected value, with the top 5 deals labeled</figcaption>
-          </figure>
+        <div class="chart-card chart-tall" style="margin-bottom:20px;">
+          <h3>Tournament-Wide Top 15</h3>
+          <div class="sub">Value Score, 0&ndash;100, every position mixed together</div>
+          <div class="chart-canvas-wrap"><canvas id="chart-top15"></canvas></div>
+        </div>
+
+        <div class="tabs" id="position-tabs">
+          <button class="tab-btn active" data-pos="Forward">Forward</button>
+          <button class="tab-btn" data-pos="Midfielder">Midfielder</button>
+          <button class="tab-btn" data-pos="Defender">Defender</button>
+          <button class="tab-btn" data-pos="Goalkeeper">Goalkeeper</button>
+        </div>
+        <div class="chart-card chart-tall">
+          <h3 id="position-chart-title">Top 8 Forwards</h3>
+          <div class="sub">Ranked within their own position group</div>
+          <div class="chart-canvas-wrap"><canvas id="chart-position"></canvas></div>
         </div>
       </div>
     </section>
 
     <section class="case-section">
       <div class="wrap">
-        <span class="step">Summary</span>
-        <h2>Key Findings</h2>
-        <ul class="findings">
-          <li>The dataset's pre-built tournament totals didn't reliably match totals computed from raw match rows, so every aggregate here was rebuilt from scratch.</li>
-          <li>Squad value, attacking output, and discipline vary substantially across the 48 teams — the interactive explorer (in the live notebook) lets you drill into any one against the tournament average.</li>
-          <li>The Player Value Score correlates positively with the dataset's own rating column, a reasonable sanity check that it measures something sensible.</li>
-          <li>Attacking output and match rating are the strongest correlates of market value; position is a likely confounder worth isolating in a follow-up.</li>
-          <li>Both regression models land around the same R² (~0.45) — a Random Forest didn't meaningfully outperform a simple linear model here, itself a useful finding.</li>
-          <li>Ranking "best deals" by percentage gap (not raw euros) keeps players at very different price tiers comparable.</li>
-        </ul>
+        <span class="step" style="color:#f5a623;">&#128269; Reality Check</span>
+        <h2>What Actually Moves a Transfer Price</h2>
+        <p>
+          Market value is badly skewed &mdash; a handful of superstar valuations drag the
+          whole scale &mdash; so it's log-transformed before comparing it against every
+          per-90 stat on offer. Green bars below climb with value, red bars fall with it.
+          The headline: end product (goals, assists, xG/xA, overall rating) tracks value
+          far more tightly than the unglamorous defensive work that actually wins matches.
+        </p>
+        <div class="chart-card chart-tall">
+          <div class="chart-canvas-wrap"><canvas id="chart-correlation"></canvas></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <div class="wrap">
+        <span class="step" style="color:#f5a623;">&#129302; Machine Learning</span>
+        <h2>Putting a Number on 2027</h2>
+        <p>
+          A plain Linear Regression and a Random Forest were both trained on the same
+          performance stats, age, and position, then judged only on data neither model had
+          seen during training. The twist: the extra complexity of a forest of decision
+          trees barely moves the needle here &mdash; a useful result in itself, since it
+          means the simpler, more explainable model isn't leaving much on the table.
+        </p>
+        <div class="grid grid-2" style="margin-bottom:20px;">
+          <div class="card">
+            <h3>Linear Regression</h3>
+            <div class="grid grid-3" id="metrics-linear" style="margin-top:16px;"></div>
+          </div>
+          <div class="card">
+            <h3>Random Forest <span class="tag" style="background:#123f2b;color:#4ade80;margin-left:8px;">Used for projections</span></h3>
+            <div class="grid grid-3" id="metrics-rf" style="margin-top:16px;"></div>
+          </div>
+        </div>
+        <div class="chart-card chart-tall">
+          <h3>What the Forest Actually Leans On</h3>
+          <div class="sub">Relative importance of each input feature</div>
+          <div class="chart-canvas-wrap"><canvas id="chart-importance"></canvas></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <div class="wrap">
+        <span class="step" style="color:#4ade80;">&#128176; Scouting Report</span>
+        <h2>Who's Underpriced Right Now</h2>
+        <p>
+          Every player's model-projected 2027 value (run through a transparent age-curve
+          adjustment, not a black box) is compared against what they're worth today, as a
+          <strong>percentage</strong> gap rather than a flat euro amount &mdash; a &euro;5M
+          swing means a completely different thing for a &euro;2M academy prospect than for
+          an &euro;80M superstar. Dots above the dashed line in the scatter chart are the
+          model's undervalued picks.
+        </p>
+        <div class="chart-card chart-tall" style="margin-bottom:20px;">
+          <h3>The League-Wide Shortlist</h3>
+          <div class="sub">Top 15 by projected value gap, as a % of current market value</div>
+          <div class="chart-canvas-wrap"><canvas id="chart-best-deals"></canvas></div>
+        </div>
+        <div class="chart-card chart-tall" style="margin-bottom:20px;">
+          <h3>Today's Price vs. Tomorrow's Projection</h3>
+          <div class="sub">A sample of players &middot; anything above the dashed line is projected to gain value</div>
+          <div class="chart-canvas-wrap"><canvas id="chart-scatter"></canvas></div>
+        </div>
+        <div class="chart-card table-scroll">
+          <h3 style="margin-bottom:16px;">One Pick Per Team</h3>
+          <table class="data-table" id="table-best-deal-per-team">
+            <thead><tr><th>Team</th><th>Player</th><th>Pos</th><th>Age</th><th>Market Value</th><th>Projected 2027</th><th>Value Gap</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <div class="wrap">
+        <span class="step">Wrap-Up</span>
+        <h2>What This Actually Showed</h2>
+        <div class="finding-list">
+          <div class="finding-item"><div class="n">01</div><p><strong>The dataset lied about its own totals.</strong> Pre-built "tournament total" columns drifted from a manual sum of match rows often enough that trusting them would have quietly poisoned every downstream number.</p></div>
+          <div class="finding-item"><div class="n">02</div><p><strong>Position context beats raw totals.</strong> Judging every player on one universal scale flattens the differences between roles; scoring within position produces leaderboards that actually pass the smell test.</p></div>
+          <div class="finding-item"><div class="n">03</div><p><strong>Flash sells.</strong> Goals, assists, and match rating correlate with market value far more than defensive workrate does &mdash; the transfer market rewards what shows up on a highlight reel.</p></div>
+          <div class="finding-item"><div class="n">04</div><p><strong>Half the story, not the whole thing.</strong> The regression model accounts for roughly half of the variation in log market value out of sample &mdash; good enough to flag relative value, not to price a transfer to the euro.</p></div>
+          <div class="finding-item"><div class="n">05</div><p><strong>A simple age curve surfaces real sleeper picks.</strong> Layering age-based adjustment on top of the model's raw prediction pushes young overperformers to the top of the "best deal" list instead of aging veterans.</p></div>
+        </div>
       </div>
     </section>
 
@@ -259,5 +247,7 @@
     </div>
   </footer>
 
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+  <script src="assets/js/fifa-dashboard.js"></script>
 </body>
 </html>
