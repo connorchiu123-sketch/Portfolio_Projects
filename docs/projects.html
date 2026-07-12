@@ -24,57 +24,28 @@
     <section style="padding-top: 60px; padding-bottom: 20px;">
       <div class="wrap">
         <h2>Projects</h2>
-        <p class="section-sub">Five projects, roughly in order of how they build on each other</p>
-
-        <a class="featured-card" href="fifa-world-cup.html">
-          <div class="top-row">
-            <span class="tag done">Completed</span>
-            <span class="tag gold">Flagship Project</span>
-          </div>
-          <h3>⚽ FIFA World Cup 2026: Team &amp; Player Value Research Dashboard</h3>
-          <p>
-            A fully-worked research notebook covering the whole FIFA World Cup 2026 player
-            dataset (~54,600 match rows, 1,248 players, 48 teams) — every step is documented
-            so the reasoning behind each decision is traceable, not just the final chart.
-          </p>
-          <ul>
-            <li>Verified data quality issues in pre-built totals, then rebuilt every player and team aggregate directly from raw match rows</li>
-            <li>Built an interactive Team Dashboard comparing all 48 squads on attacking, defensive, physical, and financial metrics</li>
-            <li>Designed a position-aware Player Value Score from percentile ranks of per-90-minute stats, rather than raw totals</li>
-            <li>Ran correlation analysis to find which performance stats actually drive market value</li>
-            <li>Trained Linear Regression and Random Forest models to project 2027 market value, then ranked players by value gap to surface the best "deals"</li>
-          </ul>
-          <div class="stack">pandas · numpy · matplotlib · seaborn · scikit-learn · ipywidgets</div>
-          <span class="view-more">View full case study with all charts &rarr;</span>
-        </a>
-
-        <div class="feature-banner">
-          <div>
-            <h3>Live Demo: Sports Analytics Dashboard</h3>
-            <p>Combines the FIFA transfer-value and Super Bowl ad-revenue projects into one interactive, runs-in-your-browser dashboard with charts and sortable tables.</p>
-          </div>
-          <a class="btn" href="../Notebooks/dashboard.html" target="_blank" rel="noopener">Open Dashboard</a>
-        </div>
+        <p class="section-sub">One finished, two still in progress</p>
 
         <div class="grid">
 
           <div class="card">
-            <div class="tag blue">Project 1</div>
-            <h3>Soccer Player Transfer Values</h3>
+            <div class="tag done">Completed</div>
+            <h3>⚽ FIFA World Cup 2026: Team &amp; Player Value Research Dashboard</h3>
             <p>
-              Explores FIFA World Cup 2026 player data — cleaning a 70+ column dataset
-              down to what matters, aggregating per-player stats, and charting market
-              value by position and goals scored.
+              A fully-worked research notebook covering the whole FIFA World Cup 2026 player
+              dataset (~54,600 match rows, 1,248 players, 48 teams) — a custom Player Value
+              Score, a market-value correlation study, and a regression model projecting
+              each player's 2027 transfer value.
             </p>
-            <div class="stack">pandas · matplotlib</div>
+            <div class="stack">pandas · numpy · matplotlib · seaborn · scikit-learn · Chart.js</div>
             <div class="links">
-              <a class="primary" href="../Notebooks/01_soccer_transfer_values.ipynb">Open Notebook</a>
+              <a class="primary" href="fifa-world-cup.html">View Case Study</a>
               <a href="../DataSets/fifa_world_cup_2026_player_performance.csv">Dataset</a>
             </div>
           </div>
 
           <div class="card">
-            <div class="tag red">Project 2</div>
+            <div class="tag progress">In Progress</div>
             <h3>Super Bowl Ad Revenue</h3>
             <p>
               Cleans 52 years (1967–2018) of Super Bowl data — parsing dates, stripping
@@ -89,21 +60,7 @@
           </div>
 
           <div class="card">
-            <div class="tag blue">Project 3</div>
-            <h3>NFL API Exploration</h3>
-            <p>
-              Pulls live data from ESPN's public NFL API — scoreboard, teams, standings,
-              and full rosters — then joins the results into pandas DataFrames to compare
-              team records, roster experience, and point differentials.
-            </p>
-            <div class="stack">Python · requests · pandas · REST APIs</div>
-            <div class="links">
-              <a class="primary" href="../Notebooks/nfl_api_exploration.ipynb">Open Notebook</a>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="tag red">Project 4</div>
+            <div class="tag progress">In Progress</div>
             <h3>Sports Business Operations Analysis</h3>
             <p>
               A business-operations lens on a synthetic 12-team basketball league:
