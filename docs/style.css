@@ -195,7 +195,7 @@ section p.section-sub {
 .tag.red { background: var(--red-dim); }
 .tag.gold { background: #6b5410; color: #ffd75e; }
 .tag.done { background: #123f2b; color: #4ade80; }
-.tag.progress { background: #6b4310; color: #f5a623; }
+.tag.progress { background: var(--red-dim); color: var(--red); }
 
 .card h3 {
   font-size: 17px;
