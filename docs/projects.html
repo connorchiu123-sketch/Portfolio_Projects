@@ -24,7 +24,29 @@
     <section style="padding-top: 60px; padding-bottom: 20px;">
       <div class="wrap">
         <h2>Projects</h2>
-        <p class="section-sub">Four projects, roughly in order of how they build on each other</p>
+        <p class="section-sub">Five projects, roughly in order of how they build on each other</p>
+
+        <a class="featured-card" href="fifa-world-cup.html">
+          <div class="top-row">
+            <span class="tag done">Completed</span>
+            <span class="tag gold">Flagship Project</span>
+          </div>
+          <h3>⚽ FIFA World Cup 2026: Team &amp; Player Value Research Dashboard</h3>
+          <p>
+            A fully-worked research notebook covering the whole FIFA World Cup 2026 player
+            dataset (~54,600 match rows, 1,248 players, 48 teams) — every step is documented
+            so the reasoning behind each decision is traceable, not just the final chart.
+          </p>
+          <ul>
+            <li>Verified data quality issues in pre-built totals, then rebuilt every player and team aggregate directly from raw match rows</li>
+            <li>Built an interactive Team Dashboard comparing all 48 squads on attacking, defensive, physical, and financial metrics</li>
+            <li>Designed a position-aware Player Value Score from percentile ranks of per-90-minute stats, rather than raw totals</li>
+            <li>Ran correlation analysis to find which performance stats actually drive market value</li>
+            <li>Trained Linear Regression and Random Forest models to project 2027 market value, then ranked players by value gap to surface the best "deals"</li>
+          </ul>
+          <div class="stack">pandas · numpy · matplotlib · seaborn · scikit-learn · ipywidgets</div>
+          <span class="view-more">View full case study with all charts &rarr;</span>
+        </a>
 
         <div class="feature-banner">
           <div>

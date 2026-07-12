@@ -1,0 +1,263 @@
+Total cells: 47
+--- MD cell 0 ---
+
+# ⚽ FIFA World Cup 2026: Team & Player Value Research Dashboard
+
+**A beginner-friendly, fully-worked research notebook**
+
+This notebook is written so that someone who is *new* to `pandas`, data visualization, or
+machine learning can follow every step, not just run it. Every code cell is preceded by a
+markdown cell that explains **what** we are about to do and **why** we are doing it that way.
+Where a decision could have been made differently (e.g., "should we average this stat or sum
+it?"), we explain the reasoning so you can defend the choice in a research write-up.
+
+### Research questions t
+--- MD cell 1 ---
+
+## 1. Setup: Importing Our Tools
+
+Before we can do anything, we need to load the Python libraries this notebook depends on.
+Here's what each one does, in plain English:
+
+| Library | What it's for |
+|---|---|
+| `pandas` | Loading and reshaping tabular data (like Excel, but in code) |
+| `numpy` | Fast numerical operations (math on whole columns at once) |
+| `matplotlib` | The base plotting library — draws charts |
+| `seaborn` | Sits on top of matplotlib; makes nicer-looking statistical charts with less code |
+| `sklearn` (scikit-learn) | Machine learning — we use it for train/test splitting and
+--- CODE cell 2 (first 150 chars) ---
+ | # --- Core data handling --- | import pandas as pd | import numpy as np |  | # --- Visualization --- | import matplotlib.pyplot as plt | import matplotlib.ticker
+--- MD cell 3 ---
+
+## 2. Load the Data & Take a First Look
+
+Rule of thumb for *any* new dataset: **before you analyze it, look at it.** We check:
+
+- How many rows and columns are there?
+- What do the first few rows actually look like?
+- What data type is each column (number, text, date)?
+- Are there any missing values we need to handle?
+
+Skipping this step is the single most common cause of bugs later in a project.
+
+--- CODE cell 4 (first 150 chars) ---
+ | # Read the CSV file into a pandas DataFrame (think: a spreadsheet held in memory). | df = pd.read_csv("fifa_world_cup_2026_player_performance.csv") |  | pr
+--- CODE cell 5 (first 150 chars) ---
+ | # .info() gives us column names, non-null counts, and data types in one shot. | df.info(memory_usage=False) | 
+--- CODE cell 6 (first 150 chars) ---
+ | # Check for missing values in every column. If a column has missing data, it will | # show a number greater than 0 here. An empty result (all zeros) me
+--- MD cell 7 ---
+
+## 3. Data Quality Checks  Verifying Our Assumptions Before We Aggregate
+
+This dataset has **one row per player per match**, which means a player like Gavi Ramos
+appears dozens of times (once per match he played). Before we collapse the data down to
+"one row per player," we need to verify a few assumptions. Getting this wrong is the
+single biggest source of errors in sports analytics projects, because it silently produces
+numbers that *look* plausible but are wrong.
+
+**Assumption #1 — Is `market_value_eur` the same for a player across every row?**
+It should represent one player's value, not a
+--- CODE cell 8 (first 150 chars) ---
+ | # --- Check #1: is market_value_eur constant per player? --- | # nunique() counts how many *distinct* values exist per player. If the value is truly | # 
+--- CODE cell 9 (first 150 chars) ---
+ | # --- Check #2: do the tournament-total columns match a manual sum of the match rows? --- | check = df.groupby("player_id").agg( |     manual_sum_goals  
+--- MD cell 10 ---
+
+**Finding:** the pre-built `total_*` columns do **not** reliably match what you get from
+summing the match-level rows. Rather than trust columns that may have been generated
+independently of the match data, **we will build every player-level total ourselves,
+directly from the match rows.** This is more work, but it means every number in this
+notebook is traceable back to the raw data — which matters a great deal in a research
+context, where a reviewer may ask "where did this number come from?"
+
+--- MD cell 11 ---
+
+## 4. Building a Clean Player-Level Table
+
+This is the most important data-preparation step in the whole notebook, because Sections
+6–11 all depend on it. We are going to collapse ~54,600 match rows into **1,248 rows — one
+per player** — but *how* we collapse each column matters:
+
+- **Identity columns** (name, team, position, age, market value) are the same on every row
+  for a given player, so we just take the **first** occurrence.
+- **Counting stats** (goals, assists, shots, tackles, etc.) should be **summed** across all
+  of a player's matches — we want their tournament total, built from t
+--- CODE cell 12 (first 150 chars) ---
+ | # Step 1: identity / "take the first value" columns — these don't change per match. | identity_cols = { |     "player_name": "first", "team": "first", "p
+--- CODE cell 13 (first 150 chars) ---
+ | # Now compute per-90-minute rates for the key counting stats, so players with different | # amounts of playing time can be compared fairly. The standar
+--- MD cell 14 ---
+
+## 5. Building a Clean Team-Level Table
+
+Now that we have one row per **player**, building one row per **team** is a second,
+simpler aggregation — this time we group the *player-level* table by `team` instead of
+re-touching the raw match data. We compute a mix of:
+
+- **Totals** that make sense to add up across a squad (total goals scored, total market value)
+- **Averages** that describe a "typical player" on the team (average age, average pass
+  accuracy, average distance covered)
+
+--- CODE cell 15 (first 150 chars) ---
+ | teams = players.groupby("team").agg( |     squad_size            = ("player_id", "count"), |     avg_age                = ("age", "mean"), |     total_mark
+--- MD cell 16 ---
+
+## 6. Team Dashboard
+
+This section is a small "dashboard within the dashboard" — a set of coordinated charts
+that let you compare teams across attacking output, discipline, physical profile, and
+squad value at a glance.
+
+We start with **static, always-visible charts** covering all 48 teams (these will always
+render, in any notebook viewer). At the end of this section we add an **optional
+interactive widget** that lets you pick a single team from a dropdown and see its stats
+highlighted against the tournament average — this part requires a live Jupyter kernel to
+be interactive (a static export
+--- CODE cell 17 (first 150 chars) ---
+ | fig, axes = plt.subplots(2, 2, figsize=(15, 11)) | fig.suptitle("Team Dashboard — Top 15 Teams by Squad Market Value", fontsize=16, fontweight="bold", 
+--- CODE cell 18 (first 150 chars) ---
+ | # A quick "how does the average team compare on multiple dimensions at once" view. | # We normalize each metric to a 0-100 scale so metrics with very d
+--- MD cell 19 ---
+
+### Optional: interactive team explorer
+
+The cell below uses `ipywidgets` to build a dropdown menu. If you're running this
+notebook live in Jupyter, changing the dropdown will redraw the panel below it for
+whichever team you pick, comparing that team's stats against the tournament-wide average.
+If you're viewing a static export of this notebook, you'll just see the dropdown's
+default team (the first team alphabetically).
+
+--- CODE cell 20 (first 150 chars) ---
+ | team_list = sorted(teams["team"].unique()) | tournament_avg = teams.drop(columns=["team"]).mean(numeric_only=True) |  | def show_team_snapshot(selected_tea
+--- MD cell 21 ---
+
+## 7. Player Value Score: Methodology
+
+This is the section where we decide **what "valuable" means**, and we do it *before*
+writing any code, because that ordering matters: if you let the code decide your
+definition of value, you end up rationalizing whatever the numbers happen to show.
+
+### Why not just rank players by goals, or by the dataset's own `player_rating` column?
+
+- **Raw totals unfairly favor high-minute players.** A player who played 1,700 minutes
+  will out-accumulate a player who played 800 minutes, even if the second player was more
+  productive *per minute on the pitch*. We f
+--- CODE cell 22 (first 150 chars) ---
+ | # --- Step 1: define which raw columns feed each category --- | CATEGORY_METRICS = { |     "attacking":   ["goals_p90", "assists_p90", "xg_p90", "xa_p90"
+--- CODE cell 23 (first 150 chars) ---
+ | # --- Step 4: apply position-specific weights to combine the five category scores --- | # Goalkeepers get their own simplified formula (shot-stopping +
+--- CODE cell 24 (first 150 chars) ---
+ | # --- Sanity check: does our from-scratch Value Score agree, at least broadly, with the | #     dataset's own pre-built "player_rating" column? They sh
+--- MD cell 25 ---
+
+## 8. Top Players Leaderboard
+
+With a defensible Value Score in hand, we can now visualize the leaderboard — overall,
+and per position, since comparing a goalkeeper's score directly to a forward's score is
+only meaningful in the sense of "how good are they relative to their own peers," not
+"who has bigger raw numbers."
+
+--- CODE cell 26 (first 150 chars) ---
+ | top15_players = players.sort_values("value_score", ascending=False).head(15) |  | fig, ax = plt.subplots(figsize=(10, 7)) | colors = top15_players["positio
+--- CODE cell 27 (first 150 chars) ---
+ | # One panel per position, so we can see the top players *within* each role. | fig, axes = plt.subplots(2, 2, figsize=(14, 10)) | fig.suptitle("Top 8 Play
+--- CODE cell 28 (first 150 chars) ---
+ | # Which team has the single most valuable player (by our score)? Useful as a per-team | # "star player" callout, and this is the table Section 6's team
+--- MD cell 29 ---
+
+## 9. What Drives Market Value? Correlation Analysis
+
+Now we shift questions: instead of "who performs best," we ask "which performance stats
+are most associated with a player already having a **high market value**?" This tells us
+what the market seems to reward, and it also tells us which features are worth feeding
+into the regression model in Section 10.
+
+We use **Pearson correlation**, which measures the strength of a *linear* relationship
+between two numeric columns, from -1 (perfect negative relationship) to +1 (perfect
+positive relationship). A correlation near 0 means the two columns a
+--- CODE cell 30 (first 150 chars) ---
+ | fig, ax = plt.subplots(1, 2, figsize=(13, 4.5)) | sns.histplot(players["market_value_eur"], bins=40, ax=ax[0], color="#1f4e79") | ax[0].set_title("Market
+--- CODE cell 31 (first 150 chars) ---
+ | # Candidate numeric columns to correlate against log market value. | # We deliberately exclude our own value_score / percentile columns here, since tho
+--- MD cell 32 ---
+
+### Interpreting these results
+
+Metrics tied to **direct attacking output and match ratings** (goals, assists, xG, xA, and
+the dataset's own `player_rating` / `performance_score`) tend to show the strongest
+positive relationship with market value — which lines up with how transfer markets behave
+in real football: end-product is rewarded more visibly than defensive work. Watch for two
+things a careful reviewer would flag:
+
+1. **Correlation is not causation.** A high correlation between `goals_p90` and market
+   value doesn't prove that scoring goals *causes* a higher valuation — it's consisten
+--- MD cell 33 ---
+
+## 10. Predicting 2027 Market Value — Regression Model
+
+### What we're building, and an honest limitation up front
+
+This dataset is a **single snapshot** — one tournament, one set of market values. It does
+not contain multiple years of history, so no model trained on it can *truly* learn how an
+individual player's value evolves year over year. What we *can* build responsibly is:
+
+1. A regression model that learns the relationship between **performance stats and current
+   market value** across all 1,248 players — call the model's output the
+   **"performance-implied value."**
+2. A simple, tra
+--- CODE cell 34 (first 150 chars) ---
+ | FEATURES_NUMERIC = [ |     "goals_p90", "assists_p90", "xg_p90", "xa_p90", "shots_on_target_p90", |     "key_passes_p90", "pass_accuracy", "player_rating
+--- CODE cell 35 (first 150 chars) ---
+ | # Split into training data (used to fit the model) and test data (held out, used only to | # evaluate how well the model generalizes to players it hasn
+--- CODE cell 36 (first 150 chars) ---
+ | # We compare two models of different complexity: | #  - Linear Regression: simple, fully interpretable (each feature gets one coefficient). | #  - Random
+--- MD cell 37 ---
+
+**Reading the metrics:** MAE (Mean Absolute Error) tells you, on average, how far off a
+prediction is in real euros — smaller is better. RMSE is similar but punishes large
+misses more heavily, so if RMSE is much bigger than MAE, it's a sign the model is making a
+few very large errors on top of many small ones. R² (in log space) tells you what share of
+the variation in players' market values the model is able to explain — 1.0 would be a
+perfect fit, 0.0 means the model does no better than always guessing the average.
+
+Whichever model has the **lower MAE/RMSE and higher R² on the test set** is 
+--- CODE cell 38 (first 150 chars) ---
+ | # Visual gut-check: plot predicted vs. actual market value for the test set. A model with | # real predictive power will show points clustering around 
+--- CODE cell 39 (first 150 chars) ---
+ | # Which features does the Random Forest lean on most heavily? feature_importances_ gives | # each feature a score based on how much it improved the mod
+--- CODE cell 40 (first 150 chars) ---
+ | # --- Generate "performance-implied value" for every player using the better model --- | final_model = rf_model  # swap to lin_model here if Linear Reg
+--- MD cell 41 ---
+
+## 11. Finding the Best Deals
+
+We define a player's **value gap** as the percentage difference between their projected
+2027 value and their current market value:
+
+$$\text{value gap \%} = \frac{\text{projected\_2027\_value} - \text{market\_value\_eur}}{\text{market\_value\_eur}} \times 100$$
+
+**Why percentage, and not a raw euro difference?** A €5M gap means something very
+different for a player currently worth €2M (a huge relative upside) than for a player
+currently worth €80M (a rounding error). Using a percentage puts players at very different
+price tiers on a level playing field when we as
+--- CODE cell 42 (first 150 chars) ---
+ | players["value_gap_eur"] = players["projected_2027_value"] - players["market_value_eur"] | players["value_gap_pct"] = players["value_gap_eur"] / player
+--- CODE cell 43 (first 150 chars) ---
+ | # The single best-deal player on EACH team — useful for a per-team scouting report. | best_deal_per_team = players.loc[players.groupby("team")["value_g
+--- CODE cell 44 (first 150 chars) ---
+ | # Scatter of current vs. projected value across ALL players, with the "no change" reference | # line. Points ABOVE the line are players our model proje
+--- CODE cell 45 (first 150 chars) ---
+ | # Optional interactive drill-down: pick a team, see its full squad sorted by value gap. | def show_team_best_deals(selected_team): |     squad = players[
+--- MD cell 46 ---
+
+## 12. Summary of Findings
+
+- **Data quality:** the dataset's pre-built `total_*` "tournament total" columns did **not**
+  reliably match totals computed directly from the match-level rows, so every aggregate in
+  this notebook was built from the raw match data rather than trusting those columns.
+- **Team Dashboard:** teams vary substantially in squad value, total attacking output, and
+  discipline; the interactive team explorer (Section 6) lets you drill into any of the 48
+  teams against the tournament average.
+- **Player Value Score:** built from percentile ranks *within position group*, u

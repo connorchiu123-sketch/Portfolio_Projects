@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FIFA World Cup 2026 Research Dashboard — Connor Chiu</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <nav>
+      <a class="brand" href="index.html">Connor Chiu</a>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a class="active" href="projects.html">Projects</a>
+        <a href="https://www.linkedin.com/in/connor-chiu-3b9094372/" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="case-hero">
+      <div class="wrap">
+        <a class="case-back" href="projects.html">&larr; Back to Projects</a>
+        <div class="top-row">
+          <span class="tag done">Completed</span>
+          <span class="tag gold">Flagship Project</span>
+        </div>
+        <h1>⚽ FIFA World Cup 2026: Team &amp; Player Value Research Dashboard</h1>
+        <p class="lead">
+          A fully-worked research notebook built so that every step is explained, not just
+          run. Each section below pairs the chart it produced with a short plain-English
+          summary of what it shows and why it was built that way.
+        </p>
+
+        <div class="dataset-facts">
+          <div><strong>54,600</strong>match rows</div>
+          <div><strong>1,248</strong>unique players</div>
+          <div><strong>48</strong>teams</div>
+        </div>
+
+        <div class="stack">pandas · numpy · matplotlib · seaborn · scikit-learn · ipywidgets</div>
+
+        <div class="case-links">
+          <a class="primary" href="../Notebooks/World_Cup_Research_Dashboard.ipynb">Open Full Notebook</a>
+          <a href="../DataSets/fifa_world_cup_2026_player_performance.csv">Download Dataset</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <div class="wrap">
+        <span class="step">Step 1</span>
+        <h2>Data Quality First</h2>
+        <p>
+          The raw dataset has one row per player <em>per match</em>, so a player who played
+          every game appears dozens of times. Before aggregating anything, the notebook
+          checks whether the dataset's own pre-built "tournament total" columns can be
+          trusted. They couldn't — the totals didn't reliably match a manual sum of the
+          match-level rows. So every player and team statistic used from this point on was
+          rebuilt directly from the raw match data, collapsing ~54,600 match rows into 1,248
+          player rows and 48 team rows, so every number is traceable back to its source.
+        </p>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <div class="wrap">
+        <span class="step">Step 2</span>
+        <h2>Team Dashboard</h2>
+        <p>
+          A "dashboard within the dashboard" comparing all 48 squads on attacking output,
+          discipline, physical profile, and squad value. The radar chart normalizes five very
+          different metrics (goals, market value, pass accuracy, etc.) onto the same 0–100
+          scale so the top 5 teams can be compared at a glance. A live version also lets you
+          pick any team from a dropdown and see it plotted against the tournament average —
+          that part needs a running notebook kernel, so it isn't shown here.
+        </p>
+        <div class="case-img-grid">
+          <figure class="chart-fig">
+            <img src="assets/fifa/team-dashboard-overview.png" alt="Team dashboard: total squad market value, total goals scored, average pass accuracy, and total cards for the top 15 teams" loading="lazy" />
+            <figcaption>Top 15 teams by squad market value, goals, pass accuracy, and discipline</figcaption>
+          </figure>
+          <figure class="chart-fig">
+            <img src="assets/fifa/team-radar-comparison.png" alt="Radar chart comparing the top 5 teams by squad value across five normalized metrics" loading="lazy" />
+            <figcaption>Top 5 teams, five metrics, all scaled 0–100 for a fair comparison</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <div class="wrap">
+        <span class="step">Step 3</span>
+        <h2>Player Value Score — Methodology</h2>
+        <p>
+          Rather than ranking players by raw goals or the dataset's own rating, this
+          notebook builds a transparent Value Score from scratch. Stats are converted to
+          per-90-minute rates first, so a player who only played 800 minutes isn't penalized
+          against one who played 1,700. Those rates are then converted to percentile ranks
+          <em>within each position group</em> — a defender is judged against other defenders,
+          not against forwards — and combined using position-specific weights (goalkeepers
+          get their own simplified formula). As a sanity check, the resulting score
+          correlates positively with the dataset's own player rating, which is reassuring
+          evidence it's measuring something real.
+        </p>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <div class="wrap">
+        <span class="step">Step 4</span>
+        <h2>Top Players Leaderboard</h2>
+        <p>
+          With a defensible Value Score in hand, the leaderboard is shown two ways: an
+          overall top 15 across the whole tournament, and a per-position breakdown, since
+          comparing a goalkeeper's score directly against a forward's is only meaningful
+          relative to their own peers.
+        </p>
+        <div class="case-img-grid">
+          <figure class="chart-fig">
+            <img src="assets/fifa/top15-value-score.png" alt="Bar chart of the top 15 players overall by Value Score, colored by position" loading="lazy" />
+            <figcaption>Top 15 players tournament-wide by Value Score</figcaption>
+          </figure>
+          <figure class="chart-fig">
+            <img src="assets/fifa/top-players-by-position.png" alt="Four panel chart showing the top 8 players by Value Score within each position" loading="lazy" />
+            <figcaption>Top 8 players within each position group</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <div class="wrap">
+        <span class="step">Step 5</span>
+        <h2>What Drives Market Value?</h2>
+        <p>
+          Market value is heavily right-skewed (a handful of superstar valuations stretch the
+          scale), so it's log-transformed before running correlations — this turns a
+          lopsided distribution into a much more symmetric one, which is what a linear
+          correlation or regression assumes. Pearson correlation is then used to see which
+          performance stats move together with market value the most.
+        </p>
+        <div class="case-img-grid">
+          <figure class="chart-fig">
+            <img src="assets/fifa/market-value-distribution.png" alt="Two histograms comparing the raw and log-transformed distribution of player market value" loading="lazy" />
+            <figcaption>Raw vs. log-transformed market value — log is far more symmetric</figcaption>
+          </figure>
+          <figure class="chart-fig">
+            <img src="assets/fifa/correlation-with-market-value.png" alt="Horizontal bar chart of Pearson correlation between performance metrics and log market value" loading="lazy" />
+            <figcaption>Green = positively correlated with value, red = negatively correlated</figcaption>
+          </figure>
+        </div>
+        <p style="margin-top: 20px;">Top strongest correlates of market value:</p>
+        <div class="corr-list">
+          <div><strong>Consistency Score</strong><span>0.84</span></div>
+          <div><strong>Clutch Performance Score</strong><span>0.63</span></div>
+          <div><strong>Key Passes /90</strong><span>0.53</span></div>
+          <div><strong>Stamina Score</strong><span>0.49</span></div>
+          <div><strong>Successful Dribbles /90</strong><span>0.49</span></div>
+          <div><strong>Creativity Score</strong><span>0.49</span></div>
+        </div>
+        <p>
+          Attacking output and overall match rating showed the strongest positive
+          relationship with market value — consistent with how transfer markets behave in
+          real football, where visible end-product tends to get rewarded more than
+          unglamorous defensive work. Correlation isn't causation, though, and position is a
+          likely confounding variable worth controlling for separately.
+        </p>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <div class="wrap">
+        <span class="step">Step 6</span>
+        <h2>Predicting 2027 Market Value</h2>
+        <p>
+          Two regression models — Linear Regression and a Random Forest — were trained on
+          performance stats to learn the relationship with current market value, evaluated
+          on a held-out test set so the score reflects how well the model generalizes, not
+          just how well it memorized the training data. Worth being upfront about a
+          limitation: this dataset is a single tournament snapshot, so this is a
+          "performance-implied value," not a true year-over-year forecast.
+        </p>
+        <div class="metrics-row">
+          <div class="metric-box"><div class="lbl">Linear Regression MAE</div><div class="val">€9.80M</div></div>
+          <div class="metric-box"><div class="lbl">Random Forest MAE</div><div class="val">€9.84M</div></div>
+          <div class="metric-box"><div class="lbl">RMSE (Linear)</div><div class="val">€18.65M</div></div>
+          <div class="metric-box"><div class="lbl">R² (log space)</div><div class="val">0.447</div></div>
+        </div>
+        <div class="case-img-grid">
+          <figure class="chart-fig">
+            <img src="assets/fifa/model-predicted-vs-actual.png" alt="Scatter plot of Random Forest predicted market value versus actual market value on the test set" loading="lazy" />
+            <figcaption>Predicted vs. actual value — closer to the dashed line is a better prediction</figcaption>
+          </figure>
+          <figure class="chart-fig">
+            <img src="assets/fifa/feature-importance.png" alt="Horizontal bar chart of Random Forest feature importances" loading="lazy" />
+            <figcaption>Which stats the Random Forest leaned on most heavily</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <div class="wrap">
+        <span class="step">Step 7</span>
+        <h2>Finding the Best Deals</h2>
+        <p>
+          Each player's projected 2027 value is compared against their current market value
+          as a <strong>percentage</strong> gap rather than a raw euro difference — a €5M gap
+          means very different things for a €2M player versus an €80M player, and percentage
+          puts every price tier on a level playing field.
+        </p>
+        <div class="case-img-grid">
+          <figure class="chart-fig">
+            <img src="assets/fifa/best-deals-leaguewide.png" alt="Bar chart of the top 15 league-wide best deal players by projected value gap percentage" loading="lazy" />
+            <figcaption>Top 15 "best deal" players league-wide by projected value gap</figcaption>
+          </figure>
+          <figure class="chart-fig">
+            <img src="assets/fifa/current-vs-projected-value.png" alt="Scatter plot of current market value versus projected 2027 value for all players, with top best deals labeled" loading="lazy" />
+            <figcaption>Every player: current vs. projected value, with the top 5 deals labeled</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <div class="wrap">
+        <span class="step">Summary</span>
+        <h2>Key Findings</h2>
+        <ul class="findings">
+          <li>The dataset's pre-built tournament totals didn't reliably match totals computed from raw match rows, so every aggregate here was rebuilt from scratch.</li>
+          <li>Squad value, attacking output, and discipline vary substantially across the 48 teams — the interactive explorer (in the live notebook) lets you drill into any one against the tournament average.</li>
+          <li>The Player Value Score correlates positively with the dataset's own rating column, a reasonable sanity check that it measures something sensible.</li>
+          <li>Attacking output and match rating are the strongest correlates of market value; position is a likely confounder worth isolating in a follow-up.</li>
+          <li>Both regression models land around the same R² (~0.45) — a Random Forest didn't meaningfully outperform a simple linear model here, itself a useful finding.</li>
+          <li>Ranking "best deals" by percentage gap (not raw euros) keeps players at very different price tiers comparable.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="case-section" style="border-bottom: 1px solid var(--border);">
+      <div class="wrap">
+        <a class="btn btn-blue" href="projects.html">&larr; Back to All Projects</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <span>&copy; 2026 Connor Chiu</span>
+      <div class="foot-links">
+        <a href="about.html">About</a>
+        <a href="projects.html">Projects</a>
+        <a href="https://www.linkedin.com/in/connor-chiu-3b9094372/" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
