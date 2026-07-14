@@ -57,6 +57,20 @@
 
     <section class="case-section">
       <div class="wrap">
+        <span class="step">&#128161; Key Insights</span>
+        <h2>The Short Version</h2>
+        <div class="finding-list">
+          <div class="finding-item"><div class="n">01</div><p><strong>The dataset lied about its own totals.</strong> Pre-built "tournament total" columns drifted from a manual sum of match rows often enough that trusting them would have quietly poisoned every downstream number.</p></div>
+          <div class="finding-item"><div class="n">02</div><p><strong>Position context beats raw totals.</strong> Judging every player on one universal scale flattens the differences between roles; scoring within position produces leaderboards that actually pass the smell test.</p></div>
+          <div class="finding-item"><div class="n">03</div><p><strong>Flash sells.</strong> Goals, assists, and match rating correlate with market value far more than defensive workrate does &mdash; the transfer market rewards what shows up on a highlight reel.</p></div>
+          <div class="finding-item"><div class="n">04</div><p><strong>Half the story, not the whole thing.</strong> The regression model accounts for roughly half of the variation in log market value out of sample &mdash; good enough to flag relative value, not to price a transfer to the euro.</p></div>
+          <div class="finding-item"><div class="n">05</div><p><strong>The gap cuts both directions.</strong> The same age-adjusted projection that surfaces young, undervalued sleepers also flags the players priced well above what their output supports &mdash; useful either way you're shopping.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <div class="wrap">
         <span class="step" style="color:#5b9dff;">&#9881;&#65039; Behind the Numbers</span>
         <h2>How 48 Squads Stack Up</h2>
         <p>
@@ -94,9 +108,13 @@
           <div style="display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap; margin-bottom:16px;">
             <div>
               <h3 style="margin-bottom:4px;">Compare Any Team</h3>
-              <div class="sub" style="margin-bottom:0;">Benchmarked against the tournament-wide average, not raw units</div>
+              <div class="sub" style="margin-bottom:0;">Pick two teams head-to-head, or leave it on the tournament average</div>
             </div>
-            <select id="team-select" class="tab-btn" style="cursor:pointer;"></select>
+            <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+              <select id="team-select" class="tab-btn" style="cursor:pointer;"></select>
+              <span style="color:#6b7690; font-size:0.8rem;">vs.</span>
+              <select id="team-compare-select" class="tab-btn" style="cursor:pointer;"></select>
+            </div>
           </div>
           <div class="chart-canvas-wrap"><canvas id="chart-team-explorer"></canvas></div>
           <p id="team-explorer-meta" style="margin-top:14px; color:#6b7690; font-size:0.85rem;"></p>
@@ -221,20 +239,6 @@
             <thead><tr><th>Team</th><th>Player</th><th>Pos</th><th>Age</th><th>Market Value</th><th>Projected 2027</th><th>Value Gap</th></tr></thead>
             <tbody></tbody>
           </table>
-        </div>
-      </div>
-    </section>
-
-    <section class="case-section">
-      <div class="wrap">
-        <span class="step">Wrap-Up</span>
-        <h2>What This Actually Showed</h2>
-        <div class="finding-list">
-          <div class="finding-item"><div class="n">01</div><p><strong>The dataset lied about its own totals.</strong> Pre-built "tournament total" columns drifted from a manual sum of match rows often enough that trusting them would have quietly poisoned every downstream number.</p></div>
-          <div class="finding-item"><div class="n">02</div><p><strong>Position context beats raw totals.</strong> Judging every player on one universal scale flattens the differences between roles; scoring within position produces leaderboards that actually pass the smell test.</p></div>
-          <div class="finding-item"><div class="n">03</div><p><strong>Flash sells.</strong> Goals, assists, and match rating correlate with market value far more than defensive workrate does &mdash; the transfer market rewards what shows up on a highlight reel.</p></div>
-          <div class="finding-item"><div class="n">04</div><p><strong>Half the story, not the whole thing.</strong> The regression model accounts for roughly half of the variation in log market value out of sample &mdash; good enough to flag relative value, not to price a transfer to the euro.</p></div>
-          <div class="finding-item"><div class="n">05</div><p><strong>The gap cuts both directions.</strong> The same age-adjusted projection that surfaces young, undervalued sleepers also flags the players priced well above what their output supports &mdash; useful either way you're shopping.</p></div>
         </div>
       </div>
     </section>

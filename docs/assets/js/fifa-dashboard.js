@@ -116,27 +116,48 @@ async function main() {
     });
   }
 
-  // ---- Interactive team explorer ----
+  // ---- Interactive team explorer: team vs. team, or team vs. tournament average ----
   const teamSelect = document.getElementById("team-select");
+  const compareSelect = document.getElementById("team-compare-select");
+  const AVG_SENTINEL = "__AVG__";
   let explorerChart = null;
-  if (teamSelect) {
-    const teamNames = data.teams.map((t) => t.team).sort();
-    teamSelect.innerHTML = teamNames.map((t) => `<option value="${t}">${t}</option>`).join("");
 
-    function renderExplorer(teamName) {
-      const row = data.teams.find((t) => t.team === teamName);
+  if (teamSelect && compareSelect) {
+    const teamNames = data.teams.map((t) => t.team).sort();
+
+    // Synthesize a "Tournament Average" pseudo-team so it can be compared exactly
+    // like a real team — same fields, same normalization, same chart code path.
+    const avgSquadSize = data.teams.reduce((s, t) => s + t.squad_size, 0) / data.teams.length;
+    const avgAge = data.teams.reduce((s, t) => s + t.avg_age, 0) / data.teams.length;
+    const averageRow = { team: "Tournament Average", squad_size: avgSquadSize, avg_age: avgAge, ...data.tournament_avg };
+
+    function resolveRow(value) {
+      return value === AVG_SENTINEL ? averageRow : data.teams.find((t) => t.team === value);
+    }
+
+    teamSelect.innerHTML = teamNames.map((t) => `<option value="${t}">${t}</option>`).join("");
+    compareSelect.innerHTML =
+      `<option value="${AVG_SENTINEL}">Tournament Average</option>` +
+      teamNames.map((t) => `<option value="${t}">${t}</option>`).join("");
+
+    function renderExplorer(teamName, compareValue) {
+      const row = resolveRow(teamName);
+      const compareRow = resolveRow(compareValue);
       const avg = data.tournament_avg;
       // Raw units differ wildly (euros in the hundreds of millions vs. a 0-1 pass
-      // accuracy), so every metric is expressed as % of the tournament average —
-      // that keeps all five bars on one meaningful, comparable scale.
-      const rawMetrics = [
-        ["Total Market Value", row.total_market_value_eur, avg.total_market_value_eur, eur],
-        ["Total Goals", row.total_goals, avg.total_goals, (v) => v.toFixed(0)],
-        ["Avg Pass Accuracy", row.avg_pass_accuracy, avg.avg_pass_accuracy, (v) => v.toFixed(2)],
-        ["Avg Player Rating", row.avg_player_rating, avg.avg_player_rating, (v) => v.toFixed(2)],
-        ["Avg Distance Covered (km)", row.avg_distance_km, avg.avg_distance_km, (v) => v.toFixed(2)],
+      // accuracy), so every metric is expressed as % of the true tournament average —
+      // that keeps both bars on one meaningful, comparable scale no matter what's
+      // being compared (a team, or the average itself, which naturally lands at 100%).
+      const metricDefs = [
+        ["Total Market Value", "total_market_value_eur", eur],
+        ["Total Goals", "total_goals", (v) => v.toFixed(0)],
+        ["Avg Pass Accuracy", "avg_pass_accuracy", (v) => v.toFixed(2)],
+        ["Avg Player Rating", "avg_player_rating", (v) => v.toFixed(2)],
+        ["Avg Distance Covered (km)", "avg_distance_km", (v) => v.toFixed(2)],
       ];
-      const teamPct = rawMetrics.map((m) => (m[1] / m[2]) * 100);
+      const rawMetrics = metricDefs.map(([label, key, fmt]) => [label, row[key], compareRow[key], avg[key], fmt]);
+      const teamPct = rawMetrics.map((m) => (m[1] / m[3]) * 100);
+      const comparePct = rawMetrics.map((m) => (m[2] / m[3]) * 100);
       const ctx = document.getElementById("chart-team-explorer");
       if (explorerChart) explorerChart.destroy();
       explorerChart = new Chart(ctx, {
@@ -144,8 +165,8 @@ async function main() {
         data: {
           labels: rawMetrics.map((m) => m[0]),
           datasets: [
-            { label: teamName, data: teamPct, backgroundColor: FIFA_COLORS.blue, borderRadius: 4 },
-            { label: "Tournament average", data: rawMetrics.map(() => 100), backgroundColor: "#4a5578", borderRadius: 4 },
+            { label: row.team, data: teamPct, backgroundColor: FIFA_COLORS.blue, borderRadius: 4 },
+            { label: compareRow.team, data: comparePct, backgroundColor: FIFA_COLORS.amber, borderRadius: 4 },
           ],
         },
         options: {
@@ -157,9 +178,9 @@ async function main() {
             tooltip: {
               callbacks: {
                 label: (c) => {
-                  const [label, teamVal, avgVal, fmt] = rawMetrics[c.dataIndex];
-                  const raw = c.datasetIndex === 0 ? teamVal : avgVal;
-                  return `${c.dataset.label}: ${fmt(raw)} (${c.parsed.x.toFixed(0)}% of avg)`;
+                  const [label, teamVal, compareVal, , fmt] = rawMetrics[c.dataIndex];
+                  const raw = c.datasetIndex === 0 ? teamVal : compareVal;
+                  return `${c.dataset.label}: ${fmt(raw)} (${c.parsed.x.toFixed(0)}% of tournament avg)`;
                 },
               },
             },
@@ -171,11 +192,13 @@ async function main() {
         },
       });
       document.getElementById("team-explorer-meta").textContent =
-        `Squad size: ${row.squad_size} players   |   Average age: ${row.avg_age.toFixed(1)}`;
+        `${row.team}: squad ${Math.round(row.squad_size)}, avg age ${row.avg_age.toFixed(1)}   |   ` +
+        `${compareRow.team}: squad ${Math.round(compareRow.squad_size)}, avg age ${compareRow.avg_age.toFixed(1)}`;
     }
 
-    teamSelect.addEventListener("change", () => renderExplorer(teamSelect.value));
-    renderExplorer(teamNames[0]);
+    teamSelect.addEventListener("change", () => renderExplorer(teamSelect.value, compareSelect.value));
+    compareSelect.addEventListener("change", () => renderExplorer(teamSelect.value, compareSelect.value));
+    renderExplorer(teamNames[0], AVG_SENTINEL);
   }
 
   // ---- Value Score leaderboard ----
