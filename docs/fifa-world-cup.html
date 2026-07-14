@@ -58,13 +58,13 @@
     <section class="case-section">
       <div class="wrap">
         <span class="step">&#128161; Key Insights</span>
-        <h2>The Short Version</h2>
+        <h2>What I Learned</h2>
         <div class="finding-list">
-          <div class="finding-item"><div class="n">01</div><p><strong>The dataset lied about its own totals.</strong> Pre-built "tournament total" columns drifted from a manual sum of match rows often enough that trusting them would have quietly poisoned every downstream number.</p></div>
-          <div class="finding-item"><div class="n">02</div><p><strong>Position context beats raw totals.</strong> Judging every player on one universal scale flattens the differences between roles; scoring within position produces leaderboards that actually pass the smell test.</p></div>
-          <div class="finding-item"><div class="n">03</div><p><strong>Flash sells.</strong> Goals, assists, and match rating correlate with market value far more than defensive workrate does &mdash; the transfer market rewards what shows up on a highlight reel.</p></div>
-          <div class="finding-item"><div class="n">04</div><p><strong>Half the story, not the whole thing.</strong> The regression model accounts for roughly half of the variation in log market value out of sample &mdash; good enough to flag relative value, not to price a transfer to the euro.</p></div>
-          <div class="finding-item"><div class="n">05</div><p><strong>The gap cuts both directions.</strong> The same age-adjusted projection that surfaces young, undervalued sleepers also flags the players priced well above what their output supports &mdash; useful either way you're shopping.</p></div>
+          <div class="finding-item"><div class="n">01</div><p><strong>Don't trust a dataset's built-in totals.</strong> The columns that were supposed to already have each player's season totals didn't match what you get from adding up the raw match data yourself &mdash; so every total in this project was rebuilt from scratch instead of taking the shortcut.</p></div>
+          <div class="finding-item"><div class="n">02</div><p><strong>Compare players within their own position, not everyone at once.</strong> A defender and a striker do very different jobs, so scoring them on one universal scale isn't fair. Ranking players only against others in the same position gave results that actually made sense.</p></div>
+          <div class="finding-item"><div class="n">03</div><p><strong>Flashy stats drive price more than steady ones.</strong> Goals, assists, and overall rating line up with market value far more than defensive stats do &mdash; even though solid defending matters just as much to winning.</p></div>
+          <div class="finding-item"><div class="n">04</div><p><strong>The model explains part of the picture, not the whole thing.</strong> It only accounts for around half of what actually drives a player's value, so it's good for spotting players worth a second look, but not precise enough to set an exact price.</p></div>
+          <div class="finding-item"><div class="n">05</div><p><strong>The same method spots both bargains and red flags.</strong> Comparing a player's projected future value to their price today doesn't just surface undervalued young players &mdash; it also flags players who might be overpriced for what they actually produce.</p></div>
         </div>
       </div>
     </section>
