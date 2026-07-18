@@ -1,0 +1,1203 @@
+{
+    "meta":  {
+                 "source":  "Cal_Football_Business_Operations_Dataset.xlsx (synthetic data)",
+                 "seasons":  "2023 Pac-12, 2024-25 ACC",
+                 "note":  "All aggregates below are computed client-side from these raw rows so filtered views always reconcile with the totals."
+             },
+    "raw":  {
+                "games":  [
+                              {
+                                  "season":  "2023",
+                                  "opponent":  "USC",
+                                  "attendance":  52027,
+                                  "capacity_pct":  0.833
+                              },
+                              {
+                                  "season":  "2023",
+                                  "opponent":  "TCU",
+                                  "attendance":  61842,
+                                  "capacity_pct":  0.99
+                              },
+                              {
+                                  "season":  "2023",
+                                  "opponent":  "Arizona State",
+                                  "attendance":  47941,
+                                  "capacity_pct":  0.767
+                              },
+                              {
+                                  "season":  "2023",
+                                  "opponent":  "Washington State",
+                                  "attendance":  40676,
+                                  "capacity_pct":  0.651
+                              },
+                              {
+                                  "season":  "2023",
+                                  "opponent":  "Weber State",
+                                  "attendance":  54712,
+                                  "capacity_pct":  0.876
+                              },
+                              {
+                                  "season":  "2023",
+                                  "opponent":  "Colorado",
+                                  "attendance":  38711,
+                                  "capacity_pct":  0.62
+                              },
+                              {
+                                  "season":  "2024",
+                                  "opponent":  "Duke",
+                                  "attendance":  57651,
+                                  "capacity_pct":  0.923
+                              },
+                              {
+                                  "season":  "2024",
+                                  "opponent":  "TCU",
+                                  "attendance":  46394,
+                                  "capacity_pct":  0.743
+                              },
+                              {
+                                  "season":  "2024",
+                                  "opponent":  "Virginia Tech",
+                                  "attendance":  38787,
+                                  "capacity_pct":  0.621
+                              },
+                              {
+                                  "season":  "2024",
+                                  "opponent":  "Idaho State",
+                                  "attendance":  42357,
+                                  "capacity_pct":  0.678
+                              },
+                              {
+                                  "season":  "2024",
+                                  "opponent":  "Boston College",
+                                  "attendance":  41745,
+                                  "capacity_pct":  0.668
+                              },
+                              {
+                                  "season":  "2024",
+                                  "opponent":  "Miami (FL)",
+                                  "attendance":  50765,
+                                  "capacity_pct":  0.813
+                              },
+                              {
+                                  "season":  "2025",
+                                  "opponent":  "Pittsburgh",
+                                  "attendance":  50231,
+                                  "capacity_pct":  0.804
+                              },
+                              {
+                                  "season":  "2025",
+                                  "opponent":  "Notre Dame",
+                                  "attendance":  59391,
+                                  "capacity_pct":  0.951
+                              },
+                              {
+                                  "season":  "2025",
+                                  "opponent":  "Wake Forest",
+                                  "attendance":  49346,
+                                  "capacity_pct":  0.79
+                              },
+                              {
+                                  "season":  "2025",
+                                  "opponent":  "Sacramento State",
+                                  "attendance":  45397,
+                                  "capacity_pct":  0.727
+                              },
+                              {
+                                  "season":  "2025",
+                                  "opponent":  "Duke",
+                                  "attendance":  43942,
+                                  "capacity_pct":  0.703
+                              },
+                              {
+                                  "season":  "2025",
+                                  "opponent":  "Idaho State",
+                                  "attendance":  50292,
+                                  "capacity_pct":  0.805
+                              }
+                          ],
+                "tickets":  [
+                                {
+                                    "season":  "2023",
+                                    "tier":  "Season Ticket Allocation",
+                                    "revenue":  4345560.99
+                                },
+                                {
+                                    "season":  "2023",
+                                    "tier":  "Single-Game General",
+                                    "revenue":  1839360.72
+                                },
+                                {
+                                    "season":  "2023",
+                                    "tier":  "Student",
+                                    "revenue":  296470.32
+                                },
+                                {
+                                    "season":  "2023",
+                                    "tier":  "Premium / Club",
+                                    "revenue":  3156982.81
+                                },
+                                {
+                                    "season":  "2023",
+                                    "tier":  "Group Sales",
+                                    "revenue":  118881
+                                },
+                                {
+                                    "season":  "2023",
+                                    "tier":  "Visiting Team Allotment",
+                                    "revenue":  178194.75
+                                },
+                                {
+                                    "season":  "2023",
+                                    "tier":  "Season Ticket Allocation",
+                                    "revenue":  4057085.34
+                                },
+                                {
+                                    "season":  "2023",
+                                    "tier":  "Single-Game General",
+                                    "revenue":  2130450.14
+                                },
+                                {
+                                    "season":  "2023",
+                                    "tier":  "Student",
+                                    "revenue":  197271.36
+                                },
+                                {
+                                    "season":  "2023",
+                                    "tier":  "Premium / Club",
+                                    "revenue":  1796705.22
+                                },
+                                {
+                                    "season":  "2023",
+                                    "tier":  "Group Sales",
+                                    "revenue":  130952.34
+                                },
+                                {
+                                    "season":  "2023",
+                                    "tier":  "Visiting Team Allotment",
+                                    "revenue":  109366.95
+                                },
+                                {
+                                    "season":  "2023",
+                                    "tier":  "Season Ticket Allocation",
+                                    "revenue":  2456791.28
+                                },
+                                {
+                                    "season":  "2023",
+                                    "tier":  "Single-Game General",
+                                    "revenue":  1232830.8
+                                },
+                                {
+                                    "season":  "2023",
+                                    "tier":  "Student",
+                                    "revenue":  209554.53
+                                },
+                                {
+                                    "season":  "2023",
+                                    "tier":  "Premium / Club",
+                                    "revenue":  1846547.47
+                                },
+                                {
+                                    "season":  "2023",
+                                    "tier":  "Group Sales",
+                                    "revenue":  160938.36
+                                },
+                                {
+                                    "season":  "2023",
+                                    "tier":  "Visiting Team Allotment",
+                                    "revenue":  108319.92
+                                },
+                                {
+                                    "season":  "2023",
+                                    "tier":  "Season Ticket Allocation",
+                                    "revenue":  2421956.6
+                                },
+                                {
+                                    "season":  "2023",
+                                    "tier":  "Single-Game General",
+                                    "revenue":  923952.78
+                                },
+                                {
+                                    "season":  "2023",
+                                    "tier":  "Student",
+                                    "revenue":  133559.14
+                                },
+                                {
+                                    "season":  "2023",
+                                    "tier":  "Premium / Club",
+                                    "revenue":  878114.07
+                                },
+                                {
+                                    "season":  "2023",
+                                    "tier":  "Group Sales",
+                                    "revenue":  74560.5
+                                },
+                                {
+                                    "season":  "2023",
+                                    "tier":  "Visiting Team Allotment",
+                                    "revenue":  75974.4
+                                },
+                                {
+                                    "season":  "2023",
+                                    "tier":  "Season Ticket Allocation",
+                                    "revenue":  4704715.08
+                                },
+                                {
+                                    "season":  "2023",
+                                    "tier":  "Single-Game General",
+                                    "revenue":  1542057.5
+                                },
+                                {
+                                    "season":  "2023",
+                                    "tier":  "Student",
+                                    "revenue":  260369.1
+                                },
+                                {
+                                    "season":  "2023",
+                                    "tier":  "Premium / Club",
+                                    "revenue":  1315844.42
+                                },
+                                {
+                                    "season":  "2023",
+                                    "tier":  "Group Sales",
+                                    "revenue":  143948
+                                },
+                                {
+                                    "season":  "2023",
+                                    "tier":  "Visiting Team Allotment",
+                                    "revenue":  163164.43
+                                },
+                                {
+                                    "season":  "2023",
+                                    "tier":  "Season Ticket Allocation",
+                                    "revenue":  2710137.2
+                                },
+                                {
+                                    "season":  "2023",
+                                    "tier":  "Single-Game General",
+                                    "revenue":  667622.82
+                                },
+                                {
+                                    "season":  "2023",
+                                    "tier":  "Student",
+                                    "revenue":  137108.92
+                                },
+                                {
+                                    "season":  "2023",
+                                    "tier":  "Premium / Club",
+                                    "revenue":  1453417
+                                },
+                                {
+                                    "season":  "2023",
+                                    "tier":  "Group Sales",
+                                    "revenue":  99842.54
+                                },
+                                {
+                                    "season":  "2023",
+                                    "tier":  "Visiting Team Allotment",
+                                    "revenue":  121368
+                                },
+                                {
+                                    "season":  "2024",
+                                    "tier":  "Season Ticket Allocation",
+                                    "revenue":  4548281.1
+                                },
+                                {
+                                    "season":  "2024",
+                                    "tier":  "Single-Game General",
+                                    "revenue":  1427811.84
+                                },
+                                {
+                                    "season":  "2024",
+                                    "tier":  "Student",
+                                    "revenue":  272090.6
+                                },
+                                {
+                                    "season":  "2024",
+                                    "tier":  "Premium / Club",
+                                    "revenue":  2694150.16
+                                },
+                                {
+                                    "season":  "2024",
+                                    "tier":  "Group Sales",
+                                    "revenue":  165402.95
+                                },
+                                {
+                                    "season":  "2024",
+                                    "tier":  "Visiting Team Allotment",
+                                    "revenue":  134793.76
+                                },
+                                {
+                                    "season":  "2024",
+                                    "tier":  "Season Ticket Allocation",
+                                    "revenue":  2511484.8
+                                },
+                                {
+                                    "season":  "2024",
+                                    "tier":  "Single-Game General",
+                                    "revenue":  1523157.54
+                                },
+                                {
+                                    "season":  "2024",
+                                    "tier":  "Student",
+                                    "revenue":  204976.92
+                                },
+                                {
+                                    "season":  "2024",
+                                    "tier":  "Premium / Club",
+                                    "revenue":  2066068.96
+                                },
+                                {
+                                    "season":  "2024",
+                                    "tier":  "Group Sales",
+                                    "revenue":  161675.36
+                                },
+                                {
+                                    "season":  "2024",
+                                    "tier":  "Visiting Team Allotment",
+                                    "revenue":  158077.85
+                                },
+                                {
+                                    "season":  "2024",
+                                    "tier":  "Season Ticket Allocation",
+                                    "revenue":  2623371.1
+                                },
+                                {
+                                    "season":  "2024",
+                                    "tier":  "Single-Game General",
+                                    "revenue":  1305846.08
+                                },
+                                {
+                                    "season":  "2024",
+                                    "tier":  "Student",
+                                    "revenue":  131918.34
+                                },
+                                {
+                                    "season":  "2024",
+                                    "tier":  "Premium / Club",
+                                    "revenue":  850523.06
+                                },
+                                {
+                                    "season":  "2024",
+                                    "tier":  "Group Sales",
+                                    "revenue":  114797.92
+                                },
+                                {
+                                    "season":  "2024",
+                                    "tier":  "Visiting Team Allotment",
+                                    "revenue":  113204.52
+                                },
+                                {
+                                    "season":  "2024",
+                                    "tier":  "Season Ticket Allocation",
+                                    "revenue":  3262572
+                                },
+                                {
+                                    "season":  "2024",
+                                    "tier":  "Single-Game General",
+                                    "revenue":  1065878.15
+                                },
+                                {
+                                    "season":  "2024",
+                                    "tier":  "Student",
+                                    "revenue":  195455.82
+                                },
+                                {
+                                    "season":  "2024",
+                                    "tier":  "Premium / Club",
+                                    "revenue":  1076638.68
+                                },
+                                {
+                                    "season":  "2024",
+                                    "tier":  "Group Sales",
+                                    "revenue":  140374.57
+                                },
+                                {
+                                    "season":  "2024",
+                                    "tier":  "Visiting Team Allotment",
+                                    "revenue":  147553.56
+                                },
+                                {
+                                    "season":  "2024",
+                                    "tier":  "Season Ticket Allocation",
+                                    "revenue":  2509635.84
+                                },
+                                {
+                                    "season":  "2024",
+                                    "tier":  "Single-Game General",
+                                    "revenue":  1254968.13
+                                },
+                                {
+                                    "season":  "2024",
+                                    "tier":  "Student",
+                                    "revenue":  162015.92
+                                },
+                                {
+                                    "season":  "2024",
+                                    "tier":  "Premium / Club",
+                                    "revenue":  1027710.32
+                                },
+                                {
+                                    "season":  "2024",
+                                    "tier":  "Group Sales",
+                                    "revenue":  145006.4
+                                },
+                                {
+                                    "season":  "2024",
+                                    "tier":  "Visiting Team Allotment",
+                                    "revenue":  94620
+                                },
+                                {
+                                    "season":  "2024",
+                                    "tier":  "Season Ticket Allocation",
+                                    "revenue":  4762665.5
+                                },
+                                {
+                                    "season":  "2024",
+                                    "tier":  "Single-Game General",
+                                    "revenue":  1383170.88
+                                },
+                                {
+                                    "season":  "2024",
+                                    "tier":  "Student",
+                                    "revenue":  347919.75
+                                },
+                                {
+                                    "season":  "2024",
+                                    "tier":  "Premium / Club",
+                                    "revenue":  3019349.7
+                                },
+                                {
+                                    "season":  "2024",
+                                    "tier":  "Group Sales",
+                                    "revenue":  144408.02
+                                },
+                                {
+                                    "season":  "2024",
+                                    "tier":  "Visiting Team Allotment",
+                                    "revenue":  168261.2
+                                },
+                                {
+                                    "season":  "2025",
+                                    "tier":  "Season Ticket Allocation",
+                                    "revenue":  3062916.78
+                                },
+                                {
+                                    "season":  "2025",
+                                    "tier":  "Single-Game General",
+                                    "revenue":  1019894.04
+                                },
+                                {
+                                    "season":  "2025",
+                                    "tier":  "Student",
+                                    "revenue":  287035.28
+                                },
+                                {
+                                    "season":  "2025",
+                                    "tier":  "Premium / Club",
+                                    "revenue":  2542686.39
+                                },
+                                {
+                                    "season":  "2025",
+                                    "tier":  "Group Sales",
+                                    "revenue":  124618.62
+                                },
+                                {
+                                    "season":  "2025",
+                                    "tier":  "Visiting Team Allotment",
+                                    "revenue":  113991.63
+                                },
+                                {
+                                    "season":  "2025",
+                                    "tier":  "Season Ticket Allocation",
+                                    "revenue":  3785274.84
+                                },
+                                {
+                                    "season":  "2025",
+                                    "tier":  "Single-Game General",
+                                    "revenue":  1286056.96
+                                },
+                                {
+                                    "season":  "2025",
+                                    "tier":  "Student",
+                                    "revenue":  270807.48
+                                },
+                                {
+                                    "season":  "2025",
+                                    "tier":  "Premium / Club",
+                                    "revenue":  1428669.9
+                                },
+                                {
+                                    "season":  "2025",
+                                    "tier":  "Group Sales",
+                                    "revenue":  232819.65
+                                },
+                                {
+                                    "season":  "2025",
+                                    "tier":  "Visiting Team Allotment",
+                                    "revenue":  192656.75
+                                },
+                                {
+                                    "season":  "2025",
+                                    "tier":  "Season Ticket Allocation",
+                                    "revenue":  4138563.44
+                                },
+                                {
+                                    "season":  "2025",
+                                    "tier":  "Single-Game General",
+                                    "revenue":  1402412.66
+                                },
+                                {
+                                    "season":  "2025",
+                                    "tier":  "Student",
+                                    "revenue":  157248
+                                },
+                                {
+                                    "season":  "2025",
+                                    "tier":  "Premium / Club",
+                                    "revenue":  1099090.08
+                                },
+                                {
+                                    "season":  "2025",
+                                    "tier":  "Group Sales",
+                                    "revenue":  147874.68
+                                },
+                                {
+                                    "season":  "2025",
+                                    "tier":  "Visiting Team Allotment",
+                                    "revenue":  163828.25
+                                },
+                                {
+                                    "season":  "2025",
+                                    "tier":  "Season Ticket Allocation",
+                                    "revenue":  3371262.72
+                                },
+                                {
+                                    "season":  "2025",
+                                    "tier":  "Single-Game General",
+                                    "revenue":  864894.89
+                                },
+                                {
+                                    "season":  "2025",
+                                    "tier":  "Student",
+                                    "revenue":  288367.2
+                                },
+                                {
+                                    "season":  "2025",
+                                    "tier":  "Premium / Club",
+                                    "revenue":  945320.4
+                                },
+                                {
+                                    "season":  "2025",
+                                    "tier":  "Group Sales",
+                                    "revenue":  81678.72
+                                },
+                                {
+                                    "season":  "2025",
+                                    "tier":  "Visiting Team Allotment",
+                                    "revenue":  148726.5
+                                },
+                                {
+                                    "season":  "2025",
+                                    "tier":  "Season Ticket Allocation",
+                                    "revenue":  2263039.2
+                                },
+                                {
+                                    "season":  "2025",
+                                    "tier":  "Single-Game General",
+                                    "revenue":  1465652
+                                },
+                                {
+                                    "season":  "2025",
+                                    "tier":  "Student",
+                                    "revenue":  210868.8
+                                },
+                                {
+                                    "season":  "2025",
+                                    "tier":  "Premium / Club",
+                                    "revenue":  1681184.7
+                                },
+                                {
+                                    "season":  "2025",
+                                    "tier":  "Group Sales",
+                                    "revenue":  156040.01
+                                },
+                                {
+                                    "season":  "2025",
+                                    "tier":  "Visiting Team Allotment",
+                                    "revenue":  123084
+                                },
+                                {
+                                    "season":  "2025",
+                                    "tier":  "Season Ticket Allocation",
+                                    "revenue":  3614832.6
+                                },
+                                {
+                                    "season":  "2025",
+                                    "tier":  "Single-Game General",
+                                    "revenue":  861472.72
+                                },
+                                {
+                                    "season":  "2025",
+                                    "tier":  "Student",
+                                    "revenue":  187518.24
+                                },
+                                {
+                                    "season":  "2025",
+                                    "tier":  "Premium / Club",
+                                    "revenue":  1327102.02
+                                },
+                                {
+                                    "season":  "2025",
+                                    "tier":  "Group Sales",
+                                    "revenue":  108380.79
+                                },
+                                {
+                                    "season":  "2025",
+                                    "tier":  "Visiting Team Allotment",
+                                    "revenue":  134501.9
+                                }
+                            ],
+                "gameday":  [
+                                {
+                                    "season":  "2023",
+                                    "category":  "Concessions - Food",
+                                    "revenue":  467151.62
+                                },
+                                {
+                                    "season":  "2023",
+                                    "category":  "Concessions - Beverage",
+                                    "revenue":  262080.99
+                                },
+                                {
+                                    "season":  "2023",
+                                    "category":  "Merchandise - Apparel",
+                                    "revenue":  207967.09
+                                },
+                                {
+                                    "season":  "2023",
+                                    "category":  "Merchandise - Novelty/Accessories",
+                                    "revenue":  67246.5
+                                },
+                                {
+                                    "season":  "2023",
+                                    "category":  "Parking",
+                                    "revenue":  452508.27
+                                },
+                                {
+                                    "season":  "2023",
+                                    "category":  "Programs / Digital Guide",
+                                    "revenue":  17832.39
+                                },
+                                {
+                                    "season":  "2023",
+                                    "category":  "Concessions - Food",
+                                    "revenue":  559510.64
+                                },
+                                {
+                                    "season":  "2023",
+                                    "category":  "Concessions - Beverage",
+                                    "revenue":  413254.18
+                                },
+                                {
+                                    "season":  "2023",
+                                    "category":  "Merchandise - Apparel",
+                                    "revenue":  298483.43
+                                },
+                                {
+                                    "season":  "2023",
+                                    "category":  "Merchandise - Novelty/Accessories",
+                                    "revenue":  128245.97
+                                },
+                                {
+                                    "season":  "2023",
+                                    "category":  "Parking",
+                                    "revenue":  585352.57
+                                },
+                                {
+                                    "season":  "2023",
+                                    "category":  "Programs / Digital Guide",
+                                    "revenue":  31864.47
+                                },
+                                {
+                                    "season":  "2023",
+                                    "category":  "Concessions - Food",
+                                    "revenue":  564466.03
+                                },
+                                {
+                                    "season":  "2023",
+                                    "category":  "Concessions - Beverage",
+                                    "revenue":  273311.04
+                                },
+                                {
+                                    "season":  "2023",
+                                    "category":  "Merchandise - Apparel",
+                                    "revenue":  259180.66
+                                },
+                                {
+                                    "season":  "2023",
+                                    "category":  "Merchandise - Novelty/Accessories",
+                                    "revenue":  128677.83
+                                },
+                                {
+                                    "season":  "2023",
+                                    "category":  "Parking",
+                                    "revenue":  277725.23
+                                },
+                                {
+                                    "season":  "2023",
+                                    "category":  "Programs / Digital Guide",
+                                    "revenue":  22220.85
+                                },
+                                {
+                                    "season":  "2023",
+                                    "category":  "Concessions - Food",
+                                    "revenue":  255279.55
+                                },
+                                {
+                                    "season":  "2023",
+                                    "category":  "Concessions - Beverage",
+                                    "revenue":  161026.77
+                                },
+                                {
+                                    "season":  "2023",
+                                    "category":  "Merchandise - Apparel",
+                                    "revenue":  174328.46
+                                },
+                                {
+                                    "season":  "2023",
+                                    "category":  "Merchandise - Novelty/Accessories",
+                                    "revenue":  129620.2
+                                },
+                                {
+                                    "season":  "2023",
+                                    "category":  "Parking",
+                                    "revenue":  298384.34
+                                },
+                                {
+                                    "season":  "2023",
+                                    "category":  "Programs / Digital Guide",
+                                    "revenue":  16050.49
+                                },
+                                {
+                                    "season":  "2023",
+                                    "category":  "Concessions - Food",
+                                    "revenue":  494835.65
+                                },
+                                {
+                                    "season":  "2023",
+                                    "category":  "Concessions - Beverage",
+                                    "revenue":  468949.83
+                                },
+                                {
+                                    "season":  "2023",
+                                    "category":  "Merchandise - Apparel",
+                                    "revenue":  250532.62
+                                },
+                                {
+                                    "season":  "2023",
+                                    "category":  "Merchandise - Novelty/Accessories",
+                                    "revenue":  125768.97
+                                },
+                                {
+                                    "season":  "2023",
+                                    "category":  "Parking",
+                                    "revenue":  445104.23
+                                },
+                                {
+                                    "season":  "2023",
+                                    "category":  "Programs / Digital Guide",
+                                    "revenue":  17880.71
+                                },
+                                {
+                                    "season":  "2023",
+                                    "category":  "Concessions - Food",
+                                    "revenue":  202332.96
+                                },
+                                {
+                                    "season":  "2023",
+                                    "category":  "Concessions - Beverage",
+                                    "revenue":  336053.92
+                                },
+                                {
+                                    "season":  "2023",
+                                    "category":  "Merchandise - Apparel",
+                                    "revenue":  232442.41
+                                },
+                                {
+                                    "season":  "2023",
+                                    "category":  "Merchandise - Novelty/Accessories",
+                                    "revenue":  93464.64
+                                },
+                                {
+                                    "season":  "2023",
+                                    "category":  "Parking",
+                                    "revenue":  332205.41
+                                },
+                                {
+                                    "season":  "2023",
+                                    "category":  "Programs / Digital Guide",
+                                    "revenue":  11545.41
+                                },
+                                {
+                                    "season":  "2024",
+                                    "category":  "Concessions - Food",
+                                    "revenue":  429562.26
+                                },
+                                {
+                                    "season":  "2024",
+                                    "category":  "Concessions - Beverage",
+                                    "revenue":  206311.67
+                                },
+                                {
+                                    "season":  "2024",
+                                    "category":  "Merchandise - Apparel",
+                                    "revenue":  279579.75
+                                },
+                                {
+                                    "season":  "2024",
+                                    "category":  "Merchandise - Novelty/Accessories",
+                                    "revenue":  79961.55
+                                },
+                                {
+                                    "season":  "2024",
+                                    "category":  "Parking",
+                                    "revenue":  549653.52
+                                },
+                                {
+                                    "season":  "2024",
+                                    "category":  "Programs / Digital Guide",
+                                    "revenue":  20188.67
+                                },
+                                {
+                                    "season":  "2024",
+                                    "category":  "Concessions - Food",
+                                    "revenue":  368898.22
+                                },
+                                {
+                                    "season":  "2024",
+                                    "category":  "Concessions - Beverage",
+                                    "revenue":  307643.82
+                                },
+                                {
+                                    "season":  "2024",
+                                    "category":  "Merchandise - Apparel",
+                                    "revenue":  291606.47
+                                },
+                                {
+                                    "season":  "2024",
+                                    "category":  "Merchandise - Novelty/Accessories",
+                                    "revenue":  53328.12
+                                },
+                                {
+                                    "season":  "2024",
+                                    "category":  "Parking",
+                                    "revenue":  412675.59
+                                },
+                                {
+                                    "season":  "2024",
+                                    "category":  "Programs / Digital Guide",
+                                    "revenue":  27922.39
+                                },
+                                {
+                                    "season":  "2024",
+                                    "category":  "Concessions - Food",
+                                    "revenue":  418421.09
+                                },
+                                {
+                                    "season":  "2024",
+                                    "category":  "Concessions - Beverage",
+                                    "revenue":  266541.67
+                                },
+                                {
+                                    "season":  "2024",
+                                    "category":  "Merchandise - Apparel",
+                                    "revenue":  239601.32
+                                },
+                                {
+                                    "season":  "2024",
+                                    "category":  "Merchandise - Novelty/Accessories",
+                                    "revenue":  68318.95
+                                },
+                                {
+                                    "season":  "2024",
+                                    "category":  "Parking",
+                                    "revenue":  308964.22
+                                },
+                                {
+                                    "season":  "2024",
+                                    "category":  "Programs / Digital Guide",
+                                    "revenue":  19205.19
+                                },
+                                {
+                                    "season":  "2024",
+                                    "category":  "Concessions - Food",
+                                    "revenue":  296706.96
+                                },
+                                {
+                                    "season":  "2024",
+                                    "category":  "Concessions - Beverage",
+                                    "revenue":  177570.27
+                                },
+                                {
+                                    "season":  "2024",
+                                    "category":  "Merchandise - Apparel",
+                                    "revenue":  160721.72
+                                },
+                                {
+                                    "season":  "2024",
+                                    "category":  "Merchandise - Novelty/Accessories",
+                                    "revenue":  74687.96
+                                },
+                                {
+                                    "season":  "2024",
+                                    "category":  "Parking",
+                                    "revenue":  335316.94
+                                },
+                                {
+                                    "season":  "2024",
+                                    "category":  "Programs / Digital Guide",
+                                    "revenue":  16547.62
+                                },
+                                {
+                                    "season":  "2024",
+                                    "category":  "Concessions - Food",
+                                    "revenue":  444699.59
+                                },
+                                {
+                                    "season":  "2024",
+                                    "category":  "Concessions - Beverage",
+                                    "revenue":  250558.46
+                                },
+                                {
+                                    "season":  "2024",
+                                    "category":  "Merchandise - Apparel",
+                                    "revenue":  297119.88
+                                },
+                                {
+                                    "season":  "2024",
+                                    "category":  "Merchandise - Novelty/Accessories",
+                                    "revenue":  128843.39
+                                },
+                                {
+                                    "season":  "2024",
+                                    "category":  "Parking",
+                                    "revenue":  524246.67
+                                },
+                                {
+                                    "season":  "2024",
+                                    "category":  "Programs / Digital Guide",
+                                    "revenue":  13020.15
+                                },
+                                {
+                                    "season":  "2024",
+                                    "category":  "Concessions - Food",
+                                    "revenue":  397002.05
+                                },
+                                {
+                                    "season":  "2024",
+                                    "category":  "Concessions - Beverage",
+                                    "revenue":  393766.26
+                                },
+                                {
+                                    "season":  "2024",
+                                    "category":  "Merchandise - Apparel",
+                                    "revenue":  301259.73
+                                },
+                                {
+                                    "season":  "2024",
+                                    "category":  "Merchandise - Novelty/Accessories",
+                                    "revenue":  143689.22
+                                },
+                                {
+                                    "season":  "2024",
+                                    "category":  "Parking",
+                                    "revenue":  360608.92
+                                },
+                                {
+                                    "season":  "2024",
+                                    "category":  "Programs / Digital Guide",
+                                    "revenue":  13985.75
+                                },
+                                {
+                                    "season":  "2025",
+                                    "category":  "Concessions - Food",
+                                    "revenue":  495157.9
+                                },
+                                {
+                                    "season":  "2025",
+                                    "category":  "Concessions - Beverage",
+                                    "revenue":  346058.48
+                                },
+                                {
+                                    "season":  "2025",
+                                    "category":  "Merchandise - Apparel",
+                                    "revenue":  264058.62
+                                },
+                                {
+                                    "season":  "2025",
+                                    "category":  "Merchandise - Novelty/Accessories",
+                                    "revenue":  66326.81
+                                },
+                                {
+                                    "season":  "2025",
+                                    "category":  "Parking",
+                                    "revenue":  650755.59
+                                },
+                                {
+                                    "season":  "2025",
+                                    "category":  "Programs / Digital Guide",
+                                    "revenue":  22412.21
+                                },
+                                {
+                                    "season":  "2025",
+                                    "category":  "Concessions - Food",
+                                    "revenue":  329425.8
+                                },
+                                {
+                                    "season":  "2025",
+                                    "category":  "Concessions - Beverage",
+                                    "revenue":  270328.74
+                                },
+                                {
+                                    "season":  "2025",
+                                    "category":  "Merchandise - Apparel",
+                                    "revenue":  386417.22
+                                },
+                                {
+                                    "season":  "2025",
+                                    "category":  "Merchandise - Novelty/Accessories",
+                                    "revenue":  183846.48
+                                },
+                                {
+                                    "season":  "2025",
+                                    "category":  "Parking",
+                                    "revenue":  538526.94
+                                },
+                                {
+                                    "season":  "2025",
+                                    "category":  "Programs / Digital Guide",
+                                    "revenue":  20873.2
+                                },
+                                {
+                                    "season":  "2025",
+                                    "category":  "Concessions - Food",
+                                    "revenue":  344448.43
+                                },
+                                {
+                                    "season":  "2025",
+                                    "category":  "Concessions - Beverage",
+                                    "revenue":  306652.14
+                                },
+                                {
+                                    "season":  "2025",
+                                    "category":  "Merchandise - Apparel",
+                                    "revenue":  145509.03
+                                },
+                                {
+                                    "season":  "2025",
+                                    "category":  "Merchandise - Novelty/Accessories",
+                                    "revenue":  151084.26
+                                },
+                                {
+                                    "season":  "2025",
+                                    "category":  "Parking",
+                                    "revenue":  434370.21
+                                },
+                                {
+                                    "season":  "2025",
+                                    "category":  "Programs / Digital Guide",
+                                    "revenue":  22431.82
+                                },
+                                {
+                                    "season":  "2025",
+                                    "category":  "Concessions - Food",
+                                    "revenue":  331540.19
+                                },
+                                {
+                                    "season":  "2025",
+                                    "category":  "Concessions - Beverage",
+                                    "revenue":  209112.73
+                                },
+                                {
+                                    "season":  "2025",
+                                    "category":  "Merchandise - Apparel",
+                                    "revenue":  239199.78
+                                },
+                                {
+                                    "season":  "2025",
+                                    "category":  "Merchandise - Novelty/Accessories",
+                                    "revenue":  53313.24
+                                },
+                                {
+                                    "season":  "2025",
+                                    "category":  "Parking",
+                                    "revenue":  538854.26
+                                },
+                                {
+                                    "season":  "2025",
+                                    "category":  "Programs / Digital Guide",
+                                    "revenue":  27314.94
+                                },
+                                {
+                                    "season":  "2025",
+                                    "category":  "Concessions - Food",
+                                    "revenue":  264401.15
+                                },
+                                {
+                                    "season":  "2025",
+                                    "category":  "Concessions - Beverage",
+                                    "revenue":  328197.61
+                                },
+                                {
+                                    "season":  "2025",
+                                    "category":  "Merchandise - Apparel",
+                                    "revenue":  259725.28
+                                },
+                                {
+                                    "season":  "2025",
+                                    "category":  "Merchandise - Novelty/Accessories",
+                                    "revenue":  99835.19
+                                },
+                                {
+                                    "season":  "2025",
+                                    "category":  "Parking",
+                                    "revenue":  347298.26
+                                },
+                                {
+                                    "season":  "2025",
+                                    "category":  "Programs / Digital Guide",
+                                    "revenue":  13181.31
+                                },
+                                {
+                                    "season":  "2025",
+                                    "category":  "Concessions - Food",
+                                    "revenue":  244019.7
+                                },
+                                {
+                                    "season":  "2025",
+                                    "category":  "Concessions - Beverage",
+                                    "revenue":  293893.53
+                                },
+                                {
+                                    "season":  "2025",
+                                    "category":  "Merchandise - Apparel",
+                                    "revenue":  206591.16
+                                },
+                                {
+                                    "season":  "2025",
+                                    "category":  "Merchandise - Novelty/Accessories",
+                                    "revenue":  166872
+                                },
+                                {
+                                    "season":  "2025",
+                                    "category":  "Parking",
+                                    "revenue":  437355.99
+                                },
+                                {
+                                    "season":  "2025",
+                                    "category":  "Programs / Digital Guide",
+                                    "revenue":  27207.6
+                                }
+                            ]
+            }
+}

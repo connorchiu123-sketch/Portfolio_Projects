@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cal Berkeley Football Operations Dashboard — Connor Chiu</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <nav>
+      <a class="brand" href="index.html">Connor Chiu</a>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a class="active" href="projects.html">Projects</a>
+        <a href="https://www.linkedin.com/in/connor-chiu-3b9094372/" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="case-hero">
+      <div class="wrap">
+        <a class="case-back" href="projects.html">&larr; Back to Projects</a>
+        <div class="top-row">
+          <span class="tag progress">In Progress</span>
+        </div>
+        <h1>&#127944; Cal Berkeley Football Operations Analysis</h1>
+        <p class="lead">
+          A synthetic, multi-season (2023 Pac-12, 2024&ndash;25 ACC) business-operations
+          dataset for a college football program &mdash; ticket sales by tier, gameday
+          revenue by category, sponsorship, travel costs, budgets, and media revenue &mdash;
+          modeled as an Excel workbook and connected to Power BI. The panels below are a
+          Chart.js recreation of the first Power BI dashboard, driven by the same
+          underlying numbers.
+        </p>
+        <div class="stack">Excel · Power BI · Chart.js</div>
+        <div class="case-links">
+          <a class="primary" href="../DataSets/Cal_Football_Business_Operations_Dataset.xlsx">Download Workbook</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section" style="padding-top: 24px; padding-bottom: 24px;">
+      <div class="wrap">
+        <div class="grid grid-4" id="overview-stats">
+          <div class="metric-box"><div class="val">&mdash;</div><div class="lbl">Total ticket revenue</div></div>
+          <div class="metric-box"><div class="val">&mdash;</div><div class="lbl">Total gameday revenue</div></div>
+          <div class="metric-box"><div class="val">&mdash;</div><div class="lbl">Average stadium capacity</div></div>
+          <div class="metric-box"><div class="val">&mdash;</div><div class="lbl">Total home attendance</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <div class="wrap">
+        <span class="step">&#127909; Live Dashboard</span>
+        <h2>Ticket &amp; Gameday Revenue</h2>
+        <p>
+          18 home games across three seasons, broken out by ticket tier and by gameday
+          revenue category &mdash; parking, concessions, merchandise, and programs.
+        </p>
+        <div class="grid grid-2">
+          <div class="chart-card chart-tall">
+            <h3>Ticket Revenue by Tier</h3>
+            <div class="sub">Sum of gross ticket revenue, all home games</div>
+            <div class="chart-canvas-wrap"><canvas id="chart-ticket-tier"></canvas></div>
+          </div>
+          <div class="chart-card chart-tall">
+            <h3>Gameday Revenue by Category</h3>
+            <div class="sub">Sum of revenue by category</div>
+            <div class="chart-canvas-wrap"><canvas id="chart-gameday-category"></canvas></div>
+          </div>
+        </div>
+
+        <div class="chart-card chart-tall" style="margin-top:20px;">
+          <h3>Average Stadium Capacity by Season</h3>
+          <div class="sub">Click a bar to filter every panel above by season &mdash; click it again to clear</div>
+          <div class="chart-canvas-wrap"><canvas id="chart-capacity-season"></canvas></div>
+          <p id="season-filter-status" style="margin-top:14px; margin-bottom:0; color:#6b7690; font-size:0.85rem;"></p>
+        </div>
+
+        <div class="chart-card table-scroll" style="margin-top:20px;">
+          <h3 style="margin-bottom:16px;">Attendance by Opponent</h3>
+          <table class="data-table" id="table-attendance-opponent">
+            <thead><tr><th>Opponent</th><th>Games</th><th>Total Attendance</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <div class="wrap">
+        <span class="step" style="color:#f5a623;">&#128202; Source Dashboard</span>
+        <h2>The Original Power BI Report</h2>
+        <p>
+          The panels above are a from-scratch Chart.js recreation, built directly off the
+          workbook rather than a screenshot &mdash; here's the actual Power BI dashboard
+          they're modeled on.
+        </p>
+        <div class="chart-card">
+          <img src="assets/images/cal-football-powerbi.png" alt="Cal Football Power BI dashboard: KPI cards for ticket revenue, gameday revenue, capacity, and attendance, plus ticket revenue, gameday revenue, and capacity charts, and an attendance-per-opponent table" style="max-width:100%; display:block; border-radius:8px;" />
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section" style="border-bottom: 1px solid var(--border);">
+      <div class="wrap">
+        <a class="btn btn-blue" href="projects.html">&larr; Back to All Projects</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <span>&copy; 2026 Connor Chiu</span>
+      <div class="foot-links">
+        <a href="about.html">About</a>
+        <a href="projects.html">Projects</a>
+        <a href="https://www.linkedin.com/in/connor-chiu-3b9094372/" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+  <script src="assets/js/cal-football-dashboard.js"></script>
+</body>
+</html>
