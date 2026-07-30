@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Super Bowl Operations — Data Model — Connor Chiu</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <nav>
+      <a class="brand" href="index.html">Connor Chiu</a>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a class="active" href="projects.html">Projects</a>
+        <a href="https://www.linkedin.com/in/connor-chiu-3b9094372/" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="case-hero">
+      <div class="wrap">
+        <a class="case-back" href="super-bowl-ops.html">&larr; Back to Super Bowl Operations Analysis</a>
+        <div class="top-row">
+          <span class="tag progress">In Progress</span>
+        </div>
+        <h1>&#128202; Super Bowl Operations &mdash; Data Model</h1>
+        <p class="lead">
+          Eight dimension tables surrounding six fact tables, all built in SQL Server.
+          <code>dim_date</code> is the shared time dimension &mdash; ticket sales,
+          sponsorship installments, and staffing shifts all hang off it, so any of the
+          three can be grouped by week, month, or event phase without separate date
+          columns.
+        </p>
+        <div class="stack">SQL Server &middot; T-SQL &middot; Star Schema</div>
+        <div class="case-links">
+          <a class="primary" href="../DataSets/SuperBowlOps_02_create_tables.sql">View Raw SQL</a>
+          <a href="../DataSets/SuperBowlOps_04_sample_queries.sql">Sample Queries</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section" style="padding-top: 24px;">
+      <div class="wrap">
+        <div class="chart-card">
+          <img src="assets/images/superbowl-schema-diagram.jpg" alt="Super Bowl Ops star schema diagram: dim_sponsor, dim_vendor, dim_sales_channel, dim_ticket_tier, dim_gate, dim_date, dim_department, and dim_budget_category surrounding fact_ticket_sales, fact_concessions_sales, fact_sponsorship_revenue, fact_gate_entries, fact_security_incidents, fact_staffing_cost, and fact_department_budget" style="max-width:100%; display:block; border-radius:8px;" />
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section" style="border-bottom: 1px solid var(--border);">
+      <div class="wrap">
+        <a class="btn btn-blue" href="super-bowl-ops.html">&larr; Back to Dashboard</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <span>&copy; 2026 Connor Chiu</span>
+      <div class="foot-links">
+        <a href="about.html">About</a>
+        <a href="projects.html">Projects</a>
+        <a href="https://www.linkedin.com/in/connor-chiu-3b9094372/" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
