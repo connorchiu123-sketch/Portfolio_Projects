@@ -1,0 +1,6463 @@
+{
+  "meta": {
+    "source": "SuperBowlOps SQL Server star schema (synthetic data)",
+    "note": "Ticket sale quantities/prices are generated client-side from the same randomized formulas as the T-SQL sample data script; every other fact table is the fixed sample data verbatim, so aggregates reconcile with the source dashboard exactly."
+  },
+  "raw": {
+    "departments": [
+      {
+        "name": "Security",
+        "group": "Operations"
+      },
+      {
+        "name": "Guest Services",
+        "group": "Guest Experience"
+      },
+      {
+        "name": "Concessions & Merchandise",
+        "group": "Revenue"
+      },
+      {
+        "name": "Medical Services",
+        "group": "Support"
+      },
+      {
+        "name": "Parking & Transportation",
+        "group": "Operations"
+      },
+      {
+        "name": "Broadcast & Media Operations",
+        "group": "Revenue"
+      },
+      {
+        "name": "Cleaning & Facilities",
+        "group": "Support"
+      }
+    ],
+    "vendors": [
+      {
+        "name": "Apex Staffing Solutions",
+        "category": "Staffing Agency",
+        "contract_amount": 410000.0
+      },
+      {
+        "name": "Summit Security Services",
+        "category": "Security Services",
+        "contract_amount": 680000.0
+      },
+      {
+        "name": "Gameday Catering Co.",
+        "category": "Catering",
+        "contract_amount": 295000.0
+      },
+      {
+        "name": "CleanSweep Facilities",
+        "category": "Cleaning Services",
+        "contract_amount": 210000.0
+      },
+      {
+        "name": "Rapid Response Medical",
+        "category": "Medical Services",
+        "contract_amount": 185000.0
+      },
+      {
+        "name": "Skyline AV Productions",
+        "category": "Broadcast / AV Equipment",
+        "contract_amount": 540000.0
+      },
+      {
+        "name": "Metro Shuttle Transit",
+        "category": "Transportation",
+        "contract_amount": 160000.0
+      },
+      {
+        "name": "Premier Merchandise Group",
+        "category": "Merchandise Supplier",
+        "contract_amount": 120000.0
+      }
+    ],
+    "gates": [
+      {
+        "name": "Gate A",
+        "zone": "North",
+        "max_capacity_per_hour": 8000
+      },
+      {
+        "name": "Gate B",
+        "zone": "South",
+        "max_capacity_per_hour": 8000
+      },
+      {
+        "name": "Gate C",
+        "zone": "East",
+        "max_capacity_per_hour": 6000
+      },
+      {
+        "name": "Gate D",
+        "zone": "West",
+        "max_capacity_per_hour": 6000
+      },
+      {
+        "name": "Gate E",
+        "zone": "Club Level",
+        "max_capacity_per_hour": 3000
+      },
+      {
+        "name": "Gate F",
+        "zone": "Suites",
+        "max_capacity_per_hour": 1500
+      }
+    ],
+    "ticket_tiers": [
+      {
+        "name": "Upper Bowl",
+        "face_value": 950.0,
+        "gate": "Gate A"
+      },
+      {
+        "name": "Lower Bowl",
+        "face_value": 2400.0,
+        "gate": "Gate B"
+      },
+      {
+        "name": "Club Level",
+        "face_value": 4800.0,
+        "gate": "Gate E"
+      },
+      {
+        "name": "Suite Package (per seat)",
+        "face_value": 9500.0,
+        "gate": "Gate F"
+      },
+      {
+        "name": "Standing Room / Party Deck",
+        "face_value": 650.0,
+        "gate": "Gate C"
+      }
+    ],
+    "sponsors": [
+      {
+        "name": "Apex Beverage Co.",
+        "category": "Beverage",
+        "sponsorship_tier": "Presenting Sponsor"
+      },
+      {
+        "name": "IronPeak Financial",
+        "category": "Financial Services",
+        "sponsorship_tier": "Official Partner"
+      },
+      {
+        "name": "Velocity Motors",
+        "category": "Automotive",
+        "sponsorship_tier": "Official Partner"
+      },
+      {
+        "name": "NimbusTech",
+        "category": "Technology",
+        "sponsorship_tier": "Suite Sponsor"
+      },
+      {
+        "name": "Guardian Insurance Group",
+        "category": "Insurance",
+        "sponsorship_tier": "Official Partner"
+      },
+      {
+        "name": "Stride Athletic Apparel",
+        "category": "Apparel",
+        "sponsorship_tier": "Official Partner"
+      },
+      {
+        "name": "Crestline Streaming Co.",
+        "category": "Media / Broadcast",
+        "sponsorship_tier": "Official Partner"
+      }
+    ],
+    "sales_channels": [
+      {
+        "name": "Season Ticket Holder Allocation",
+        "market_type": "Primary"
+      },
+      {
+        "name": "Public On-Sale",
+        "market_type": "Primary"
+      },
+      {
+        "name": "Corporate Hospitality Package",
+        "market_type": "Primary"
+      },
+      {
+        "name": "Ticket Exchange / Resale",
+        "market_type": "Secondary"
+      }
+    ],
+    "ticket_sales": [
+      {
+        "tier": "Upper Bowl",
+        "channel": "Season Ticket Holder Allocation",
+        "days_to_game": 50,
+        "qty": 191,
+        "price": 940.5,
+        "revenue": 179635.5
+      },
+      {
+        "tier": "Lower Bowl",
+        "channel": "Season Ticket Holder Allocation",
+        "days_to_game": 50,
+        "qty": 200,
+        "price": 2424.0,
+        "revenue": 484800.0
+      },
+      {
+        "tier": "Club Level",
+        "channel": "Season Ticket Holder Allocation",
+        "days_to_game": 50,
+        "qty": 156,
+        "price": 4752.0,
+        "revenue": 741312.0
+      },
+      {
+        "tier": "Upper Bowl",
+        "channel": "Season Ticket Holder Allocation",
+        "days_to_game": 51,
+        "qty": 218,
+        "price": 940.5,
+        "revenue": 205029.0
+      },
+      {
+        "tier": "Lower Bowl",
+        "channel": "Season Ticket Holder Allocation",
+        "days_to_game": 51,
+        "qty": 196,
+        "price": 2424.0,
+        "revenue": 475104.0
+      },
+      {
+        "tier": "Club Level",
+        "channel": "Season Ticket Holder Allocation",
+        "days_to_game": 51,
+        "qty": 157,
+        "price": 4848.0,
+        "revenue": 761136.0
+      },
+      {
+        "tier": "Upper Bowl",
+        "channel": "Season Ticket Holder Allocation",
+        "days_to_game": 52,
+        "qty": 177,
+        "price": 940.5,
+        "revenue": 166468.5
+      },
+      {
+        "tier": "Lower Bowl",
+        "channel": "Season Ticket Holder Allocation",
+        "days_to_game": 52,
+        "qty": 161,
+        "price": 2400.0,
+        "revenue": 386400.0
+      },
+      {
+        "tier": "Club Level",
+        "channel": "Season Ticket Holder Allocation",
+        "days_to_game": 52,
+        "qty": 203,
+        "price": 4752.0,
+        "revenue": 964656.0
+      },
+      {
+        "tier": "Upper Bowl",
+        "channel": "Season Ticket Holder Allocation",
+        "days_to_game": 53,
+        "qty": 180,
+        "price": 940.5,
+        "revenue": 169290.0
+      },
+      {
+        "tier": "Lower Bowl",
+        "channel": "Season Ticket Holder Allocation",
+        "days_to_game": 53,
+        "qty": 220,
+        "price": 2400.0,
+        "revenue": 528000.0
+      },
+      {
+        "tier": "Club Level",
+        "channel": "Season Ticket Holder Allocation",
+        "days_to_game": 53,
+        "qty": 157,
+        "price": 4848.0,
+        "revenue": 761136.0
+      },
+      {
+        "tier": "Upper Bowl",
+        "channel": "Season Ticket Holder Allocation",
+        "days_to_game": 54,
+        "qty": 165,
+        "price": 940.5,
+        "revenue": 155182.5
+      },
+      {
+        "tier": "Lower Bowl",
+        "channel": "Season Ticket Holder Allocation",
+        "days_to_game": 54,
+        "qty": 230,
+        "price": 2424.0,
+        "revenue": 557520.0
+      },
+      {
+        "tier": "Club Level",
+        "channel": "Season Ticket Holder Allocation",
+        "days_to_game": 54,
+        "qty": 224,
+        "price": 4752.0,
+        "revenue": 1064448.0
+      },
+      {
+        "tier": "Upper Bowl",
+        "channel": "Season Ticket Holder Allocation",
+        "days_to_game": 55,
+        "qty": 223,
+        "price": 959.5,
+        "revenue": 213968.5
+      },
+      {
+        "tier": "Lower Bowl",
+        "channel": "Season Ticket Holder Allocation",
+        "days_to_game": 55,
+        "qty": 200,
+        "price": 2376.0,
+        "revenue": 475200.0
+      },
+      {
+        "tier": "Club Level",
+        "channel": "Season Ticket Holder Allocation",
+        "days_to_game": 55,
+        "qty": 178,
+        "price": 4752.0,
+        "revenue": 845856.0
+      },
+      {
+        "tier": "Upper Bowl",
+        "channel": "Season Ticket Holder Allocation",
+        "days_to_game": 56,
+        "qty": 221,
+        "price": 940.5,
+        "revenue": 207850.5
+      },
+      {
+        "tier": "Lower Bowl",
+        "channel": "Season Ticket Holder Allocation",
+        "days_to_game": 56,
+        "qty": 187,
+        "price": 2400.0,
+        "revenue": 448800.0
+      },
+      {
+        "tier": "Club Level",
+        "channel": "Season Ticket Holder Allocation",
+        "days_to_game": 56,
+        "qty": 168,
+        "price": 4848.0,
+        "revenue": 814464.0
+      },
+      {
+        "tier": "Upper Bowl",
+        "channel": "Season Ticket Holder Allocation",
+        "days_to_game": 57,
+        "qty": 165,
+        "price": 959.5,
+        "revenue": 158317.5
+      },
+      {
+        "tier": "Lower Bowl",
+        "channel": "Season Ticket Holder Allocation",
+        "days_to_game": 57,
+        "qty": 189,
+        "price": 2424.0,
+        "revenue": 458136.0
+      },
+      {
+        "tier": "Club Level",
+        "channel": "Season Ticket Holder Allocation",
+        "days_to_game": 57,
+        "qty": 237,
+        "price": 4752.0,
+        "revenue": 1126224.0
+      },
+      {
+        "tier": "Upper Bowl",
+        "channel": "Season Ticket Holder Allocation",
+        "days_to_game": 58,
+        "qty": 163,
+        "price": 959.5,
+        "revenue": 156398.5
+      },
+      {
+        "tier": "Lower Bowl",
+        "channel": "Season Ticket Holder Allocation",
+        "days_to_game": 58,
+        "qty": 223,
+        "price": 2424.0,
+        "revenue": 540552.0
+      },
+      {
+        "tier": "Club Level",
+        "channel": "Season Ticket Holder Allocation",
+        "days_to_game": 58,
+        "qty": 174,
+        "price": 4800.0,
+        "revenue": 835200.0
+      },
+      {
+        "tier": "Upper Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 5,
+        "qty": 176,
+        "price": 1007.48,
+        "revenue": 177316.48
+      },
+      {
+        "tier": "Lower Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 5,
+        "qty": 174,
+        "price": 2545.2,
+        "revenue": 442864.8
+      },
+      {
+        "tier": "Standing Room / Party Deck",
+        "channel": "Public On-Sale",
+        "days_to_game": 5,
+        "qty": 173,
+        "price": 689.33,
+        "revenue": 119254.09
+      },
+      {
+        "tier": "Upper Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 6,
+        "qty": 180,
+        "price": 997.5,
+        "revenue": 179550.0
+      },
+      {
+        "tier": "Lower Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 6,
+        "qty": 201,
+        "price": 2520.0,
+        "revenue": 506520.0
+      },
+      {
+        "tier": "Standing Room / Party Deck",
+        "channel": "Public On-Sale",
+        "days_to_game": 6,
+        "qty": 187,
+        "price": 682.5,
+        "revenue": 127627.5
+      },
+      {
+        "tier": "Upper Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 7,
+        "qty": 201,
+        "price": 997.5,
+        "revenue": 200497.5
+      },
+      {
+        "tier": "Lower Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 7,
+        "qty": 187,
+        "price": 2494.8,
+        "revenue": 466527.6
+      },
+      {
+        "tier": "Standing Room / Party Deck",
+        "channel": "Public On-Sale",
+        "days_to_game": 7,
+        "qty": 179,
+        "price": 702.98,
+        "revenue": 125833.42
+      },
+      {
+        "tier": "Upper Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 8,
+        "qty": 172,
+        "price": 1017.45,
+        "revenue": 175001.4
+      },
+      {
+        "tier": "Lower Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 8,
+        "qty": 176,
+        "price": 2444.4,
+        "revenue": 430214.4
+      },
+      {
+        "tier": "Standing Room / Party Deck",
+        "channel": "Public On-Sale",
+        "days_to_game": 8,
+        "qty": 197,
+        "price": 675.67,
+        "revenue": 133106.99
+      },
+      {
+        "tier": "Upper Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 9,
+        "qty": 191,
+        "price": 997.5,
+        "revenue": 190522.5
+      },
+      {
+        "tier": "Lower Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 9,
+        "qty": 179,
+        "price": 2570.4,
+        "revenue": 460101.6
+      },
+      {
+        "tier": "Standing Room / Party Deck",
+        "channel": "Public On-Sale",
+        "days_to_game": 9,
+        "qty": 186,
+        "price": 675.67,
+        "revenue": 125674.62
+      },
+      {
+        "tier": "Upper Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 10,
+        "qty": 193,
+        "price": 967.57,
+        "revenue": 186741.01
+      },
+      {
+        "tier": "Lower Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 10,
+        "qty": 162,
+        "price": 2545.2,
+        "revenue": 412322.4
+      },
+      {
+        "tier": "Standing Room / Party Deck",
+        "channel": "Public On-Sale",
+        "days_to_game": 10,
+        "qty": 181,
+        "price": 668.85,
+        "revenue": 121061.85
+      },
+      {
+        "tier": "Upper Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 11,
+        "qty": 173,
+        "price": 977.55,
+        "revenue": 169116.15
+      },
+      {
+        "tier": "Lower Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 11,
+        "qty": 183,
+        "price": 2520.0,
+        "revenue": 461160.0
+      },
+      {
+        "tier": "Standing Room / Party Deck",
+        "channel": "Public On-Sale",
+        "days_to_game": 11,
+        "qty": 154,
+        "price": 696.15,
+        "revenue": 107207.1
+      },
+      {
+        "tier": "Upper Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 12,
+        "qty": 153,
+        "price": 1027.42,
+        "revenue": 157195.26
+      },
+      {
+        "tier": "Lower Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 12,
+        "qty": 184,
+        "price": 2545.2,
+        "revenue": 468316.8
+      },
+      {
+        "tier": "Standing Room / Party Deck",
+        "channel": "Public On-Sale",
+        "days_to_game": 12,
+        "qty": 169,
+        "price": 675.67,
+        "revenue": 114188.23
+      },
+      {
+        "tier": "Upper Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 13,
+        "qty": 168,
+        "price": 1007.48,
+        "revenue": 169256.64
+      },
+      {
+        "tier": "Lower Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 13,
+        "qty": 177,
+        "price": 2545.2,
+        "revenue": 450500.4
+      },
+      {
+        "tier": "Standing Room / Party Deck",
+        "channel": "Public On-Sale",
+        "days_to_game": 13,
+        "qty": 175,
+        "price": 662.02,
+        "revenue": 115853.5
+      },
+      {
+        "tier": "Upper Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 14,
+        "qty": 148,
+        "price": 987.52,
+        "revenue": 146152.96
+      },
+      {
+        "tier": "Lower Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 14,
+        "qty": 173,
+        "price": 2570.4,
+        "revenue": 444679.2
+      },
+      {
+        "tier": "Standing Room / Party Deck",
+        "channel": "Public On-Sale",
+        "days_to_game": 14,
+        "qty": 147,
+        "price": 662.02,
+        "revenue": 97316.94
+      },
+      {
+        "tier": "Upper Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 15,
+        "qty": 159,
+        "price": 1017.45,
+        "revenue": 161774.55
+      },
+      {
+        "tier": "Lower Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 15,
+        "qty": 176,
+        "price": 2570.4,
+        "revenue": 452390.4
+      },
+      {
+        "tier": "Standing Room / Party Deck",
+        "channel": "Public On-Sale",
+        "days_to_game": 15,
+        "qty": 168,
+        "price": 675.67,
+        "revenue": 113512.56
+      },
+      {
+        "tier": "Upper Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 16,
+        "qty": 161,
+        "price": 1017.45,
+        "revenue": 163809.45
+      },
+      {
+        "tier": "Lower Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 16,
+        "qty": 159,
+        "price": 2444.4,
+        "revenue": 388659.6
+      },
+      {
+        "tier": "Standing Room / Party Deck",
+        "channel": "Public On-Sale",
+        "days_to_game": 16,
+        "qty": 166,
+        "price": 675.67,
+        "revenue": 112161.22
+      },
+      {
+        "tier": "Upper Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 17,
+        "qty": 144,
+        "price": 1007.48,
+        "revenue": 145077.12
+      },
+      {
+        "tier": "Lower Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 17,
+        "qty": 141,
+        "price": 2520.0,
+        "revenue": 355320.0
+      },
+      {
+        "tier": "Standing Room / Party Deck",
+        "channel": "Public On-Sale",
+        "days_to_game": 17,
+        "qty": 137,
+        "price": 668.85,
+        "revenue": 91632.45
+      },
+      {
+        "tier": "Upper Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 18,
+        "qty": 149,
+        "price": 977.55,
+        "revenue": 145654.95
+      },
+      {
+        "tier": "Lower Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 18,
+        "qty": 146,
+        "price": 2520.0,
+        "revenue": 367920.0
+      },
+      {
+        "tier": "Standing Room / Party Deck",
+        "channel": "Public On-Sale",
+        "days_to_game": 18,
+        "qty": 156,
+        "price": 702.98,
+        "revenue": 109664.88
+      },
+      {
+        "tier": "Upper Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 19,
+        "qty": 159,
+        "price": 967.57,
+        "revenue": 153843.63
+      },
+      {
+        "tier": "Lower Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 19,
+        "qty": 138,
+        "price": 2520.0,
+        "revenue": 347760.0
+      },
+      {
+        "tier": "Standing Room / Party Deck",
+        "channel": "Public On-Sale",
+        "days_to_game": 19,
+        "qty": 153,
+        "price": 689.33,
+        "revenue": 105467.49
+      },
+      {
+        "tier": "Upper Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 20,
+        "qty": 142,
+        "price": 977.55,
+        "revenue": 138812.1
+      },
+      {
+        "tier": "Lower Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 20,
+        "qty": 152,
+        "price": 2595.6,
+        "revenue": 394531.2
+      },
+      {
+        "tier": "Standing Room / Party Deck",
+        "channel": "Public On-Sale",
+        "days_to_game": 20,
+        "qty": 160,
+        "price": 675.67,
+        "revenue": 108107.2
+      },
+      {
+        "tier": "Upper Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 21,
+        "qty": 148,
+        "price": 987.52,
+        "revenue": 146152.96
+      },
+      {
+        "tier": "Lower Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 21,
+        "qty": 146,
+        "price": 2469.6,
+        "revenue": 360561.6
+      },
+      {
+        "tier": "Standing Room / Party Deck",
+        "channel": "Public On-Sale",
+        "days_to_game": 21,
+        "qty": 131,
+        "price": 662.02,
+        "revenue": 86724.62
+      },
+      {
+        "tier": "Upper Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 22,
+        "qty": 130,
+        "price": 977.55,
+        "revenue": 127081.5
+      },
+      {
+        "tier": "Lower Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 22,
+        "qty": 133,
+        "price": 2570.4,
+        "revenue": 341863.2
+      },
+      {
+        "tier": "Standing Room / Party Deck",
+        "channel": "Public On-Sale",
+        "days_to_game": 22,
+        "qty": 133,
+        "price": 662.02,
+        "revenue": 88048.66
+      },
+      {
+        "tier": "Upper Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 23,
+        "qty": 147,
+        "price": 1027.42,
+        "revenue": 151030.74
+      },
+      {
+        "tier": "Lower Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 23,
+        "qty": 153,
+        "price": 2469.6,
+        "revenue": 377848.8
+      },
+      {
+        "tier": "Standing Room / Party Deck",
+        "channel": "Public On-Sale",
+        "days_to_game": 23,
+        "qty": 132,
+        "price": 675.67,
+        "revenue": 89188.44
+      },
+      {
+        "tier": "Upper Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 24,
+        "qty": 113,
+        "price": 977.55,
+        "revenue": 110463.15
+      },
+      {
+        "tier": "Lower Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 24,
+        "qty": 139,
+        "price": 2545.2,
+        "revenue": 353782.8
+      },
+      {
+        "tier": "Standing Room / Party Deck",
+        "channel": "Public On-Sale",
+        "days_to_game": 24,
+        "qty": 136,
+        "price": 689.33,
+        "revenue": 93748.88
+      },
+      {
+        "tier": "Upper Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 25,
+        "qty": 146,
+        "price": 987.52,
+        "revenue": 144177.92
+      },
+      {
+        "tier": "Lower Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 25,
+        "qty": 118,
+        "price": 2570.4,
+        "revenue": 303307.2
+      },
+      {
+        "tier": "Standing Room / Party Deck",
+        "channel": "Public On-Sale",
+        "days_to_game": 25,
+        "qty": 142,
+        "price": 689.33,
+        "revenue": 97884.86
+      },
+      {
+        "tier": "Upper Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 26,
+        "qty": 110,
+        "price": 997.5,
+        "revenue": 109725.0
+      },
+      {
+        "tier": "Lower Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 26,
+        "qty": 142,
+        "price": 2520.0,
+        "revenue": 357840.0
+      },
+      {
+        "tier": "Standing Room / Party Deck",
+        "channel": "Public On-Sale",
+        "days_to_game": 26,
+        "qty": 132,
+        "price": 682.5,
+        "revenue": 90090.0
+      },
+      {
+        "tier": "Upper Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 27,
+        "qty": 129,
+        "price": 967.57,
+        "revenue": 124816.53
+      },
+      {
+        "tier": "Lower Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 27,
+        "qty": 134,
+        "price": 2570.4,
+        "revenue": 344433.6
+      },
+      {
+        "tier": "Standing Room / Party Deck",
+        "channel": "Public On-Sale",
+        "days_to_game": 27,
+        "qty": 129,
+        "price": 662.02,
+        "revenue": 85400.58
+      },
+      {
+        "tier": "Upper Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 28,
+        "qty": 113,
+        "price": 967.57,
+        "revenue": 109335.41
+      },
+      {
+        "tier": "Lower Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 28,
+        "qty": 114,
+        "price": 2520.0,
+        "revenue": 287280.0
+      },
+      {
+        "tier": "Standing Room / Party Deck",
+        "channel": "Public On-Sale",
+        "days_to_game": 28,
+        "qty": 111,
+        "price": 662.02,
+        "revenue": 73484.22
+      },
+      {
+        "tier": "Upper Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 29,
+        "qty": 119,
+        "price": 1007.48,
+        "revenue": 119890.12
+      },
+      {
+        "tier": "Lower Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 29,
+        "qty": 101,
+        "price": 2444.4,
+        "revenue": 246884.4
+      },
+      {
+        "tier": "Standing Room / Party Deck",
+        "channel": "Public On-Sale",
+        "days_to_game": 29,
+        "qty": 98,
+        "price": 689.33,
+        "revenue": 67554.34
+      },
+      {
+        "tier": "Upper Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 30,
+        "qty": 104,
+        "price": 1007.48,
+        "revenue": 104777.92
+      },
+      {
+        "tier": "Lower Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 30,
+        "qty": 101,
+        "price": 2494.8,
+        "revenue": 251974.8
+      },
+      {
+        "tier": "Standing Room / Party Deck",
+        "channel": "Public On-Sale",
+        "days_to_game": 30,
+        "qty": 134,
+        "price": 662.02,
+        "revenue": 88710.68
+      },
+      {
+        "tier": "Upper Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 31,
+        "qty": 96,
+        "price": 1027.42,
+        "revenue": 98632.32
+      },
+      {
+        "tier": "Lower Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 31,
+        "qty": 105,
+        "price": 2545.2,
+        "revenue": 267246.0
+      },
+      {
+        "tier": "Standing Room / Party Deck",
+        "channel": "Public On-Sale",
+        "days_to_game": 31,
+        "qty": 116,
+        "price": 668.85,
+        "revenue": 77586.6
+      },
+      {
+        "tier": "Upper Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 32,
+        "qty": 105,
+        "price": 987.52,
+        "revenue": 103689.6
+      },
+      {
+        "tier": "Lower Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 32,
+        "qty": 127,
+        "price": 2494.8,
+        "revenue": 316839.6
+      },
+      {
+        "tier": "Standing Room / Party Deck",
+        "channel": "Public On-Sale",
+        "days_to_game": 32,
+        "qty": 119,
+        "price": 662.02,
+        "revenue": 78780.38
+      },
+      {
+        "tier": "Upper Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 33,
+        "qty": 93,
+        "price": 1027.42,
+        "revenue": 95550.06
+      },
+      {
+        "tier": "Lower Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 33,
+        "qty": 117,
+        "price": 2520.0,
+        "revenue": 294840.0
+      },
+      {
+        "tier": "Standing Room / Party Deck",
+        "channel": "Public On-Sale",
+        "days_to_game": 33,
+        "qty": 116,
+        "price": 682.5,
+        "revenue": 79170.0
+      },
+      {
+        "tier": "Upper Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 34,
+        "qty": 102,
+        "price": 967.57,
+        "revenue": 98692.14
+      },
+      {
+        "tier": "Lower Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 34,
+        "qty": 92,
+        "price": 2444.4,
+        "revenue": 224884.8
+      },
+      {
+        "tier": "Standing Room / Party Deck",
+        "channel": "Public On-Sale",
+        "days_to_game": 34,
+        "qty": 104,
+        "price": 696.15,
+        "revenue": 72399.6
+      },
+      {
+        "tier": "Upper Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 35,
+        "qty": 96,
+        "price": 997.5,
+        "revenue": 95760.0
+      },
+      {
+        "tier": "Lower Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 35,
+        "qty": 90,
+        "price": 2545.2,
+        "revenue": 229068.0
+      },
+      {
+        "tier": "Standing Room / Party Deck",
+        "channel": "Public On-Sale",
+        "days_to_game": 35,
+        "qty": 81,
+        "price": 668.85,
+        "revenue": 54176.85
+      },
+      {
+        "tier": "Upper Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 36,
+        "qty": 110,
+        "price": 987.52,
+        "revenue": 108627.2
+      },
+      {
+        "tier": "Lower Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 36,
+        "qty": 86,
+        "price": 2570.4,
+        "revenue": 221054.4
+      },
+      {
+        "tier": "Standing Room / Party Deck",
+        "channel": "Public On-Sale",
+        "days_to_game": 36,
+        "qty": 111,
+        "price": 662.02,
+        "revenue": 73484.22
+      },
+      {
+        "tier": "Upper Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 37,
+        "qty": 107,
+        "price": 987.52,
+        "revenue": 105664.64
+      },
+      {
+        "tier": "Lower Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 37,
+        "qty": 79,
+        "price": 2570.4,
+        "revenue": 203061.6
+      },
+      {
+        "tier": "Standing Room / Party Deck",
+        "channel": "Public On-Sale",
+        "days_to_game": 37,
+        "qty": 90,
+        "price": 689.33,
+        "revenue": 62039.7
+      },
+      {
+        "tier": "Upper Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 38,
+        "qty": 94,
+        "price": 977.55,
+        "revenue": 91889.7
+      },
+      {
+        "tier": "Lower Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 38,
+        "qty": 93,
+        "price": 2595.6,
+        "revenue": 241390.8
+      },
+      {
+        "tier": "Standing Room / Party Deck",
+        "channel": "Public On-Sale",
+        "days_to_game": 38,
+        "qty": 85,
+        "price": 689.33,
+        "revenue": 58593.05
+      },
+      {
+        "tier": "Upper Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 39,
+        "qty": 102,
+        "price": 1027.42,
+        "revenue": 104796.84
+      },
+      {
+        "tier": "Lower Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 39,
+        "qty": 100,
+        "price": 2494.8,
+        "revenue": 249480.0
+      },
+      {
+        "tier": "Standing Room / Party Deck",
+        "channel": "Public On-Sale",
+        "days_to_game": 39,
+        "qty": 82,
+        "price": 689.33,
+        "revenue": 56525.06
+      },
+      {
+        "tier": "Upper Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 40,
+        "qty": 77,
+        "price": 1027.42,
+        "revenue": 79111.34
+      },
+      {
+        "tier": "Lower Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 40,
+        "qty": 80,
+        "price": 2595.6,
+        "revenue": 207648.0
+      },
+      {
+        "tier": "Standing Room / Party Deck",
+        "channel": "Public On-Sale",
+        "days_to_game": 40,
+        "qty": 90,
+        "price": 696.15,
+        "revenue": 62653.5
+      },
+      {
+        "tier": "Upper Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 41,
+        "qty": 76,
+        "price": 977.55,
+        "revenue": 74293.8
+      },
+      {
+        "tier": "Lower Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 41,
+        "qty": 95,
+        "price": 2520.0,
+        "revenue": 239400.0
+      },
+      {
+        "tier": "Standing Room / Party Deck",
+        "channel": "Public On-Sale",
+        "days_to_game": 41,
+        "qty": 84,
+        "price": 696.15,
+        "revenue": 58476.6
+      },
+      {
+        "tier": "Upper Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 42,
+        "qty": 60,
+        "price": 967.57,
+        "revenue": 58054.2
+      },
+      {
+        "tier": "Lower Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 42,
+        "qty": 76,
+        "price": 2520.0,
+        "revenue": 191520.0
+      },
+      {
+        "tier": "Standing Room / Party Deck",
+        "channel": "Public On-Sale",
+        "days_to_game": 42,
+        "qty": 75,
+        "price": 668.85,
+        "revenue": 50163.75
+      },
+      {
+        "tier": "Upper Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 43,
+        "qty": 94,
+        "price": 987.52,
+        "revenue": 92826.88
+      },
+      {
+        "tier": "Lower Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 43,
+        "qty": 84,
+        "price": 2595.6,
+        "revenue": 218030.4
+      },
+      {
+        "tier": "Standing Room / Party Deck",
+        "channel": "Public On-Sale",
+        "days_to_game": 43,
+        "qty": 78,
+        "price": 675.67,
+        "revenue": 52702.26
+      },
+      {
+        "tier": "Upper Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 44,
+        "qty": 58,
+        "price": 977.55,
+        "revenue": 56697.9
+      },
+      {
+        "tier": "Lower Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 44,
+        "qty": 59,
+        "price": 2469.6,
+        "revenue": 145706.4
+      },
+      {
+        "tier": "Standing Room / Party Deck",
+        "channel": "Public On-Sale",
+        "days_to_game": 44,
+        "qty": 83,
+        "price": 668.85,
+        "revenue": 55514.55
+      },
+      {
+        "tier": "Upper Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 45,
+        "qty": 71,
+        "price": 977.55,
+        "revenue": 69406.05
+      },
+      {
+        "tier": "Lower Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 45,
+        "qty": 80,
+        "price": 2545.2,
+        "revenue": 203616.0
+      },
+      {
+        "tier": "Standing Room / Party Deck",
+        "channel": "Public On-Sale",
+        "days_to_game": 45,
+        "qty": 89,
+        "price": 702.98,
+        "revenue": 62565.22
+      },
+      {
+        "tier": "Upper Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 46,
+        "qty": 47,
+        "price": 997.5,
+        "revenue": 46882.5
+      },
+      {
+        "tier": "Lower Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 46,
+        "qty": 69,
+        "price": 2595.6,
+        "revenue": 179096.4
+      },
+      {
+        "tier": "Standing Room / Party Deck",
+        "channel": "Public On-Sale",
+        "days_to_game": 46,
+        "qty": 52,
+        "price": 702.98,
+        "revenue": 36554.96
+      },
+      {
+        "tier": "Upper Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 47,
+        "qty": 51,
+        "price": 997.5,
+        "revenue": 50872.5
+      },
+      {
+        "tier": "Lower Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 47,
+        "qty": 56,
+        "price": 2520.0,
+        "revenue": 141120.0
+      },
+      {
+        "tier": "Standing Room / Party Deck",
+        "channel": "Public On-Sale",
+        "days_to_game": 47,
+        "qty": 55,
+        "price": 682.5,
+        "revenue": 37537.5
+      },
+      {
+        "tier": "Upper Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 48,
+        "qty": 62,
+        "price": 967.57,
+        "revenue": 59989.34
+      },
+      {
+        "tier": "Lower Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 48,
+        "qty": 66,
+        "price": 2520.0,
+        "revenue": 166320.0
+      },
+      {
+        "tier": "Standing Room / Party Deck",
+        "channel": "Public On-Sale",
+        "days_to_game": 48,
+        "qty": 66,
+        "price": 696.15,
+        "revenue": 45945.9
+      },
+      {
+        "tier": "Upper Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 49,
+        "qty": 43,
+        "price": 1017.45,
+        "revenue": 43750.35
+      },
+      {
+        "tier": "Lower Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 49,
+        "qty": 48,
+        "price": 2469.6,
+        "revenue": 118540.8
+      },
+      {
+        "tier": "Standing Room / Party Deck",
+        "channel": "Public On-Sale",
+        "days_to_game": 49,
+        "qty": 46,
+        "price": 662.02,
+        "revenue": 30452.92
+      },
+      {
+        "tier": "Upper Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 50,
+        "qty": 44,
+        "price": 1007.48,
+        "revenue": 44329.12
+      },
+      {
+        "tier": "Lower Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 50,
+        "qty": 64,
+        "price": 2595.6,
+        "revenue": 166118.4
+      },
+      {
+        "tier": "Standing Room / Party Deck",
+        "channel": "Public On-Sale",
+        "days_to_game": 50,
+        "qty": 44,
+        "price": 689.33,
+        "revenue": 30330.52
+      },
+      {
+        "tier": "Upper Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 51,
+        "qty": 70,
+        "price": 997.5,
+        "revenue": 69825.0
+      },
+      {
+        "tier": "Lower Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 51,
+        "qty": 54,
+        "price": 2469.6,
+        "revenue": 133358.4
+      },
+      {
+        "tier": "Standing Room / Party Deck",
+        "channel": "Public On-Sale",
+        "days_to_game": 51,
+        "qty": 67,
+        "price": 689.33,
+        "revenue": 46185.11
+      },
+      {
+        "tier": "Upper Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 52,
+        "qty": 37,
+        "price": 967.57,
+        "revenue": 35800.09
+      },
+      {
+        "tier": "Lower Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 52,
+        "qty": 29,
+        "price": 2595.6,
+        "revenue": 75272.4
+      },
+      {
+        "tier": "Standing Room / Party Deck",
+        "channel": "Public On-Sale",
+        "days_to_game": 52,
+        "qty": 35,
+        "price": 689.33,
+        "revenue": 24126.55
+      },
+      {
+        "tier": "Upper Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 53,
+        "qty": 34,
+        "price": 997.5,
+        "revenue": 33915.0
+      },
+      {
+        "tier": "Lower Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 53,
+        "qty": 38,
+        "price": 2595.6,
+        "revenue": 98632.8
+      },
+      {
+        "tier": "Standing Room / Party Deck",
+        "channel": "Public On-Sale",
+        "days_to_game": 53,
+        "qty": 39,
+        "price": 662.02,
+        "revenue": 25818.78
+      },
+      {
+        "tier": "Upper Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 54,
+        "qty": 39,
+        "price": 977.55,
+        "revenue": 38124.45
+      },
+      {
+        "tier": "Lower Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 54,
+        "qty": 41,
+        "price": 2545.2,
+        "revenue": 104353.2
+      },
+      {
+        "tier": "Standing Room / Party Deck",
+        "channel": "Public On-Sale",
+        "days_to_game": 54,
+        "qty": 38,
+        "price": 702.98,
+        "revenue": 26713.24
+      },
+      {
+        "tier": "Upper Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 55,
+        "qty": 57,
+        "price": 987.52,
+        "revenue": 56288.64
+      },
+      {
+        "tier": "Lower Bowl",
+        "channel": "Public On-Sale",
+        "days_to_game": 55,
+        "qty": 36,
+        "price": 2545.2,
+        "revenue": 91627.2
+      },
+      {
+        "tier": "Standing Room / Party Deck",
+        "channel": "Public On-Sale",
+        "days_to_game": 55,
+        "qty": 46,
+        "price": 702.98,
+        "revenue": 32337.08
+      },
+      {
+        "tier": "Club Level",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 10,
+        "qty": 9,
+        "price": 6156.0,
+        "revenue": 55404.0
+      },
+      {
+        "tier": "Suite Package (per seat)",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 10,
+        "qty": 16,
+        "price": 13979.25,
+        "revenue": 223668.0
+      },
+      {
+        "tier": "Club Level",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 11,
+        "qty": 19,
+        "price": 6804.0,
+        "revenue": 129276.0
+      },
+      {
+        "tier": "Suite Package (per seat)",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 11,
+        "qty": 23,
+        "price": 13851.0,
+        "revenue": 318573.0
+      },
+      {
+        "tier": "Club Level",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 12,
+        "qty": 21,
+        "price": 6544.8,
+        "revenue": 137440.8
+      },
+      {
+        "tier": "Suite Package (per seat)",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 12,
+        "qty": 21,
+        "price": 12440.25,
+        "revenue": 261245.25
+      },
+      {
+        "tier": "Club Level",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 13,
+        "qty": 22,
+        "price": 6285.6,
+        "revenue": 138283.2
+      },
+      {
+        "tier": "Suite Package (per seat)",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 13,
+        "qty": 21,
+        "price": 13209.75,
+        "revenue": 277404.75
+      },
+      {
+        "tier": "Club Level",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 14,
+        "qty": 5,
+        "price": 6998.4,
+        "revenue": 34992.0
+      },
+      {
+        "tier": "Suite Package (per seat)",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 14,
+        "qty": 19,
+        "price": 13722.75,
+        "revenue": 260732.25
+      },
+      {
+        "tier": "Club Level",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 15,
+        "qty": 10,
+        "price": 6739.2,
+        "revenue": 67392.0
+      },
+      {
+        "tier": "Suite Package (per seat)",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 15,
+        "qty": 5,
+        "price": 13722.75,
+        "revenue": 68613.75
+      },
+      {
+        "tier": "Club Level",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 16,
+        "qty": 9,
+        "price": 6285.6,
+        "revenue": 56570.4
+      },
+      {
+        "tier": "Suite Package (per seat)",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 16,
+        "qty": 9,
+        "price": 13081.5,
+        "revenue": 117733.5
+      },
+      {
+        "tier": "Club Level",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 17,
+        "qty": 24,
+        "price": 6868.8,
+        "revenue": 164851.2
+      },
+      {
+        "tier": "Suite Package (per seat)",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 17,
+        "qty": 8,
+        "price": 13209.75,
+        "revenue": 105678.0
+      },
+      {
+        "tier": "Club Level",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 18,
+        "qty": 6,
+        "price": 6480.0,
+        "revenue": 38880.0
+      },
+      {
+        "tier": "Suite Package (per seat)",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 18,
+        "qty": 21,
+        "price": 13209.75,
+        "revenue": 277404.75
+      },
+      {
+        "tier": "Club Level",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 19,
+        "qty": 22,
+        "price": 6609.6,
+        "revenue": 145411.2
+      },
+      {
+        "tier": "Suite Package (per seat)",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 19,
+        "qty": 8,
+        "price": 13979.25,
+        "revenue": 111834.0
+      },
+      {
+        "tier": "Club Level",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 20,
+        "qty": 22,
+        "price": 6156.0,
+        "revenue": 135432.0
+      },
+      {
+        "tier": "Suite Package (per seat)",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 20,
+        "qty": 12,
+        "price": 12568.5,
+        "revenue": 150822.0
+      },
+      {
+        "tier": "Club Level",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 21,
+        "qty": 13,
+        "price": 6156.0,
+        "revenue": 80028.0
+      },
+      {
+        "tier": "Suite Package (per seat)",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 21,
+        "qty": 8,
+        "price": 13209.75,
+        "revenue": 105678.0
+      },
+      {
+        "tier": "Club Level",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 22,
+        "qty": 19,
+        "price": 6674.4,
+        "revenue": 126813.6
+      },
+      {
+        "tier": "Suite Package (per seat)",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 22,
+        "qty": 5,
+        "price": 13722.75,
+        "revenue": 68613.75
+      },
+      {
+        "tier": "Club Level",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 23,
+        "qty": 7,
+        "price": 6609.6,
+        "revenue": 46267.2
+      },
+      {
+        "tier": "Suite Package (per seat)",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 23,
+        "qty": 15,
+        "price": 13338.0,
+        "revenue": 200070.0
+      },
+      {
+        "tier": "Club Level",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 24,
+        "qty": 21,
+        "price": 6739.2,
+        "revenue": 141523.2
+      },
+      {
+        "tier": "Suite Package (per seat)",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 24,
+        "qty": 21,
+        "price": 12568.5,
+        "revenue": 263938.5
+      },
+      {
+        "tier": "Club Level",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 25,
+        "qty": 13,
+        "price": 6609.6,
+        "revenue": 85924.8
+      },
+      {
+        "tier": "Suite Package (per seat)",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 25,
+        "qty": 21,
+        "price": 13209.75,
+        "revenue": 277404.75
+      },
+      {
+        "tier": "Club Level",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 26,
+        "qty": 20,
+        "price": 6674.4,
+        "revenue": 133488.0
+      },
+      {
+        "tier": "Suite Package (per seat)",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 26,
+        "qty": 12,
+        "price": 13594.5,
+        "revenue": 163134.0
+      },
+      {
+        "tier": "Club Level",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 27,
+        "qty": 21,
+        "price": 7063.2,
+        "revenue": 148327.2
+      },
+      {
+        "tier": "Suite Package (per seat)",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 27,
+        "qty": 13,
+        "price": 13979.25,
+        "revenue": 181730.25
+      },
+      {
+        "tier": "Club Level",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 28,
+        "qty": 22,
+        "price": 7063.2,
+        "revenue": 155390.4
+      },
+      {
+        "tier": "Suite Package (per seat)",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 28,
+        "qty": 11,
+        "price": 13851.0,
+        "revenue": 152361.0
+      },
+      {
+        "tier": "Club Level",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 29,
+        "qty": 19,
+        "price": 6285.6,
+        "revenue": 119426.4
+      },
+      {
+        "tier": "Suite Package (per seat)",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 29,
+        "qty": 18,
+        "price": 12312.0,
+        "revenue": 221616.0
+      },
+      {
+        "tier": "Club Level",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 30,
+        "qty": 17,
+        "price": 6609.6,
+        "revenue": 112363.2
+      },
+      {
+        "tier": "Suite Package (per seat)",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 30,
+        "qty": 15,
+        "price": 12312.0,
+        "revenue": 184680.0
+      },
+      {
+        "tier": "Club Level",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 31,
+        "qty": 12,
+        "price": 6544.8,
+        "revenue": 78537.6
+      },
+      {
+        "tier": "Suite Package (per seat)",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 31,
+        "qty": 7,
+        "price": 12568.5,
+        "revenue": 87979.5
+      },
+      {
+        "tier": "Club Level",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 32,
+        "qty": 14,
+        "price": 6933.6,
+        "revenue": 97070.4
+      },
+      {
+        "tier": "Suite Package (per seat)",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 32,
+        "qty": 8,
+        "price": 13979.25,
+        "revenue": 111834.0
+      },
+      {
+        "tier": "Club Level",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 33,
+        "qty": 9,
+        "price": 6868.8,
+        "revenue": 61819.2
+      },
+      {
+        "tier": "Suite Package (per seat)",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 33,
+        "qty": 16,
+        "price": 12440.25,
+        "revenue": 199044.0
+      },
+      {
+        "tier": "Club Level",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 34,
+        "qty": 13,
+        "price": 7063.2,
+        "revenue": 91821.6
+      },
+      {
+        "tier": "Suite Package (per seat)",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 34,
+        "qty": 9,
+        "price": 13081.5,
+        "revenue": 117733.5
+      },
+      {
+        "tier": "Club Level",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 35,
+        "qty": 12,
+        "price": 6868.8,
+        "revenue": 82425.6
+      },
+      {
+        "tier": "Suite Package (per seat)",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 35,
+        "qty": 8,
+        "price": 12953.25,
+        "revenue": 103626.0
+      },
+      {
+        "tier": "Club Level",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 36,
+        "qty": 20,
+        "price": 6285.6,
+        "revenue": 125712.0
+      },
+      {
+        "tier": "Suite Package (per seat)",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 36,
+        "qty": 12,
+        "price": 12440.25,
+        "revenue": 149283.0
+      },
+      {
+        "tier": "Club Level",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 37,
+        "qty": 18,
+        "price": 6674.4,
+        "revenue": 120139.2
+      },
+      {
+        "tier": "Suite Package (per seat)",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 37,
+        "qty": 17,
+        "price": 12825.0,
+        "revenue": 218025.0
+      },
+      {
+        "tier": "Club Level",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 38,
+        "qty": 18,
+        "price": 6350.4,
+        "revenue": 114307.2
+      },
+      {
+        "tier": "Suite Package (per seat)",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 38,
+        "qty": 16,
+        "price": 12825.0,
+        "revenue": 205200.0
+      },
+      {
+        "tier": "Club Level",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 39,
+        "qty": 7,
+        "price": 6868.8,
+        "revenue": 48081.6
+      },
+      {
+        "tier": "Suite Package (per seat)",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 39,
+        "qty": 16,
+        "price": 12183.75,
+        "revenue": 194940.0
+      },
+      {
+        "tier": "Club Level",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 40,
+        "qty": 15,
+        "price": 6674.4,
+        "revenue": 100116.0
+      },
+      {
+        "tier": "Suite Package (per seat)",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 40,
+        "qty": 19,
+        "price": 13081.5,
+        "revenue": 248548.5
+      },
+      {
+        "tier": "Club Level",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 41,
+        "qty": 5,
+        "price": 6544.8,
+        "revenue": 32724.0
+      },
+      {
+        "tier": "Suite Package (per seat)",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 41,
+        "qty": 15,
+        "price": 13209.75,
+        "revenue": 198146.25
+      },
+      {
+        "tier": "Club Level",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 42,
+        "qty": 24,
+        "price": 6415.2,
+        "revenue": 153964.8
+      },
+      {
+        "tier": "Suite Package (per seat)",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 42,
+        "qty": 21,
+        "price": 12312.0,
+        "revenue": 258552.0
+      },
+      {
+        "tier": "Club Level",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 43,
+        "qty": 8,
+        "price": 7063.2,
+        "revenue": 56505.6
+      },
+      {
+        "tier": "Suite Package (per seat)",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 43,
+        "qty": 12,
+        "price": 13979.25,
+        "revenue": 167751.0
+      },
+      {
+        "tier": "Club Level",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 44,
+        "qty": 8,
+        "price": 6220.8,
+        "revenue": 49766.4
+      },
+      {
+        "tier": "Suite Package (per seat)",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 44,
+        "qty": 13,
+        "price": 12696.75,
+        "revenue": 165057.75
+      },
+      {
+        "tier": "Club Level",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 45,
+        "qty": 6,
+        "price": 7063.2,
+        "revenue": 42379.2
+      },
+      {
+        "tier": "Suite Package (per seat)",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 45,
+        "qty": 10,
+        "price": 12696.75,
+        "revenue": 126967.5
+      },
+      {
+        "tier": "Club Level",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 46,
+        "qty": 9,
+        "price": 6998.4,
+        "revenue": 62985.6
+      },
+      {
+        "tier": "Suite Package (per seat)",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 46,
+        "qty": 18,
+        "price": 13851.0,
+        "revenue": 249318.0
+      },
+      {
+        "tier": "Club Level",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 47,
+        "qty": 13,
+        "price": 6544.8,
+        "revenue": 85082.4
+      },
+      {
+        "tier": "Suite Package (per seat)",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 47,
+        "qty": 9,
+        "price": 13209.75,
+        "revenue": 118887.75
+      },
+      {
+        "tier": "Club Level",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 48,
+        "qty": 21,
+        "price": 6739.2,
+        "revenue": 141523.2
+      },
+      {
+        "tier": "Suite Package (per seat)",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 48,
+        "qty": 20,
+        "price": 13594.5,
+        "revenue": 271890.0
+      },
+      {
+        "tier": "Club Level",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 49,
+        "qty": 15,
+        "price": 6220.8,
+        "revenue": 93312.0
+      },
+      {
+        "tier": "Suite Package (per seat)",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 49,
+        "qty": 13,
+        "price": 12183.75,
+        "revenue": 158388.75
+      },
+      {
+        "tier": "Club Level",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 50,
+        "qty": 10,
+        "price": 6544.8,
+        "revenue": 65448.0
+      },
+      {
+        "tier": "Suite Package (per seat)",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 50,
+        "qty": 7,
+        "price": 12696.75,
+        "revenue": 88877.25
+      },
+      {
+        "tier": "Club Level",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 51,
+        "qty": 5,
+        "price": 6804.0,
+        "revenue": 34020.0
+      },
+      {
+        "tier": "Suite Package (per seat)",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 51,
+        "qty": 7,
+        "price": 13722.75,
+        "revenue": 96059.25
+      },
+      {
+        "tier": "Club Level",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 52,
+        "qty": 13,
+        "price": 6220.8,
+        "revenue": 80870.4
+      },
+      {
+        "tier": "Suite Package (per seat)",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 52,
+        "qty": 24,
+        "price": 13851.0,
+        "revenue": 332424.0
+      },
+      {
+        "tier": "Club Level",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 53,
+        "qty": 12,
+        "price": 6220.8,
+        "revenue": 74649.6
+      },
+      {
+        "tier": "Suite Package (per seat)",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 53,
+        "qty": 13,
+        "price": 13851.0,
+        "revenue": 180063.0
+      },
+      {
+        "tier": "Club Level",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 54,
+        "qty": 8,
+        "price": 6609.6,
+        "revenue": 52876.8
+      },
+      {
+        "tier": "Suite Package (per seat)",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 54,
+        "qty": 5,
+        "price": 12825.0,
+        "revenue": 64125.0
+      },
+      {
+        "tier": "Club Level",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 55,
+        "qty": 22,
+        "price": 6544.8,
+        "revenue": 143985.6
+      },
+      {
+        "tier": "Suite Package (per seat)",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 55,
+        "qty": 13,
+        "price": 13338.0,
+        "revenue": 173394.0
+      },
+      {
+        "tier": "Club Level",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 56,
+        "qty": 9,
+        "price": 6156.0,
+        "revenue": 55404.0
+      },
+      {
+        "tier": "Suite Package (per seat)",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 56,
+        "qty": 21,
+        "price": 13594.5,
+        "revenue": 285484.5
+      },
+      {
+        "tier": "Club Level",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 57,
+        "qty": 12,
+        "price": 6220.8,
+        "revenue": 74649.6
+      },
+      {
+        "tier": "Suite Package (per seat)",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 57,
+        "qty": 10,
+        "price": 12696.75,
+        "revenue": 126967.5
+      },
+      {
+        "tier": "Club Level",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 58,
+        "qty": 6,
+        "price": 6285.6,
+        "revenue": 37713.6
+      },
+      {
+        "tier": "Suite Package (per seat)",
+        "channel": "Corporate Hospitality Package",
+        "days_to_game": 58,
+        "qty": 11,
+        "price": 13979.25,
+        "revenue": 153771.75
+      },
+      {
+        "tier": "Upper Bowl",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 3,
+        "qty": 7,
+        "price": 1977.81,
+        "revenue": 13844.67
+      },
+      {
+        "tier": "Lower Bowl",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 3,
+        "qty": 11,
+        "price": 4721.52,
+        "revenue": 51936.72
+      },
+      {
+        "tier": "Club Level",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 3,
+        "qty": 7,
+        "price": 10818.24,
+        "revenue": 75727.68
+      },
+      {
+        "tier": "Suite Package (per seat)",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 3,
+        "qty": 11,
+        "price": 18326.45,
+        "revenue": 201590.95
+      },
+      {
+        "tier": "Standing Room / Party Deck",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 3,
+        "qty": 7,
+        "price": 1390.48,
+        "revenue": 9733.36
+      },
+      {
+        "tier": "Upper Bowl",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 4,
+        "qty": 15,
+        "price": 1625.26,
+        "revenue": 24378.9
+      },
+      {
+        "tier": "Lower Bowl",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 4,
+        "qty": 7,
+        "price": 4151.04,
+        "revenue": 29057.28
+      },
+      {
+        "tier": "Club Level",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 4,
+        "qty": 3,
+        "price": 8211.84,
+        "revenue": 24635.52
+      },
+      {
+        "tier": "Suite Package (per seat)",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 4,
+        "qty": 14,
+        "price": 21789.2,
+        "revenue": 305048.8
+      },
+      {
+        "tier": "Standing Room / Party Deck",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 4,
+        "qty": 11,
+        "price": 1246.44,
+        "revenue": 13710.84
+      },
+      {
+        "tier": "Upper Bowl",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 5,
+        "qty": 11,
+        "price": 2109.0,
+        "revenue": 23199.0
+      },
+      {
+        "tier": "Lower Bowl",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 5,
+        "qty": 6,
+        "price": 5239.2,
+        "revenue": 31435.2
+      },
+      {
+        "tier": "Club Level",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 5,
+        "qty": 4,
+        "price": 10389.6,
+        "revenue": 41558.4
+      },
+      {
+        "tier": "Suite Package (per seat)",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 5,
+        "qty": 13,
+        "price": 21265.75,
+        "revenue": 276454.75
+      },
+      {
+        "tier": "Standing Room / Party Deck",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 5,
+        "qty": 11,
+        "price": 1382.88,
+        "revenue": 15211.68
+      },
+      {
+        "tier": "Upper Bowl",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 6,
+        "qty": 11,
+        "price": 1884.61,
+        "revenue": 20730.71
+      },
+      {
+        "tier": "Lower Bowl",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 6,
+        "qty": 14,
+        "price": 4499.04,
+        "revenue": 62986.56
+      },
+      {
+        "tier": "Club Level",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 6,
+        "qty": 6,
+        "price": 9696.96,
+        "revenue": 58181.76
+      },
+      {
+        "tier": "Suite Package (per seat)",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 6,
+        "qty": 6,
+        "price": 16944.2,
+        "revenue": 101665.2
+      },
+      {
+        "tier": "Standing Room / Party Deck",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 6,
+        "qty": 9,
+        "price": 1324.96,
+        "revenue": 11924.64
+      },
+      {
+        "tier": "Upper Bowl",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 7,
+        "qty": 3,
+        "price": 1666.49,
+        "revenue": 4999.47
+      },
+      {
+        "tier": "Lower Bowl",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 7,
+        "qty": 3,
+        "price": 4038.24,
+        "revenue": 12114.72
+      },
+      {
+        "tier": "Club Level",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 7,
+        "qty": 13,
+        "price": 9107.52,
+        "revenue": 118397.76
+      },
+      {
+        "tier": "Suite Package (per seat)",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 7,
+        "qty": 9,
+        "price": 17005.0,
+        "revenue": 153045.0
+      },
+      {
+        "tier": "Standing Room / Party Deck",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 7,
+        "qty": 3,
+        "price": 1105.33,
+        "revenue": 3315.99
+      },
+      {
+        "tier": "Upper Bowl",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 8,
+        "qty": 13,
+        "price": 1906.08,
+        "revenue": 24779.04
+      },
+      {
+        "tier": "Lower Bowl",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 8,
+        "qty": 16,
+        "price": 5153.28,
+        "revenue": 82452.48
+      },
+      {
+        "tier": "Club Level",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 8,
+        "qty": 13,
+        "price": 9123.84,
+        "revenue": 118609.92
+      },
+      {
+        "tier": "Suite Package (per seat)",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 8,
+        "qty": 12,
+        "price": 17556.0,
+        "revenue": 210672.0
+      },
+      {
+        "tier": "Standing Room / Party Deck",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 8,
+        "qty": 14,
+        "price": 1235.52,
+        "revenue": 17297.28
+      },
+      {
+        "tier": "Upper Bowl",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 9,
+        "qty": 3,
+        "price": 1955.76,
+        "revenue": 5867.28
+      },
+      {
+        "tier": "Lower Bowl",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 9,
+        "qty": 5,
+        "price": 4152.0,
+        "revenue": 20760.0
+      },
+      {
+        "tier": "Club Level",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 9,
+        "qty": 7,
+        "price": 9798.72,
+        "revenue": 68591.04
+      },
+      {
+        "tier": "Suite Package (per seat)",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 9,
+        "qty": 3,
+        "price": 17421.1,
+        "revenue": 52263.3
+      },
+      {
+        "tier": "Standing Room / Party Deck",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 9,
+        "qty": 8,
+        "price": 1248.2,
+        "revenue": 9985.6
+      },
+      {
+        "tier": "Upper Bowl",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 10,
+        "qty": 11,
+        "price": 1776.5,
+        "revenue": 19541.5
+      },
+      {
+        "tier": "Lower Bowl",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 10,
+        "qty": 6,
+        "price": 3753.6,
+        "revenue": 22521.6
+      },
+      {
+        "tier": "Club Level",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 10,
+        "qty": 17,
+        "price": 8894.4,
+        "revenue": 151204.8
+      },
+      {
+        "tier": "Suite Package (per seat)",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 10,
+        "qty": 6,
+        "price": 18088.0,
+        "revenue": 108528.0
+      },
+      {
+        "tier": "Standing Room / Party Deck",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 10,
+        "qty": 5,
+        "price": 994.5,
+        "revenue": 4972.5
+      },
+      {
+        "tier": "Upper Bowl",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 11,
+        "qty": 8,
+        "price": 1808.61,
+        "revenue": 14468.88
+      },
+      {
+        "tier": "Lower Bowl",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 11,
+        "qty": 4,
+        "price": 4809.6,
+        "revenue": 19238.4
+      },
+      {
+        "tier": "Club Level",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 11,
+        "qty": 7,
+        "price": 9779.52,
+        "revenue": 68456.64
+      },
+      {
+        "tier": "Suite Package (per seat)",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 11,
+        "qty": 13,
+        "price": 16182.3,
+        "revenue": 210369.9
+      },
+      {
+        "tier": "Standing Room / Party Deck",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 11,
+        "qty": 6,
+        "price": 1324.31,
+        "revenue": 7945.86
+      },
+      {
+        "tier": "Upper Bowl",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 12,
+        "qty": 15,
+        "price": 1402.2,
+        "revenue": 21033.0
+      },
+      {
+        "tier": "Lower Bowl",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 12,
+        "qty": 4,
+        "price": 4172.16,
+        "revenue": 16688.64
+      },
+      {
+        "tier": "Club Level",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 12,
+        "qty": 16,
+        "price": 7478.4,
+        "revenue": 119654.4
+      },
+      {
+        "tier": "Suite Package (per seat)",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 12,
+        "qty": 5,
+        "price": 17917.0,
+        "revenue": 89585.0
+      },
+      {
+        "tier": "Standing Room / Party Deck",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 12,
+        "qty": 12,
+        "price": 980.72,
+        "revenue": 11768.64
+      },
+      {
+        "tier": "Upper Bowl",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 13,
+        "qty": 9,
+        "price": 1391.85,
+        "revenue": 12526.65
+      },
+      {
+        "tier": "Lower Bowl",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 13,
+        "qty": 7,
+        "price": 4211.76,
+        "revenue": 29482.32
+      },
+      {
+        "tier": "Club Level",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 13,
+        "qty": 13,
+        "price": 8037.12,
+        "revenue": 104482.56
+      },
+      {
+        "tier": "Suite Package (per seat)",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 13,
+        "qty": 4,
+        "price": 19424.65,
+        "revenue": 77698.6
+      },
+      {
+        "tier": "Standing Room / Party Deck",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 13,
+        "qty": 11,
+        "price": 1036.04,
+        "revenue": 11396.44
+      },
+      {
+        "tier": "Upper Bowl",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 14,
+        "qty": 13,
+        "price": 1921.28,
+        "revenue": 24976.64
+      },
+      {
+        "tier": "Lower Bowl",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 14,
+        "qty": 9,
+        "price": 4171.2,
+        "revenue": 37540.8
+      },
+      {
+        "tier": "Club Level",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 14,
+        "qty": 14,
+        "price": 9176.64,
+        "revenue": 128472.96
+      },
+      {
+        "tier": "Suite Package (per seat)",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 14,
+        "qty": 5,
+        "price": 16210.8,
+        "revenue": 81054.0
+      },
+      {
+        "tier": "Standing Room / Party Deck",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 14,
+        "qty": 14,
+        "price": 1324.83,
+        "revenue": 18547.62
+      },
+      {
+        "tier": "Upper Bowl",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 15,
+        "qty": 13,
+        "price": 1457.78,
+        "revenue": 18951.14
+      },
+      {
+        "tier": "Lower Bowl",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 15,
+        "qty": 3,
+        "price": 4538.4,
+        "revenue": 13615.2
+      },
+      {
+        "tier": "Club Level",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 15,
+        "qty": 13,
+        "price": 8704.8,
+        "revenue": 113162.4
+      },
+      {
+        "tier": "Suite Package (per seat)",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 15,
+        "qty": 14,
+        "price": 17964.5,
+        "revenue": 251503.0
+      },
+      {
+        "tier": "Standing Room / Party Deck",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 15,
+        "qty": 5,
+        "price": 1239.22,
+        "revenue": 6196.1
+      },
+      {
+        "tier": "Upper Bowl",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 16,
+        "qty": 15,
+        "price": 1761.68,
+        "revenue": 26425.2
+      },
+      {
+        "tier": "Lower Bowl",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 16,
+        "qty": 12,
+        "price": 3319.68,
+        "revenue": 39836.16
+      },
+      {
+        "tier": "Club Level",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 16,
+        "qty": 16,
+        "price": 9265.92,
+        "revenue": 148254.72
+      },
+      {
+        "tier": "Suite Package (per seat)",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 16,
+        "qty": 15,
+        "price": 15017.6,
+        "revenue": 225264.0
+      },
+      {
+        "tier": "Standing Room / Party Deck",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 16,
+        "qty": 4,
+        "price": 899.08,
+        "revenue": 3596.32
+      },
+      {
+        "tier": "Upper Bowl",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 17,
+        "qty": 3,
+        "price": 1387.19,
+        "revenue": 4161.57
+      },
+      {
+        "tier": "Lower Bowl",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 17,
+        "qty": 13,
+        "price": 4040.88,
+        "revenue": 52531.44
+      },
+      {
+        "tier": "Club Level",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 17,
+        "qty": 4,
+        "price": 8153.28,
+        "revenue": 32613.12
+      },
+      {
+        "tier": "Suite Package (per seat)",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 17,
+        "qty": 16,
+        "price": 16702.9,
+        "revenue": 267246.4
+      },
+      {
+        "tier": "Standing Room / Party Deck",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 17,
+        "qty": 11,
+        "price": 900.71,
+        "revenue": 9907.81
+      },
+      {
+        "tier": "Upper Bowl",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 18,
+        "qty": 13,
+        "price": 1262.17,
+        "revenue": 16408.21
+      },
+      {
+        "tier": "Lower Bowl",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 18,
+        "qty": 13,
+        "price": 4344.96,
+        "revenue": 56484.48
+      },
+      {
+        "tier": "Club Level",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 18,
+        "qty": 13,
+        "price": 7358.4,
+        "revenue": 95659.2
+      },
+      {
+        "tier": "Suite Package (per seat)",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 18,
+        "qty": 10,
+        "price": 14702.2,
+        "revenue": 147022.0
+      },
+      {
+        "tier": "Standing Room / Party Deck",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 18,
+        "qty": 3,
+        "price": 1129.31,
+        "revenue": 3387.93
+      },
+      {
+        "tier": "Upper Bowl",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 19,
+        "qty": 15,
+        "price": 1276.99,
+        "revenue": 19154.85
+      },
+      {
+        "tier": "Lower Bowl",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 19,
+        "qty": 14,
+        "price": 4187.04,
+        "revenue": 58618.56
+      },
+      {
+        "tier": "Club Level",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 19,
+        "qty": 17,
+        "price": 8511.36,
+        "revenue": 144693.12
+      },
+      {
+        "tier": "Suite Package (per seat)",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 19,
+        "qty": 4,
+        "price": 16709.55,
+        "revenue": 66838.2
+      },
+      {
+        "tier": "Standing Room / Party Deck",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 19,
+        "qty": 4,
+        "price": 1115.4,
+        "revenue": 4461.6
+      },
+      {
+        "tier": "Upper Bowl",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 20,
+        "qty": 7,
+        "price": 1250.2,
+        "revenue": 8751.4
+      },
+      {
+        "tier": "Lower Bowl",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 20,
+        "qty": 16,
+        "price": 3561.6,
+        "revenue": 56985.6
+      },
+      {
+        "tier": "Club Level",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 20,
+        "qty": 6,
+        "price": 6921.6,
+        "revenue": 41529.6
+      },
+      {
+        "tier": "Suite Package (per seat)",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 20,
+        "qty": 6,
+        "price": 15827.0,
+        "revenue": 94962.0
+      },
+      {
+        "tier": "Standing Room / Party Deck",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 20,
+        "qty": 10,
+        "price": 1037.4,
+        "revenue": 10374.0
+      },
+      {
+        "tier": "Upper Bowl",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 21,
+        "qty": 4,
+        "price": 1561.8,
+        "revenue": 6247.2
+      },
+      {
+        "tier": "Lower Bowl",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 21,
+        "qty": 17,
+        "price": 3551.04,
+        "revenue": 60367.68
+      },
+      {
+        "tier": "Club Level",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 21,
+        "qty": 15,
+        "price": 6049.92,
+        "revenue": 90748.8
+      },
+      {
+        "tier": "Suite Package (per seat)",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 21,
+        "qty": 12,
+        "price": 13275.3,
+        "revenue": 159303.6
+      },
+      {
+        "tier": "Standing Room / Party Deck",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 21,
+        "qty": 4,
+        "price": 1139.84,
+        "revenue": 4559.36
+      },
+      {
+        "tier": "Upper Bowl",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 22,
+        "qty": 5,
+        "price": 1413.03,
+        "revenue": 7065.15
+      },
+      {
+        "tier": "Lower Bowl",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 22,
+        "qty": 7,
+        "price": 3505.44,
+        "revenue": 24538.08
+      },
+      {
+        "tier": "Club Level",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 22,
+        "qty": 12,
+        "price": 8104.32,
+        "revenue": 97251.84
+      },
+      {
+        "tier": "Suite Package (per seat)",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 22,
+        "qty": 5,
+        "price": 11457.0,
+        "revenue": 57285.0
+      },
+      {
+        "tier": "Standing Room / Party Deck",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 22,
+        "qty": 10,
+        "price": 810.03,
+        "revenue": 8100.3
+      },
+      {
+        "tier": "Upper Bowl",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 23,
+        "qty": 10,
+        "price": 1331.62,
+        "revenue": 13316.2
+      },
+      {
+        "tier": "Lower Bowl",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 23,
+        "qty": 13,
+        "price": 3018.24,
+        "revenue": 39237.12
+      },
+      {
+        "tier": "Club Level",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 23,
+        "qty": 14,
+        "price": 6476.64,
+        "revenue": 90672.96
+      },
+      {
+        "tier": "Suite Package (per seat)",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 23,
+        "qty": 13,
+        "price": 15058.45,
+        "revenue": 195759.85
+      },
+      {
+        "tier": "Standing Room / Party Deck",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 23,
+        "qty": 7,
+        "price": 1047.35,
+        "revenue": 7331.45
+      },
+      {
+        "tier": "Upper Bowl",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 24,
+        "qty": 7,
+        "price": 1447.04,
+        "revenue": 10129.28
+      },
+      {
+        "tier": "Lower Bowl",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 24,
+        "qty": 10,
+        "price": 3655.68,
+        "revenue": 36556.8
+      },
+      {
+        "tier": "Club Level",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 24,
+        "qty": 15,
+        "price": 5959.68,
+        "revenue": 89395.2
+      },
+      {
+        "tier": "Suite Package (per seat)",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 24,
+        "qty": 17,
+        "price": 15200.0,
+        "revenue": 258400.0
+      },
+      {
+        "tier": "Standing Room / Party Deck",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 24,
+        "qty": 6,
+        "price": 906.88,
+        "revenue": 5441.28
+      },
+      {
+        "tier": "Upper Bowl",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 25,
+        "qty": 4,
+        "price": 1425.0,
+        "revenue": 5700.0
+      },
+      {
+        "tier": "Lower Bowl",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 25,
+        "qty": 3,
+        "price": 3240.0,
+        "revenue": 9720.0
+      },
+      {
+        "tier": "Club Level",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 25,
+        "qty": 10,
+        "price": 5640.0,
+        "revenue": 56400.0
+      },
+      {
+        "tier": "Suite Package (per seat)",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 25,
+        "qty": 16,
+        "price": 14487.5,
+        "revenue": 231800.0
+      },
+      {
+        "tier": "Standing Room / Party Deck",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 25,
+        "qty": 10,
+        "price": 869.38,
+        "revenue": 8693.8
+      },
+      {
+        "tier": "Upper Bowl",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 26,
+        "qty": 9,
+        "price": 1193.77,
+        "revenue": 10743.93
+      },
+      {
+        "tier": "Lower Bowl",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 26,
+        "qty": 17,
+        "price": 3015.84,
+        "revenue": 51269.28
+      },
+      {
+        "tier": "Club Level",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 26,
+        "qty": 4,
+        "price": 7437.12,
+        "revenue": 29748.48
+      },
+      {
+        "tier": "Suite Package (per seat)",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 26,
+        "qty": 4,
+        "price": 11474.1,
+        "revenue": 45896.4
+      },
+      {
+        "tier": "Standing Room / Party Deck",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 26,
+        "qty": 14,
+        "price": 975.39,
+        "revenue": 13655.46
+      },
+      {
+        "tier": "Upper Bowl",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 27,
+        "qty": 7,
+        "price": 1277.47,
+        "revenue": 8942.29
+      },
+      {
+        "tier": "Lower Bowl",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 27,
+        "qty": 5,
+        "price": 3655.68,
+        "revenue": 18278.4
+      },
+      {
+        "tier": "Club Level",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 27,
+        "qty": 16,
+        "price": 6968.64,
+        "revenue": 111498.24
+      },
+      {
+        "tier": "Suite Package (per seat)",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 27,
+        "qty": 7,
+        "price": 10965.85,
+        "revenue": 76760.95
+      },
+      {
+        "tier": "Standing Room / Party Deck",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 27,
+        "qty": 14,
+        "price": 874.06,
+        "revenue": 12236.84
+      },
+      {
+        "tier": "Upper Bowl",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 28,
+        "qty": 6,
+        "price": 1333.42,
+        "revenue": 8000.52
+      },
+      {
+        "tier": "Lower Bowl",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 28,
+        "qty": 17,
+        "price": 3368.64,
+        "revenue": 57266.88
+      },
+      {
+        "tier": "Club Level",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 28,
+        "qty": 9,
+        "price": 5066.88,
+        "revenue": 45601.92
+      },
+      {
+        "tier": "Suite Package (per seat)",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 28,
+        "qty": 5,
+        "price": 9918.0,
+        "revenue": 49590.0
+      },
+      {
+        "tier": "Standing Room / Party Deck",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 28,
+        "qty": 10,
+        "price": 889.72,
+        "revenue": 8897.2
+      },
+      {
+        "tier": "Upper Bowl",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 29,
+        "qty": 9,
+        "price": 1170.12,
+        "revenue": 10531.08
+      },
+      {
+        "tier": "Lower Bowl",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 29,
+        "qty": 14,
+        "price": 2684.88,
+        "revenue": 37588.32
+      },
+      {
+        "tier": "Club Level",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 29,
+        "qty": 9,
+        "price": 6074.88,
+        "revenue": 54673.92
+      },
+      {
+        "tier": "Suite Package (per seat)",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 29,
+        "qty": 9,
+        "price": 11808.5,
+        "revenue": 106276.5
+      },
+      {
+        "tier": "Standing Room / Party Deck",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 29,
+        "qty": 4,
+        "price": 815.3,
+        "revenue": 3261.2
+      },
+      {
+        "tier": "Upper Bowl",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 30,
+        "qty": 3,
+        "price": 1149.5,
+        "revenue": 3448.5
+      },
+      {
+        "tier": "Lower Bowl",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 30,
+        "qty": 15,
+        "price": 2930.4,
+        "revenue": 43956.0
+      },
+      {
+        "tier": "Club Level",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 30,
+        "qty": 16,
+        "price": 6072.0,
+        "revenue": 97152.0
+      },
+      {
+        "tier": "Suite Package (per seat)",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 30,
+        "qty": 4,
+        "price": 10659.0,
+        "revenue": 42636.0
+      },
+      {
+        "tier": "Standing Room / Party Deck",
+        "channel": "Ticket Exchange / Resale",
+        "days_to_game": 30,
+        "qty": 14,
+        "price": 643.5,
+        "revenue": 9009.0
+      }
+    ],
+    "gate_entries": [
+      {
+        "gate": "Gate A",
+        "zone": "North",
+        "entry_hour": 11,
+        "fans_entered": 400,
+        "avg_wait_time_minutes": 1.2
+      },
+      {
+        "gate": "Gate A",
+        "zone": "North",
+        "entry_hour": 12,
+        "fans_entered": 900,
+        "avg_wait_time_minutes": 1.8
+      },
+      {
+        "gate": "Gate A",
+        "zone": "North",
+        "entry_hour": 13,
+        "fans_entered": 1500,
+        "avg_wait_time_minutes": 2.1
+      },
+      {
+        "gate": "Gate A",
+        "zone": "North",
+        "entry_hour": 14,
+        "fans_entered": 2600,
+        "avg_wait_time_minutes": 3.8
+      },
+      {
+        "gate": "Gate A",
+        "zone": "North",
+        "entry_hour": 15,
+        "fans_entered": 2900,
+        "avg_wait_time_minutes": 6.5
+      },
+      {
+        "gate": "Gate A",
+        "zone": "North",
+        "entry_hour": 16,
+        "fans_entered": 900,
+        "avg_wait_time_minutes": 11.2
+      },
+      {
+        "gate": "Gate B",
+        "zone": "South",
+        "entry_hour": 11,
+        "fans_entered": 380,
+        "avg_wait_time_minutes": 1.3
+      },
+      {
+        "gate": "Gate B",
+        "zone": "South",
+        "entry_hour": 12,
+        "fans_entered": 850,
+        "avg_wait_time_minutes": 2.0
+      },
+      {
+        "gate": "Gate B",
+        "zone": "South",
+        "entry_hour": 13,
+        "fans_entered": 1400,
+        "avg_wait_time_minutes": 2.4
+      },
+      {
+        "gate": "Gate B",
+        "zone": "South",
+        "entry_hour": 14,
+        "fans_entered": 2500,
+        "avg_wait_time_minutes": 4.1
+      },
+      {
+        "gate": "Gate B",
+        "zone": "South",
+        "entry_hour": 15,
+        "fans_entered": 3000,
+        "avg_wait_time_minutes": 7.2
+      },
+      {
+        "gate": "Gate B",
+        "zone": "South",
+        "entry_hour": 16,
+        "fans_entered": 1000,
+        "avg_wait_time_minutes": 12.8
+      },
+      {
+        "gate": "Gate C",
+        "zone": "East",
+        "entry_hour": 11,
+        "fans_entered": 300,
+        "avg_wait_time_minutes": 1.1
+      },
+      {
+        "gate": "Gate C",
+        "zone": "East",
+        "entry_hour": 12,
+        "fans_entered": 650,
+        "avg_wait_time_minutes": 1.7
+      },
+      {
+        "gate": "Gate C",
+        "zone": "East",
+        "entry_hour": 13,
+        "fans_entered": 1100,
+        "avg_wait_time_minutes": 2.0
+      },
+      {
+        "gate": "Gate C",
+        "zone": "East",
+        "entry_hour": 14,
+        "fans_entered": 1900,
+        "avg_wait_time_minutes": 3.5
+      },
+      {
+        "gate": "Gate C",
+        "zone": "East",
+        "entry_hour": 15,
+        "fans_entered": 2200,
+        "avg_wait_time_minutes": 6.0
+      },
+      {
+        "gate": "Gate C",
+        "zone": "East",
+        "entry_hour": 16,
+        "fans_entered": 700,
+        "avg_wait_time_minutes": 10.5
+      },
+      {
+        "gate": "Gate D",
+        "zone": "West",
+        "entry_hour": 11,
+        "fans_entered": 290,
+        "avg_wait_time_minutes": 1.2
+      },
+      {
+        "gate": "Gate D",
+        "zone": "West",
+        "entry_hour": 12,
+        "fans_entered": 620,
+        "avg_wait_time_minutes": 1.8
+      },
+      {
+        "gate": "Gate D",
+        "zone": "West",
+        "entry_hour": 13,
+        "fans_entered": 1050,
+        "avg_wait_time_minutes": 2.2
+      },
+      {
+        "gate": "Gate D",
+        "zone": "West",
+        "entry_hour": 14,
+        "fans_entered": 1850,
+        "avg_wait_time_minutes": 3.7
+      },
+      {
+        "gate": "Gate D",
+        "zone": "West",
+        "entry_hour": 15,
+        "fans_entered": 2150,
+        "avg_wait_time_minutes": 6.3
+      },
+      {
+        "gate": "Gate D",
+        "zone": "West",
+        "entry_hour": 16,
+        "fans_entered": 750,
+        "avg_wait_time_minutes": 10.9
+      },
+      {
+        "gate": "Gate E",
+        "zone": "Club Level",
+        "entry_hour": 11,
+        "fans_entered": 150,
+        "avg_wait_time_minutes": 0.8
+      },
+      {
+        "gate": "Gate E",
+        "zone": "Club Level",
+        "entry_hour": 12,
+        "fans_entered": 350,
+        "avg_wait_time_minutes": 1.3
+      },
+      {
+        "gate": "Gate E",
+        "zone": "Club Level",
+        "entry_hour": 13,
+        "fans_entered": 600,
+        "avg_wait_time_minutes": 1.5
+      },
+      {
+        "gate": "Gate E",
+        "zone": "Club Level",
+        "entry_hour": 14,
+        "fans_entered": 1000,
+        "avg_wait_time_minutes": 2.8
+      },
+      {
+        "gate": "Gate E",
+        "zone": "Club Level",
+        "entry_hour": 15,
+        "fans_entered": 1100,
+        "avg_wait_time_minutes": 4.2
+      },
+      {
+        "gate": "Gate E",
+        "zone": "Club Level",
+        "entry_hour": 16,
+        "fans_entered": 250,
+        "avg_wait_time_minutes": 6.0
+      },
+      {
+        "gate": "Gate F",
+        "zone": "Suites",
+        "entry_hour": 11,
+        "fans_entered": 80,
+        "avg_wait_time_minutes": 0.6
+      },
+      {
+        "gate": "Gate F",
+        "zone": "Suites",
+        "entry_hour": 12,
+        "fans_entered": 180,
+        "avg_wait_time_minutes": 0.9
+      },
+      {
+        "gate": "Gate F",
+        "zone": "Suites",
+        "entry_hour": 13,
+        "fans_entered": 300,
+        "avg_wait_time_minutes": 1.0
+      },
+      {
+        "gate": "Gate F",
+        "zone": "Suites",
+        "entry_hour": 14,
+        "fans_entered": 500,
+        "avg_wait_time_minutes": 1.8
+      },
+      {
+        "gate": "Gate F",
+        "zone": "Suites",
+        "entry_hour": 15,
+        "fans_entered": 550,
+        "avg_wait_time_minutes": 2.5
+      },
+      {
+        "gate": "Gate F",
+        "zone": "Suites",
+        "entry_hour": 16,
+        "fans_entered": 120,
+        "avg_wait_time_minutes": 3.2
+      }
+    ],
+    "concessions": [
+      {
+        "gate": "Gate A",
+        "category": "Food",
+        "entry_hour": 11,
+        "units_sold": 341,
+        "revenue": 4306.5
+      },
+      {
+        "gate": "Gate A",
+        "category": "Food",
+        "entry_hour": 12,
+        "units_sold": 788,
+        "revenue": 9947.0
+      },
+      {
+        "gate": "Gate A",
+        "category": "Food",
+        "entry_hour": 13,
+        "units_sold": 1277,
+        "revenue": 16109.5
+      },
+      {
+        "gate": "Gate A",
+        "category": "Food",
+        "entry_hour": 14,
+        "units_sold": 1692,
+        "revenue": 21344.0
+      },
+      {
+        "gate": "Gate A",
+        "category": "Food",
+        "entry_hour": 15,
+        "units_sold": 2228,
+        "revenue": 28101.0
+      },
+      {
+        "gate": "Gate A",
+        "category": "Food",
+        "entry_hour": 16,
+        "units_sold": 1055,
+        "revenue": 13311.0
+      },
+      {
+        "gate": "Gate A",
+        "category": "Food",
+        "entry_hour": 17,
+        "units_sold": 496,
+        "revenue": 6264.0
+      },
+      {
+        "gate": "Gate A",
+        "category": "Food",
+        "entry_hour": 18,
+        "units_sold": 634,
+        "revenue": 8004.0
+      },
+      {
+        "gate": "Gate A",
+        "category": "Food",
+        "entry_hour": 19,
+        "units_sold": 1509,
+        "revenue": 19038.5
+      },
+      {
+        "gate": "Gate A",
+        "category": "Food",
+        "entry_hour": 20,
+        "units_sold": 947,
+        "revenue": 11948.0
+      },
+      {
+        "gate": "Gate A",
+        "category": "Food",
+        "entry_hour": 21,
+        "units_sold": 450,
+        "revenue": 5684.0
+      },
+      {
+        "gate": "Gate A",
+        "category": "Beverage - Non-Alcoholic",
+        "entry_hour": 11,
+        "units_sold": 637,
+        "revenue": 2821.0
+      },
+      {
+        "gate": "Gate A",
+        "category": "Beverage - Non-Alcoholic",
+        "entry_hour": 12,
+        "units_sold": 1097,
+        "revenue": 4860.8
+      },
+      {
+        "gate": "Gate A",
+        "category": "Beverage - Non-Alcoholic",
+        "entry_hour": 13,
+        "units_sold": 1302,
+        "revenue": 5766.0
+      },
+      {
+        "gate": "Gate A",
+        "category": "Beverage - Non-Alcoholic",
+        "entry_hour": 14,
+        "units_sold": 1401,
+        "revenue": 6206.2
+      },
+      {
+        "gate": "Gate A",
+        "category": "Beverage - Non-Alcoholic",
+        "entry_hour": 15,
+        "units_sold": 1663,
+        "revenue": 7365.6
+      },
+      {
+        "gate": "Gate A",
+        "category": "Beverage - Non-Alcoholic",
+        "entry_hour": 16,
+        "units_sold": 1232,
+        "revenue": 5456.0
+      },
+      {
+        "gate": "Gate A",
+        "category": "Beverage - Non-Alcoholic",
+        "entry_hour": 17,
+        "units_sold": 789,
+        "revenue": 3496.8
+      },
+      {
+        "gate": "Gate A",
+        "category": "Beverage - Non-Alcoholic",
+        "entry_hour": 18,
+        "units_sold": 1086,
+        "revenue": 4811.2
+      },
+      {
+        "gate": "Gate A",
+        "category": "Beverage - Non-Alcoholic",
+        "entry_hour": 19,
+        "units_sold": 1920,
+        "revenue": 8506.4
+      },
+      {
+        "gate": "Gate A",
+        "category": "Beverage - Non-Alcoholic",
+        "entry_hour": 20,
+        "units_sold": 1442,
+        "revenue": 6386.0
+      },
+      {
+        "gate": "Gate A",
+        "category": "Beverage - Non-Alcoholic",
+        "entry_hour": 21,
+        "units_sold": 1187,
+        "revenue": 5257.6
+      },
+      {
+        "gate": "Gate A",
+        "category": "Beverage - Alcoholic",
+        "entry_hour": 11,
+        "units_sold": 216,
+        "revenue": 1920.0
+      },
+      {
+        "gate": "Gate A",
+        "category": "Beverage - Alcoholic",
+        "entry_hour": 12,
+        "units_sold": 622,
+        "revenue": 5529.6
+      },
+      {
+        "gate": "Gate A",
+        "category": "Beverage - Alcoholic",
+        "entry_hour": 13,
+        "units_sold": 1090,
+        "revenue": 9696.0
+      },
+      {
+        "gate": "Gate A",
+        "category": "Beverage - Alcoholic",
+        "entry_hour": 14,
+        "units_sold": 1557,
+        "revenue": 13843.2
+      },
+      {
+        "gate": "Gate A",
+        "category": "Beverage - Alcoholic",
+        "entry_hour": 15,
+        "units_sold": 1652,
+        "revenue": 14688.0
+      },
+      {
+        "gate": "Gate A",
+        "category": "Beverage - Alcoholic",
+        "entry_hour": 16,
+        "units_sold": 1306,
+        "revenue": 11616.0
+      },
+      {
+        "gate": "Gate A",
+        "category": "Beverage - Alcoholic",
+        "entry_hour": 17,
+        "units_sold": 881,
+        "revenue": 7833.6
+      },
+      {
+        "gate": "Gate A",
+        "category": "Beverage - Alcoholic",
+        "entry_hour": 18,
+        "units_sold": 1155,
+        "revenue": 10272.0
+      },
+      {
+        "gate": "Gate A",
+        "category": "Beverage - Alcoholic",
+        "entry_hour": 19,
+        "units_sold": 1964,
+        "revenue": 17462.4
+      },
+      {
+        "gate": "Gate A",
+        "category": "Beverage - Alcoholic",
+        "entry_hour": 20,
+        "units_sold": 518,
+        "revenue": 4608.0
+      },
+      {
+        "gate": "Gate A",
+        "category": "Merchandise",
+        "entry_hour": 11,
+        "units_sold": 142,
+        "revenue": 6403.2
+      },
+      {
+        "gate": "Gate A",
+        "category": "Merchandise",
+        "entry_hour": 12,
+        "units_sold": 158,
+        "revenue": 7125.3
+      },
+      {
+        "gate": "Gate A",
+        "category": "Merchandise",
+        "entry_hour": 13,
+        "units_sold": 178,
+        "revenue": 8064.9
+      },
+      {
+        "gate": "Gate A",
+        "category": "Merchandise",
+        "entry_hour": 14,
+        "units_sold": 180,
+        "revenue": 8143.2
+      },
+      {
+        "gate": "Gate A",
+        "category": "Merchandise",
+        "entry_hour": 15,
+        "units_sold": 210,
+        "revenue": 9483.0
+      },
+      {
+        "gate": "Gate A",
+        "category": "Merchandise",
+        "entry_hour": 16,
+        "units_sold": 145,
+        "revenue": 6542.4
+      },
+      {
+        "gate": "Gate A",
+        "category": "Merchandise",
+        "entry_hour": 17,
+        "units_sold": 148,
+        "revenue": 6699.0
+      },
+      {
+        "gate": "Gate A",
+        "category": "Merchandise",
+        "entry_hour": 18,
+        "units_sold": 133,
+        "revenue": 6029.1
+      },
+      {
+        "gate": "Gate A",
+        "category": "Merchandise",
+        "entry_hour": 19,
+        "units_sold": 162,
+        "revenue": 7308.0
+      },
+      {
+        "gate": "Gate A",
+        "category": "Merchandise",
+        "entry_hour": 20,
+        "units_sold": 175,
+        "revenue": 7917.0
+      },
+      {
+        "gate": "Gate A",
+        "category": "Merchandise",
+        "entry_hour": 21,
+        "units_sold": 309,
+        "revenue": 13963.5
+      },
+      {
+        "gate": "Gate B",
+        "category": "Food",
+        "entry_hour": 11,
+        "units_sold": 307,
+        "revenue": 3891.6
+      },
+      {
+        "gate": "Gate B",
+        "category": "Food",
+        "entry_hour": 12,
+        "units_sold": 724,
+        "revenue": 9177.0
+      },
+      {
+        "gate": "Gate B",
+        "category": "Food",
+        "entry_hour": 13,
+        "units_sold": 1258,
+        "revenue": 15939.0
+      },
+      {
+        "gate": "Gate B",
+        "category": "Food",
+        "entry_hour": 14,
+        "units_sold": 1796,
+        "revenue": 22742.4
+      },
+      {
+        "gate": "Gate B",
+        "category": "Food",
+        "entry_hour": 15,
+        "units_sold": 2071,
+        "revenue": 26220.0
+      },
+      {
+        "gate": "Gate B",
+        "category": "Food",
+        "entry_hour": 16,
+        "units_sold": 971,
+        "revenue": 12295.8
+      },
+      {
+        "gate": "Gate B",
+        "category": "Food",
+        "entry_hour": 17,
+        "units_sold": 431,
+        "revenue": 5464.8
+      },
+      {
+        "gate": "Gate B",
+        "category": "Food",
+        "entry_hour": 18,
+        "units_sold": 640,
+        "revenue": 8114.4
+      },
+      {
+        "gate": "Gate B",
+        "category": "Food",
+        "entry_hour": 19,
+        "units_sold": 1558,
+        "revenue": 19734.0
+      },
+      {
+        "gate": "Gate B",
+        "category": "Food",
+        "entry_hour": 20,
+        "units_sold": 854,
+        "revenue": 10819.2
+      },
+      {
+        "gate": "Gate B",
+        "category": "Food",
+        "entry_hour": 21,
+        "units_sold": 444,
+        "revenue": 5630.4
+      },
+      {
+        "gate": "Gate B",
+        "category": "Beverage - Non-Alcoholic",
+        "entry_hour": 11,
+        "units_sold": 737,
+        "revenue": 3245.0
+      },
+      {
+        "gate": "Gate B",
+        "category": "Beverage - Non-Alcoholic",
+        "entry_hour": 12,
+        "units_sold": 1039,
+        "revenue": 4578.4
+      },
+      {
+        "gate": "Gate B",
+        "category": "Beverage - Non-Alcoholic",
+        "entry_hour": 13,
+        "units_sold": 1326,
+        "revenue": 5841.0
+      },
+      {
+        "gate": "Gate B",
+        "category": "Beverage - Non-Alcoholic",
+        "entry_hour": 14,
+        "units_sold": 1547,
+        "revenue": 6814.5
+      },
+      {
+        "gate": "Gate B",
+        "category": "Beverage - Non-Alcoholic",
+        "entry_hour": 15,
+        "units_sold": 1720,
+        "revenue": 7575.6
+      },
+      {
+        "gate": "Gate B",
+        "category": "Beverage - Non-Alcoholic",
+        "entry_hour": 16,
+        "units_sold": 1093,
+        "revenue": 4814.4
+      },
+      {
+        "gate": "Gate B",
+        "category": "Beverage - Non-Alcoholic",
+        "entry_hour": 17,
+        "units_sold": 747,
+        "revenue": 3292.2
+      },
+      {
+        "gate": "Gate B",
+        "category": "Beverage - Non-Alcoholic",
+        "entry_hour": 18,
+        "units_sold": 1018,
+        "revenue": 4484.0
+      },
+      {
+        "gate": "Gate B",
+        "category": "Beverage - Non-Alcoholic",
+        "entry_hour": 19,
+        "units_sold": 2063,
+        "revenue": 9086.0
+      },
+      {
+        "gate": "Gate B",
+        "category": "Beverage - Non-Alcoholic",
+        "entry_hour": 20,
+        "units_sold": 1273,
+        "revenue": 5605.0
+      },
+      {
+        "gate": "Gate B",
+        "category": "Beverage - Non-Alcoholic",
+        "entry_hour": 21,
+        "units_sold": 986,
+        "revenue": 4342.4
+      },
+      {
+        "gate": "Gate B",
+        "category": "Beverage - Alcoholic",
+        "entry_hour": 11,
+        "units_sold": 197,
+        "revenue": 1766.4
+      },
+      {
+        "gate": "Gate B",
+        "category": "Beverage - Alcoholic",
+        "entry_hour": 12,
+        "units_sold": 655,
+        "revenue": 5851.2
+      },
+      {
+        "gate": "Gate B",
+        "category": "Beverage - Alcoholic",
+        "entry_hour": 13,
+        "units_sold": 1081,
+        "revenue": 9660.0
+      },
+      {
+        "gate": "Gate B",
+        "category": "Beverage - Alcoholic",
+        "entry_hour": 14,
+        "units_sold": 1542,
+        "revenue": 13781.6
+      },
+      {
+        "gate": "Gate B",
+        "category": "Beverage - Alcoholic",
+        "entry_hour": 15,
+        "units_sold": 1698,
+        "revenue": 15170.8
+      },
+      {
+        "gate": "Gate B",
+        "category": "Beverage - Alcoholic",
+        "entry_hour": 16,
+        "units_sold": 1178,
+        "revenue": 10524.8
+      },
+      {
+        "gate": "Gate B",
+        "category": "Beverage - Alcoholic",
+        "entry_hour": 17,
+        "units_sold": 824,
+        "revenue": 7360.0
+      },
+      {
+        "gate": "Gate B",
+        "category": "Beverage - Alcoholic",
+        "entry_hour": 18,
+        "units_sold": 1071,
+        "revenue": 9568.0
+      },
+      {
+        "gate": "Gate B",
+        "category": "Beverage - Alcoholic",
+        "entry_hour": 19,
+        "units_sold": 1803,
+        "revenue": 16109.2
+      },
+      {
+        "gate": "Gate B",
+        "category": "Beverage - Alcoholic",
+        "entry_hour": 20,
+        "units_sold": 484,
+        "revenue": 4324.0
+      },
+      {
+        "gate": "Gate B",
+        "category": "Merchandise",
+        "entry_hour": 11,
+        "units_sold": 155,
+        "revenue": 7019.2
+      },
+      {
+        "gate": "Gate B",
+        "category": "Merchandise",
+        "entry_hour": 12,
+        "units_sold": 157,
+        "revenue": 7084.8
+      },
+      {
+        "gate": "Gate B",
+        "category": "Merchandise",
+        "entry_hour": 13,
+        "units_sold": 158,
+        "revenue": 7158.6
+      },
+      {
+        "gate": "Gate B",
+        "category": "Merchandise",
+        "entry_hour": 14,
+        "units_sold": 150,
+        "revenue": 6789.6
+      },
+      {
+        "gate": "Gate B",
+        "category": "Merchandise",
+        "entry_hour": 15,
+        "units_sold": 172,
+        "revenue": 7790.0
+      },
+      {
+        "gate": "Gate B",
+        "category": "Merchandise",
+        "entry_hour": 16,
+        "units_sold": 145,
+        "revenue": 6560.0
+      },
+      {
+        "gate": "Gate B",
+        "category": "Merchandise",
+        "entry_hour": 17,
+        "units_sold": 136,
+        "revenue": 6141.8
+      },
+      {
+        "gate": "Gate B",
+        "category": "Merchandise",
+        "entry_hour": 18,
+        "units_sold": 117,
+        "revenue": 5280.8
+      },
+      {
+        "gate": "Gate B",
+        "category": "Merchandise",
+        "entry_hour": 19,
+        "units_sold": 145,
+        "revenue": 6560.0
+      },
+      {
+        "gate": "Gate B",
+        "category": "Merchandise",
+        "entry_hour": 20,
+        "units_sold": 176,
+        "revenue": 7954.0
+      },
+      {
+        "gate": "Gate B",
+        "category": "Merchandise",
+        "entry_hour": 21,
+        "units_sold": 275,
+        "revenue": 12423.0
+      },
+      {
+        "gate": "Gate C",
+        "category": "Food",
+        "entry_hour": 11,
+        "units_sold": 238,
+        "revenue": 2998.8
+      },
+      {
+        "gate": "Gate C",
+        "category": "Food",
+        "entry_hour": 12,
+        "units_sold": 612,
+        "revenue": 7711.2
+      },
+      {
+        "gate": "Gate C",
+        "category": "Food",
+        "entry_hour": 13,
+        "units_sold": 855,
+        "revenue": 10771.2
+      },
+      {
+        "gate": "Gate C",
+        "category": "Food",
+        "entry_hour": 14,
+        "units_sold": 1166,
+        "revenue": 14688.0
+      },
+      {
+        "gate": "Gate C",
+        "category": "Food",
+        "entry_hour": 15,
+        "units_sold": 1585,
+        "revenue": 19961.4
+      },
+      {
+        "gate": "Gate C",
+        "category": "Food",
+        "entry_hour": 16,
+        "units_sold": 743,
+        "revenue": 9363.6
+      },
+      {
+        "gate": "Gate C",
+        "category": "Food",
+        "entry_hour": 17,
+        "units_sold": 333,
+        "revenue": 4202.4
+      },
+      {
+        "gate": "Gate C",
+        "category": "Food",
+        "entry_hour": 18,
+        "units_sold": 515,
+        "revenue": 6487.2
+      },
+      {
+        "gate": "Gate C",
+        "category": "Food",
+        "entry_hour": 19,
+        "units_sold": 1010,
+        "revenue": 12729.6
+      },
+      {
+        "gate": "Gate C",
+        "category": "Food",
+        "entry_hour": 20,
+        "units_sold": 660,
+        "revenue": 8323.2
+      },
+      {
+        "gate": "Gate C",
+        "category": "Food",
+        "entry_hour": 21,
+        "units_sold": 317,
+        "revenue": 3998.4
+      },
+      {
+        "gate": "Gate C",
+        "category": "Beverage - Non-Alcoholic",
+        "entry_hour": 11,
+        "units_sold": 500,
+        "revenue": 2300.0
+      },
+      {
+        "gate": "Gate C",
+        "category": "Beverage - Non-Alcoholic",
+        "entry_hour": 12,
+        "units_sold": 728,
+        "revenue": 3348.8
+      },
+      {
+        "gate": "Gate C",
+        "category": "Beverage - Non-Alcoholic",
+        "entry_hour": 13,
+        "units_sold": 1050,
+        "revenue": 4830.0
+      },
+      {
+        "gate": "Gate C",
+        "category": "Beverage - Non-Alcoholic",
+        "entry_hour": 14,
+        "units_sold": 1078,
+        "revenue": 4958.8
+      },
+      {
+        "gate": "Gate C",
+        "category": "Beverage - Non-Alcoholic",
+        "entry_hour": 15,
+        "units_sold": 1296,
+        "revenue": 5961.6
+      },
+      {
+        "gate": "Gate C",
+        "category": "Beverage - Non-Alcoholic",
+        "entry_hour": 16,
+        "units_sold": 808,
+        "revenue": 3716.8
+      },
+      {
+        "gate": "Gate C",
+        "category": "Beverage - Non-Alcoholic",
+        "entry_hour": 17,
+        "units_sold": 564,
+        "revenue": 2594.4
+      },
+      {
+        "gate": "Gate C",
+        "category": "Beverage - Non-Alcoholic",
+        "entry_hour": 18,
+        "units_sold": 848,
+        "revenue": 3900.8
+      },
+      {
+        "gate": "Gate C",
+        "category": "Beverage - Non-Alcoholic",
+        "entry_hour": 19,
+        "units_sold": 1484,
+        "revenue": 6826.4
+      },
+      {
+        "gate": "Gate C",
+        "category": "Beverage - Non-Alcoholic",
+        "entry_hour": 20,
+        "units_sold": 1100,
+        "revenue": 5060.0
+      },
+      {
+        "gate": "Gate C",
+        "category": "Beverage - Non-Alcoholic",
+        "entry_hour": 21,
+        "units_sold": 768,
+        "revenue": 3532.8
+      },
+      {
+        "gate": "Gate C",
+        "category": "Beverage - Alcoholic",
+        "entry_hour": 11,
+        "units_sold": 139,
+        "revenue": 1232.8
+      },
+      {
+        "gate": "Gate C",
+        "category": "Beverage - Alcoholic",
+        "entry_hour": 12,
+        "units_sold": 446,
+        "revenue": 3939.6
+      },
+      {
+        "gate": "Gate C",
+        "category": "Beverage - Alcoholic",
+        "entry_hour": 13,
+        "units_sold": 737,
+        "revenue": 6499.0
+      },
+      {
+        "gate": "Gate C",
+        "category": "Beverage - Alcoholic",
+        "entry_hour": 14,
+        "units_sold": 1085,
+        "revenue": 9567.6
+      },
+      {
+        "gate": "Gate C",
+        "category": "Beverage - Alcoholic",
+        "entry_hour": 15,
+        "units_sold": 1317,
+        "revenue": 11617.8
+      },
+      {
+        "gate": "Gate C",
+        "category": "Beverage - Alcoholic",
+        "entry_hour": 16,
+        "units_sold": 919,
+        "revenue": 8107.0
+      },
+      {
+        "gate": "Gate C",
+        "category": "Beverage - Alcoholic",
+        "entry_hour": 17,
+        "units_sold": 632,
+        "revenue": 5574.4
+      },
+      {
+        "gate": "Gate C",
+        "category": "Beverage - Alcoholic",
+        "entry_hour": 18,
+        "units_sold": 782,
+        "revenue": 6901.0
+      },
+      {
+        "gate": "Gate C",
+        "category": "Beverage - Alcoholic",
+        "entry_hour": 19,
+        "units_sold": 1279,
+        "revenue": 11276.1
+      },
+      {
+        "gate": "Gate C",
+        "category": "Beverage - Alcoholic",
+        "entry_hour": 20,
+        "units_sold": 342,
+        "revenue": 3015.0
+      },
+      {
+        "gate": "Gate C",
+        "category": "Merchandise",
+        "entry_hour": 11,
+        "units_sold": 101,
+        "revenue": 4587.2
+      },
+      {
+        "gate": "Gate C",
+        "category": "Merchandise",
+        "entry_hour": 12,
+        "units_sold": 110,
+        "revenue": 4995.9
+      },
+      {
+        "gate": "Gate C",
+        "category": "Merchandise",
+        "entry_hour": 13,
+        "units_sold": 125,
+        "revenue": 5654.7
+      },
+      {
+        "gate": "Gate C",
+        "category": "Merchandise",
+        "entry_hour": 14,
+        "units_sold": 128,
+        "revenue": 5764.5
+      },
+      {
+        "gate": "Gate C",
+        "category": "Merchandise",
+        "entry_hour": 15,
+        "units_sold": 146,
+        "revenue": 6588.0
+      },
+      {
+        "gate": "Gate C",
+        "category": "Merchandise",
+        "entry_hour": 16,
+        "units_sold": 113,
+        "revenue": 5124.0
+      },
+      {
+        "gate": "Gate C",
+        "category": "Merchandise",
+        "entry_hour": 17,
+        "units_sold": 85,
+        "revenue": 3843.0
+      },
+      {
+        "gate": "Gate C",
+        "category": "Merchandise",
+        "entry_hour": 18,
+        "units_sold": 87,
+        "revenue": 3928.4
+      },
+      {
+        "gate": "Gate C",
+        "category": "Merchandise",
+        "entry_hour": 19,
+        "units_sold": 110,
+        "revenue": 4977.6
+      },
+      {
+        "gate": "Gate C",
+        "category": "Merchandise",
+        "entry_hour": 20,
+        "units_sold": 143,
+        "revenue": 6466.0
+      },
+      {
+        "gate": "Gate C",
+        "category": "Merchandise",
+        "entry_hour": 21,
+        "units_sold": 211,
+        "revenue": 9516.0
+      },
+      {
+        "gate": "Gate D",
+        "category": "Food",
+        "entry_hour": 11,
+        "units_sold": 241,
+        "revenue": 3057.6
+      },
+      {
+        "gate": "Gate D",
+        "category": "Food",
+        "entry_hour": 12,
+        "units_sold": 526,
+        "revenue": 6654.2
+      },
+      {
+        "gate": "Gate D",
+        "category": "Food",
+        "entry_hour": 13,
+        "units_sold": 792,
+        "revenue": 10025.4
+      },
+      {
+        "gate": "Gate D",
+        "category": "Food",
+        "entry_hour": 14,
+        "units_sold": 1202,
+        "revenue": 15209.6
+      },
+      {
+        "gate": "Gate D",
+        "category": "Food",
+        "entry_hour": 15,
+        "units_sold": 1384,
+        "revenue": 17502.8
+      },
+      {
+        "gate": "Gate D",
+        "category": "Food",
+        "entry_hour": 16,
+        "units_sold": 655,
+        "revenue": 8290.8
+      },
+      {
+        "gate": "Gate D",
+        "category": "Food",
+        "entry_hour": 17,
+        "units_sold": 328,
+        "revenue": 4155.2
+      },
+      {
+        "gate": "Gate D",
+        "category": "Food",
+        "entry_hour": 18,
+        "units_sold": 432,
+        "revenue": 5468.4
+      },
+      {
+        "gate": "Gate D",
+        "category": "Food",
+        "entry_hour": 19,
+        "units_sold": 1108,
+        "revenue": 14014.0
+      },
+      {
+        "gate": "Gate D",
+        "category": "Food",
+        "entry_hour": 20,
+        "units_sold": 644,
+        "revenue": 8153.6
+      },
+      {
+        "gate": "Gate D",
+        "category": "Food",
+        "entry_hour": 21,
+        "units_sold": 285,
+        "revenue": 3606.4
+      },
+      {
+        "gate": "Gate D",
+        "category": "Beverage - Non-Alcoholic",
+        "entry_hour": 11,
+        "units_sold": 513,
+        "revenue": 2354.0
+      },
+      {
+        "gate": "Gate D",
+        "category": "Beverage - Non-Alcoholic",
+        "entry_hour": 12,
+        "units_sold": 698,
+        "revenue": 3203.2
+      },
+      {
+        "gate": "Gate D",
+        "category": "Beverage - Non-Alcoholic",
+        "entry_hour": 13,
+        "units_sold": 864,
+        "revenue": 3960.0
+      },
+      {
+        "gate": "Gate D",
+        "category": "Beverage - Non-Alcoholic",
+        "entry_hour": 14,
+        "units_sold": 992,
+        "revenue": 4549.6
+      },
+      {
+        "gate": "Gate D",
+        "category": "Beverage - Non-Alcoholic",
+        "entry_hour": 15,
+        "units_sold": 1117,
+        "revenue": 5121.6
+      },
+      {
+        "gate": "Gate D",
+        "category": "Beverage - Non-Alcoholic",
+        "entry_hour": 16,
+        "units_sold": 829,
+        "revenue": 3801.6
+      },
+      {
+        "gate": "Gate D",
+        "category": "Beverage - Non-Alcoholic",
+        "entry_hour": 17,
+        "units_sold": 524,
+        "revenue": 2402.4
+      },
+      {
+        "gate": "Gate D",
+        "category": "Beverage - Non-Alcoholic",
+        "entry_hour": 18,
+        "units_sold": 844,
+        "revenue": 3872.0
+      },
+      {
+        "gate": "Gate D",
+        "category": "Beverage - Non-Alcoholic",
+        "entry_hour": 19,
+        "units_sold": 1330,
+        "revenue": 6098.4
+      },
+      {
+        "gate": "Gate D",
+        "category": "Beverage - Non-Alcoholic",
+        "entry_hour": 20,
+        "units_sold": 902,
+        "revenue": 4136.0
+      },
+      {
+        "gate": "Gate D",
+        "category": "Beverage - Non-Alcoholic",
+        "entry_hour": 21,
+        "units_sold": 844,
+        "revenue": 3872.0
+      },
+      {
+        "gate": "Gate D",
+        "category": "Beverage - Alcoholic",
+        "entry_hour": 11,
+        "units_sold": 143,
+        "revenue": 1254.4
+      },
+      {
+        "gate": "Gate D",
+        "category": "Beverage - Alcoholic",
+        "entry_hour": 12,
+        "units_sold": 464,
+        "revenue": 4070.4
+      },
+      {
+        "gate": "Gate D",
+        "category": "Beverage - Alcoholic",
+        "entry_hour": 13,
+        "units_sold": 803,
+        "revenue": 7040.0
+      },
+      {
+        "gate": "Gate D",
+        "category": "Beverage - Alcoholic",
+        "entry_hour": 14,
+        "units_sold": 1052,
+        "revenue": 9228.8
+      },
+      {
+        "gate": "Gate D",
+        "category": "Beverage - Alcoholic",
+        "entry_hour": 15,
+        "units_sold": 1154,
+        "revenue": 10118.4
+      },
+      {
+        "gate": "Gate D",
+        "category": "Beverage - Alcoholic",
+        "entry_hour": 16,
+        "units_sold": 746,
+        "revenue": 6547.2
+      },
+      {
+        "gate": "Gate D",
+        "category": "Beverage - Alcoholic",
+        "entry_hour": 17,
+        "units_sold": 537,
+        "revenue": 4710.4
+      },
+      {
+        "gate": "Gate D",
+        "category": "Beverage - Alcoholic",
+        "entry_hour": 18,
+        "units_sold": 722,
+        "revenue": 6336.0
+      },
+      {
+        "gate": "Gate D",
+        "category": "Beverage - Alcoholic",
+        "entry_hour": 19,
+        "units_sold": 1315,
+        "revenue": 11532.8
+      },
+      {
+        "gate": "Gate D",
+        "category": "Beverage - Alcoholic",
+        "entry_hour": 20,
+        "units_sold": 394,
+        "revenue": 3456.0
+      },
+      {
+        "gate": "Gate D",
+        "category": "Merchandise",
+        "entry_hour": 11,
+        "units_sold": 99,
+        "revenue": 4454.4
+      },
+      {
+        "gate": "Gate D",
+        "category": "Merchandise",
+        "entry_hour": 12,
+        "units_sold": 118,
+        "revenue": 5324.4
+      },
+      {
+        "gate": "Gate D",
+        "category": "Merchandise",
+        "entry_hour": 13,
+        "units_sold": 113,
+        "revenue": 5115.6
+      },
+      {
+        "gate": "Gate D",
+        "category": "Merchandise",
+        "entry_hour": 14,
+        "units_sold": 112,
+        "revenue": 5063.4
+      },
+      {
+        "gate": "Gate D",
+        "category": "Merchandise",
+        "entry_hour": 15,
+        "units_sold": 140,
+        "revenue": 6322.0
+      },
+      {
+        "gate": "Gate D",
+        "category": "Merchandise",
+        "entry_hour": 16,
+        "units_sold": 92,
+        "revenue": 4176.0
+      },
+      {
+        "gate": "Gate D",
+        "category": "Merchandise",
+        "entry_hour": 17,
+        "units_sold": 81,
+        "revenue": 3654.0
+      },
+      {
+        "gate": "Gate D",
+        "category": "Merchandise",
+        "entry_hour": 18,
+        "units_sold": 96,
+        "revenue": 4344.2
+      },
+      {
+        "gate": "Gate D",
+        "category": "Merchandise",
+        "entry_hour": 19,
+        "units_sold": 102,
+        "revenue": 4593.6
+      },
+      {
+        "gate": "Gate D",
+        "category": "Merchandise",
+        "entry_hour": 20,
+        "units_sold": 134,
+        "revenue": 6032.0
+      },
+      {
+        "gate": "Gate D",
+        "category": "Merchandise",
+        "entry_hour": 21,
+        "units_sold": 189,
+        "revenue": 8526.0
+      },
+      {
+        "gate": "Gate E",
+        "category": "Food",
+        "entry_hour": 11,
+        "units_sold": 96,
+        "revenue": 2280.0
+      },
+      {
+        "gate": "Gate E",
+        "category": "Food",
+        "entry_hour": 12,
+        "units_sold": 246,
+        "revenue": 5852.0
+      },
+      {
+        "gate": "Gate E",
+        "category": "Food",
+        "entry_hour": 13,
+        "units_sold": 341,
+        "revenue": 8109.2
+      },
+      {
+        "gate": "Gate E",
+        "category": "Food",
+        "entry_hour": 14,
+        "units_sold": 537,
+        "revenue": 12768.0
+      },
+      {
+        "gate": "Gate E",
+        "category": "Food",
+        "entry_hour": 15,
+        "units_sold": 644,
+        "revenue": 15306.4
+      },
+      {
+        "gate": "Gate E",
+        "category": "Food",
+        "entry_hour": 16,
+        "units_sold": 279,
+        "revenue": 6634.8
+      },
+      {
+        "gate": "Gate E",
+        "category": "Food",
+        "entry_hour": 17,
+        "units_sold": 136,
+        "revenue": 3252.8
+      },
+      {
+        "gate": "Gate E",
+        "category": "Food",
+        "entry_hour": 18,
+        "units_sold": 186,
+        "revenue": 4423.2
+      },
+      {
+        "gate": "Gate E",
+        "category": "Food",
+        "entry_hour": 19,
+        "units_sold": 374,
+        "revenue": 8892.0
+      },
+      {
+        "gate": "Gate E",
+        "category": "Food",
+        "entry_hour": 20,
+        "units_sold": 263,
+        "revenue": 6262.4
+      },
+      {
+        "gate": "Gate E",
+        "category": "Food",
+        "entry_hour": 21,
+        "units_sold": 140,
+        "revenue": 3344.0
+      },
+      {
+        "gate": "Gate E",
+        "category": "Beverage - Non-Alcoholic",
+        "entry_hour": 11,
+        "units_sold": 158,
+        "revenue": 1039.5
+      },
+      {
+        "gate": "Gate E",
+        "category": "Beverage - Non-Alcoholic",
+        "entry_hour": 12,
+        "units_sold": 232,
+        "revenue": 1528.8
+      },
+      {
+        "gate": "Gate E",
+        "category": "Beverage - Non-Alcoholic",
+        "entry_hour": 13,
+        "units_sold": 288,
+        "revenue": 1890.0
+      },
+      {
+        "gate": "Gate E",
+        "category": "Beverage - Non-Alcoholic",
+        "entry_hour": 14,
+        "units_sold": 337,
+        "revenue": 2217.6
+      },
+      {
+        "gate": "Gate E",
+        "category": "Beverage - Non-Alcoholic",
+        "entry_hour": 15,
+        "units_sold": 403,
+        "revenue": 2646.0
+      },
+      {
+        "gate": "Gate E",
+        "category": "Beverage - Non-Alcoholic",
+        "entry_hour": 16,
+        "units_sold": 281,
+        "revenue": 1848.0
+      },
+      {
+        "gate": "Gate E",
+        "category": "Beverage - Non-Alcoholic",
+        "entry_hour": 17,
+        "units_sold": 197,
+        "revenue": 1297.8
+      },
+      {
+        "gate": "Gate E",
+        "category": "Beverage - Non-Alcoholic",
+        "entry_hour": 18,
+        "units_sold": 235,
+        "revenue": 1545.6
+      },
+      {
+        "gate": "Gate E",
+        "category": "Beverage - Non-Alcoholic",
+        "entry_hour": 19,
+        "units_sold": 439,
+        "revenue": 2881.2
+      },
+      {
+        "gate": "Gate E",
+        "category": "Beverage - Non-Alcoholic",
+        "entry_hour": 20,
+        "units_sold": 310,
+        "revenue": 2037.0
+      },
+      {
+        "gate": "Gate E",
+        "category": "Beverage - Non-Alcoholic",
+        "entry_hour": 21,
+        "units_sold": 263,
+        "revenue": 1730.4
+      },
+      {
+        "gate": "Gate E",
+        "category": "Beverage - Alcoholic",
+        "entry_hour": 11,
+        "units_sold": 133,
+        "revenue": 2222.0
+      },
+      {
+        "gate": "Gate E",
+        "category": "Beverage - Alcoholic",
+        "entry_hour": 12,
+        "units_sold": 384,
+        "revenue": 6402.0
+      },
+      {
+        "gate": "Gate E",
+        "category": "Beverage - Alcoholic",
+        "entry_hour": 13,
+        "units_sold": 693,
+        "revenue": 11550.0
+      },
+      {
+        "gate": "Gate E",
+        "category": "Beverage - Alcoholic",
+        "entry_hour": 14,
+        "units_sold": 840,
+        "revenue": 14014.0
+      },
+      {
+        "gate": "Gate E",
+        "category": "Beverage - Alcoholic",
+        "entry_hour": 15,
+        "units_sold": 1122,
+        "revenue": 18700.0
+      },
+      {
+        "gate": "Gate E",
+        "category": "Beverage - Alcoholic",
+        "entry_hour": 16,
+        "units_sold": 747,
+        "revenue": 12463.0
+      },
+      {
+        "gate": "Gate E",
+        "category": "Beverage - Alcoholic",
+        "entry_hour": 17,
+        "units_sold": 533,
+        "revenue": 8888.0
+      },
+      {
+        "gate": "Gate E",
+        "category": "Beverage - Alcoholic",
+        "entry_hour": 18,
+        "units_sold": 673,
+        "revenue": 11220.0
+      },
+      {
+        "gate": "Gate E",
+        "category": "Beverage - Alcoholic",
+        "entry_hour": 19,
+        "units_sold": 1077,
+        "revenue": 17952.0
+      },
+      {
+        "gate": "Gate E",
+        "category": "Beverage - Alcoholic",
+        "entry_hour": 20,
+        "units_sold": 297,
+        "revenue": 4950.0
+      },
+      {
+        "gate": "Gate E",
+        "category": "Merchandise",
+        "entry_hour": 11,
+        "units_sold": 71,
+        "revenue": 4276.8
+      },
+      {
+        "gate": "Gate E",
+        "category": "Merchandise",
+        "entry_hour": 12,
+        "units_sold": 85,
+        "revenue": 5151.6
+      },
+      {
+        "gate": "Gate E",
+        "category": "Merchandise",
+        "entry_hour": 13,
+        "units_sold": 74,
+        "revenue": 4471.2
+      },
+      {
+        "gate": "Gate E",
+        "category": "Merchandise",
+        "entry_hour": 14,
+        "units_sold": 77,
+        "revenue": 4665.6
+      },
+      {
+        "gate": "Gate E",
+        "category": "Merchandise",
+        "entry_hour": 15,
+        "units_sold": 94,
+        "revenue": 5670.0
+      },
+      {
+        "gate": "Gate E",
+        "category": "Merchandise",
+        "entry_hour": 16,
+        "units_sold": 69,
+        "revenue": 4147.2
+      },
+      {
+        "gate": "Gate E",
+        "category": "Merchandise",
+        "entry_hour": 17,
+        "units_sold": 62,
+        "revenue": 3742.2
+      },
+      {
+        "gate": "Gate E",
+        "category": "Merchandise",
+        "entry_hour": 18,
+        "units_sold": 60,
+        "revenue": 3628.8
+      },
+      {
+        "gate": "Gate E",
+        "category": "Merchandise",
+        "entry_hour": 19,
+        "units_sold": 69,
+        "revenue": 4190.4
+      },
+      {
+        "gate": "Gate E",
+        "category": "Merchandise",
+        "entry_hour": 20,
+        "units_sold": 93,
+        "revenue": 5616.0
+      },
+      {
+        "gate": "Gate E",
+        "category": "Merchandise",
+        "entry_hour": 21,
+        "units_sold": 130,
+        "revenue": 7857.0
+      },
+      {
+        "gate": "Gate F",
+        "category": "Food",
+        "entry_hour": 11,
+        "units_sold": 42,
+        "revenue": 1499.4
+      },
+      {
+        "gate": "Gate F",
+        "category": "Food",
+        "entry_hour": 12,
+        "units_sold": 100,
+        "revenue": 3534.3
+      },
+      {
+        "gate": "Gate F",
+        "category": "Food",
+        "entry_hour": 13,
+        "units_sold": 148,
+        "revenue": 5217.3
+      },
+      {
+        "gate": "Gate F",
+        "category": "Food",
+        "entry_hour": 14,
+        "units_sold": 252,
+        "revenue": 8894.4
+      },
+      {
+        "gate": "Gate F",
+        "category": "Food",
+        "entry_hour": 15,
+        "units_sold": 289,
+        "revenue": 10174.5
+      },
+      {
+        "gate": "Gate F",
+        "category": "Food",
+        "entry_hour": 16,
+        "units_sold": 142,
+        "revenue": 5003.1
+      },
+      {
+        "gate": "Gate F",
+        "category": "Food",
+        "entry_hour": 17,
+        "units_sold": 55,
+        "revenue": 1938.0
+      },
+      {
+        "gate": "Gate F",
+        "category": "Food",
+        "entry_hour": 18,
+        "units_sold": 84,
+        "revenue": 2968.2
+      },
+      {
+        "gate": "Gate F",
+        "category": "Food",
+        "entry_hour": 19,
+        "units_sold": 197,
+        "revenue": 6961.5
+      },
+      {
+        "gate": "Gate F",
+        "category": "Food",
+        "entry_hour": 20,
+        "units_sold": 119,
+        "revenue": 4202.4
+      },
+      {
+        "gate": "Gate F",
+        "category": "Food",
+        "entry_hour": 21,
+        "units_sold": 52,
+        "revenue": 1856.4
+      },
+      {
+        "gate": "Gate F",
+        "category": "Beverage - Non-Alcoholic",
+        "entry_hour": 11,
+        "units_sold": 70,
+        "revenue": 654.0
+      },
+      {
+        "gate": "Gate F",
+        "category": "Beverage - Non-Alcoholic",
+        "entry_hour": 12,
+        "units_sold": 97,
+        "revenue": 902.4
+      },
+      {
+        "gate": "Gate F",
+        "category": "Beverage - Non-Alcoholic",
+        "entry_hour": 13,
+        "units_sold": 132,
+        "revenue": 1224.0
+      },
+      {
+        "gate": "Gate F",
+        "category": "Beverage - Non-Alcoholic",
+        "entry_hour": 14,
+        "units_sold": 130,
+        "revenue": 1201.2
+      },
+      {
+        "gate": "Gate F",
+        "category": "Beverage - Non-Alcoholic",
+        "entry_hour": 15,
+        "units_sold": 149,
+        "revenue": 1382.4
+      },
+      {
+        "gate": "Gate F",
+        "category": "Beverage - Non-Alcoholic",
+        "entry_hour": 16,
+        "units_sold": 93,
+        "revenue": 864.0
+      },
+      {
+        "gate": "Gate F",
+        "category": "Beverage - Non-Alcoholic",
+        "entry_hour": 17,
+        "units_sold": 85,
+        "revenue": 784.8
+      },
+      {
+        "gate": "Gate F",
+        "category": "Beverage - Non-Alcoholic",
+        "entry_hour": 18,
+        "units_sold": 97,
+        "revenue": 902.4
+      },
+      {
+        "gate": "Gate F",
+        "category": "Beverage - Non-Alcoholic",
+        "entry_hour": 19,
+        "units_sold": 187,
+        "revenue": 1730.4
+      },
+      {
+        "gate": "Gate F",
+        "category": "Beverage - Non-Alcoholic",
+        "entry_hour": 20,
+        "units_sold": 118,
+        "revenue": 1092.0
+      },
+      {
+        "gate": "Gate F",
+        "category": "Beverage - Non-Alcoholic",
+        "entry_hour": 21,
+        "units_sold": 94,
+        "revenue": 873.6
+      },
+      {
+        "gate": "Gate F",
+        "category": "Beverage - Alcoholic",
+        "entry_hour": 11,
+        "units_sold": 55,
+        "revenue": 1254.0
+      },
+      {
+        "gate": "Gate F",
+        "category": "Beverage - Alcoholic",
+        "entry_hour": 12,
+        "units_sold": 177,
+        "revenue": 4039.2
+      },
+      {
+        "gate": "Gate F",
+        "category": "Beverage - Alcoholic",
+        "entry_hour": 13,
+        "units_sold": 301,
+        "revenue": 6864.0
+      },
+      {
+        "gate": "Gate F",
+        "category": "Beverage - Alcoholic",
+        "entry_hour": 14,
+        "units_sold": 406,
+        "revenue": 9240.0
+      },
+      {
+        "gate": "Gate F",
+        "category": "Beverage - Alcoholic",
+        "entry_hour": 15,
+        "units_sold": 458,
+        "revenue": 10434.6
+      },
+      {
+        "gate": "Gate F",
+        "category": "Beverage - Alcoholic",
+        "entry_hour": 16,
+        "units_sold": 293,
+        "revenue": 6679.2
+      },
+      {
+        "gate": "Gate F",
+        "category": "Beverage - Alcoholic",
+        "entry_hour": 17,
+        "units_sold": 220,
+        "revenue": 5016.0
+      },
+      {
+        "gate": "Gate F",
+        "category": "Beverage - Alcoholic",
+        "entry_hour": 18,
+        "units_sold": 290,
+        "revenue": 6600.0
+      },
+      {
+        "gate": "Gate F",
+        "category": "Beverage - Alcoholic",
+        "entry_hour": 19,
+        "units_sold": 473,
+        "revenue": 10771.2
+      },
+      {
+        "gate": "Gate F",
+        "category": "Beverage - Alcoholic",
+        "entry_hour": 20,
+        "units_sold": 137,
+        "revenue": 3135.0
+      },
+      {
+        "gate": "Gate F",
+        "category": "Merchandise",
+        "entry_hour": 11,
+        "units_sold": 33,
+        "revenue": 2552.0
+      },
+      {
+        "gate": "Gate F",
+        "category": "Merchandise",
+        "entry_hour": 12,
+        "units_sold": 36,
+        "revenue": 2766.6
+      },
+      {
+        "gate": "Gate F",
+        "category": "Merchandise",
+        "entry_hour": 13,
+        "units_sold": 35,
+        "revenue": 2714.4
+      },
+      {
+        "gate": "Gate F",
+        "category": "Merchandise",
+        "entry_hour": 14,
+        "units_sold": 31,
+        "revenue": 2375.1
+      },
+      {
+        "gate": "Gate F",
+        "category": "Merchandise",
+        "entry_hour": 15,
+        "units_sold": 37,
+        "revenue": 2871.0
+      },
+      {
+        "gate": "Gate F",
+        "category": "Merchandise",
+        "entry_hour": 16,
+        "units_sold": 31,
+        "revenue": 2366.4
+      },
+      {
+        "gate": "Gate F",
+        "category": "Merchandise",
+        "entry_hour": 17,
+        "units_sold": 26,
+        "revenue": 2050.3
+      },
+      {
+        "gate": "Gate F",
+        "category": "Merchandise",
+        "entry_hour": 18,
+        "units_sold": 26,
+        "revenue": 2030.0
+      },
+      {
+        "gate": "Gate F",
+        "category": "Merchandise",
+        "entry_hour": 19,
+        "units_sold": 31,
+        "revenue": 2412.8
+      },
+      {
+        "gate": "Gate F",
+        "category": "Merchandise",
+        "entry_hour": 20,
+        "units_sold": 36,
+        "revenue": 2755.0
+      },
+      {
+        "gate": "Gate F",
+        "category": "Merchandise",
+        "entry_hour": 21,
+        "units_sold": 53,
+        "revenue": 4045.5
+      }
+    ],
+    "sponsorship_revenue": [
+      {
+        "sponsor": "Apex Beverage Co.",
+        "category": "Beverage",
+        "sponsorship_tier": "Presenting Sponsor",
+        "revenue_category": "Signage & Activation",
+        "days_to_game": 58,
+        "amount": 7400000.0
+      },
+      {
+        "sponsor": "Apex Beverage Co.",
+        "category": "Beverage",
+        "sponsorship_tier": "Presenting Sponsor",
+        "revenue_category": "Signage & Activation",
+        "days_to_game": 30,
+        "amount": 6475000.0
+      },
+      {
+        "sponsor": "Apex Beverage Co.",
+        "category": "Beverage",
+        "sponsorship_tier": "Presenting Sponsor",
+        "revenue_category": "Signage & Activation",
+        "days_to_game": 7,
+        "amount": 4625000.0
+      },
+      {
+        "sponsor": "Apex Beverage Co.",
+        "category": "Beverage",
+        "sponsorship_tier": "Presenting Sponsor",
+        "revenue_category": "Broadcast Ad Package",
+        "days_to_game": 45,
+        "amount": 5520000.0
+      },
+      {
+        "sponsor": "Apex Beverage Co.",
+        "category": "Beverage",
+        "sponsorship_tier": "Presenting Sponsor",
+        "revenue_category": "Broadcast Ad Package",
+        "days_to_game": 14,
+        "amount": 3680000.0
+      },
+      {
+        "sponsor": "IronPeak Financial",
+        "category": "Financial Services",
+        "sponsorship_tier": "Official Partner",
+        "revenue_category": "Suite Package & Signage",
+        "days_to_game": 55,
+        "amount": 2560000.0
+      },
+      {
+        "sponsor": "IronPeak Financial",
+        "category": "Financial Services",
+        "sponsorship_tier": "Official Partner",
+        "revenue_category": "Suite Package & Signage",
+        "days_to_game": 28,
+        "amount": 2240000.0
+      },
+      {
+        "sponsor": "IronPeak Financial",
+        "category": "Financial Services",
+        "sponsorship_tier": "Official Partner",
+        "revenue_category": "Suite Package & Signage",
+        "days_to_game": 6,
+        "amount": 1600000.0
+      },
+      {
+        "sponsor": "Velocity Motors",
+        "category": "Automotive",
+        "sponsorship_tier": "Official Partner",
+        "revenue_category": "Broadcast Ad Package",
+        "days_to_game": 45,
+        "amount": 4680000.0
+      },
+      {
+        "sponsor": "Velocity Motors",
+        "category": "Automotive",
+        "sponsorship_tier": "Official Partner",
+        "revenue_category": "Broadcast Ad Package",
+        "days_to_game": 14,
+        "amount": 3120000.0
+      },
+      {
+        "sponsor": "NimbusTech",
+        "category": "Technology",
+        "sponsorship_tier": "Suite Sponsor",
+        "revenue_category": "Suite Package",
+        "days_to_game": 50,
+        "amount": 1860000.0
+      },
+      {
+        "sponsor": "NimbusTech",
+        "category": "Technology",
+        "sponsorship_tier": "Suite Sponsor",
+        "revenue_category": "Suite Package",
+        "days_to_game": 20,
+        "amount": 1240000.0
+      },
+      {
+        "sponsor": "NimbusTech",
+        "category": "Technology",
+        "sponsorship_tier": "Suite Sponsor",
+        "revenue_category": "Halftime Show Activation",
+        "days_to_game": 5,
+        "amount": 1800000.0
+      },
+      {
+        "sponsor": "Guardian Insurance Group",
+        "category": "Insurance",
+        "sponsorship_tier": "Official Partner",
+        "revenue_category": "Signage",
+        "days_to_game": 52,
+        "amount": 2550000.0
+      },
+      {
+        "sponsor": "Guardian Insurance Group",
+        "category": "Insurance",
+        "sponsorship_tier": "Official Partner",
+        "revenue_category": "Signage",
+        "days_to_game": 18,
+        "amount": 1700000.0
+      },
+      {
+        "sponsor": "Stride Athletic Apparel",
+        "category": "Apparel",
+        "sponsorship_tier": "Official Partner",
+        "revenue_category": "Activation Space",
+        "days_to_game": 40,
+        "amount": 1740000.0
+      },
+      {
+        "sponsor": "Stride Athletic Apparel",
+        "category": "Apparel",
+        "sponsorship_tier": "Official Partner",
+        "revenue_category": "Activation Space",
+        "days_to_game": 12,
+        "amount": 1160000.0
+      },
+      {
+        "sponsor": "Crestline Streaming Co.",
+        "category": "Media / Broadcast",
+        "sponsorship_tier": "Official Partner",
+        "revenue_category": "Digital Streaming Rights",
+        "days_to_game": 50,
+        "amount": 2800000.0
+      },
+      {
+        "sponsor": "Crestline Streaming Co.",
+        "category": "Media / Broadcast",
+        "sponsorship_tier": "Official Partner",
+        "revenue_category": "Digital Streaming Rights",
+        "days_to_game": 10,
+        "amount": 2800000.0
+      }
+    ],
+    "security_incidents": [
+      {
+        "gate": "Gate A",
+        "incident_type": "Medical",
+        "severity": "Low",
+        "incident_hour": 14,
+        "response_time_minutes": 4.5
+      },
+      {
+        "gate": "Gate B",
+        "incident_type": "Crowd Control",
+        "severity": "Medium",
+        "incident_hour": 15,
+        "response_time_minutes": 8.2
+      },
+      {
+        "gate": "Gate C",
+        "incident_type": "Prohibited Item",
+        "severity": "Low",
+        "incident_hour": 13,
+        "response_time_minutes": 2.1
+      },
+      {
+        "gate": "Gate A",
+        "incident_type": "Prohibited Item",
+        "severity": "Low",
+        "incident_hour": 14,
+        "response_time_minutes": 1.8
+      },
+      {
+        "gate": "Gate B",
+        "incident_type": "Prohibited Item",
+        "severity": "Low",
+        "incident_hour": 11,
+        "response_time_minutes": 1.5
+      },
+      {
+        "gate": "Gate D",
+        "incident_type": "Lost Child",
+        "severity": "Low",
+        "incident_hour": 12,
+        "response_time_minutes": 6.2
+      },
+      {
+        "gate": "Gate F",
+        "incident_type": "Prohibited Item",
+        "severity": "Low",
+        "incident_hour": 12,
+        "response_time_minutes": 1.9
+      },
+      {
+        "gate": "Gate C",
+        "incident_type": "Prohibited Item",
+        "severity": "Low",
+        "incident_hour": 16,
+        "response_time_minutes": 2.0
+      },
+      {
+        "gate": "Gate E",
+        "incident_type": "Medical",
+        "severity": "Medium",
+        "incident_hour": 18,
+        "response_time_minutes": 6.4
+      },
+      {
+        "gate": "Gate D",
+        "incident_type": "Medical",
+        "severity": "Medium",
+        "incident_hour": 18,
+        "response_time_minutes": 7.1
+      },
+      {
+        "gate": "Gate E",
+        "incident_type": "Crowd Control",
+        "severity": "Low",
+        "incident_hour": 18,
+        "response_time_minutes": 5.0
+      },
+      {
+        "gate": "Gate B",
+        "incident_type": "Lost Child",
+        "severity": "Medium",
+        "incident_hour": 17,
+        "response_time_minutes": 15.0
+      },
+      {
+        "gate": "Gate F",
+        "incident_type": "Crowd Control",
+        "severity": "Low",
+        "incident_hour": 16,
+        "response_time_minutes": 5.5
+      },
+      {
+        "gate": "Gate C",
+        "incident_type": "Medical",
+        "severity": "High",
+        "incident_hour": 20,
+        "response_time_minutes": 9.8
+      },
+      {
+        "gate": "Gate F",
+        "incident_type": "Ejection",
+        "severity": "High",
+        "incident_hour": 20,
+        "response_time_minutes": 14.6
+      },
+      {
+        "gate": "Gate A",
+        "incident_type": "Crowd Control",
+        "severity": "High",
+        "incident_hour": 19,
+        "response_time_minutes": 18.2
+      },
+      {
+        "gate": "Gate D",
+        "incident_type": "Ejection",
+        "severity": "High",
+        "incident_hour": 19,
+        "response_time_minutes": 12.5
+      },
+      {
+        "gate": "Gate B",
+        "incident_type": "Medical",
+        "severity": "Low",
+        "incident_hour": 16,
+        "response_time_minutes": 3.9
+      },
+      {
+        "gate": "Gate E",
+        "incident_type": "Ejection",
+        "severity": "Medium",
+        "incident_hour": 20,
+        "response_time_minutes": 10.1
+      },
+      {
+        "gate": "Gate C",
+        "incident_type": "Lost Child",
+        "severity": "Low",
+        "incident_hour": 14,
+        "response_time_minutes": 7.6
+      },
+      {
+        "gate": "Gate F",
+        "incident_type": "Medical",
+        "severity": "Low",
+        "incident_hour": 17,
+        "response_time_minutes": 4.2
+      },
+      {
+        "gate": "Gate A",
+        "incident_type": "Lost Child",
+        "severity": "Medium",
+        "incident_hour": 18,
+        "response_time_minutes": 11.3
+      },
+      {
+        "gate": "Gate C",
+        "incident_type": "Crowd Control",
+        "severity": "Medium",
+        "incident_hour": 21,
+        "response_time_minutes": 9.5
+      },
+      {
+        "gate": "Gate A",
+        "incident_type": "Crowd Control",
+        "severity": "High",
+        "incident_hour": 21,
+        "response_time_minutes": 16.8
+      },
+      {
+        "gate": "Gate B",
+        "incident_type": "Ejection",
+        "severity": "Medium",
+        "incident_hour": 21,
+        "response_time_minutes": 11.2
+      },
+      {
+        "gate": "Gate A",
+        "incident_type": "Medical",
+        "severity": "Low",
+        "incident_hour": 21,
+        "response_time_minutes": 5.3
+      },
+      {
+        "gate": "Gate B",
+        "incident_type": "Crowd Control",
+        "severity": "Medium",
+        "incident_hour": 22,
+        "response_time_minutes": 10.0
+      },
+      {
+        "gate": "Gate D",
+        "incident_type": "Medical",
+        "severity": "Low",
+        "incident_hour": 22,
+        "response_time_minutes": 4.8
+      },
+      {
+        "gate": "Gate E",
+        "incident_type": "Prohibited Item",
+        "severity": "Low",
+        "incident_hour": 13,
+        "response_time_minutes": 2.4
+      },
+      {
+        "gate": "Gate F",
+        "incident_type": "Lost Child",
+        "severity": "Low",
+        "incident_hour": 15,
+        "response_time_minutes": 5.9
+      },
+      {
+        "gate": "Gate C",
+        "incident_type": "Ejection",
+        "severity": "Medium",
+        "incident_hour": 19,
+        "response_time_minutes": 10.8
+      },
+      {
+        "gate": "Gate D",
+        "incident_type": "Crowd Control",
+        "severity": "Medium",
+        "incident_hour": 20,
+        "response_time_minutes": 9.1
+      },
+      {
+        "gate": "Gate A",
+        "incident_type": "Ejection",
+        "severity": "High",
+        "incident_hour": 20,
+        "response_time_minutes": 13.9
+      },
+      {
+        "gate": "Gate E",
+        "incident_type": "Lost Child",
+        "severity": "Medium",
+        "incident_hour": 17,
+        "response_time_minutes": 12.4
+      },
+      {
+        "gate": "Gate B",
+        "incident_type": "Medical",
+        "severity": "Medium",
+        "incident_hour": 19,
+        "response_time_minutes": 7.8
+      },
+      {
+        "gate": "Gate F",
+        "incident_type": "Crowd Control",
+        "severity": "Medium",
+        "incident_hour": 21,
+        "response_time_minutes": 8.6
+      },
+      {
+        "gate": "Gate C",
+        "incident_type": "Medical",
+        "severity": "Low",
+        "incident_hour": 12,
+        "response_time_minutes": 3.5
+      },
+      {
+        "gate": "Gate D",
+        "incident_type": "Prohibited Item",
+        "severity": "Low",
+        "incident_hour": 11,
+        "response_time_minutes": 1.6
+      }
+    ],
+    "department_budget": [
+      {
+        "department": "Security",
+        "category": "Direct Labor",
+        "budgeted_amount": 2000000.0,
+        "actual_amount": 2120000.0
+      },
+      {
+        "department": "Security",
+        "category": "Security Technology & K9",
+        "budgeted_amount": 450000.0,
+        "actual_amount": 468000.0
+      },
+      {
+        "department": "Security",
+        "category": "Equipment & AV",
+        "budgeted_amount": 150000.0,
+        "actual_amount": 142000.0
+      },
+      {
+        "department": "Security",
+        "category": "Insurance & Risk Management",
+        "budgeted_amount": 400000.0,
+        "actual_amount": 410000.0
+      },
+      {
+        "department": "Security",
+        "category": "Coordination & Overhead",
+        "budgeted_amount": 200000.0,
+        "actual_amount": 214000.0
+      },
+      {
+        "department": "Guest Services",
+        "category": "Direct Labor",
+        "budgeted_amount": 950000.0,
+        "actual_amount": 906000.0
+      },
+      {
+        "department": "Guest Services",
+        "category": "Equipment & AV",
+        "budgeted_amount": 100000.0,
+        "actual_amount": 92000.0
+      },
+      {
+        "department": "Guest Services",
+        "category": "Coordination & Overhead",
+        "budgeted_amount": 250000.0,
+        "actual_amount": 240600.0
+      },
+      {
+        "department": "Guest Services",
+        "category": "Contingency Reserve",
+        "budgeted_amount": 150000.0,
+        "actual_amount": 154000.0
+      },
+      {
+        "department": "Concessions & Merchandise",
+        "category": "Direct Labor",
+        "budgeted_amount": 1400000.0,
+        "actual_amount": 1462000.0
+      },
+      {
+        "department": "Concessions & Merchandise",
+        "category": "Equipment & AV",
+        "budgeted_amount": 200000.0,
+        "actual_amount": 210000.0
+      },
+      {
+        "department": "Concessions & Merchandise",
+        "category": "Facilities & Site Prep",
+        "budgeted_amount": 250000.0,
+        "actual_amount": 268400.0
+      },
+      {
+        "department": "Concessions & Merchandise",
+        "category": "Coordination & Overhead",
+        "budgeted_amount": 250000.0,
+        "actual_amount": 247000.0
+      },
+      {
+        "department": "Medical Services",
+        "category": "Direct Labor",
+        "budgeted_amount": 420000.0,
+        "actual_amount": 405000.0
+      },
+      {
+        "department": "Medical Services",
+        "category": "Equipment & AV",
+        "budgeted_amount": 80000.0,
+        "actual_amount": 76000.0
+      },
+      {
+        "department": "Medical Services",
+        "category": "Insurance & Risk Management",
+        "budgeted_amount": 90000.0,
+        "actual_amount": 87500.0
+      },
+      {
+        "department": "Medical Services",
+        "category": "Coordination & Overhead",
+        "budgeted_amount": 30000.0,
+        "actual_amount": 30000.0
+      },
+      {
+        "department": "Parking & Transportation",
+        "category": "Direct Labor",
+        "budgeted_amount": 620000.0,
+        "actual_amount": 660000.0
+      },
+      {
+        "department": "Parking & Transportation",
+        "category": "Equipment & AV",
+        "budgeted_amount": 80000.0,
+        "actual_amount": 92000.0
+      },
+      {
+        "department": "Parking & Transportation",
+        "category": "Facilities & Site Prep",
+        "budgeted_amount": 150000.0,
+        "actual_amount": 165300.0
+      },
+      {
+        "department": "Parking & Transportation",
+        "category": "Coordination & Overhead",
+        "budgeted_amount": 130000.0,
+        "actual_amount": 125000.0
+      },
+      {
+        "department": "Broadcast & Media Operations",
+        "category": "Direct Labor",
+        "budgeted_amount": 850000.0,
+        "actual_amount": 815000.0
+      },
+      {
+        "department": "Broadcast & Media Operations",
+        "category": "Equipment & AV",
+        "budgeted_amount": 700000.0,
+        "actual_amount": 668000.0
+      },
+      {
+        "department": "Broadcast & Media Operations",
+        "category": "Coordination & Overhead",
+        "budgeted_amount": 200000.0,
+        "actual_amount": 196600.0
+      },
+      {
+        "department": "Broadcast & Media Operations",
+        "category": "Contingency Reserve",
+        "budgeted_amount": 100000.0,
+        "actual_amount": 100000.0
+      },
+      {
+        "department": "Cleaning & Facilities",
+        "category": "Direct Labor",
+        "budgeted_amount": 480000.0,
+        "actual_amount": 500000.0
+      },
+      {
+        "department": "Cleaning & Facilities",
+        "category": "Equipment & AV",
+        "budgeted_amount": 60000.0,
+        "actual_amount": 58000.0
+      },
+      {
+        "department": "Cleaning & Facilities",
+        "category": "Facilities & Site Prep",
+        "budgeted_amount": 150000.0,
+        "actual_amount": 158900.0
+      },
+      {
+        "department": "Cleaning & Facilities",
+        "category": "Coordination & Overhead",
+        "budgeted_amount": 50000.0,
+        "actual_amount": 46000.0
+      }
+    ],
+    "staffing_cost": [
+      {
+        "department": "Security",
+        "phase": "Setup",
+        "crew_name": "Security: Perimeter & Bag Check",
+        "workers_scheduled": 60,
+        "hours_per_worker": 8.0,
+        "hourly_rate": 26.0,
+        "total_cost": 12480.0
+      },
+      {
+        "department": "Cleaning & Facilities",
+        "phase": "Setup",
+        "crew_name": "Cleaning: Site Prep Crew",
+        "workers_scheduled": 50,
+        "hours_per_worker": 8.0,
+        "hourly_rate": 18.0,
+        "total_cost": 7200.0
+      },
+      {
+        "department": "Concessions & Merchandise",
+        "phase": "Setup",
+        "crew_name": "Concessions: Merchandise Stocking",
+        "workers_scheduled": 30,
+        "hours_per_worker": 6.0,
+        "hourly_rate": 17.0,
+        "total_cost": 3060.0
+      },
+      {
+        "department": "Security",
+        "phase": "Setup",
+        "crew_name": "Security: Perimeter & Bag Check",
+        "workers_scheduled": 90,
+        "hours_per_worker": 9.0,
+        "hourly_rate": 27.0,
+        "total_cost": 21870.0
+      },
+      {
+        "department": "Security",
+        "phase": "Setup",
+        "crew_name": "Security: Credentialing Walkthrough",
+        "workers_scheduled": 40,
+        "hours_per_worker": 8.0,
+        "hourly_rate": 28.0,
+        "total_cost": 8960.0
+      },
+      {
+        "department": "Cleaning & Facilities",
+        "phase": "Setup",
+        "crew_name": "Cleaning: Site Prep Crew",
+        "workers_scheduled": 70,
+        "hours_per_worker": 9.0,
+        "hourly_rate": 18.5,
+        "total_cost": 11655.0
+      },
+      {
+        "department": "Concessions & Merchandise",
+        "phase": "Setup",
+        "crew_name": "Concessions: Stand Stocking & Prep",
+        "workers_scheduled": 120,
+        "hours_per_worker": 8.0,
+        "hourly_rate": 18.0,
+        "total_cost": 17280.0
+      },
+      {
+        "department": "Concessions & Merchandise",
+        "phase": "Setup",
+        "crew_name": "Concessions: Merchandise Stocking",
+        "workers_scheduled": 60,
+        "hours_per_worker": 8.0,
+        "hourly_rate": 17.5,
+        "total_cost": 8400.0
+      },
+      {
+        "department": "Broadcast & Media Operations",
+        "phase": "Setup",
+        "crew_name": "Broadcast: Production Rehearsal",
+        "workers_scheduled": 40,
+        "hours_per_worker": 10.0,
+        "hourly_rate": 50.0,
+        "total_cost": 20000.0
+      },
+      {
+        "department": "Broadcast & Media Operations",
+        "phase": "Setup",
+        "crew_name": "Broadcast: AV Rig & Engineering",
+        "workers_scheduled": 25,
+        "hours_per_worker": 12.0,
+        "hourly_rate": 65.0,
+        "total_cost": 19500.0
+      },
+      {
+        "department": "Guest Services",
+        "phase": "Setup",
+        "crew_name": "Guest Services: Usher Training",
+        "workers_scheduled": 30,
+        "hours_per_worker": 6.0,
+        "hourly_rate": 18.0,
+        "total_cost": 3240.0
+      },
+      {
+        "department": "Security",
+        "phase": "Game Day",
+        "crew_name": "Security: Perimeter & Bag Check",
+        "workers_scheduled": 380,
+        "hours_per_worker": 10.0,
+        "hourly_rate": 28.0,
+        "total_cost": 106400.0
+      },
+      {
+        "department": "Security",
+        "phase": "Game Day",
+        "crew_name": "Security: Interior / Seating Bowl",
+        "workers_scheduled": 320,
+        "hours_per_worker": 12.0,
+        "hourly_rate": 30.0,
+        "total_cost": 115200.0
+      },
+      {
+        "department": "Security",
+        "phase": "Game Day",
+        "crew_name": "Security: K9 & Specialized Units",
+        "workers_scheduled": 45,
+        "hours_per_worker": 14.0,
+        "hourly_rate": 58.0,
+        "total_cost": 36540.0
+      },
+      {
+        "department": "Guest Services",
+        "phase": "Game Day",
+        "crew_name": "Guest Services: Ushers & Ticket Takers",
+        "workers_scheduled": 280,
+        "hours_per_worker": 10.0,
+        "hourly_rate": 19.0,
+        "total_cost": 53200.0
+      },
+      {
+        "department": "Guest Services",
+        "phase": "Game Day",
+        "crew_name": "Guest Services: Guest Relations & ADA",
+        "workers_scheduled": 65,
+        "hours_per_worker": 12.0,
+        "hourly_rate": 24.0,
+        "total_cost": 18720.0
+      },
+      {
+        "department": "Concessions & Merchandise",
+        "phase": "Game Day",
+        "crew_name": "Concessions: Stand Staff",
+        "workers_scheduled": 600,
+        "hours_per_worker": 10.0,
+        "hourly_rate": 19.0,
+        "total_cost": 114000.0
+      },
+      {
+        "department": "Concessions & Merchandise",
+        "phase": "Game Day",
+        "crew_name": "Concessions: Merchandise Sales",
+        "workers_scheduled": 180,
+        "hours_per_worker": 10.0,
+        "hourly_rate": 18.0,
+        "total_cost": 32400.0
+      },
+      {
+        "department": "Concessions & Merchandise",
+        "phase": "Game Day",
+        "crew_name": "Concessions: Suite / Premium Catering",
+        "workers_scheduled": 85,
+        "hours_per_worker": 11.0,
+        "hourly_rate": 26.0,
+        "total_cost": 24310.0
+      },
+      {
+        "department": "Medical Services",
+        "phase": "Game Day",
+        "crew_name": "Medical: EMT & First Aid Stations",
+        "workers_scheduled": 75,
+        "hours_per_worker": 12.0,
+        "hourly_rate": 52.0,
+        "total_cost": 46800.0
+      },
+      {
+        "department": "Medical Services",
+        "phase": "Game Day",
+        "crew_name": "Medical: Emergency Response Coordination",
+        "workers_scheduled": 15,
+        "hours_per_worker": 14.0,
+        "hourly_rate": 85.0,
+        "total_cost": 17850.0
+      },
+      {
+        "department": "Parking & Transportation",
+        "phase": "Game Day",
+        "crew_name": "Parking: Parking Attendants",
+        "workers_scheduled": 110,
+        "hours_per_worker": 10.0,
+        "hourly_rate": 20.0,
+        "total_cost": 22000.0
+      },
+      {
+        "department": "Parking & Transportation",
+        "phase": "Game Day",
+        "crew_name": "Parking: Shuttle & Transit Operations",
+        "workers_scheduled": 45,
+        "hours_per_worker": 13.0,
+        "hourly_rate": 27.0,
+        "total_cost": 15795.0
+      },
+      {
+        "department": "Broadcast & Media Operations",
+        "phase": "Game Day",
+        "crew_name": "Broadcast: Production & Camera Crew",
+        "workers_scheduled": 80,
+        "hours_per_worker": 16.0,
+        "hourly_rate": 52.0,
+        "total_cost": 66560.0
+      },
+      {
+        "department": "Broadcast & Media Operations",
+        "phase": "Game Day",
+        "crew_name": "Broadcast: Technical / Engineering",
+        "workers_scheduled": 25,
+        "hours_per_worker": 18.0,
+        "hourly_rate": 68.0,
+        "total_cost": 30600.0
+      },
+      {
+        "department": "Cleaning & Facilities",
+        "phase": "Game Day",
+        "crew_name": "Cleaning: Game-Day Crew",
+        "workers_scheduled": 160,
+        "hours_per_worker": 10.0,
+        "hourly_rate": 19.0,
+        "total_cost": 30400.0
+      },
+      {
+        "department": "Cleaning & Facilities",
+        "phase": "Teardown",
+        "crew_name": "Cleaning: Post-Event Teardown Crew",
+        "workers_scheduled": 90,
+        "hours_per_worker": 8.0,
+        "hourly_rate": 22.0,
+        "total_cost": 15840.0
+      },
+      {
+        "department": "Security",
+        "phase": "Teardown",
+        "crew_name": "Security: Overnight Sweep & Breakdown",
+        "workers_scheduled": 60,
+        "hours_per_worker": 6.0,
+        "hourly_rate": 26.0,
+        "total_cost": 9360.0
+      },
+      {
+        "department": "Parking & Transportation",
+        "phase": "Teardown",
+        "crew_name": "Parking: Shuttle Wind-Down",
+        "workers_scheduled": 25,
+        "hours_per_worker": 6.0,
+        "hourly_rate": 26.0,
+        "total_cost": 3900.0
+      }
+    ]
+  }
+}
