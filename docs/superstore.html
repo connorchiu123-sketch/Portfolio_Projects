@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Superstore Project — Connor Chiu</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <nav>
+      <a class="brand" href="index.html">Connor Chiu</a>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a class="active" href="projects.html">Projects</a>
+        <a href="https://www.linkedin.com/in/connor-chiu-3b9094372/" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="case-hero">
+      <div class="wrap">
+        <a class="case-back" href="projects.html">&larr; Back to Projects</a>
+        <div class="top-row">
+          <span class="tag done">Completed</span>
+        </div>
+        <h1>&#128722; Superstore Project</h1>
+        <p class="lead">
+          An Excel workbook analysis of Tableau's classic Sample Superstore dataset
+          &mdash; 9,994 orders (2014&ndash;2017) across 4 regions, 3 product categories, and
+          17 sub-categories. Pivot tables dig into how discounting actually affects
+          profit, and the panels below are a Chart.js recreation of the workbook's own
+          Dashboard sheet, built directly off those same pivot tables.
+        </p>
+        <div class="stack">Excel &middot; Pivot Tables &middot; Chart.js</div>
+        <div class="case-links">
+          <a class="primary" href="../DataSets/Sample_Superstore.xlsx">Download Workbook</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section" style="padding-top: 24px; padding-bottom: 24px;">
+      <div class="wrap">
+        <div class="grid grid-4" id="superstore-kpis">
+          <div class="metric-box"><div class="val">&mdash;</div><div class="lbl">Total Sales</div></div>
+          <div class="metric-box"><div class="val">&mdash;</div><div class="lbl">Total Profit</div></div>
+          <div class="metric-box"><div class="val">&mdash;</div><div class="lbl">Total Discount $</div></div>
+          <div class="metric-box"><div class="val">&mdash;</div><div class="lbl">Overall Profit Margin</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <div class="wrap">
+        <span class="step">&#128202; Live Dashboard</span>
+        <h2>Where the Money Actually Goes</h2>
+        <p>
+          Sales climb steadily every year with a strong Q4 seasonal bump &mdash; but the
+          real story is discounting: orders discounted 20% or more lose money in every
+          single year of the dataset, while orders under 20% stay comfortably profitable.
+        </p>
+
+        <div class="grid grid-2">
+          <div class="chart-card chart-tall">
+            <h3>Sales Trend by Quarter</h3>
+            <div class="sub">Sum of Sales, 2014 Q1 &ndash; 2017 Q4</div>
+            <div class="chart-canvas-wrap"><canvas id="chart-sales-trend"></canvas></div>
+          </div>
+          <div class="chart-card chart-tall">
+            <h3>Profit by Category</h3>
+            <div class="sub">Sum of Profit</div>
+            <div class="chart-canvas-wrap"><canvas id="chart-profit-category"></canvas></div>
+          </div>
+        </div>
+
+        <div class="grid grid-2" style="margin-top: 20px;">
+          <div class="chart-card chart-tall">
+            <h3>Quantity Ordered by Discount Range</h3>
+            <div class="sub">Sum of Quantity, 0-20% vs. 20%+ discount</div>
+            <div class="chart-canvas-wrap"><canvas id="chart-quantity-discount"></canvas></div>
+          </div>
+          <div class="chart-card chart-tall">
+            <h3>Profit by Region Over Time</h3>
+            <div class="sub">Sum of Profit by region, by year</div>
+            <div class="chart-canvas-wrap"><canvas id="chart-profit-region"></canvas></div>
+          </div>
+        </div>
+
+        <div class="chart-card chart-tall" style="margin-top:20px;">
+          <h3>Profit Margin by Discount Range, by Year</h3>
+          <div class="sub">The core insight &mdash; 20%+ discounted orders run a negative margin every year</div>
+          <div class="chart-canvas-wrap"><canvas id="chart-profit-pct-discount"></canvas></div>
+        </div>
+
+        <div class="chart-card chart-tall" style="margin-top:20px;">
+          <h3>Sales vs. Discount $ by Year</h3>
+          <div class="sub">Sum of Sales and Sum of Discount $, by year</div>
+          <div class="chart-canvas-wrap"><canvas id="chart-sales-discount-year"></canvas></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section" style="border-bottom: 1px solid var(--border);">
+      <div class="wrap">
+        <a class="btn btn-blue" href="projects.html">&larr; Back to All Projects</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <span>&copy; 2026 Connor Chiu</span>
+      <div class="foot-links">
+        <a href="about.html">About</a>
+        <a href="projects.html">Projects</a>
+        <a href="https://www.linkedin.com/in/connor-chiu-3b9094372/" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+  <script src="assets/js/superstore-dashboard.js"></script>
+</body>
+</html>

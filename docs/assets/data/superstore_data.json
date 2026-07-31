@@ -1,0 +1,59 @@
+{
+  "meta": {
+    "source": "Sample_Superstore.xlsx (Tableau's classic Sample Superstore dataset)",
+    "note": "Pivot values taken directly from the workbook's Sales / Profit / Discount sheets, which feed the Dashboard sheet's charts.",
+    "order_rows": 9994,
+    "date_range": "2014-2017"
+  },
+  "kpis": {
+    "total_sales": 2297200.8603,
+    "total_profit": 286397.0217,
+    "total_discount_dollars": 322582.1343,
+    "profit_margin_pct": 0.1246721724
+  },
+  "sales_by_quarter": [
+    { "period": "2014 Q1", "sales": 74447.796 },
+    { "period": "2014 Q2", "sales": 86538.7596 },
+    { "period": "2014 Q3", "sales": 143633.2123 },
+    { "period": "2014 Q4", "sales": 179627.7302 },
+    { "period": "2015 Q1", "sales": 68851.7386 },
+    { "period": "2015 Q2", "sales": 89124.187 },
+    { "period": "2015 Q3", "sales": 130259.5752 },
+    { "period": "2015 Q4", "sales": 182297.0082 },
+    { "period": "2016 Q1", "sales": 93237.181 },
+    { "period": "2016 Q2", "sales": 136082.301 },
+    { "period": "2016 Q3", "sales": 143787.3622 },
+    { "period": "2016 Q4", "sales": 236098.7538 },
+    { "period": "2017 Q1", "sales": 123144.8602 },
+    { "period": "2017 Q2", "sales": 133764.372 },
+    { "period": "2017 Q3", "sales": 196251.956 },
+    { "period": "2017 Q4", "sales": 280054.067 }
+  ],
+  "profit_by_category": [
+    { "category": "Furniture", "profit": 18451.2728 },
+    { "category": "Office Supplies", "profit": 122490.8008 },
+    { "category": "Technology", "profit": 145454.9481 }
+  ],
+  "quantity_by_discount_range": [
+    { "range": "0-20% Discount", "quantity": 32498 },
+    { "range": "20%+ Discount", "quantity": 5375 }
+  ],
+  "profit_by_region_year": [
+    { "region": "Central", "2014": 539.5534, "2015": 11716.802, "2016": 19899.1629, "2017": 7550.8442 },
+    { "region": "East", "2014": 17059.6095, "2015": 21091.013, "2016": 20141.5961, "2017": 33230.5614 },
+    { "region": "South", "2014": 11879.12, "2015": 8318.594, "2016": 17702.8084, "2017": 8848.9079 },
+    { "region": "West", "2014": 20065.6912, "2015": 20492.1947, "2016": 24051.6069, "2017": 43808.9561 }
+  ],
+  "profit_pct_by_discount_range_year": [
+    { "year": "2014", "0-20% Discount": 0.2042203505, "20%+ Discount": -0.2688119637 },
+    { "year": "2015", "0-20% Discount": 0.2214338266, "20%+ Discount": -0.4439472002 },
+    { "year": "2016", "0-20% Discount": 0.2167228638, "20%+ Discount": -0.3600140664 },
+    { "year": "2017", "0-20% Discount": 0.225307078, "20%+ Discount": -0.4430795081 }
+  ],
+  "sales_and_discount_by_year": [
+    { "year": "2014", "sales": 484247.4981, "discount_dollars": 77556.7954 },
+    { "year": "2015", "sales": 470532.509, "discount_dollars": 62861.1853 },
+    { "year": "2016", "sales": 609205.598, "discount_dollars": 80911.5669 },
+    { "year": "2017", "sales": 733215.2552, "discount_dollars": 101252.5867 }
+  ]
+}
