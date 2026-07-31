@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Super Bowl Operations — Queries &amp; Dataset — Connor Chiu</title>
+  <title>Super Bowl Operations — Sample Queries — Connor Chiu</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -27,15 +27,15 @@
         <div class="top-row">
           <span class="tag progress">In Progress</span>
         </div>
-        <h1>&#128269; Super Bowl Operations &mdash; Queries &amp; Dataset</h1>
+        <h1>&#128269; Super Bowl Operations &mdash; Sample Queries</h1>
         <p class="lead">
           Fourteen T-SQL business questions run against the star schema, each one
-          mapped to the Power BI visual it feeds &mdash; plus the raw SQL Server
-          scripts and sample data behind the whole project.
+          mapped to the Power BI visual it feeds.
         </p>
         <div class="stack">SQL Server &middot; T-SQL</div>
         <div class="case-links">
           <a class="primary" href="super-bowl-schema.html">View Schema</a>
+          <a href="super-bowl-dataset.html">View Dataset</a>
           <a href="super-bowl-ops.html">View Dashboard</a>
         </div>
       </div>
@@ -224,48 +224,6 @@ ORDER BY variance_amount DESC;</code></pre>
     (SELECT SUM(gross_revenue) FROM fact_ticket_sales)
       + (SELECT SUM(revenue) FROM fact_concessions_sales)
       + (SELECT SUM(amount) FROM fact_sponsorship_revenue)             AS total_event_revenue;</code></pre>
-        </div>
-      </div>
-    </section>
-
-    <!-- =================================== DATASET ==================================== -->
-    <section class="case-section">
-      <div class="wrap">
-        <span class="step" style="color:#4ade80;">&#128190; Dataset</span>
-        <h2>Schema, Sample Data &amp; Downloads</h2>
-        <p>
-          The full SQL Server build &mdash; database creation, table definitions, and
-          ~450 rows of fabricated sample data across 8 dimension and 6 fact tables &mdash;
-          plus the JSON export that actually drives the live charts on this site.
-        </p>
-
-        <div class="grid grid-2">
-          <div class="chart-card">
-            <h3>01. Create Database</h3>
-            <div class="sub">Creates the SuperBowlOps database</div>
-            <a class="btn btn-blue" href="../DataSets/SuperBowlOps_01_create_database.sql">Download .sql</a>
-          </div>
-          <div class="chart-card">
-            <h3>02. Create Tables</h3>
-            <div class="sub">8 dimension tables + 6 fact tables, star schema</div>
-            <a class="btn btn-blue" href="../DataSets/SuperBowlOps_02_create_tables.sql">Download .sql</a>
-          </div>
-          <div class="chart-card">
-            <h3>03. Insert Sample Data</h3>
-            <div class="sub">The fabricated dataset itself &mdash; ~450 rows across all 14 tables</div>
-            <a class="btn btn-blue" href="../DataSets/SuperBowlOps_03_insert_sample_data.sql">Download .sql</a>
-          </div>
-          <div class="chart-card">
-            <h3>04. Sample Queries</h3>
-            <div class="sub">The 14 T-SQL questions above, as a runnable script</div>
-            <a class="btn btn-blue" href="../DataSets/SuperBowlOps_04_sample_queries.sql">Download .sql</a>
-          </div>
-        </div>
-
-        <div class="chart-card" style="margin-top:20px;">
-          <h3>Dashboard data (JSON)</h3>
-          <div class="sub">The raw row-level data behind the live Chart.js dashboard on this site &mdash; fetched client-side and aggregated in the browser</div>
-          <a class="btn btn-blue" href="assets/data/superbowl_data.json">View superbowl_data.json</a>
         </div>
       </div>
     </section>
