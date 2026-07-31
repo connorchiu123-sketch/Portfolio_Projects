@@ -514,6 +514,14 @@ table.data-table {
 .data-table th { color: #6b7690; font-weight: 600; font-size: 0.76rem; text-transform: uppercase; letter-spacing: 0.4px; }
 .data-table tr:hover td { background: rgba(255,255,255,0.02); }
 .table-scroll { overflow-x: auto; }
+.table-scroll-v { max-height: 420px; overflow-y: auto; }
+.table-scroll-v .data-table thead th {
+  position: sticky;
+  top: 0;
+  background: var(--surface);
+  box-shadow: 0 1px 0 var(--border);
+}
+.data-table caption { caption-side: top; text-align: left; color: #6b7690; font-size: 0.76rem; margin-bottom: 8px; }
 
 .sql-block {
   background: #0e1322;
