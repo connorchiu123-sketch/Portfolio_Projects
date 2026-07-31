@@ -1,0 +1,63 @@
+calendar_date,day_name,month_name,days_to_game,event_phase
+2026-12-16,Wednesday,December,60,Ticket Sales Window
+2026-12-17,Thursday,December,59,Ticket Sales Window
+2026-12-18,Friday,December,58,Ticket Sales Window
+2026-12-19,Saturday,December,57,Ticket Sales Window
+2026-12-20,Sunday,December,56,Ticket Sales Window
+2026-12-21,Monday,December,55,Ticket Sales Window
+2026-12-22,Tuesday,December,54,Ticket Sales Window
+2026-12-23,Wednesday,December,53,Ticket Sales Window
+2026-12-24,Thursday,December,52,Ticket Sales Window
+2026-12-25,Friday,December,51,Ticket Sales Window
+2026-12-26,Saturday,December,50,Ticket Sales Window
+2026-12-27,Sunday,December,49,Ticket Sales Window
+2026-12-28,Monday,December,48,Ticket Sales Window
+2026-12-29,Tuesday,December,47,Ticket Sales Window
+2026-12-30,Wednesday,December,46,Ticket Sales Window
+2026-12-31,Thursday,December,45,Ticket Sales Window
+2027-01-01,Friday,January,44,Ticket Sales Window
+2027-01-02,Saturday,January,43,Ticket Sales Window
+2027-01-03,Sunday,January,42,Ticket Sales Window
+2027-01-04,Monday,January,41,Ticket Sales Window
+2027-01-05,Tuesday,January,40,Ticket Sales Window
+2027-01-06,Wednesday,January,39,Ticket Sales Window
+2027-01-07,Thursday,January,38,Ticket Sales Window
+2027-01-08,Friday,January,37,Ticket Sales Window
+2027-01-09,Saturday,January,36,Ticket Sales Window
+2027-01-10,Sunday,January,35,Ticket Sales Window
+2027-01-11,Monday,January,34,Ticket Sales Window
+2027-01-12,Tuesday,January,33,Ticket Sales Window
+2027-01-13,Wednesday,January,32,Ticket Sales Window
+2027-01-14,Thursday,January,31,Ticket Sales Window
+2027-01-15,Friday,January,30,Ticket Sales Window
+2027-01-16,Saturday,January,29,Ticket Sales Window
+2027-01-17,Sunday,January,28,Ticket Sales Window
+2027-01-18,Monday,January,27,Ticket Sales Window
+2027-01-19,Tuesday,January,26,Ticket Sales Window
+2027-01-20,Wednesday,January,25,Ticket Sales Window
+2027-01-21,Thursday,January,24,Ticket Sales Window
+2027-01-22,Friday,January,23,Ticket Sales Window
+2027-01-23,Saturday,January,22,Ticket Sales Window
+2027-01-24,Sunday,January,21,Ticket Sales Window
+2027-01-25,Monday,January,20,Ticket Sales Window
+2027-01-26,Tuesday,January,19,Ticket Sales Window
+2027-01-27,Wednesday,January,18,Ticket Sales Window
+2027-01-28,Thursday,January,17,Ticket Sales Window
+2027-01-29,Friday,January,16,Ticket Sales Window
+2027-01-30,Saturday,January,15,Ticket Sales Window
+2027-01-31,Sunday,January,14,Ticket Sales Window
+2027-02-01,Monday,February,13,Ticket Sales Window
+2027-02-02,Tuesday,February,12,Ticket Sales Window
+2027-02-03,Wednesday,February,11,Ticket Sales Window
+2027-02-04,Thursday,February,10,Ticket Sales Window
+2027-02-05,Friday,February,9,Ticket Sales Window
+2027-02-06,Saturday,February,8,Ticket Sales Window
+2027-02-07,Sunday,February,7,Ticket Sales Window
+2027-02-08,Monday,February,6,Ticket Sales Window
+2027-02-09,Tuesday,February,5,Ticket Sales Window
+2027-02-10,Wednesday,February,4,Ticket Sales Window
+2027-02-11,Thursday,February,3,Ticket Sales Window
+2027-02-12,Friday,February,2,Setup
+2027-02-13,Saturday,February,1,Setup
+2027-02-14,Sunday,February,0,Game Day
+2027-02-15,Monday,February,-1,Teardown

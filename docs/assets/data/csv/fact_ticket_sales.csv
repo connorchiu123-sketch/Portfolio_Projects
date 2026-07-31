@@ -1,0 +1,419 @@
+tier,channel,days_to_game,quantity_sold,unit_price,gross_revenue
+Upper Bowl,Season Ticket Holder Allocation,50,191,940.5,179635.5
+Lower Bowl,Season Ticket Holder Allocation,50,200,2424.0,484800.0
+Club Level,Season Ticket Holder Allocation,50,156,4752.0,741312.0
+Upper Bowl,Season Ticket Holder Allocation,51,218,940.5,205029.0
+Lower Bowl,Season Ticket Holder Allocation,51,196,2424.0,475104.0
+Club Level,Season Ticket Holder Allocation,51,157,4848.0,761136.0
+Upper Bowl,Season Ticket Holder Allocation,52,177,940.5,166468.5
+Lower Bowl,Season Ticket Holder Allocation,52,161,2400.0,386400.0
+Club Level,Season Ticket Holder Allocation,52,203,4752.0,964656.0
+Upper Bowl,Season Ticket Holder Allocation,53,180,940.5,169290.0
+Lower Bowl,Season Ticket Holder Allocation,53,220,2400.0,528000.0
+Club Level,Season Ticket Holder Allocation,53,157,4848.0,761136.0
+Upper Bowl,Season Ticket Holder Allocation,54,165,940.5,155182.5
+Lower Bowl,Season Ticket Holder Allocation,54,230,2424.0,557520.0
+Club Level,Season Ticket Holder Allocation,54,224,4752.0,1064448.0
+Upper Bowl,Season Ticket Holder Allocation,55,223,959.5,213968.5
+Lower Bowl,Season Ticket Holder Allocation,55,200,2376.0,475200.0
+Club Level,Season Ticket Holder Allocation,55,178,4752.0,845856.0
+Upper Bowl,Season Ticket Holder Allocation,56,221,940.5,207850.5
+Lower Bowl,Season Ticket Holder Allocation,56,187,2400.0,448800.0
+Club Level,Season Ticket Holder Allocation,56,168,4848.0,814464.0
+Upper Bowl,Season Ticket Holder Allocation,57,165,959.5,158317.5
+Lower Bowl,Season Ticket Holder Allocation,57,189,2424.0,458136.0
+Club Level,Season Ticket Holder Allocation,57,237,4752.0,1126224.0
+Upper Bowl,Season Ticket Holder Allocation,58,163,959.5,156398.5
+Lower Bowl,Season Ticket Holder Allocation,58,223,2424.0,540552.0
+Club Level,Season Ticket Holder Allocation,58,174,4800.0,835200.0
+Upper Bowl,Public On-Sale,5,176,1007.48,177316.48
+Lower Bowl,Public On-Sale,5,174,2545.2,442864.8
+Standing Room / Party Deck,Public On-Sale,5,173,689.33,119254.09
+Upper Bowl,Public On-Sale,6,180,997.5,179550.0
+Lower Bowl,Public On-Sale,6,201,2520.0,506520.0
+Standing Room / Party Deck,Public On-Sale,6,187,682.5,127627.5
+Upper Bowl,Public On-Sale,7,201,997.5,200497.5
+Lower Bowl,Public On-Sale,7,187,2494.8,466527.6
+Standing Room / Party Deck,Public On-Sale,7,179,702.98,125833.42
+Upper Bowl,Public On-Sale,8,172,1017.45,175001.4
+Lower Bowl,Public On-Sale,8,176,2444.4,430214.4
+Standing Room / Party Deck,Public On-Sale,8,197,675.67,133106.99
+Upper Bowl,Public On-Sale,9,191,997.5,190522.5
+Lower Bowl,Public On-Sale,9,179,2570.4,460101.6
+Standing Room / Party Deck,Public On-Sale,9,186,675.67,125674.62
+Upper Bowl,Public On-Sale,10,193,967.57,186741.01
+Lower Bowl,Public On-Sale,10,162,2545.2,412322.4
+Standing Room / Party Deck,Public On-Sale,10,181,668.85,121061.85
+Upper Bowl,Public On-Sale,11,173,977.55,169116.15
+Lower Bowl,Public On-Sale,11,183,2520.0,461160.0
+Standing Room / Party Deck,Public On-Sale,11,154,696.15,107207.1
+Upper Bowl,Public On-Sale,12,153,1027.42,157195.26
+Lower Bowl,Public On-Sale,12,184,2545.2,468316.8
+Standing Room / Party Deck,Public On-Sale,12,169,675.67,114188.23
+Upper Bowl,Public On-Sale,13,168,1007.48,169256.64
+Lower Bowl,Public On-Sale,13,177,2545.2,450500.4
+Standing Room / Party Deck,Public On-Sale,13,175,662.02,115853.5
+Upper Bowl,Public On-Sale,14,148,987.52,146152.96
+Lower Bowl,Public On-Sale,14,173,2570.4,444679.2
+Standing Room / Party Deck,Public On-Sale,14,147,662.02,97316.94
+Upper Bowl,Public On-Sale,15,159,1017.45,161774.55
+Lower Bowl,Public On-Sale,15,176,2570.4,452390.4
+Standing Room / Party Deck,Public On-Sale,15,168,675.67,113512.56
+Upper Bowl,Public On-Sale,16,161,1017.45,163809.45
+Lower Bowl,Public On-Sale,16,159,2444.4,388659.6
+Standing Room / Party Deck,Public On-Sale,16,166,675.67,112161.22
+Upper Bowl,Public On-Sale,17,144,1007.48,145077.12
+Lower Bowl,Public On-Sale,17,141,2520.0,355320.0
+Standing Room / Party Deck,Public On-Sale,17,137,668.85,91632.45
+Upper Bowl,Public On-Sale,18,149,977.55,145654.95
+Lower Bowl,Public On-Sale,18,146,2520.0,367920.0
+Standing Room / Party Deck,Public On-Sale,18,156,702.98,109664.88
+Upper Bowl,Public On-Sale,19,159,967.57,153843.63
+Lower Bowl,Public On-Sale,19,138,2520.0,347760.0
+Standing Room / Party Deck,Public On-Sale,19,153,689.33,105467.49
+Upper Bowl,Public On-Sale,20,142,977.55,138812.1
+Lower Bowl,Public On-Sale,20,152,2595.6,394531.2
+Standing Room / Party Deck,Public On-Sale,20,160,675.67,108107.2
+Upper Bowl,Public On-Sale,21,148,987.52,146152.96
+Lower Bowl,Public On-Sale,21,146,2469.6,360561.6
+Standing Room / Party Deck,Public On-Sale,21,131,662.02,86724.62
+Upper Bowl,Public On-Sale,22,130,977.55,127081.5
+Lower Bowl,Public On-Sale,22,133,2570.4,341863.2
+Standing Room / Party Deck,Public On-Sale,22,133,662.02,88048.66
+Upper Bowl,Public On-Sale,23,147,1027.42,151030.74
+Lower Bowl,Public On-Sale,23,153,2469.6,377848.8
+Standing Room / Party Deck,Public On-Sale,23,132,675.67,89188.44
+Upper Bowl,Public On-Sale,24,113,977.55,110463.15
+Lower Bowl,Public On-Sale,24,139,2545.2,353782.8
+Standing Room / Party Deck,Public On-Sale,24,136,689.33,93748.88
+Upper Bowl,Public On-Sale,25,146,987.52,144177.92
+Lower Bowl,Public On-Sale,25,118,2570.4,303307.2
+Standing Room / Party Deck,Public On-Sale,25,142,689.33,97884.86
+Upper Bowl,Public On-Sale,26,110,997.5,109725.0
+Lower Bowl,Public On-Sale,26,142,2520.0,357840.0
+Standing Room / Party Deck,Public On-Sale,26,132,682.5,90090.0
+Upper Bowl,Public On-Sale,27,129,967.57,124816.53
+Lower Bowl,Public On-Sale,27,134,2570.4,344433.6
+Standing Room / Party Deck,Public On-Sale,27,129,662.02,85400.58
+Upper Bowl,Public On-Sale,28,113,967.57,109335.41
+Lower Bowl,Public On-Sale,28,114,2520.0,287280.0
+Standing Room / Party Deck,Public On-Sale,28,111,662.02,73484.22
+Upper Bowl,Public On-Sale,29,119,1007.48,119890.12
+Lower Bowl,Public On-Sale,29,101,2444.4,246884.4
+Standing Room / Party Deck,Public On-Sale,29,98,689.33,67554.34
+Upper Bowl,Public On-Sale,30,104,1007.48,104777.92
+Lower Bowl,Public On-Sale,30,101,2494.8,251974.8
+Standing Room / Party Deck,Public On-Sale,30,134,662.02,88710.68
+Upper Bowl,Public On-Sale,31,96,1027.42,98632.32
+Lower Bowl,Public On-Sale,31,105,2545.2,267246.0
+Standing Room / Party Deck,Public On-Sale,31,116,668.85,77586.6
+Upper Bowl,Public On-Sale,32,105,987.52,103689.6
+Lower Bowl,Public On-Sale,32,127,2494.8,316839.6
+Standing Room / Party Deck,Public On-Sale,32,119,662.02,78780.38
+Upper Bowl,Public On-Sale,33,93,1027.42,95550.06
+Lower Bowl,Public On-Sale,33,117,2520.0,294840.0
+Standing Room / Party Deck,Public On-Sale,33,116,682.5,79170.0
+Upper Bowl,Public On-Sale,34,102,967.57,98692.14
+Lower Bowl,Public On-Sale,34,92,2444.4,224884.8
+Standing Room / Party Deck,Public On-Sale,34,104,696.15,72399.6
+Upper Bowl,Public On-Sale,35,96,997.5,95760.0
+Lower Bowl,Public On-Sale,35,90,2545.2,229068.0
+Standing Room / Party Deck,Public On-Sale,35,81,668.85,54176.85
+Upper Bowl,Public On-Sale,36,110,987.52,108627.2
+Lower Bowl,Public On-Sale,36,86,2570.4,221054.4
+Standing Room / Party Deck,Public On-Sale,36,111,662.02,73484.22
+Upper Bowl,Public On-Sale,37,107,987.52,105664.64
+Lower Bowl,Public On-Sale,37,79,2570.4,203061.6
+Standing Room / Party Deck,Public On-Sale,37,90,689.33,62039.7
+Upper Bowl,Public On-Sale,38,94,977.55,91889.7
+Lower Bowl,Public On-Sale,38,93,2595.6,241390.8
+Standing Room / Party Deck,Public On-Sale,38,85,689.33,58593.05
+Upper Bowl,Public On-Sale,39,102,1027.42,104796.84
+Lower Bowl,Public On-Sale,39,100,2494.8,249480.0
+Standing Room / Party Deck,Public On-Sale,39,82,689.33,56525.06
+Upper Bowl,Public On-Sale,40,77,1027.42,79111.34
+Lower Bowl,Public On-Sale,40,80,2595.6,207648.0
+Standing Room / Party Deck,Public On-Sale,40,90,696.15,62653.5
+Upper Bowl,Public On-Sale,41,76,977.55,74293.8
+Lower Bowl,Public On-Sale,41,95,2520.0,239400.0
+Standing Room / Party Deck,Public On-Sale,41,84,696.15,58476.6
+Upper Bowl,Public On-Sale,42,60,967.57,58054.2
+Lower Bowl,Public On-Sale,42,76,2520.0,191520.0
+Standing Room / Party Deck,Public On-Sale,42,75,668.85,50163.75
+Upper Bowl,Public On-Sale,43,94,987.52,92826.88
+Lower Bowl,Public On-Sale,43,84,2595.6,218030.4
+Standing Room / Party Deck,Public On-Sale,43,78,675.67,52702.26
+Upper Bowl,Public On-Sale,44,58,977.55,56697.9
+Lower Bowl,Public On-Sale,44,59,2469.6,145706.4
+Standing Room / Party Deck,Public On-Sale,44,83,668.85,55514.55
+Upper Bowl,Public On-Sale,45,71,977.55,69406.05
+Lower Bowl,Public On-Sale,45,80,2545.2,203616.0
+Standing Room / Party Deck,Public On-Sale,45,89,702.98,62565.22
+Upper Bowl,Public On-Sale,46,47,997.5,46882.5
+Lower Bowl,Public On-Sale,46,69,2595.6,179096.4
+Standing Room / Party Deck,Public On-Sale,46,52,702.98,36554.96
+Upper Bowl,Public On-Sale,47,51,997.5,50872.5
+Lower Bowl,Public On-Sale,47,56,2520.0,141120.0
+Standing Room / Party Deck,Public On-Sale,47,55,682.5,37537.5
+Upper Bowl,Public On-Sale,48,62,967.57,59989.34
+Lower Bowl,Public On-Sale,48,66,2520.0,166320.0
+Standing Room / Party Deck,Public On-Sale,48,66,696.15,45945.9
+Upper Bowl,Public On-Sale,49,43,1017.45,43750.35
+Lower Bowl,Public On-Sale,49,48,2469.6,118540.8
+Standing Room / Party Deck,Public On-Sale,49,46,662.02,30452.92
+Upper Bowl,Public On-Sale,50,44,1007.48,44329.12
+Lower Bowl,Public On-Sale,50,64,2595.6,166118.4
+Standing Room / Party Deck,Public On-Sale,50,44,689.33,30330.52
+Upper Bowl,Public On-Sale,51,70,997.5,69825.0
+Lower Bowl,Public On-Sale,51,54,2469.6,133358.4
+Standing Room / Party Deck,Public On-Sale,51,67,689.33,46185.11
+Upper Bowl,Public On-Sale,52,37,967.57,35800.09
+Lower Bowl,Public On-Sale,52,29,2595.6,75272.4
+Standing Room / Party Deck,Public On-Sale,52,35,689.33,24126.55
+Upper Bowl,Public On-Sale,53,34,997.5,33915.0
+Lower Bowl,Public On-Sale,53,38,2595.6,98632.8
+Standing Room / Party Deck,Public On-Sale,53,39,662.02,25818.78
+Upper Bowl,Public On-Sale,54,39,977.55,38124.45
+Lower Bowl,Public On-Sale,54,41,2545.2,104353.2
+Standing Room / Party Deck,Public On-Sale,54,38,702.98,26713.24
+Upper Bowl,Public On-Sale,55,57,987.52,56288.64
+Lower Bowl,Public On-Sale,55,36,2545.2,91627.2
+Standing Room / Party Deck,Public On-Sale,55,46,702.98,32337.08
+Club Level,Corporate Hospitality Package,10,9,6156.0,55404.0
+Suite Package (per seat),Corporate Hospitality Package,10,16,13979.25,223668.0
+Club Level,Corporate Hospitality Package,11,19,6804.0,129276.0
+Suite Package (per seat),Corporate Hospitality Package,11,23,13851.0,318573.0
+Club Level,Corporate Hospitality Package,12,21,6544.8,137440.8
+Suite Package (per seat),Corporate Hospitality Package,12,21,12440.25,261245.25
+Club Level,Corporate Hospitality Package,13,22,6285.6,138283.2
+Suite Package (per seat),Corporate Hospitality Package,13,21,13209.75,277404.75
+Club Level,Corporate Hospitality Package,14,5,6998.4,34992.0
+Suite Package (per seat),Corporate Hospitality Package,14,19,13722.75,260732.25
+Club Level,Corporate Hospitality Package,15,10,6739.2,67392.0
+Suite Package (per seat),Corporate Hospitality Package,15,5,13722.75,68613.75
+Club Level,Corporate Hospitality Package,16,9,6285.6,56570.4
+Suite Package (per seat),Corporate Hospitality Package,16,9,13081.5,117733.5
+Club Level,Corporate Hospitality Package,17,24,6868.8,164851.2
+Suite Package (per seat),Corporate Hospitality Package,17,8,13209.75,105678.0
+Club Level,Corporate Hospitality Package,18,6,6480.0,38880.0
+Suite Package (per seat),Corporate Hospitality Package,18,21,13209.75,277404.75
+Club Level,Corporate Hospitality Package,19,22,6609.6,145411.2
+Suite Package (per seat),Corporate Hospitality Package,19,8,13979.25,111834.0
+Club Level,Corporate Hospitality Package,20,22,6156.0,135432.0
+Suite Package (per seat),Corporate Hospitality Package,20,12,12568.5,150822.0
+Club Level,Corporate Hospitality Package,21,13,6156.0,80028.0
+Suite Package (per seat),Corporate Hospitality Package,21,8,13209.75,105678.0
+Club Level,Corporate Hospitality Package,22,19,6674.4,126813.6
+Suite Package (per seat),Corporate Hospitality Package,22,5,13722.75,68613.75
+Club Level,Corporate Hospitality Package,23,7,6609.6,46267.2
+Suite Package (per seat),Corporate Hospitality Package,23,15,13338.0,200070.0
+Club Level,Corporate Hospitality Package,24,21,6739.2,141523.2
+Suite Package (per seat),Corporate Hospitality Package,24,21,12568.5,263938.5
+Club Level,Corporate Hospitality Package,25,13,6609.6,85924.8
+Suite Package (per seat),Corporate Hospitality Package,25,21,13209.75,277404.75
+Club Level,Corporate Hospitality Package,26,20,6674.4,133488.0
+Suite Package (per seat),Corporate Hospitality Package,26,12,13594.5,163134.0
+Club Level,Corporate Hospitality Package,27,21,7063.2,148327.2
+Suite Package (per seat),Corporate Hospitality Package,27,13,13979.25,181730.25
+Club Level,Corporate Hospitality Package,28,22,7063.2,155390.4
+Suite Package (per seat),Corporate Hospitality Package,28,11,13851.0,152361.0
+Club Level,Corporate Hospitality Package,29,19,6285.6,119426.4
+Suite Package (per seat),Corporate Hospitality Package,29,18,12312.0,221616.0
+Club Level,Corporate Hospitality Package,30,17,6609.6,112363.2
+Suite Package (per seat),Corporate Hospitality Package,30,15,12312.0,184680.0
+Club Level,Corporate Hospitality Package,31,12,6544.8,78537.6
+Suite Package (per seat),Corporate Hospitality Package,31,7,12568.5,87979.5
+Club Level,Corporate Hospitality Package,32,14,6933.6,97070.4
+Suite Package (per seat),Corporate Hospitality Package,32,8,13979.25,111834.0
+Club Level,Corporate Hospitality Package,33,9,6868.8,61819.2
+Suite Package (per seat),Corporate Hospitality Package,33,16,12440.25,199044.0
+Club Level,Corporate Hospitality Package,34,13,7063.2,91821.6
+Suite Package (per seat),Corporate Hospitality Package,34,9,13081.5,117733.5
+Club Level,Corporate Hospitality Package,35,12,6868.8,82425.6
+Suite Package (per seat),Corporate Hospitality Package,35,8,12953.25,103626.0
+Club Level,Corporate Hospitality Package,36,20,6285.6,125712.0
+Suite Package (per seat),Corporate Hospitality Package,36,12,12440.25,149283.0
+Club Level,Corporate Hospitality Package,37,18,6674.4,120139.2
+Suite Package (per seat),Corporate Hospitality Package,37,17,12825.0,218025.0
+Club Level,Corporate Hospitality Package,38,18,6350.4,114307.2
+Suite Package (per seat),Corporate Hospitality Package,38,16,12825.0,205200.0
+Club Level,Corporate Hospitality Package,39,7,6868.8,48081.6
+Suite Package (per seat),Corporate Hospitality Package,39,16,12183.75,194940.0
+Club Level,Corporate Hospitality Package,40,15,6674.4,100116.0
+Suite Package (per seat),Corporate Hospitality Package,40,19,13081.5,248548.5
+Club Level,Corporate Hospitality Package,41,5,6544.8,32724.0
+Suite Package (per seat),Corporate Hospitality Package,41,15,13209.75,198146.25
+Club Level,Corporate Hospitality Package,42,24,6415.2,153964.8
+Suite Package (per seat),Corporate Hospitality Package,42,21,12312.0,258552.0
+Club Level,Corporate Hospitality Package,43,8,7063.2,56505.6
+Suite Package (per seat),Corporate Hospitality Package,43,12,13979.25,167751.0
+Club Level,Corporate Hospitality Package,44,8,6220.8,49766.4
+Suite Package (per seat),Corporate Hospitality Package,44,13,12696.75,165057.75
+Club Level,Corporate Hospitality Package,45,6,7063.2,42379.2
+Suite Package (per seat),Corporate Hospitality Package,45,10,12696.75,126967.5
+Club Level,Corporate Hospitality Package,46,9,6998.4,62985.6
+Suite Package (per seat),Corporate Hospitality Package,46,18,13851.0,249318.0
+Club Level,Corporate Hospitality Package,47,13,6544.8,85082.4
+Suite Package (per seat),Corporate Hospitality Package,47,9,13209.75,118887.75
+Club Level,Corporate Hospitality Package,48,21,6739.2,141523.2
+Suite Package (per seat),Corporate Hospitality Package,48,20,13594.5,271890.0
+Club Level,Corporate Hospitality Package,49,15,6220.8,93312.0
+Suite Package (per seat),Corporate Hospitality Package,49,13,12183.75,158388.75
+Club Level,Corporate Hospitality Package,50,10,6544.8,65448.0
+Suite Package (per seat),Corporate Hospitality Package,50,7,12696.75,88877.25
+Club Level,Corporate Hospitality Package,51,5,6804.0,34020.0
+Suite Package (per seat),Corporate Hospitality Package,51,7,13722.75,96059.25
+Club Level,Corporate Hospitality Package,52,13,6220.8,80870.4
+Suite Package (per seat),Corporate Hospitality Package,52,24,13851.0,332424.0
+Club Level,Corporate Hospitality Package,53,12,6220.8,74649.6
+Suite Package (per seat),Corporate Hospitality Package,53,13,13851.0,180063.0
+Club Level,Corporate Hospitality Package,54,8,6609.6,52876.8
+Suite Package (per seat),Corporate Hospitality Package,54,5,12825.0,64125.0
+Club Level,Corporate Hospitality Package,55,22,6544.8,143985.6
+Suite Package (per seat),Corporate Hospitality Package,55,13,13338.0,173394.0
+Club Level,Corporate Hospitality Package,56,9,6156.0,55404.0
+Suite Package (per seat),Corporate Hospitality Package,56,21,13594.5,285484.5
+Club Level,Corporate Hospitality Package,57,12,6220.8,74649.6
+Suite Package (per seat),Corporate Hospitality Package,57,10,12696.75,126967.5
+Club Level,Corporate Hospitality Package,58,6,6285.6,37713.6
+Suite Package (per seat),Corporate Hospitality Package,58,11,13979.25,153771.75
+Upper Bowl,Ticket Exchange / Resale,3,7,1977.81,13844.67
+Lower Bowl,Ticket Exchange / Resale,3,11,4721.52,51936.72
+Club Level,Ticket Exchange / Resale,3,7,10818.24,75727.68
+Suite Package (per seat),Ticket Exchange / Resale,3,11,18326.45,201590.95
+Standing Room / Party Deck,Ticket Exchange / Resale,3,7,1390.48,9733.36
+Upper Bowl,Ticket Exchange / Resale,4,15,1625.26,24378.9
+Lower Bowl,Ticket Exchange / Resale,4,7,4151.04,29057.28
+Club Level,Ticket Exchange / Resale,4,3,8211.84,24635.52
+Suite Package (per seat),Ticket Exchange / Resale,4,14,21789.2,305048.8
+Standing Room / Party Deck,Ticket Exchange / Resale,4,11,1246.44,13710.84
+Upper Bowl,Ticket Exchange / Resale,5,11,2109.0,23199.0
+Lower Bowl,Ticket Exchange / Resale,5,6,5239.2,31435.2
+Club Level,Ticket Exchange / Resale,5,4,10389.6,41558.4
+Suite Package (per seat),Ticket Exchange / Resale,5,13,21265.75,276454.75
+Standing Room / Party Deck,Ticket Exchange / Resale,5,11,1382.88,15211.68
+Upper Bowl,Ticket Exchange / Resale,6,11,1884.61,20730.71
+Lower Bowl,Ticket Exchange / Resale,6,14,4499.04,62986.56
+Club Level,Ticket Exchange / Resale,6,6,9696.96,58181.76
+Suite Package (per seat),Ticket Exchange / Resale,6,6,16944.2,101665.2
+Standing Room / Party Deck,Ticket Exchange / Resale,6,9,1324.96,11924.64
+Upper Bowl,Ticket Exchange / Resale,7,3,1666.49,4999.47
+Lower Bowl,Ticket Exchange / Resale,7,3,4038.24,12114.72
+Club Level,Ticket Exchange / Resale,7,13,9107.52,118397.76
+Suite Package (per seat),Ticket Exchange / Resale,7,9,17005.0,153045.0
+Standing Room / Party Deck,Ticket Exchange / Resale,7,3,1105.33,3315.99
+Upper Bowl,Ticket Exchange / Resale,8,13,1906.08,24779.04
+Lower Bowl,Ticket Exchange / Resale,8,16,5153.28,82452.48
+Club Level,Ticket Exchange / Resale,8,13,9123.84,118609.92
+Suite Package (per seat),Ticket Exchange / Resale,8,12,17556.0,210672.0
+Standing Room / Party Deck,Ticket Exchange / Resale,8,14,1235.52,17297.28
+Upper Bowl,Ticket Exchange / Resale,9,3,1955.76,5867.28
+Lower Bowl,Ticket Exchange / Resale,9,5,4152.0,20760.0
+Club Level,Ticket Exchange / Resale,9,7,9798.72,68591.04
+Suite Package (per seat),Ticket Exchange / Resale,9,3,17421.1,52263.3
+Standing Room / Party Deck,Ticket Exchange / Resale,9,8,1248.2,9985.6
+Upper Bowl,Ticket Exchange / Resale,10,11,1776.5,19541.5
+Lower Bowl,Ticket Exchange / Resale,10,6,3753.6,22521.6
+Club Level,Ticket Exchange / Resale,10,17,8894.4,151204.8
+Suite Package (per seat),Ticket Exchange / Resale,10,6,18088.0,108528.0
+Standing Room / Party Deck,Ticket Exchange / Resale,10,5,994.5,4972.5
+Upper Bowl,Ticket Exchange / Resale,11,8,1808.61,14468.88
+Lower Bowl,Ticket Exchange / Resale,11,4,4809.6,19238.4
+Club Level,Ticket Exchange / Resale,11,7,9779.52,68456.64
+Suite Package (per seat),Ticket Exchange / Resale,11,13,16182.3,210369.9
+Standing Room / Party Deck,Ticket Exchange / Resale,11,6,1324.31,7945.86
+Upper Bowl,Ticket Exchange / Resale,12,15,1402.2,21033.0
+Lower Bowl,Ticket Exchange / Resale,12,4,4172.16,16688.64
+Club Level,Ticket Exchange / Resale,12,16,7478.4,119654.4
+Suite Package (per seat),Ticket Exchange / Resale,12,5,17917.0,89585.0
+Standing Room / Party Deck,Ticket Exchange / Resale,12,12,980.72,11768.64
+Upper Bowl,Ticket Exchange / Resale,13,9,1391.85,12526.65
+Lower Bowl,Ticket Exchange / Resale,13,7,4211.76,29482.32
+Club Level,Ticket Exchange / Resale,13,13,8037.12,104482.56
+Suite Package (per seat),Ticket Exchange / Resale,13,4,19424.65,77698.6
+Standing Room / Party Deck,Ticket Exchange / Resale,13,11,1036.04,11396.44
+Upper Bowl,Ticket Exchange / Resale,14,13,1921.28,24976.64
+Lower Bowl,Ticket Exchange / Resale,14,9,4171.2,37540.8
+Club Level,Ticket Exchange / Resale,14,14,9176.64,128472.96
+Suite Package (per seat),Ticket Exchange / Resale,14,5,16210.8,81054.0
+Standing Room / Party Deck,Ticket Exchange / Resale,14,14,1324.83,18547.62
+Upper Bowl,Ticket Exchange / Resale,15,13,1457.78,18951.14
+Lower Bowl,Ticket Exchange / Resale,15,3,4538.4,13615.2
+Club Level,Ticket Exchange / Resale,15,13,8704.8,113162.4
+Suite Package (per seat),Ticket Exchange / Resale,15,14,17964.5,251503.0
+Standing Room / Party Deck,Ticket Exchange / Resale,15,5,1239.22,6196.1
+Upper Bowl,Ticket Exchange / Resale,16,15,1761.68,26425.2
+Lower Bowl,Ticket Exchange / Resale,16,12,3319.68,39836.16
+Club Level,Ticket Exchange / Resale,16,16,9265.92,148254.72
+Suite Package (per seat),Ticket Exchange / Resale,16,15,15017.6,225264.0
+Standing Room / Party Deck,Ticket Exchange / Resale,16,4,899.08,3596.32
+Upper Bowl,Ticket Exchange / Resale,17,3,1387.19,4161.57
+Lower Bowl,Ticket Exchange / Resale,17,13,4040.88,52531.44
+Club Level,Ticket Exchange / Resale,17,4,8153.28,32613.12
+Suite Package (per seat),Ticket Exchange / Resale,17,16,16702.9,267246.4
+Standing Room / Party Deck,Ticket Exchange / Resale,17,11,900.71,9907.81
+Upper Bowl,Ticket Exchange / Resale,18,13,1262.17,16408.21
+Lower Bowl,Ticket Exchange / Resale,18,13,4344.96,56484.48
+Club Level,Ticket Exchange / Resale,18,13,7358.4,95659.2
+Suite Package (per seat),Ticket Exchange / Resale,18,10,14702.2,147022.0
+Standing Room / Party Deck,Ticket Exchange / Resale,18,3,1129.31,3387.93
+Upper Bowl,Ticket Exchange / Resale,19,15,1276.99,19154.85
+Lower Bowl,Ticket Exchange / Resale,19,14,4187.04,58618.56
+Club Level,Ticket Exchange / Resale,19,17,8511.36,144693.12
+Suite Package (per seat),Ticket Exchange / Resale,19,4,16709.55,66838.2
+Standing Room / Party Deck,Ticket Exchange / Resale,19,4,1115.4,4461.6
+Upper Bowl,Ticket Exchange / Resale,20,7,1250.2,8751.4
+Lower Bowl,Ticket Exchange / Resale,20,16,3561.6,56985.6
+Club Level,Ticket Exchange / Resale,20,6,6921.6,41529.6
+Suite Package (per seat),Ticket Exchange / Resale,20,6,15827.0,94962.0
+Standing Room / Party Deck,Ticket Exchange / Resale,20,10,1037.4,10374.0
+Upper Bowl,Ticket Exchange / Resale,21,4,1561.8,6247.2
+Lower Bowl,Ticket Exchange / Resale,21,17,3551.04,60367.68
+Club Level,Ticket Exchange / Resale,21,15,6049.92,90748.8
+Suite Package (per seat),Ticket Exchange / Resale,21,12,13275.3,159303.6
+Standing Room / Party Deck,Ticket Exchange / Resale,21,4,1139.84,4559.36
+Upper Bowl,Ticket Exchange / Resale,22,5,1413.03,7065.15
+Lower Bowl,Ticket Exchange / Resale,22,7,3505.44,24538.08
+Club Level,Ticket Exchange / Resale,22,12,8104.32,97251.84
+Suite Package (per seat),Ticket Exchange / Resale,22,5,11457.0,57285.0
+Standing Room / Party Deck,Ticket Exchange / Resale,22,10,810.03,8100.3
+Upper Bowl,Ticket Exchange / Resale,23,10,1331.62,13316.2
+Lower Bowl,Ticket Exchange / Resale,23,13,3018.24,39237.12
+Club Level,Ticket Exchange / Resale,23,14,6476.64,90672.96
+Suite Package (per seat),Ticket Exchange / Resale,23,13,15058.45,195759.85
+Standing Room / Party Deck,Ticket Exchange / Resale,23,7,1047.35,7331.45
+Upper Bowl,Ticket Exchange / Resale,24,7,1447.04,10129.28
+Lower Bowl,Ticket Exchange / Resale,24,10,3655.68,36556.8
+Club Level,Ticket Exchange / Resale,24,15,5959.68,89395.2
+Suite Package (per seat),Ticket Exchange / Resale,24,17,15200.0,258400.0
+Standing Room / Party Deck,Ticket Exchange / Resale,24,6,906.88,5441.28
+Upper Bowl,Ticket Exchange / Resale,25,4,1425.0,5700.0
+Lower Bowl,Ticket Exchange / Resale,25,3,3240.0,9720.0
+Club Level,Ticket Exchange / Resale,25,10,5640.0,56400.0
+Suite Package (per seat),Ticket Exchange / Resale,25,16,14487.5,231800.0
+Standing Room / Party Deck,Ticket Exchange / Resale,25,10,869.38,8693.8
+Upper Bowl,Ticket Exchange / Resale,26,9,1193.77,10743.93
+Lower Bowl,Ticket Exchange / Resale,26,17,3015.84,51269.28
+Club Level,Ticket Exchange / Resale,26,4,7437.12,29748.48
+Suite Package (per seat),Ticket Exchange / Resale,26,4,11474.1,45896.4
+Standing Room / Party Deck,Ticket Exchange / Resale,26,14,975.39,13655.46
+Upper Bowl,Ticket Exchange / Resale,27,7,1277.47,8942.29
+Lower Bowl,Ticket Exchange / Resale,27,5,3655.68,18278.4
+Club Level,Ticket Exchange / Resale,27,16,6968.64,111498.24
+Suite Package (per seat),Ticket Exchange / Resale,27,7,10965.85,76760.95
+Standing Room / Party Deck,Ticket Exchange / Resale,27,14,874.06,12236.84
+Upper Bowl,Ticket Exchange / Resale,28,6,1333.42,8000.52
+Lower Bowl,Ticket Exchange / Resale,28,17,3368.64,57266.88
+Club Level,Ticket Exchange / Resale,28,9,5066.88,45601.92
+Suite Package (per seat),Ticket Exchange / Resale,28,5,9918.0,49590.0
+Standing Room / Party Deck,Ticket Exchange / Resale,28,10,889.72,8897.2
+Upper Bowl,Ticket Exchange / Resale,29,9,1170.12,10531.08
+Lower Bowl,Ticket Exchange / Resale,29,14,2684.88,37588.32
+Club Level,Ticket Exchange / Resale,29,9,6074.88,54673.92
+Suite Package (per seat),Ticket Exchange / Resale,29,9,11808.5,106276.5
+Standing Room / Party Deck,Ticket Exchange / Resale,29,4,815.3,3261.2
+Upper Bowl,Ticket Exchange / Resale,30,3,1149.5,3448.5
+Lower Bowl,Ticket Exchange / Resale,30,15,2930.4,43956.0
+Club Level,Ticket Exchange / Resale,30,16,6072.0,97152.0
+Suite Package (per seat),Ticket Exchange / Resale,30,4,10659.0,42636.0
+Standing Room / Party Deck,Ticket Exchange / Resale,30,14,643.5,9009.0

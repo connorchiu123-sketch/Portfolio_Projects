@@ -1,0 +1,30 @@
+department,phase,crew_name,workers_scheduled,hours_per_worker,hourly_rate,total_cost
+Security,Setup (2 days out),Security: Perimeter & Bag Check,60,8.0,26.0,12480.0
+Cleaning & Facilities,Setup (2 days out),Cleaning: Site Prep Crew,50,8.0,18.0,7200.0
+Concessions & Merchandise,Setup (2 days out),Concessions: Merchandise Stocking,30,6.0,17.0,3060.0
+Security,Setup (1 day out),Security: Perimeter & Bag Check,90,9.0,27.0,21870.0
+Security,Setup (1 day out),Security: Credentialing Walkthrough,40,8.0,28.0,8960.0
+Cleaning & Facilities,Setup (1 day out),Cleaning: Site Prep Crew,70,9.0,18.5,11655.0
+Concessions & Merchandise,Setup (1 day out),Concessions: Stand Stocking & Prep,120,8.0,18.0,17280.0
+Concessions & Merchandise,Setup (1 day out),Concessions: Merchandise Stocking,60,8.0,17.5,8400.0
+Broadcast & Media Operations,Setup (1 day out),Broadcast: Production Rehearsal,40,10.0,50.0,20000.0
+Broadcast & Media Operations,Setup (1 day out),Broadcast: AV Rig & Engineering,25,12.0,65.0,19500.0
+Guest Services,Setup (1 day out),Guest Services: Usher Training,30,6.0,18.0,3240.0
+Security,Game Day,Security: Perimeter & Bag Check,380,10.0,28.0,106400.0
+Security,Game Day,Security: Interior / Seating Bowl,320,12.0,30.0,115200.0
+Security,Game Day,Security: K9 & Specialized Units,45,14.0,58.0,36540.0
+Guest Services,Game Day,Guest Services: Ushers & Ticket Takers,280,10.0,19.0,53200.0
+Guest Services,Game Day,Guest Services: Guest Relations & ADA,65,12.0,24.0,18720.0
+Concessions & Merchandise,Game Day,Concessions: Stand Staff,600,10.0,19.0,114000.0
+Concessions & Merchandise,Game Day,Concessions: Merchandise Sales,180,10.0,18.0,32400.0
+Concessions & Merchandise,Game Day,Concessions: Suite / Premium Catering,85,11.0,26.0,24310.0
+Medical Services,Game Day,Medical: EMT & First Aid Stations,75,12.0,52.0,46800.0
+Medical Services,Game Day,Medical: Emergency Response Coordination,15,14.0,85.0,17850.0
+Parking & Transportation,Game Day,Parking: Parking Attendants,110,10.0,20.0,22000.0
+Parking & Transportation,Game Day,Parking: Shuttle & Transit Operations,45,13.0,27.0,15795.0
+Broadcast & Media Operations,Game Day,Broadcast: Production & Camera Crew,80,16.0,52.0,66560.0
+Broadcast & Media Operations,Game Day,Broadcast: Technical / Engineering,25,18.0,68.0,30600.0
+Cleaning & Facilities,Game Day,Cleaning: Game-Day Crew,160,10.0,19.0,30400.0
+Cleaning & Facilities,Teardown (1 day after),Cleaning: Post-Event Teardown Crew,90,8.0,22.0,15840.0
+Security,Teardown (1 day after),Security: Overnight Sweep & Breakdown,60,6.0,26.0,9360.0
+Parking & Transportation,Teardown (1 day after),Parking: Shuttle Wind-Down,25,6.0,26.0,3900.0

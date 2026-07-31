@@ -1,0 +1,259 @@
+gate,category,entry_hour,units_sold,revenue
+Gate A,Food,11,341,4306.5
+Gate A,Food,12,788,9947.0
+Gate A,Food,13,1277,16109.5
+Gate A,Food,14,1692,21344.0
+Gate A,Food,15,2228,28101.0
+Gate A,Food,16,1055,13311.0
+Gate A,Food,17,496,6264.0
+Gate A,Food,18,634,8004.0
+Gate A,Food,19,1509,19038.5
+Gate A,Food,20,947,11948.0
+Gate A,Food,21,450,5684.0
+Gate A,Beverage - Non-Alcoholic,11,637,2821.0
+Gate A,Beverage - Non-Alcoholic,12,1097,4860.8
+Gate A,Beverage - Non-Alcoholic,13,1302,5766.0
+Gate A,Beverage - Non-Alcoholic,14,1401,6206.2
+Gate A,Beverage - Non-Alcoholic,15,1663,7365.6
+Gate A,Beverage - Non-Alcoholic,16,1232,5456.0
+Gate A,Beverage - Non-Alcoholic,17,789,3496.8
+Gate A,Beverage - Non-Alcoholic,18,1086,4811.2
+Gate A,Beverage - Non-Alcoholic,19,1920,8506.4
+Gate A,Beverage - Non-Alcoholic,20,1442,6386.0
+Gate A,Beverage - Non-Alcoholic,21,1187,5257.6
+Gate A,Beverage - Alcoholic,11,216,1920.0
+Gate A,Beverage - Alcoholic,12,622,5529.6
+Gate A,Beverage - Alcoholic,13,1090,9696.0
+Gate A,Beverage - Alcoholic,14,1557,13843.2
+Gate A,Beverage - Alcoholic,15,1652,14688.0
+Gate A,Beverage - Alcoholic,16,1306,11616.0
+Gate A,Beverage - Alcoholic,17,881,7833.6
+Gate A,Beverage - Alcoholic,18,1155,10272.0
+Gate A,Beverage - Alcoholic,19,1964,17462.4
+Gate A,Beverage - Alcoholic,20,518,4608.0
+Gate A,Merchandise,11,142,6403.2
+Gate A,Merchandise,12,158,7125.3
+Gate A,Merchandise,13,178,8064.9
+Gate A,Merchandise,14,180,8143.2
+Gate A,Merchandise,15,210,9483.0
+Gate A,Merchandise,16,145,6542.4
+Gate A,Merchandise,17,148,6699.0
+Gate A,Merchandise,18,133,6029.1
+Gate A,Merchandise,19,162,7308.0
+Gate A,Merchandise,20,175,7917.0
+Gate A,Merchandise,21,309,13963.5
+Gate B,Food,11,307,3891.6
+Gate B,Food,12,724,9177.0
+Gate B,Food,13,1258,15939.0
+Gate B,Food,14,1796,22742.4
+Gate B,Food,15,2071,26220.0
+Gate B,Food,16,971,12295.8
+Gate B,Food,17,431,5464.8
+Gate B,Food,18,640,8114.4
+Gate B,Food,19,1558,19734.0
+Gate B,Food,20,854,10819.2
+Gate B,Food,21,444,5630.4
+Gate B,Beverage - Non-Alcoholic,11,737,3245.0
+Gate B,Beverage - Non-Alcoholic,12,1039,4578.4
+Gate B,Beverage - Non-Alcoholic,13,1326,5841.0
+Gate B,Beverage - Non-Alcoholic,14,1547,6814.5
+Gate B,Beverage - Non-Alcoholic,15,1720,7575.6
+Gate B,Beverage - Non-Alcoholic,16,1093,4814.4
+Gate B,Beverage - Non-Alcoholic,17,747,3292.2
+Gate B,Beverage - Non-Alcoholic,18,1018,4484.0
+Gate B,Beverage - Non-Alcoholic,19,2063,9086.0
+Gate B,Beverage - Non-Alcoholic,20,1273,5605.0
+Gate B,Beverage - Non-Alcoholic,21,986,4342.4
+Gate B,Beverage - Alcoholic,11,197,1766.4
+Gate B,Beverage - Alcoholic,12,655,5851.2
+Gate B,Beverage - Alcoholic,13,1081,9660.0
+Gate B,Beverage - Alcoholic,14,1542,13781.6
+Gate B,Beverage - Alcoholic,15,1698,15170.8
+Gate B,Beverage - Alcoholic,16,1178,10524.8
+Gate B,Beverage - Alcoholic,17,824,7360.0
+Gate B,Beverage - Alcoholic,18,1071,9568.0
+Gate B,Beverage - Alcoholic,19,1803,16109.2
+Gate B,Beverage - Alcoholic,20,484,4324.0
+Gate B,Merchandise,11,155,7019.2
+Gate B,Merchandise,12,157,7084.8
+Gate B,Merchandise,13,158,7158.6
+Gate B,Merchandise,14,150,6789.6
+Gate B,Merchandise,15,172,7790.0
+Gate B,Merchandise,16,145,6560.0
+Gate B,Merchandise,17,136,6141.8
+Gate B,Merchandise,18,117,5280.8
+Gate B,Merchandise,19,145,6560.0
+Gate B,Merchandise,20,176,7954.0
+Gate B,Merchandise,21,275,12423.0
+Gate C,Food,11,238,2998.8
+Gate C,Food,12,612,7711.2
+Gate C,Food,13,855,10771.2
+Gate C,Food,14,1166,14688.0
+Gate C,Food,15,1585,19961.4
+Gate C,Food,16,743,9363.6
+Gate C,Food,17,333,4202.4
+Gate C,Food,18,515,6487.2
+Gate C,Food,19,1010,12729.6
+Gate C,Food,20,660,8323.2
+Gate C,Food,21,317,3998.4
+Gate C,Beverage - Non-Alcoholic,11,500,2300.0
+Gate C,Beverage - Non-Alcoholic,12,728,3348.8
+Gate C,Beverage - Non-Alcoholic,13,1050,4830.0
+Gate C,Beverage - Non-Alcoholic,14,1078,4958.8
+Gate C,Beverage - Non-Alcoholic,15,1296,5961.6
+Gate C,Beverage - Non-Alcoholic,16,808,3716.8
+Gate C,Beverage - Non-Alcoholic,17,564,2594.4
+Gate C,Beverage - Non-Alcoholic,18,848,3900.8
+Gate C,Beverage - Non-Alcoholic,19,1484,6826.4
+Gate C,Beverage - Non-Alcoholic,20,1100,5060.0
+Gate C,Beverage - Non-Alcoholic,21,768,3532.8
+Gate C,Beverage - Alcoholic,11,139,1232.8
+Gate C,Beverage - Alcoholic,12,446,3939.6
+Gate C,Beverage - Alcoholic,13,737,6499.0
+Gate C,Beverage - Alcoholic,14,1085,9567.6
+Gate C,Beverage - Alcoholic,15,1317,11617.8
+Gate C,Beverage - Alcoholic,16,919,8107.0
+Gate C,Beverage - Alcoholic,17,632,5574.4
+Gate C,Beverage - Alcoholic,18,782,6901.0
+Gate C,Beverage - Alcoholic,19,1279,11276.1
+Gate C,Beverage - Alcoholic,20,342,3015.0
+Gate C,Merchandise,11,101,4587.2
+Gate C,Merchandise,12,110,4995.9
+Gate C,Merchandise,13,125,5654.7
+Gate C,Merchandise,14,128,5764.5
+Gate C,Merchandise,15,146,6588.0
+Gate C,Merchandise,16,113,5124.0
+Gate C,Merchandise,17,85,3843.0
+Gate C,Merchandise,18,87,3928.4
+Gate C,Merchandise,19,110,4977.6
+Gate C,Merchandise,20,143,6466.0
+Gate C,Merchandise,21,211,9516.0
+Gate D,Food,11,241,3057.6
+Gate D,Food,12,526,6654.2
+Gate D,Food,13,792,10025.4
+Gate D,Food,14,1202,15209.6
+Gate D,Food,15,1384,17502.8
+Gate D,Food,16,655,8290.8
+Gate D,Food,17,328,4155.2
+Gate D,Food,18,432,5468.4
+Gate D,Food,19,1108,14014.0
+Gate D,Food,20,644,8153.6
+Gate D,Food,21,285,3606.4
+Gate D,Beverage - Non-Alcoholic,11,513,2354.0
+Gate D,Beverage - Non-Alcoholic,12,698,3203.2
+Gate D,Beverage - Non-Alcoholic,13,864,3960.0
+Gate D,Beverage - Non-Alcoholic,14,992,4549.6
+Gate D,Beverage - Non-Alcoholic,15,1117,5121.6
+Gate D,Beverage - Non-Alcoholic,16,829,3801.6
+Gate D,Beverage - Non-Alcoholic,17,524,2402.4
+Gate D,Beverage - Non-Alcoholic,18,844,3872.0
+Gate D,Beverage - Non-Alcoholic,19,1330,6098.4
+Gate D,Beverage - Non-Alcoholic,20,902,4136.0
+Gate D,Beverage - Non-Alcoholic,21,844,3872.0
+Gate D,Beverage - Alcoholic,11,143,1254.4
+Gate D,Beverage - Alcoholic,12,464,4070.4
+Gate D,Beverage - Alcoholic,13,803,7040.0
+Gate D,Beverage - Alcoholic,14,1052,9228.8
+Gate D,Beverage - Alcoholic,15,1154,10118.4
+Gate D,Beverage - Alcoholic,16,746,6547.2
+Gate D,Beverage - Alcoholic,17,537,4710.4
+Gate D,Beverage - Alcoholic,18,722,6336.0
+Gate D,Beverage - Alcoholic,19,1315,11532.8
+Gate D,Beverage - Alcoholic,20,394,3456.0
+Gate D,Merchandise,11,99,4454.4
+Gate D,Merchandise,12,118,5324.4
+Gate D,Merchandise,13,113,5115.6
+Gate D,Merchandise,14,112,5063.4
+Gate D,Merchandise,15,140,6322.0
+Gate D,Merchandise,16,92,4176.0
+Gate D,Merchandise,17,81,3654.0
+Gate D,Merchandise,18,96,4344.2
+Gate D,Merchandise,19,102,4593.6
+Gate D,Merchandise,20,134,6032.0
+Gate D,Merchandise,21,189,8526.0
+Gate E,Food,11,96,2280.0
+Gate E,Food,12,246,5852.0
+Gate E,Food,13,341,8109.2
+Gate E,Food,14,537,12768.0
+Gate E,Food,15,644,15306.4
+Gate E,Food,16,279,6634.8
+Gate E,Food,17,136,3252.8
+Gate E,Food,18,186,4423.2
+Gate E,Food,19,374,8892.0
+Gate E,Food,20,263,6262.4
+Gate E,Food,21,140,3344.0
+Gate E,Beverage - Non-Alcoholic,11,158,1039.5
+Gate E,Beverage - Non-Alcoholic,12,232,1528.8
+Gate E,Beverage - Non-Alcoholic,13,288,1890.0
+Gate E,Beverage - Non-Alcoholic,14,337,2217.6
+Gate E,Beverage - Non-Alcoholic,15,403,2646.0
+Gate E,Beverage - Non-Alcoholic,16,281,1848.0
+Gate E,Beverage - Non-Alcoholic,17,197,1297.8
+Gate E,Beverage - Non-Alcoholic,18,235,1545.6
+Gate E,Beverage - Non-Alcoholic,19,439,2881.2
+Gate E,Beverage - Non-Alcoholic,20,310,2037.0
+Gate E,Beverage - Non-Alcoholic,21,263,1730.4
+Gate E,Beverage - Alcoholic,11,133,2222.0
+Gate E,Beverage - Alcoholic,12,384,6402.0
+Gate E,Beverage - Alcoholic,13,693,11550.0
+Gate E,Beverage - Alcoholic,14,840,14014.0
+Gate E,Beverage - Alcoholic,15,1122,18700.0
+Gate E,Beverage - Alcoholic,16,747,12463.0
+Gate E,Beverage - Alcoholic,17,533,8888.0
+Gate E,Beverage - Alcoholic,18,673,11220.0
+Gate E,Beverage - Alcoholic,19,1077,17952.0
+Gate E,Beverage - Alcoholic,20,297,4950.0
+Gate E,Merchandise,11,71,4276.8
+Gate E,Merchandise,12,85,5151.6
+Gate E,Merchandise,13,74,4471.2
+Gate E,Merchandise,14,77,4665.6
+Gate E,Merchandise,15,94,5670.0
+Gate E,Merchandise,16,69,4147.2
+Gate E,Merchandise,17,62,3742.2
+Gate E,Merchandise,18,60,3628.8
+Gate E,Merchandise,19,69,4190.4
+Gate E,Merchandise,20,93,5616.0
+Gate E,Merchandise,21,130,7857.0
+Gate F,Food,11,42,1499.4
+Gate F,Food,12,100,3534.3
+Gate F,Food,13,148,5217.3
+Gate F,Food,14,252,8894.4
+Gate F,Food,15,289,10174.5
+Gate F,Food,16,142,5003.1
+Gate F,Food,17,55,1938.0
+Gate F,Food,18,84,2968.2
+Gate F,Food,19,197,6961.5
+Gate F,Food,20,119,4202.4
+Gate F,Food,21,52,1856.4
+Gate F,Beverage - Non-Alcoholic,11,70,654.0
+Gate F,Beverage - Non-Alcoholic,12,97,902.4
+Gate F,Beverage - Non-Alcoholic,13,132,1224.0
+Gate F,Beverage - Non-Alcoholic,14,130,1201.2
+Gate F,Beverage - Non-Alcoholic,15,149,1382.4
+Gate F,Beverage - Non-Alcoholic,16,93,864.0
+Gate F,Beverage - Non-Alcoholic,17,85,784.8
+Gate F,Beverage - Non-Alcoholic,18,97,902.4
+Gate F,Beverage - Non-Alcoholic,19,187,1730.4
+Gate F,Beverage - Non-Alcoholic,20,118,1092.0
+Gate F,Beverage - Non-Alcoholic,21,94,873.6
+Gate F,Beverage - Alcoholic,11,55,1254.0
+Gate F,Beverage - Alcoholic,12,177,4039.2
+Gate F,Beverage - Alcoholic,13,301,6864.0
+Gate F,Beverage - Alcoholic,14,406,9240.0
+Gate F,Beverage - Alcoholic,15,458,10434.6
+Gate F,Beverage - Alcoholic,16,293,6679.2
+Gate F,Beverage - Alcoholic,17,220,5016.0
+Gate F,Beverage - Alcoholic,18,290,6600.0
+Gate F,Beverage - Alcoholic,19,473,10771.2
+Gate F,Beverage - Alcoholic,20,137,3135.0
+Gate F,Merchandise,11,33,2552.0
+Gate F,Merchandise,12,36,2766.6
+Gate F,Merchandise,13,35,2714.4
+Gate F,Merchandise,14,31,2375.1
+Gate F,Merchandise,15,37,2871.0
+Gate F,Merchandise,16,31,2366.4
+Gate F,Merchandise,17,26,2050.3
+Gate F,Merchandise,18,26,2030.0
+Gate F,Merchandise,19,31,2412.8
+Gate F,Merchandise,20,36,2755.0
+Gate F,Merchandise,21,53,4045.5

@@ -1,0 +1,39 @@
+gate,incident_type,severity,incident_hour,response_time_minutes
+Gate A,Medical,Low,14,4.5
+Gate B,Crowd Control,Medium,15,8.2
+Gate C,Prohibited Item,Low,13,2.1
+Gate A,Prohibited Item,Low,14,1.8
+Gate B,Prohibited Item,Low,11,1.5
+Gate D,Lost Child,Low,12,6.2
+Gate F,Prohibited Item,Low,12,1.9
+Gate C,Prohibited Item,Low,16,2.0
+Gate E,Medical,Medium,18,6.4
+Gate D,Medical,Medium,18,7.1
+Gate E,Crowd Control,Low,18,5.0
+Gate B,Lost Child,Medium,17,15.0
+Gate F,Crowd Control,Low,16,5.5
+Gate C,Medical,High,20,9.8
+Gate F,Ejection,High,20,14.6
+Gate A,Crowd Control,High,19,18.2
+Gate D,Ejection,High,19,12.5
+Gate B,Medical,Low,16,3.9
+Gate E,Ejection,Medium,20,10.1
+Gate C,Lost Child,Low,14,7.6
+Gate F,Medical,Low,17,4.2
+Gate A,Lost Child,Medium,18,11.3
+Gate C,Crowd Control,Medium,21,9.5
+Gate A,Crowd Control,High,21,16.8
+Gate B,Ejection,Medium,21,11.2
+Gate A,Medical,Low,21,5.3
+Gate B,Crowd Control,Medium,22,10.0
+Gate D,Medical,Low,22,4.8
+Gate E,Prohibited Item,Low,13,2.4
+Gate F,Lost Child,Low,15,5.9
+Gate C,Ejection,Medium,19,10.8
+Gate D,Crowd Control,Medium,20,9.1
+Gate A,Ejection,High,20,13.9
+Gate E,Lost Child,Medium,17,12.4
+Gate B,Medical,Medium,19,7.8
+Gate F,Crowd Control,Medium,21,8.6
+Gate C,Medical,Low,12,3.5
+Gate D,Prohibited Item,Low,11,1.6

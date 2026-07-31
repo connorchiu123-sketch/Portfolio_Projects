@@ -541,6 +541,19 @@ table.data-table {
 .query-card h3 { margin: 0 0 4px; font-size: 1rem; font-weight: 700; color: var(--text); }
 .query-card .sub { color: #6b7690; font-size: 0.82rem; margin-bottom: 12px; }
 
+.card-title-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+.btn-csv {
+  flex-shrink: 0;
+  font-size: 11.5px;
+  font-weight: bold;
+  color: var(--blue);
+  border: 1px solid var(--blue);
+  padding: 5px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+}
+.btn-csv:hover { background: var(--blue); color: #08101f; }
+
 .pos-dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 7px; }
 
 .finding-list { display: flex; flex-direction: column; gap: 16px; max-width: 800px; }

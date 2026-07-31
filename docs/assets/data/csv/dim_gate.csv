@@ -1,0 +1,7 @@
+gate_name,zone,max_capacity_per_hour
+Gate A,North,8000
+Gate B,South,8000
+Gate C,East,6000
+Gate D,West,6000
+Gate E,Club Level,3000
+Gate F,Suites,1500
