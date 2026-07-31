@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Super Bowl Operations — Queries &amp; Dataset — Connor Chiu</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <nav>
+      <a class="brand" href="index.html">Connor Chiu</a>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a class="active" href="projects.html">Projects</a>
+        <a href="https://www.linkedin.com/in/connor-chiu-3b9094372/" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="case-hero">
+      <div class="wrap">
+        <a class="case-back" href="super-bowl-ops.html">&larr; Back to Super Bowl Operations Analysis</a>
+        <div class="top-row">
+          <span class="tag progress">In Progress</span>
+        </div>
+        <h1>&#128269; Super Bowl Operations &mdash; Queries &amp; Dataset</h1>
+        <p class="lead">
+          Fourteen T-SQL business questions run against the star schema, each one
+          mapped to the Power BI visual it feeds &mdash; plus the raw SQL Server
+          scripts and sample data behind the whole project.
+        </p>
+        <div class="stack">SQL Server &middot; T-SQL</div>
+        <div class="case-links">
+          <a class="primary" href="super-bowl-schema.html">View Schema</a>
+          <a href="super-bowl-ops.html">View Dashboard</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================ SAMPLE QUERIES ================================ -->
+    <section class="case-section" style="padding-top: 24px;">
+      <div class="wrap">
+        <span class="step">&#128269; Sample Queries</span>
+        <h2>Business Questions in T-SQL</h2>
+        <p>
+          Each query answers one real ops or business question and maps to one visual
+          in the dashboard &mdash; know the answer in SQL first, then check that the
+          chart shows the same thing.
+        </p>
+
+        <div class="query-card chart-card">
+          <h3>Q1. Ticket revenue and quantity by tier</h3>
+          <div class="sub">Power BI: bar chart, tier &times; revenue</div>
+          <pre class="sql-block"><code>SELECT tt.tier_name, tt.face_value,
+       SUM(fts.quantity_sold)  AS total_quantity_sold,
+       SUM(fts.gross_revenue)  AS total_gross_revenue
+FROM fact_ticket_sales fts
+JOIN dim_ticket_tier tt ON fts.tier_id = tt.tier_id
+GROUP BY tt.tier_name, tt.face_value
+ORDER BY total_gross_revenue DESC;</code></pre>
+        </div>
+
+        <div class="query-card chart-card">
+          <h3>Q1b. Ticket revenue by sales channel, and markup over face value</h3>
+          <div class="sub">Power BI: bar chart, channel &times; revenue, table with avg markup %</div>
+          <pre class="sql-block"><code>SELECT sc.channel_name, sc.market_type,
+       SUM(fts.quantity_sold) AS total_quantity_sold,
+       SUM(fts.gross_revenue) AS total_gross_revenue,
+       CAST(AVG(fts.unit_price / tt.face_value) * 100 AS DECIMAL(6,2)) AS avg_pct_of_face_value
+FROM fact_ticket_sales fts
+JOIN dim_sales_channel sc ON fts.channel_id = sc.channel_id
+JOIN dim_ticket_tier tt ON fts.tier_id = tt.tier_id
+GROUP BY sc.channel_name, sc.market_type
+ORDER BY total_gross_revenue DESC;</code></pre>
+        </div>
+
+        <div class="query-card chart-card">
+          <h3>Q1c. Ticket sales by month</h3>
+          <div class="sub">Power BI: line/column chart, month &times; revenue &mdash; shows volume building as game day approaches</div>
+          <pre class="sql-block"><code>SELECT dd.month_name, dd.event_phase,
+       SUM(fts.quantity_sold) AS total_quantity_sold,
+       SUM(fts.gross_revenue) AS total_gross_revenue
+FROM fact_ticket_sales fts
+JOIN dim_date dd ON fts.date_id = dd.date_id
+GROUP BY dd.month_name, dd.event_phase
+ORDER BY MIN(dd.days_to_game) DESC;</code></pre>
+        </div>
+
+        <div class="query-card chart-card">
+          <h3>Q2. Which gate has the worst average wait time, and when?</h3>
+          <div class="sub">Power BI: line chart, hour &times; wait time, split by gate</div>
+          <pre class="sql-block"><code>SELECT g.gate_name, g.zone, fge.entry_hour, fge.fans_entered, fge.avg_wait_time_minutes
+FROM fact_gate_entries fge
+JOIN dim_gate g ON fge.gate_id = g.gate_id
+ORDER BY fge.avg_wait_time_minutes DESC;</code></pre>
+        </div>
+
+        <div class="query-card chart-card">
+          <h3>Q3. Total staffing cost by department, with the vendor(s) behind it</h3>
+          <div class="sub">Power BI: stacked bar, department &times; vendor &times; total_cost</div>
+          <pre class="sql-block"><code>SELECT d.department_name, d.department_group, v.vendor_name,
+       SUM(fsc.total_cost) AS total_cost
+FROM fact_staffing_cost fsc
+JOIN dim_department d ON fsc.department_id = d.department_id
+JOIN dim_vendor v ON fsc.vendor_id = v.vendor_id
+GROUP BY d.department_name, d.department_group, v.vendor_name
+ORDER BY d.department_name;</code></pre>
+        </div>
+
+        <div class="query-card chart-card">
+          <h3>Q3b. Staffing cost by event phase (Setup / Game Day / Teardown)</h3>
+          <div class="sub">Power BI: stacked column, phase &times; department &times; total_cost &mdash; shows labor spend outside game day itself</div>
+          <pre class="sql-block"><code>SELECT dd.event_phase, d.department_name,
+       SUM(fsc.workers_scheduled) AS total_worker_shifts,
+       SUM(fsc.total_cost)        AS total_cost
+FROM fact_staffing_cost fsc
+JOIN dim_date dd ON fsc.date_id = dd.date_id
+JOIN dim_department d ON fsc.department_id = d.department_id
+GROUP BY dd.event_phase, d.department_name
+ORDER BY MIN(dd.days_to_game) DESC, total_cost DESC;</code></pre>
+        </div>
+
+        <div class="query-card chart-card">
+          <h3>Q4. Concessions revenue by category, total across all zones</h3>
+          <div class="sub">Power BI: donut/bar, category &times; SUM(revenue)</div>
+          <pre class="sql-block"><code>SELECT category, SUM(revenue) AS total_revenue, SUM(units_sold) AS total_units
+FROM fact_concessions_sales
+GROUP BY category
+ORDER BY total_revenue DESC;</code></pre>
+        </div>
+
+        <div class="query-card chart-card">
+          <h3>Q4b. Concessions revenue by hour block</h3>
+          <div class="sub">Power BI: stacked area/column, hour &times; category &mdash; pregame vs. in-game/halftime vs. post-game egress</div>
+          <pre class="sql-block"><code>SELECT
+    CASE
+        WHEN entry_hour BETWEEN 11 AND 16 THEN 'Pregame'
+        WHEN entry_hour BETWEEN 17 AND 20 THEN 'In-Game / Halftime'
+        ELSE 'Post-Game Egress'
+    END AS hour_block,
+    category,
+    SUM(units_sold) AS total_units,
+    SUM(revenue)     AS total_revenue
+FROM fact_concessions_sales
+GROUP BY
+    CASE
+        WHEN entry_hour BETWEEN 11 AND 16 THEN 'Pregame'
+        WHEN entry_hour BETWEEN 17 AND 20 THEN 'In-Game / Halftime'
+        ELSE 'Post-Game Egress'
+    END,
+    category
+ORDER BY hour_block, total_revenue DESC;</code></pre>
+        </div>
+
+        <div class="query-card chart-card">
+          <h3>Q5. Sponsorship revenue by sponsor, biggest deals first</h3>
+          <div class="sub">Power BI: table sorted descending, or bar chart</div>
+          <pre class="sql-block"><code>SELECT s.sponsor_name, s.category, s.sponsorship_tier, SUM(fsr.amount) AS total_sponsorship_revenue
+FROM fact_sponsorship_revenue fsr
+JOIN dim_sponsor s ON fsr.sponsor_id = s.sponsor_id
+GROUP BY s.sponsor_name, s.category, s.sponsorship_tier
+ORDER BY total_sponsorship_revenue DESC;</code></pre>
+        </div>
+
+        <div class="query-card chart-card">
+          <h3>Q5b. Sponsorship revenue recognized by month</h3>
+          <div class="sub">Power BI: line/column chart, month &times; amount &mdash; shows the installment cadence rather than one lump sum</div>
+          <pre class="sql-block"><code>SELECT dd.month_name, dd.event_phase, SUM(fsr.amount) AS total_recognized
+FROM fact_sponsorship_revenue fsr
+JOIN dim_date dd ON fsr.date_id = dd.date_id
+GROUP BY dd.month_name, dd.event_phase
+ORDER BY MIN(dd.days_to_game) DESC;</code></pre>
+        </div>
+
+        <div class="query-card chart-card">
+          <h3>Q6. Security incidents by type and severity</h3>
+          <div class="sub">Power BI: heatmap/matrix, gate &times; incident_type, color by count or avg response time</div>
+          <pre class="sql-block"><code>SELECT g.gate_name, fsi.incident_type, fsi.severity, COUNT(*) AS incident_count,
+       AVG(fsi.response_time_minutes) AS avg_response_minutes
+FROM fact_security_incidents fsi
+JOIN dim_gate g ON fsi.gate_id = g.gate_id
+GROUP BY g.gate_name, fsi.incident_type, fsi.severity
+ORDER BY avg_response_minutes DESC;</code></pre>
+        </div>
+
+        <div class="query-card chart-card">
+          <h3>Q7. Budget vs. actual by department &mdash; who ran over?</h3>
+          <div class="sub">Power BI: diverging bar, department &times; variance_amount</div>
+          <pre class="sql-block"><code>SELECT d.department_name,
+       SUM(fdb.budgeted_amount) AS budgeted_amount,
+       SUM(fdb.actual_amount)   AS actual_amount,
+       SUM(fdb.variance_amount) AS variance_amount,
+       CAST(SUM(fdb.variance_amount) * 100.0 / SUM(fdb.budgeted_amount) AS DECIMAL(6,2)) AS variance_pct
+FROM fact_department_budget fdb
+JOIN dim_department d ON fdb.department_id = d.department_id
+GROUP BY d.department_name
+ORDER BY variance_pct DESC;</code></pre>
+        </div>
+
+        <div class="query-card chart-card">
+          <h3>Q7b. Budget vs. actual by category, across all departments</h3>
+          <div class="sub">Power BI: matrix, department &times; category, color by variance_pct &mdash; biggest overrun driver company-wide</div>
+          <pre class="sql-block"><code>SELECT bc.category_name,
+       SUM(fdb.budgeted_amount) AS budgeted_amount,
+       SUM(fdb.actual_amount)   AS actual_amount,
+       SUM(fdb.variance_amount) AS variance_amount
+FROM fact_department_budget fdb
+JOIN dim_budget_category bc ON fdb.category_id = bc.category_id
+GROUP BY bc.category_name
+ORDER BY variance_amount DESC;</code></pre>
+        </div>
+
+        <div class="query-card chart-card" style="margin-bottom: 0;">
+          <h3>Q8. Total event revenue across all three revenue streams</h3>
+          <div class="sub">Power BI: KPI card row</div>
+          <pre class="sql-block"><code>SELECT
+    (SELECT SUM(gross_revenue) FROM fact_ticket_sales)                 AS total_ticket_revenue,
+    (SELECT SUM(revenue) FROM fact_concessions_sales)                  AS total_concessions_revenue,
+    (SELECT SUM(amount) FROM fact_sponsorship_revenue)                 AS total_sponsorship_revenue,
+    (SELECT SUM(gross_revenue) FROM fact_ticket_sales)
+      + (SELECT SUM(revenue) FROM fact_concessions_sales)
+      + (SELECT SUM(amount) FROM fact_sponsorship_revenue)             AS total_event_revenue;</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================== DATASET ==================================== -->
+    <section class="case-section">
+      <div class="wrap">
+        <span class="step" style="color:#4ade80;">&#128190; Dataset</span>
+        <h2>Schema, Sample Data &amp; Downloads</h2>
+        <p>
+          The full SQL Server build &mdash; database creation, table definitions, and
+          ~450 rows of fabricated sample data across 8 dimension and 6 fact tables &mdash;
+          plus the JSON export that actually drives the live charts on this site.
+        </p>
+
+        <div class="grid grid-2">
+          <div class="chart-card">
+            <h3>01. Create Database</h3>
+            <div class="sub">Creates the SuperBowlOps database</div>
+            <a class="btn btn-blue" href="../DataSets/SuperBowlOps_01_create_database.sql">Download .sql</a>
+          </div>
+          <div class="chart-card">
+            <h3>02. Create Tables</h3>
+            <div class="sub">8 dimension tables + 6 fact tables, star schema</div>
+            <a class="btn btn-blue" href="../DataSets/SuperBowlOps_02_create_tables.sql">Download .sql</a>
+          </div>
+          <div class="chart-card">
+            <h3>03. Insert Sample Data</h3>
+            <div class="sub">The fabricated dataset itself &mdash; ~450 rows across all 14 tables</div>
+            <a class="btn btn-blue" href="../DataSets/SuperBowlOps_03_insert_sample_data.sql">Download .sql</a>
+          </div>
+          <div class="chart-card">
+            <h3>04. Sample Queries</h3>
+            <div class="sub">The 14 T-SQL questions above, as a runnable script</div>
+            <a class="btn btn-blue" href="../DataSets/SuperBowlOps_04_sample_queries.sql">Download .sql</a>
+          </div>
+        </div>
+
+        <div class="chart-card" style="margin-top:20px;">
+          <h3>Dashboard data (JSON)</h3>
+          <div class="sub">The raw row-level data behind the live Chart.js dashboard on this site &mdash; fetched client-side and aggregated in the browser</div>
+          <a class="btn btn-blue" href="assets/data/superbowl_data.json">View superbowl_data.json</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section" style="border-bottom: 1px solid var(--border);">
+      <div class="wrap">
+        <a class="btn btn-blue" href="super-bowl-ops.html">&larr; Back to Dashboard</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <span>&copy; 2026 Connor Chiu</span>
+      <div class="foot-links">
+        <a href="about.html">About</a>
+        <a href="projects.html">Projects</a>
+        <a href="https://www.linkedin.com/in/connor-chiu-3b9094372/" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

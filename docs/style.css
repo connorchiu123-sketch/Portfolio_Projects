@@ -515,6 +515,24 @@ table.data-table {
 .data-table tr:hover td { background: rgba(255,255,255,0.02); }
 .table-scroll { overflow-x: auto; }
 
+.sql-block {
+  background: #0e1322;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px 18px;
+  overflow-x: auto;
+  font-family: "Cascadia Code", "Consolas", "SFMono-Regular", Menlo, monospace;
+  font-size: 0.82rem;
+  line-height: 1.55;
+  color: #c3cbe0;
+}
+.sql-block .sql-comment { color: #6b7690; }
+.sql-block .sql-keyword { color: var(--blue-light); font-weight: 600; }
+
+.query-card { margin-bottom: 20px; }
+.query-card h3 { margin: 0 0 4px; font-size: 1rem; font-weight: 700; color: var(--text); }
+.query-card .sub { color: #6b7690; font-size: 0.82rem; margin-bottom: 12px; }
+
 .pos-dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 7px; }
 
 .finding-list { display: flex; flex-direction: column; gap: 16px; max-width: 800px; }
