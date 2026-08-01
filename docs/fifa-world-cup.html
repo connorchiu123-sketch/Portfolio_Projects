@@ -59,15 +59,6 @@
       <div class="wrap">
         <span class="step" style="color:#5b9dff;">&#9881;&#65039; Behind the Numbers</span>
         <h2>How 48 Squads Stack Up</h2>
-        <p>
-          Before any of this could be trusted, the dataset's own "tournament total"
-          columns were checked against a manual sum of the match rows — they didn't
-          match closely enough to rely on, so every figure here (goals, cards, market
-          value, everything) was rebuilt from scratch off the raw match-level data instead.
-          The four panels below narrow it to the top 10 squads by total market value, kept
-          deliberately short so every bar is still readable; the radar chart lines up the
-          top 5 on five very different scales at once.
-        </p>
         <div class="grid grid-2">
           <div class="chart-card chart-tall"><h3>Total Squad Market Value</h3><div class="sub">Top 10 teams, EUR</div><div class="chart-canvas-wrap"><canvas id="chart-team-value"></canvas></div></div>
           <div class="chart-card chart-tall"><h3>Total Goals Scored</h3><div class="sub">Top 10 teams by squad value</div><div class="chart-canvas-wrap"><canvas id="chart-team-goals"></canvas></div></div>
@@ -112,16 +103,6 @@
       <div class="wrap">
         <span class="step" style="color:#a78bfa;">&#129518; Custom Metric</span>
         <h2>Building a Player Value Score From Scratch</h2>
-        <p>
-          Instead of trusting the dataset's own rating column, every player is scored on
-          five percentile-ranked categories &mdash; attacking, creativity, defensive work,
-          physical output, and reliability &mdash; using per-90-minute rates so a sub who
-          only played 800 minutes isn't punished next to a player who logged 1,700.
-          Weights shift by position (a center-back's defensive percentile matters far more
-          than a striker's), and goalkeepers get their own shot-stopping-plus-distribution
-          formula entirely. As a gut check, the score still correlates strongly with the
-          dataset's built-in rating &mdash; it isn't measuring noise.
-        </p>
         <div class="chart-card chart-tall" style="margin-bottom:20px;">
           <h3>Tournament-Wide Top 10</h3>
           <div class="sub">Value Score, 0&ndash;100, every position mixed together</div>
@@ -146,15 +127,6 @@
       <div class="wrap">
         <span class="step" style="color:#f5a623;">&#128269; Reality Check</span>
         <h2>What Actually Moves a Transfer Price</h2>
-        <p>
-          Market value is badly skewed &mdash; a handful of superstar valuations drag the
-          whole scale &mdash; so it's log-transformed before comparing it against every
-          per-90 stat on offer. Of the 24 candidate metrics tested, these 14 correlate most
-          strongly (in either direction) with value; the rest sat close enough to zero to
-          not be worth cluttering the chart with. Green climbs with value, red falls with it.
-          The headline: end product (goals, assists, xG/xA, overall rating) tracks value
-          far more tightly than the unglamorous defensive work that actually wins matches.
-        </p>
         <div class="chart-card chart-xl">
           <div class="chart-canvas-wrap"><canvas id="chart-correlation"></canvas></div>
         </div>
@@ -165,13 +137,6 @@
       <div class="wrap">
         <span class="step" style="color:#f5a623;">&#129302; Machine Learning</span>
         <h2>Putting a Number on 2027</h2>
-        <p>
-          A plain Linear Regression and a Random Forest were both trained on the same
-          performance stats, age, and position, then judged only on data neither model had
-          seen during training. The twist: the extra complexity of a forest of decision
-          trees barely moves the needle here &mdash; a useful result in itself, since it
-          means the simpler, more explainable model isn't leaving much on the table.
-        </p>
         <div class="grid grid-2" style="margin-bottom:20px;">
           <div class="card">
             <h3>Linear Regression</h3>
@@ -194,14 +159,6 @@
       <div class="wrap">
         <span class="step" style="color:#4ade80;">&#128176; Scouting Report</span>
         <h2>Who's Underpriced Right Now</h2>
-        <p>
-          Every player's model-projected 2027 value (run through a transparent age-curve
-          adjustment, not a black box) is compared against what they're worth today, as a
-          <strong>percentage</strong> gap rather than a flat euro amount &mdash; a &euro;5M
-          swing means a completely different thing for a &euro;2M academy prospect than for
-          an &euro;80M superstar. It cuts both ways, too: the second chart flips the list
-          upside down to show who the model thinks is priced <em>above</em> their output.
-        </p>
         <div class="grid grid-2" style="margin-bottom:20px;">
           <div class="chart-card chart-tall">
             <h3>The Undervalued Shortlist</h3>
