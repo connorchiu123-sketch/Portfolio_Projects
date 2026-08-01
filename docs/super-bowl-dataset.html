@@ -27,13 +27,13 @@
         <div class="top-row">
           <span class="tag progress">In Progress</span>
         </div>
-        <h1>&#128190; Super Bowl Operations &mdash; Dataset</h1>
+        <h1>Super Bowl Operations &mdash; Dataset</h1>
         <p class="lead">
           The full sample dataset, rendered as actual tables &mdash; ~930 fabricated rows
           across 8 dimension tables and 7 fact tables. Game day is fixed at 2027-02-14;
           <code>dim_date</code> spans the 60 days before it through 1 day after. Foreign
           keys are resolved to their names below for readability; every table has its own
-          &#11015; CSV download, or grab the whole dataset as SQL or JSON below.
+          CSV download, or grab the whole dataset as SQL or JSON below.
         </p>
         <div class="stack">SQL Server &middot; T-SQL</div>
         <div class="case-links">
@@ -48,13 +48,13 @@
     <!-- ================================= DIMENSIONS ================================== -->
     <section class="case-section" style="padding-top: 24px;">
       <div class="wrap">
-        <span class="step">&#128202; Dimensions</span>
+        <span class="step">Dimensions</span>
         <h2>8 Dimension Tables</h2>
 
         <div class="query-card chart-card">
           <div class="card-title-row">
             <h3>dim_department <span style="color:#6b7690; font-weight:400;">&mdash; Departments</span></h3>
-            <a class="btn-csv" href="assets/data/csv/dim_department.csv" download>&#11015; CSV</a>
+            <a class="btn-csv" href="assets/data/csv/dim_department.csv" download>CSV</a>
           </div>
           <div class="sub">8 department rows &mdash; grouped into Operations, Guest Experience, Revenue, and Support.</div>
           <div class="table-scroll table-scroll-v">
@@ -64,7 +64,7 @@
         <div class="query-card chart-card">
           <div class="card-title-row">
             <h3>dim_date <span style="color:#6b7690; font-weight:400;">&mdash; Date</span></h3>
-            <a class="btn-csv" href="assets/data/csv/dim_date.csv" download>&#11015; CSV</a>
+            <a class="btn-csv" href="assets/data/csv/dim_date.csv" download>CSV</a>
           </div>
           <div class="sub">62-row date dimension (60 days pre-game through 1 day post-game).</div>
           <div class="table-scroll table-scroll-v">
@@ -74,7 +74,7 @@
         <div class="query-card chart-card">
           <div class="card-title-row">
             <h3>dim_sales_channel <span style="color:#6b7690; font-weight:400;">&mdash; Sales Channels</span></h3>
-            <a class="btn-csv" href="assets/data/csv/dim_sales_channel.csv" download>&#11015; CSV</a>
+            <a class="btn-csv" href="assets/data/csv/dim_sales_channel.csv" download>CSV</a>
           </div>
           <div class="sub">4 ticket sales channels &mdash; 2 primary, 1 secondary market.</div>
           <div class="table-scroll table-scroll-v">
@@ -84,7 +84,7 @@
         <div class="query-card chart-card">
           <div class="card-title-row">
             <h3>dim_budget_category <span style="color:#6b7690; font-weight:400;">&mdash; Budget Categories</span></h3>
-            <a class="btn-csv" href="assets/data/csv/dim_budget_category.csv" download>&#11015; CSV</a>
+            <a class="btn-csv" href="assets/data/csv/dim_budget_category.csv" download>CSV</a>
           </div>
           <div class="sub">7 cost categories every department's budget rolls up into.</div>
           <div class="table-scroll table-scroll-v">
@@ -94,7 +94,7 @@
         <div class="query-card chart-card">
           <div class="card-title-row">
             <h3>dim_vendor <span style="color:#6b7690; font-weight:400;">&mdash; Vendors</span></h3>
-            <a class="btn-csv" href="assets/data/csv/dim_vendor.csv" download>&#11015; CSV</a>
+            <a class="btn-csv" href="assets/data/csv/dim_vendor.csv" download>CSV</a>
           </div>
           <div class="sub">8 vendor contracts.</div>
           <div class="table-scroll table-scroll-v">
@@ -104,7 +104,7 @@
         <div class="query-card chart-card">
           <div class="card-title-row">
             <h3>dim_gate <span style="color:#6b7690; font-weight:400;">&mdash; Gates</span></h3>
-            <a class="btn-csv" href="assets/data/csv/dim_gate.csv" download>&#11015; CSV</a>
+            <a class="btn-csv" href="assets/data/csv/dim_gate.csv" download>CSV</a>
           </div>
           <div class="sub">6 stadium gates.</div>
           <div class="table-scroll table-scroll-v">
@@ -114,7 +114,7 @@
         <div class="query-card chart-card">
           <div class="card-title-row">
             <h3>dim_ticket_tier <span style="color:#6b7690; font-weight:400;">&mdash; Ticket Tiers</span></h3>
-            <a class="btn-csv" href="assets/data/csv/dim_ticket_tier.csv" download>&#11015; CSV</a>
+            <a class="btn-csv" href="assets/data/csv/dim_ticket_tier.csv" download>CSV</a>
           </div>
           <div class="sub">5 seating tiers.</div>
           <div class="table-scroll table-scroll-v">
@@ -124,7 +124,7 @@
         <div class="query-card chart-card">
           <div class="card-title-row">
             <h3>dim_sponsor <span style="color:#6b7690; font-weight:400;">&mdash; Sponsors</span></h3>
-            <a class="btn-csv" href="assets/data/csv/dim_sponsor.csv" download>&#11015; CSV</a>
+            <a class="btn-csv" href="assets/data/csv/dim_sponsor.csv" download>CSV</a>
           </div>
           <div class="sub">7 sponsors.</div>
           <div class="table-scroll table-scroll-v">
@@ -137,13 +137,13 @@
     <!-- =================================== FACTS ====================================== -->
     <section class="case-section">
       <div class="wrap">
-        <span class="step" style="color:#f5a623;">&#128202; Facts</span>
+        <span class="step" style="color:#f5a623;">Facts</span>
         <h2>7 Fact Tables</h2>
 
         <div class="query-card chart-card">
           <div class="card-title-row">
             <h3>fact_ticket_sales <span style="color:#6b7690; font-weight:400;">&mdash; Ticket Sales</span></h3>
-            <a class="btn-csv" href="assets/data/csv/fact_ticket_sales.csv" download>&#11015; CSV</a>
+            <a class="btn-csv" href="assets/data/csv/fact_ticket_sales.csv" download>CSV</a>
           </div>
           <div class="sub">418 transaction-grain rows &mdash; quantity and price move with proximity to game day.</div>
           <div class="table-scroll table-scroll-v">
@@ -153,7 +153,7 @@
         <div class="query-card chart-card">
           <div class="card-title-row">
             <h3>fact_gate_entries <span style="color:#6b7690; font-weight:400;">&mdash; Gate Entries</span></h3>
-            <a class="btn-csv" href="assets/data/csv/fact_gate_entries.csv" download>&#11015; CSV</a>
+            <a class="btn-csv" href="assets/data/csv/fact_gate_entries.csv" download>CSV</a>
           </div>
           <div class="sub">36 rows &mdash; fan entry counts and wait times across a 6-hour pre-game window.</div>
           <div class="table-scroll table-scroll-v">
@@ -163,7 +163,7 @@
         <div class="query-card chart-card">
           <div class="card-title-row">
             <h3>fact_staffing_cost <span style="color:#6b7690; font-weight:400;">&mdash; Staffing Cost</span></h3>
-            <a class="btn-csv" href="assets/data/csv/fact_staffing_cost.csv" download>&#11015; CSV</a>
+            <a class="btn-csv" href="assets/data/csv/fact_staffing_cost.csv" download>CSV</a>
           </div>
           <div class="sub">29 department/vendor crews across Setup, Game Day, and Teardown.</div>
           <div class="table-scroll table-scroll-v">
@@ -173,7 +173,7 @@
         <div class="query-card chart-card">
           <div class="card-title-row">
             <h3>fact_concessions_sales <span style="color:#6b7690; font-weight:400;">&mdash; Concessions Sales</span></h3>
-            <a class="btn-csv" href="assets/data/csv/fact_concessions_sales.csv" download>&#11015; CSV</a>
+            <a class="btn-csv" href="assets/data/csv/fact_concessions_sales.csv" download>CSV</a>
           </div>
           <div class="sub">258 rows &mdash; gate/category revenue redistributed across entry hour by a weighted demand curve.</div>
           <div class="table-scroll table-scroll-v">
@@ -183,7 +183,7 @@
         <div class="query-card chart-card">
           <div class="card-title-row">
             <h3>fact_sponsorship_revenue <span style="color:#6b7690; font-weight:400;">&mdash; Sponsorship Revenue</span></h3>
-            <a class="btn-csv" href="assets/data/csv/fact_sponsorship_revenue.csv" download>&#11015; CSV</a>
+            <a class="btn-csv" href="assets/data/csv/fact_sponsorship_revenue.csv" download>CSV</a>
           </div>
           <div class="sub">19 payment installments across the contract timeline.</div>
           <div class="table-scroll table-scroll-v">
@@ -193,7 +193,7 @@
         <div class="query-card chart-card">
           <div class="card-title-row">
             <h3>fact_security_incidents <span style="color:#6b7690; font-weight:400;">&mdash; Security Incidents</span></h3>
-            <a class="btn-csv" href="assets/data/csv/fact_security_incidents.csv" download>&#11015; CSV</a>
+            <a class="btn-csv" href="assets/data/csv/fact_security_incidents.csv" download>CSV</a>
           </div>
           <div class="sub">38 logged incidents spanning pregame, in-game/halftime, and post-game egress.</div>
           <div class="table-scroll table-scroll-v">
@@ -203,7 +203,7 @@
         <div class="query-card chart-card">
           <div class="card-title-row">
             <h3>fact_department_budget <span style="color:#6b7690; font-weight:400;">&mdash; Department Budget</span></h3>
-            <a class="btn-csv" href="assets/data/csv/fact_department_budget.csv" download>&#11015; CSV</a>
+            <a class="btn-csv" href="assets/data/csv/fact_department_budget.csv" download>CSV</a>
           </div>
           <div class="sub">29 category line items rolling up to each department's total budget.</div>
           <div class="table-scroll table-scroll-v">
