@@ -578,3 +578,52 @@ table.data-table {
 }
 .placeholder-panel .big-icon { font-size: 2.6rem; margin-bottom: 14px; }
 .placeholder-panel h3 { color: var(--text); margin: 0 0 10px; }
+
+/* Power BI recreation: slicer sidebar + filtered layout */
+.pbi-layout { display: flex; gap: 24px; align-items: flex-start; }
+.pbi-sidebar { width: 220px; flex-shrink: 0; display: flex; flex-direction: column; gap: 14px; position: sticky; top: 90px; }
+.pbi-main { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 20px; }
+
+.slicer-panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 16px;
+}
+.slicer-title { font-size: 11px; font-weight: bold; text-transform: uppercase; letter-spacing: .5px; color: var(--muted); margin-bottom: 10px; }
+.slicer-list { display: flex; flex-direction: column; gap: 7px; max-height: 160px; overflow-y: auto; }
+.slicer-item { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--text); cursor: pointer; }
+.slicer-item input { accent-color: var(--blue); cursor: pointer; }
+.slicer-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.slicer-chip {
+  padding: 5px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.slicer-chip.active { background: var(--blue); border-color: var(--blue); color: #08101f; }
+.slicer-clear {
+  width: 100%;
+  text-align: center;
+  font-size: 12px;
+  font-weight: bold;
+  color: var(--blue);
+  border: 1px solid var(--blue);
+  padding: 8px;
+  border-radius: 6px;
+  background: transparent;
+  cursor: pointer;
+}
+.slicer-clear:hover { background: var(--blue); color: #08101f; }
+.pbi-status { font-size: 0.82rem; color: #6b7690; margin-top: -8px; }
+.pbi-status strong { color: var(--blue); }
+
+@media (max-width: 880px) {
+  .pbi-layout { flex-direction: column; }
+  .pbi-sidebar { width: 100%; position: static; flex-direction: row; flex-wrap: wrap; }
+  .slicer-panel { flex: 1; min-width: 160px; }
+}
