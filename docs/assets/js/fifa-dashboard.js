@@ -1,5 +1,6 @@
 // Drives the FIFA World Cup 2026 dashboard: fetches pre-computed data
-// (generated from World_Cup_Research_Dashboard.ipynb) and renders it with Chart.js.
+// (generated from World_Cup_2026_Real_Performance_Analysis.ipynb) and renders it with Chart.js.
+// Every number here traces back to FBref's real 2026 World Cup "Player Standard Stats" table.
 
 const FIFA_COLORS = {
   blue: "#5b9dff",
@@ -17,12 +18,6 @@ Chart.defaults.borderColor = FIFA_COLORS.grid;
 // Draw synchronously instead of animating in — charts far down this long page
 // otherwise sometimes miss their first (and only) animation frame.
 Chart.defaults.animation = false;
-
-function eur(n) {
-  if (Math.abs(n) >= 1e6) return "€" + (n / 1e6).toFixed(1) + "M";
-  if (Math.abs(n) >= 1e3) return "€" + (n / 1e3).toFixed(0) + "K";
-  return "€" + n.toFixed(0);
-}
 
 function horizBarChart(canvasId, labels, values, color, xLabel, formatter) {
   const ctx = document.getElementById(canvasId);
@@ -53,177 +48,94 @@ function horizBarChart(canvasId, labels, values, color, xLabel, formatter) {
   });
 }
 
+function renderTable(selector, rows, rowFn) {
+  const body = document.querySelector(`${selector} tbody`);
+  if (!body) return;
+  body.innerHTML = rows.map(rowFn).join("");
+}
+
 async function main() {
   const res = await fetch("assets/data/fifa_data.json");
   if (!res.ok) throw new Error(`fifa_data.json request failed: HTTP ${res.status}`);
   const data = await res.json();
+  const posColor = (pos) => data.meta.position_colors[pos] || "#888";
 
   // ---- Overview stats ----
   const statsEl = document.getElementById("overview-stats");
   if (statsEl) {
     const tiles = [
-      [data.meta.row_count.toLocaleString(), "Match rows crunched"],
-      [data.meta.player_count.toLocaleString(), "Players profiled"],
-      [data.meta.team_count.toLocaleString(), "Squads compared"],
-      [data.model_comparison.random_forest.r2.toFixed(2), "Model R² on held-out data"],
+      [data.meta.player_count.toLocaleString(), "Players in the dataset"],
+      [data.meta.team_count.toLocaleString(), "National squads"],
+      [data.meta.qualified_count.toLocaleString(), "Qualified for efficiency board (≥180 min)"],
+      [data.regression.total_model.r2.toFixed(2), "Regression R² (raw output)"],
     ];
     statsEl.innerHTML = tiles
       .map(([num, label]) => `<div class="metric-box"><div class="val">${num}</div><div class="lbl">${label}</div></div>`)
       .join("");
   }
 
-  // ---- Section: Team Dashboard ----
-  // Top 10 (not 15) keeps ~40px per bar instead of ~27px, so team names stay legible.
-  const top10Teams = data.teams.slice(0, 10);
-  horizBarChart("chart-team-value", top10Teams.map((t) => t.team), top10Teams.map((t) => t.total_market_value_eur), FIFA_COLORS.blue, "Total market value", eur);
-  horizBarChart("chart-team-goals", top10Teams.map((t) => t.team), top10Teams.map((t) => t.total_goals), FIFA_COLORS.green, "Goals");
-  horizBarChart("chart-team-pass", top10Teams.map((t) => t.team), top10Teams.map((t) => t.avg_pass_accuracy), FIFA_COLORS.purple, "Pass accuracy (0-1)");
-  horizBarChart("chart-team-cards", top10Teams.map((t) => t.team), top10Teams.map((t) => t.total_cards), FIFA_COLORS.red, "Cards");
-
-  // ---- Radar: top 5 teams ----
-  const radarCtx = document.getElementById("chart-team-radar");
-  if (radarCtx) {
-    const radar = data.radar_top5_teams;
-    const palette = [FIFA_COLORS.blue, FIFA_COLORS.green, FIFA_COLORS.amber, FIFA_COLORS.red, FIFA_COLORS.purple];
-    new Chart(radarCtx, {
-      type: "radar",
-      data: {
-        labels: radar.labels,
-        datasets: radar.teams.map((t, i) => ({
-          label: t.team,
-          data: t.values,
-          borderColor: palette[i % palette.length],
-          backgroundColor: palette[i % palette.length] + "22",
-          pointBackgroundColor: palette[i % palette.length],
-          borderWidth: 2,
-        })),
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: { legend: { position: "top", labels: { boxWidth: 10 } } },
-        scales: {
-          r: {
-            angleLines: { color: FIFA_COLORS.grid },
-            grid: { color: FIFA_COLORS.grid },
-            pointLabels: { color: FIFA_COLORS.text },
-            ticks: { display: false, backdropColor: "transparent" },
-            suggestedMin: 0,
-            suggestedMax: 100,
-          },
-        },
-      },
-    });
-  }
-
-  // ---- Interactive team explorer: team vs. team, or team vs. tournament average ----
-  const teamSelect = document.getElementById("team-select");
-  const compareSelect = document.getElementById("team-compare-select");
-  const AVG_SENTINEL = "__AVG__";
-  let explorerChart = null;
-
-  if (teamSelect && compareSelect) {
-    const teamNames = data.teams.map((t) => t.team).sort();
-
-    // Synthesize a "Tournament Average" pseudo-team so it can be compared exactly
-    // like a real team — same fields, same normalization, same chart code path.
-    const avgSquadSize = data.teams.reduce((s, t) => s + t.squad_size, 0) / data.teams.length;
-    const avgAge = data.teams.reduce((s, t) => s + t.avg_age, 0) / data.teams.length;
-    const averageRow = { team: "Tournament Average", squad_size: avgSquadSize, avg_age: avgAge, ...data.tournament_avg };
-
-    function resolveRow(value) {
-      return value === AVG_SENTINEL ? averageRow : data.teams.find((t) => t.team === value);
-    }
-
-    teamSelect.innerHTML = teamNames.map((t) => `<option value="${t}">${t}</option>`).join("");
-    compareSelect.innerHTML =
-      `<option value="${AVG_SENTINEL}">Tournament Average</option>` +
-      teamNames.map((t) => `<option value="${t}">${t}</option>`).join("");
-
-    function renderExplorer(teamName, compareValue) {
-      const row = resolveRow(teamName);
-      const compareRow = resolveRow(compareValue);
-      const avg = data.tournament_avg;
-      // Raw units differ wildly (euros in the hundreds of millions vs. a 0-1 pass
-      // accuracy), so every metric is expressed as % of the true tournament average —
-      // that keeps both bars on one meaningful, comparable scale no matter what's
-      // being compared (a team, or the average itself, which naturally lands at 100%).
-      const metricDefs = [
-        ["Total Market Value", "total_market_value_eur", eur],
-        ["Total Goals", "total_goals", (v) => v.toFixed(0)],
-        ["Avg Pass Accuracy", "avg_pass_accuracy", (v) => v.toFixed(2)],
-        ["Avg Player Rating", "avg_player_rating", (v) => v.toFixed(2)],
-        ["Avg Distance Covered (km)", "avg_distance_km", (v) => v.toFixed(2)],
-      ];
-      const rawMetrics = metricDefs.map(([label, key, fmt]) => [label, row[key], compareRow[key], avg[key], fmt]);
-      const teamPct = rawMetrics.map((m) => (m[1] / m[3]) * 100);
-      const comparePct = rawMetrics.map((m) => (m[2] / m[3]) * 100);
-      const ctx = document.getElementById("chart-team-explorer");
-      if (explorerChart) explorerChart.destroy();
-      explorerChart = new Chart(ctx, {
-        type: "bar",
-        data: {
-          labels: rawMetrics.map((m) => m[0]),
-          datasets: [
-            { label: row.team, data: teamPct, backgroundColor: FIFA_COLORS.blue, borderRadius: 4 },
-            { label: compareRow.team, data: comparePct, backgroundColor: FIFA_COLORS.amber, borderRadius: 4 },
-          ],
-        },
-        options: {
-          indexAxis: "y",
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: {
-            legend: { position: "top", labels: { boxWidth: 10 } },
-            tooltip: {
-              callbacks: {
-                label: (c) => {
-                  const [label, teamVal, compareVal, , fmt] = rawMetrics[c.dataIndex];
-                  const raw = c.datasetIndex === 0 ? teamVal : compareVal;
-                  return `${c.dataset.label}: ${fmt(raw)} (${c.parsed.x.toFixed(0)}% of tournament avg)`;
-                },
-              },
-            },
-          },
-          scales: {
-            x: { grid: { color: FIFA_COLORS.grid }, title: { display: true, text: "% of tournament average", color: FIFA_COLORS.text } },
-            y: { grid: { display: false } },
-          },
-        },
-      });
-      document.getElementById("team-explorer-meta").textContent =
-        `${row.team}: squad ${Math.round(row.squad_size)}, avg age ${row.avg_age.toFixed(1)}   |   ` +
-        `${compareRow.team}: squad ${Math.round(compareRow.squad_size)}, avg age ${compareRow.avg_age.toFixed(1)}`;
-    }
-
-    teamSelect.addEventListener("change", () => renderExplorer(teamSelect.value, compareSelect.value));
-    compareSelect.addEventListener("change", () => renderExplorer(teamSelect.value, compareSelect.value));
-    renderExplorer(teamNames[0], AVG_SENTINEL);
-  }
-
-  // ---- Value Score leaderboard ----
-  // Top 10 instead of 15 for the same legibility reason as the team charts above.
+  // ---- Efficiency leaderboard: goal contributions per 90 ----
+  const eff = data.efficiency_leaderboard.slice(0, 15);
   horizBarChart(
-    "chart-top15",
-    data.top10_players.map((p) => `${p.player_name} (${p.team})`),
-    data.top10_players.map((p) => p.value_score),
-    FIFA_COLORS.blue,
-    "Value Score (0-100)"
+    "chart-efficiency",
+    eff.map((p) => `${p.player_name} (${p.team})`),
+    eff.map((p) => p.contrib_per90),
+    eff.map((p) => posColor(p.position)),
+    "Goal contributions per 90 minutes"
   );
 
+  // ---- Breakout U21 table ----
+  renderTable("#table-breakout", data.breakout_u21, (r) => {
+    const dot = posColor(r.position);
+    return `<tr><td>${r.player_name}</td><td>${r.team}</td><td><span class="pos-dot" style="background:${dot}"></span>${r.position}</td><td>${r.age}</td><td>${r.total_goals_tournament}</td><td>${r.total_assists_tournament}</td><td>${r.goals_plus_assists}</td></tr>`;
+  });
+
+  // ---- Impact vs. opportunity table ----
+  renderTable("#table-impact-opportunity", data.impact_vs_opportunity, (r) => {
+    const dot = posColor(r.position);
+    return `<tr><td>${r.player_name}</td><td>${r.team}</td><td><span class="pos-dot" style="background:${dot}"></span>${r.position}</td><td>${r.matches_played}</td><td>${r.starts}</td><td>${r.goals_plus_assists}</td></tr>`;
+  });
+
+  // ---- Discipline by position ----
+  const disc = data.discipline_by_position;
+  horizBarChart(
+    "chart-discipline",
+    disc.map((d) => d.position),
+    disc.map((d) => d.cards_per90),
+    disc.map((d) => posColor(d.position)),
+    "Average cards per 90 (min. 3.0 nineties)",
+    (v) => v.toFixed(2)
+  );
+
+  renderTable("#table-discipline", data.discipline_leaderboard, (r) => {
+    const dot = posColor(r.position);
+    return `<tr><td>${r.player_name}</td><td>${r.team}</td><td><span class="pos-dot" style="background:${dot}"></span>${r.position}</td><td>${r.yellow_cards_tournament}</td><td>${r.red_cards_tournament}</td><td>${r.cards_per90.toFixed(2)}</td></tr>`;
+  });
+
+  // ---- Impact Score leaderboard (overall, FW/MF only) ----
+  const impact = data.impact_score_leaderboard.slice(0, 15);
+  horizBarChart(
+    "chart-impact-score",
+    impact.map((p) => `${p.player_name} (${p.team})`),
+    impact.map((p) => p.impact_score),
+    impact.map((p) => posColor(p.position)),
+    "Tournament Impact Score (0-100)"
+  );
+
+  // ---- Impact Score by position tabs ----
   let positionChart = null;
   function renderPositionChart(pos) {
-    const rows = data.top_by_position[pos] || [];
-    const color = data.meta.position_colors[pos] || FIFA_COLORS.blue;
+    const rows = data.impact_score_by_position[pos] || [];
+    const color = posColor(pos);
     if (positionChart) positionChart.destroy();
     positionChart = horizBarChart(
       "chart-position",
       rows.map((r) => `${r.player_name} (${r.team})`),
-      rows.map((r) => r.value_score),
+      rows.map((r) => r.impact_score),
       color,
-      "Value Score"
+      "Impact Score"
     );
-    document.getElementById("position-chart-title").textContent = `Top 6 ${pos}s`;
+    document.getElementById("position-chart-title").textContent = `Top ${rows.length} ${pos}s`;
   }
   renderPositionChart("Forward");
 
@@ -235,28 +147,35 @@ async function main() {
     });
   });
 
-  // ---- Best per team table ----
-  const bestPerTeamBody = document.querySelector("#table-best-per-team tbody");
-  if (bestPerTeamBody) {
-    bestPerTeamBody.innerHTML = data.best_per_team_top10
-      .map((r) => {
-        const dot = data.meta.position_colors[r.position] || "#888";
-        return `<tr><td>${r.team}</td><td>${r.player_name}</td><td><span class="pos-dot" style="background:${dot}"></span>${r.position}</td><td>${r.value_score.toFixed(1)}</td></tr>`;
-      })
+  // ---- Regression: rate model vs. total model metrics ----
+  function fillMetrics(elId, metrics) {
+    const el = document.getElementById(elId);
+    if (!el) return;
+    const tiles = [
+      [metrics.r2.toFixed(3), "R²"],
+      [metrics.mae.toFixed(3), "MAE"],
+    ];
+    el.innerHTML = tiles
+      .map(([num, label]) => `<div class="metric-box"><div class="val" style="font-size:1.3rem;">${num}</div><div class="lbl">${label}</div></div>`)
       .join("");
   }
+  fillMetrics("metrics-rate", data.regression.rate_model);
+  fillMetrics("metrics-total", data.regression.total_model);
 
-  // ---- Correlation with market value ----
-  // Only the 14 strongest correlates (of 24 candidates) — the rest cluster near zero
-  // and just add clutter without changing the takeaway.
-  const corr = data.correlation_with_value.slice(0, 14);
-  const ctxCorr = document.getElementById("chart-correlation");
-  if (ctxCorr) {
-    new Chart(ctxCorr, {
+  // ---- Regression coefficients ----
+  const coefs = data.regression.coefficients;
+  const ctxCoef = document.getElementById("chart-coefficients");
+  if (ctxCoef) {
+    new Chart(ctxCoef, {
       type: "bar",
       data: {
-        labels: corr.map((c) => c.metric),
-        datasets: [{ data: corr.map((c) => c.correlation), backgroundColor: corr.map((c) => (c.correlation >= 0 ? FIFA_COLORS.green : FIFA_COLORS.red)), borderRadius: 4, barThickness: 18 }],
+        labels: coefs.map((c) => c.feature),
+        datasets: [{
+          data: coefs.map((c) => c.coefficient),
+          backgroundColor: coefs.map((c) => (c.coefficient >= 0 ? FIFA_COLORS.green : FIFA_COLORS.red)),
+          borderRadius: 4,
+          barThickness: 20,
+        }],
       },
       options: {
         indexAxis: "y",
@@ -264,90 +183,49 @@ async function main() {
         maintainAspectRatio: false,
         plugins: { legend: { display: false } },
         scales: {
-          x: { grid: { color: FIFA_COLORS.grid }, title: { display: true, text: "Pearson correlation with log market value", color: FIFA_COLORS.text } },
+          x: { grid: { color: FIFA_COLORS.grid }, title: { display: true, text: "Linear regression coefficient (goal contributions)", color: FIFA_COLORS.text } },
           y: { grid: { display: false } },
         },
       },
     });
   }
 
-  // ---- Model metrics + feature importance ----
-  function fillMetrics(elId, metrics) {
-    const el = document.getElementById(elId);
-    if (!el) return;
-    const tiles = [
-      [eur(metrics.mae), "MAE"],
-      [eur(metrics.rmse), "RMSE"],
-      [metrics.r2.toFixed(3), "R²"],
-    ];
-    el.innerHTML = tiles
-      .map(([num, label]) => `<div class="metric-box"><div class="val" style="font-size:1.3rem;">${num}</div><div class="lbl">${label}</div></div>`)
-      .join("");
-  }
-  fillMetrics("metrics-linear", data.model_comparison.linear_regression);
-  fillMetrics("metrics-rf", data.model_comparison.random_forest);
-
-  const importance = data.feature_importance.slice(0, 12);
-  horizBarChart("chart-importance", importance.map((f) => f.feature), importance.map((f) => f.importance), FIFA_COLORS.blue, "Relative importance");
-
-  // ---- Best deals (and the contrasting "overvalued" side of the same coin) ----
-  const bestDeals = data.best_deals_top12;
-  horizBarChart(
-    "chart-best-deals",
-    bestDeals.map((b) => `${b.player_name} (${b.team})`),
-    bestDeals.map((b) => b.value_gap_pct),
-    FIFA_COLORS.green,
-    "Projected value gap (%)",
-    (v) => v.toFixed(0) + "%"
-  );
-
-  const overvalued = data.most_overvalued_top10;
-  horizBarChart(
-    "chart-overvalued",
-    overvalued.map((b) => `${b.player_name} (${b.team})`),
-    overvalued.map((b) => b.value_gap_pct),
-    FIFA_COLORS.red,
-    "Projected value gap (%)",
-    (v) => v.toFixed(0) + "%"
-  );
-
+  // ---- Predicted vs. actual scatter ----
   const scatterCtx = document.getElementById("chart-scatter");
   if (scatterCtx) {
-    const byPos = {};
-    data.current_vs_projected_scatter.forEach((p) => {
-      byPos[p.position] = byPos[p.position] || [];
-      byPos[p.position].push({ x: p.market_value_eur, y: p.projected_2027_value });
-    });
-    const maxVal = Math.max(...data.current_vs_projected_scatter.map((p) => Math.max(p.market_value_eur, p.projected_2027_value)));
-    const datasets = Object.entries(byPos).map(([pos, points]) => ({
-      label: pos,
-      data: points,
-      backgroundColor: (data.meta.position_colors[pos] || "#888") + "aa",
-      pointRadius: 4,
-    }));
-    datasets.push({ type: "line", label: "No change", data: [{ x: 0, y: 0 }, { x: maxVal, y: maxVal }], borderColor: "#6b7690", borderDash: [6, 6], pointRadius: 0, borderWidth: 1.5 });
+    const points = data.regression.scatter;
+    const maxVal = Math.max(...points.map((p) => Math.max(p.actual, p.predicted)));
     new Chart(scatterCtx, {
       type: "scatter",
-      data: { datasets },
+      data: {
+        datasets: [
+          {
+            label: "Test-set players",
+            data: points.map((p) => ({ x: p.actual, y: p.predicted })),
+            backgroundColor: FIFA_COLORS.blue + "aa",
+            pointRadius: 4,
+          },
+          {
+            type: "line",
+            label: "Perfect prediction",
+            data: [{ x: 0, y: 0 }, { x: maxVal, y: maxVal }],
+            borderColor: "#6b7690",
+            borderDash: [6, 6],
+            pointRadius: 0,
+            borderWidth: 1.5,
+          },
+        ],
+      },
       options: {
         responsive: true,
         maintainAspectRatio: false,
         plugins: { legend: { position: "top", labels: { boxWidth: 10 } } },
         scales: {
-          x: { title: { display: true, text: "Current market value", color: FIFA_COLORS.text }, ticks: { callback: (v) => eur(v) }, grid: { color: FIFA_COLORS.grid } },
-          y: { title: { display: true, text: "Projected 2027 value", color: FIFA_COLORS.text }, ticks: { callback: (v) => eur(v) }, grid: { color: FIFA_COLORS.grid } },
+          x: { title: { display: true, text: "Actual goal contributions (tournament total)", color: FIFA_COLORS.text }, grid: { color: FIFA_COLORS.grid } },
+          y: { title: { display: true, text: "Predicted goal contributions", color: FIFA_COLORS.text }, grid: { color: FIFA_COLORS.grid } },
         },
       },
     });
-  }
-
-  const bestDealBody = document.querySelector("#table-best-deal-per-team tbody");
-  if (bestDealBody) {
-    bestDealBody.innerHTML = data.best_deal_per_team_top15
-      .map(
-        (r) => `<tr><td>${r.team}</td><td>${r.player_name}</td><td>${r.position}</td><td>${r.age}</td><td>${eur(r.market_value_eur)}</td><td>${eur(r.projected_2027_value)}</td><td style="color:${r.value_gap_pct >= 0 ? FIFA_COLORS.green : FIFA_COLORS.red}">${r.value_gap_pct.toFixed(1)}%</td></tr>`
-      )
-      .join("");
   }
 }
 

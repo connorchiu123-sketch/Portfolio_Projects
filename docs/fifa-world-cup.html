@@ -28,18 +28,20 @@
         <div class="top-row">
           <span class="tag gold">Flagship Project</span>
         </div>
-        <h1>FIFA World Cup 2026: Team &amp; Player Value Research Dashboard</h1>
+        <h1>FIFA World Cup 2026: Real Tournament Efficiency &amp; Breakout Performance</h1>
         <p class="lead">
-          What started as a pandas cleanup exercise on about 54,600 match rows turned into
-          a full scouting report. It includes a homegrown Player Value Score, a look at
-          what actually moves a transfer price, and a regression model projecting where
-          every player might land by 2027. Everything below is wired up to the notebook's
-          real output, so you can pick a team, flip between positions, and hover over any bar.
+          Every player, club, and statistic here is real &mdash; pulled from FBref's official
+          2026 World Cup "Player Standard Stats" table, covering 1,039 players across all 48
+          national squads. Nothing is simulated. This isn't a valuation project: the real data
+          available for this tournament covers playing time, goals, assists, and discipline,
+          but not market value, defensive actions, or physical tracking &mdash; so instead of
+          forcing a story the data can't support, this project asks a question it actually can
+          answer: <strong>who delivered, relative to the chance they were given?</strong>
         </p>
         <div class="stack">pandas · numpy · matplotlib · seaborn · scikit-learn · Chart.js</div>
         <div class="case-links">
-          <a class="primary" href="https://github.com/connorchiu123-sketch/Portfolio_Projects/blob/master/Notebooks/World_Cup_Research_Dashboard.ipynb" target="_blank" rel="noopener">View Code (GitHub)</a>
-          <a href="downloads/fifa_world_cup_2026_player_performance.csv">Download Dataset</a>
+          <a class="primary" href="https://github.com/connorchiu123-sketch/Portfolio_Projects/blob/master/Notebooks/World_Cup_2026_Real_Performance_Analysis.ipynb" target="_blank" rel="noopener">View Code (GitHub)</a>
+          <a href="downloads/world_cup_2026_real_standard_stats.csv">Download Dataset</a>
         </div>
       </div>
     </section>
@@ -49,10 +51,7 @@
         <span class="step">Insights</span>
         <h2>FIFA Project Insights</h2>
         <div class="finding-list">
-          <div class="finding-item"><div class="n">01</div><p>Because the Player Value Score identifies players whose output is high relative to their current market value, <strong>the club should target those players as transfer priorities before the market corrects and their price rises.</strong></p></div>
-          <div class="finding-item"><div class="n">02</div><p>Because defensive stats correlate weakly with market value even though defense contributes just as much to winning, <strong>the club should negotiate contracts for strong defenders below what their on-field impact is worth</strong>, since the market is underpricing them.</p></div>
-          <div class="finding-item"><div class="n">03</div><p>Because the regression model only explains about half of what drives transfer value (R&sup2; = 0.447), <strong>the club should use it as a shortlist generator, not a final valuation tool.</strong> It should flag names for deeper scouting, with human judgment on marketability, injury history, and reputation deciding the actual offer.</p></div>
-          <div class="finding-item"><div class="n">04</div><p>Because stats explain less of the price for high-profile, marketable players (where reputation inflates value beyond output), <strong>the club should trust the model most for mid-tier, lower-profile targets, and rely on scouting and negotiation experience for star signings.</strong></p></div>
+          <div class="finding-item"><p><em>Insights coming soon.</em></p></div>
         </div>
       </div>
     </section>
@@ -60,59 +59,94 @@
     <section class="case-section" style="padding-top: 24px; padding-bottom: 24px;">
       <div class="wrap">
         <div class="grid grid-4" id="overview-stats">
-          <div class="metric-box"><div class="val">&mdash;</div><div class="lbl">Match rows crunched</div></div>
-          <div class="metric-box"><div class="val">&mdash;</div><div class="lbl">Players profiled</div></div>
-          <div class="metric-box"><div class="val">&mdash;</div><div class="lbl">Squads compared</div></div>
-          <div class="metric-box"><div class="val">&mdash;</div><div class="lbl">Model R&sup2; on held-out data</div></div>
+          <div class="metric-box"><div class="val">&mdash;</div><div class="lbl">Players in the dataset</div></div>
+          <div class="metric-box"><div class="val">&mdash;</div><div class="lbl">National squads</div></div>
+          <div class="metric-box"><div class="val">&mdash;</div><div class="lbl">Qualified for efficiency board (&ge;180 min)</div></div>
+          <div class="metric-box"><div class="val">&mdash;</div><div class="lbl">Regression R&sup2; (raw output)</div></div>
         </div>
       </div>
     </section>
 
     <section class="case-section">
       <div class="wrap">
-        <span class="step" style="color:#5b9dff;">Behind the Numbers</span>
-        <h2>How 48 Squads Stack Up</h2>
-        <div class="grid grid-2">
-          <div class="chart-card chart-tall"><h3>Total Squad Market Value</h3><div class="sub">Top 10 teams, EUR</div><div class="chart-canvas-wrap"><canvas id="chart-team-value"></canvas></div></div>
-          <div class="chart-card chart-tall"><h3>Total Goals Scored</h3><div class="sub">Top 10 teams by squad value</div><div class="chart-canvas-wrap"><canvas id="chart-team-goals"></canvas></div></div>
-          <div class="chart-card chart-tall"><h3>Average Squad Pass Accuracy</h3><div class="sub">Top 10 teams by squad value</div><div class="chart-canvas-wrap"><canvas id="chart-team-pass"></canvas></div></div>
-          <div class="chart-card chart-tall"><h3>Total Cards (Yellow + Red)</h3><div class="sub">Top 10 teams by squad value</div><div class="chart-canvas-wrap"><canvas id="chart-team-cards"></canvas></div></div>
-        </div>
-
-        <div class="chart-card chart-tall" style="margin-top:20px;">
-          <h3>Top 5 Squads, Five Metrics at Once</h3>
-          <div class="sub">Every axis rescaled 0&ndash;100 relative to all 48 teams so the shapes stay comparable</div>
-          <div class="chart-canvas-wrap"><canvas id="chart-team-radar"></canvas></div>
-        </div>
-
-        <p style="margin-top:20px; margin-bottom:0;">
-          Value Score is a custom 0&ndash;100 metric blending five percentile-ranked categories
-          (attacking, creativity, defense, physical output, and reliability) using per-90-minute
-          rates, with weights that shift by position.
+        <span class="step" style="color:#5b9dff;">Efficiency</span>
+        <h2>Goal Contributions per 90 Minutes</h2>
+        <p>
+          Raw goal/assist totals reward players who simply played more minutes. Dividing by
+          minutes played (scaled to a 90-minute match) puts everyone on the same footing.
+          A minimum of 2.0 "nineties" (180 real minutes) is required to qualify &mdash; the
+          same logic as a qualifying-innings cutoff in other sports &mdash; so a player who
+          played 9 minutes and scored once doesn't dominate the board.
         </p>
-        <div class="chart-card table-scroll" style="margin-top:12px;">
-          <h3 style="margin-bottom:4px;">Who Carries Each Squad</h3>
-          <div class="sub">The single highest Value Score on each national team &mdash; top 10 shown</div>
-          <table class="data-table" id="table-best-per-team">
-            <thead><tr><th>Team</th><th>Player</th><th>Position</th><th>Value Score</th></tr></thead>
+        <div class="chart-card chart-tall">
+          <h3>Top 15 Real World Cup 2026 Performers</h3>
+          <div class="sub">Goals + assists per 90 minutes, minimum 2.0 nineties played</div>
+          <div class="chart-canvas-wrap"><canvas id="chart-efficiency"></canvas></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <div class="wrap">
+        <span class="step" style="color:#4ade80;">Storylines</span>
+        <h2>Breakout Performers &mdash; Age 21 and Under</h2>
+        <p>
+          No minutes qualifier here &mdash; the question isn't "who was most efficient," it's
+          "which teenagers and very young players had any real impact at all" on the
+          tournament's biggest stage.
+        </p>
+        <div class="chart-card table-scroll">
+          <table class="data-table" id="table-breakout">
+            <thead><tr><th>Player</th><th>Team</th><th>Position</th><th>Age</th><th>Goals</th><th>Assists</th><th>G+A</th></tr></thead>
             <tbody></tbody>
           </table>
         </div>
+      </div>
+    </section>
 
-        <div class="chart-card chart-tall" style="margin-top:20px;">
-          <div style="display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap; margin-bottom:16px;">
-            <div>
-              <h3 style="margin-bottom:4px;">Compare Any Team</h3>
-              <div class="sub" style="margin-bottom:0;">Pick two teams head-to-head, or leave it on the tournament average</div>
-            </div>
-            <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
-              <select id="team-select" class="tab-btn" style="cursor:pointer;"></select>
-              <span style="color:#6b7690; font-size:0.8rem;">vs.</span>
-              <select id="team-compare-select" class="tab-btn" style="cursor:pointer;"></select>
-            </div>
+    <section class="case-section">
+      <div class="wrap">
+        <span class="step" style="color:#f5a623;">Storylines</span>
+        <h2>Impact vs. Opportunity</h2>
+        <p>
+          Who delivered despite a genuinely bench-heavy role? These players started
+          <strong>half or fewer</strong> of the matches they appeared in, played at least
+          twice, and still produced two or more goal contributions.
+        </p>
+        <div class="chart-card table-scroll">
+          <table class="data-table" id="table-impact-opportunity">
+            <thead><tr><th>Player</th><th>Team</th><th>Position</th><th>Matches</th><th>Starts</th><th>G+A</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <div class="wrap">
+        <span class="step" style="color:#ff6b6b;">Discipline</span>
+        <h2>Cards, Normalized Per 90 Minutes</h2>
+        <p>
+          A red card counts as two yellows &mdash; it ends a player's match outright and often
+          draws a suspension, a materially bigger cost than a single booking &mdash; then the
+          total is normalized per 90 minutes played (minimum 3.0 nineties) so a player who
+          played 30 minutes and picked up a card doesn't look the same as one who played 8
+          full matches cleanly.
+        </p>
+        <div class="grid grid-2">
+          <div class="chart-card chart-tall">
+            <h3>Discipline by Position</h3>
+            <div class="sub">Average cards per 90, minimum 3.0 nineties played</div>
+            <div class="chart-canvas-wrap"><canvas id="chart-discipline"></canvas></div>
           </div>
-          <div class="chart-canvas-wrap"><canvas id="chart-team-explorer"></canvas></div>
-          <p id="team-explorer-meta" style="margin-top:14px; color:#6b7690; font-size:0.85rem;"></p>
+          <div class="chart-card table-scroll">
+            <h3 style="margin-bottom:4px;">Most Cards per 90</h3>
+            <div class="sub">Individual players, minimum 3.0 nineties played</div>
+            <table class="data-table" id="table-discipline">
+              <thead><tr><th>Player</th><th>Team</th><th>Pos</th><th>YC</th><th>RC</th><th>Cards/90</th></tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
         </div>
       </div>
     </section>
@@ -120,21 +154,31 @@
     <section class="case-section">
       <div class="wrap">
         <span class="step" style="color:#a78bfa;">Custom Metric</span>
-        <h2>Building a Player Value Score From Scratch</h2>
+        <h2>Tournament Impact Score &mdash; and Its Honest Limits</h2>
+        <p>
+          A 0&ndash;100 composite of the two things this real dataset can actually measure well:
+          <strong>Attacking Output</strong> (goals + assists per 90, percentile-ranked within
+          position group) and <strong>Reliability</strong> (a blend of minutes share and a
+          clean disciplinary record, also percentile-ranked within position). It deliberately
+          does <em>not</em> claim to measure defensive contribution, physical output, or
+          creativity/passing &mdash; this tournament's public data doesn't include tackles,
+          interceptions, distance covered, or key passes at player level. For the same reason,
+          the leaderboard is restricted to <strong>Forwards and Midfielders</strong>: scoring
+          Defenders or Goalkeepers on attacking output alone would systematically and
+          misleadingly rank them low.
+        </p>
         <div class="chart-card chart-tall" style="margin-bottom:20px;">
-          <h3>Tournament-Wide Top 10</h3>
-          <div class="sub">Value Score, 0&ndash;100, every position mixed together</div>
-          <div class="chart-canvas-wrap"><canvas id="chart-top15"></canvas></div>
+          <h3>Tournament-Wide Top 15</h3>
+          <div class="sub">Impact Score, 0&ndash;100, Forwards and Midfielders only</div>
+          <div class="chart-canvas-wrap"><canvas id="chart-impact-score"></canvas></div>
         </div>
 
         <div class="tabs" id="position-tabs">
           <button class="tab-btn active" data-pos="Forward">Forward</button>
           <button class="tab-btn" data-pos="Midfielder">Midfielder</button>
-          <button class="tab-btn" data-pos="Defender">Defender</button>
-          <button class="tab-btn" data-pos="Goalkeeper">Goalkeeper</button>
         </div>
         <div class="chart-card">
-          <h3 id="position-chart-title">Top 6 Forwards</h3>
+          <h3 id="position-chart-title">Top Forwards</h3>
           <div class="sub">Ranked within their own position group</div>
           <div class="chart-canvas-wrap"><canvas id="chart-position"></canvas></div>
         </div>
@@ -143,63 +187,87 @@
 
     <section class="case-section">
       <div class="wrap">
-        <span class="step" style="color:#f5a623;">Reality Check</span>
-        <h2>What Actually Moves a Transfer Price</h2>
-        <div class="chart-card chart-xl">
-          <div class="chart-canvas-wrap"><canvas id="chart-correlation"></canvas></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="case-section">
-      <div class="wrap">
         <span class="step" style="color:#f5a623;">Machine Learning</span>
-        <h2>Putting a Number on 2027</h2>
+        <h2>Predicting Player Output &mdash; A Real Regression</h2>
+        <p>
+          How much of a Forward or Midfielder's goal contribution can be explained by age,
+          position, and playing time? A single Linear Regression is used throughout &mdash;
+          not because a fancier model wouldn't run, but because its coefficients can be read
+          directly, which matters when the point is explaining the model, not just reporting
+          a score. Goalkeepers and Defenders are excluded: predicting "close to zero" for
+          players who aren't expected to score would trivially inflate accuracy without the
+          model learning anything real.
+        </p>
         <div class="grid grid-2" style="margin-bottom:20px;">
           <div class="card">
-            <h3>Linear Regression</h3>
-            <div class="grid grid-3" id="metrics-linear" style="margin-top:16px;"></div>
+            <h3>Predicting a RATE</h3>
+            <p style="color:#8a93a8; font-size:0.85rem; margin-top:6px;">
+              Per-90 goal contribution from age, position, and starts ratio. Per-90 rates are
+              built to <em>remove</em> the effect of playing time, so this is the harder
+              version of the question.
+            </p>
+            <div class="grid grid-3" id="metrics-rate" style="margin-top:16px;"></div>
+            <p style="color:#8a93a8; font-size:0.85rem; margin-top:12px;">
+              A negative R&sup2; means the model does worse than just guessing the average
+              &mdash; a real, useful finding: age, position, and starts ratio carry
+              essentially no signal for pure efficiency.
+            </p>
           </div>
           <div class="card">
-            <h3>Random Forest <span class="tag" style="background:#123f2b;color:#4ade80;margin-left:8px;">Used for projections</span></h3>
-            <div class="grid grid-3" id="metrics-rf" style="margin-top:16px;"></div>
+            <h3>Predicting a TOTAL <span class="tag" style="background:#123f2b;color:#4ade80;margin-left:8px;">Reframed</span></h3>
+            <p style="color:#8a93a8; font-size:0.85rem; margin-top:6px;">
+              Raw goal contributions (not divided by minutes), with matches played, starts,
+              and nineties as features &mdash; playing time is allowed to explain playing time.
+            </p>
+            <div class="grid grid-3" id="metrics-total" style="margin-top:16px;"></div>
+            <p style="color:#8a93a8; font-size:0.85rem; margin-top:12px;">
+              R&sup2; &asymp; 0.2 is the honest ceiling for this feature set: playing time and
+              role explain a real, moderate share of output &mdash; clearly better than
+              guessing, clearly not a finishing-quality predictor.
+            </p>
           </div>
         </div>
-        <div class="chart-card chart-tall">
-          <h3>What the Forest Actually Leans On</h3>
-          <div class="sub">Relative importance of each input feature</div>
-          <div class="chart-canvas-wrap"><canvas id="chart-importance"></canvas></div>
+        <div class="grid grid-2">
+          <div class="chart-card chart-tall">
+            <h3>What the Model Actually Leans On</h3>
+            <div class="sub">Linear regression coefficients &mdash; the TOTAL model</div>
+            <div class="chart-canvas-wrap"><canvas id="chart-coefficients"></canvas></div>
+          </div>
+          <div class="chart-card chart-tall">
+            <h3>Predicted vs. Actual</h3>
+            <div class="sub">Test-set players &mdash; closer to the dashed line is a better prediction</div>
+            <div class="chart-canvas-wrap"><canvas id="chart-scatter"></canvas></div>
+          </div>
         </div>
       </div>
     </section>
 
-    <section class="case-section">
+    <section class="case-section" style="border-bottom: 1px solid var(--border);">
       <div class="wrap">
-        <span class="step" style="color:#4ade80;">Scouting Report</span>
-        <h2>Who's Underpriced Right Now</h2>
-        <div class="grid grid-2" style="margin-bottom:20px;">
-          <div class="chart-card chart-tall">
-            <h3>The Undervalued Shortlist</h3>
-            <div class="sub">Top 12 by projected value gap, as a % of current market value</div>
-            <div class="chart-canvas-wrap"><canvas id="chart-best-deals"></canvas></div>
+        <span class="step">Summary</span>
+        <h2>What This Project Honestly Does and Doesn't Show</h2>
+        <div class="grid grid-2">
+          <div class="card">
+            <h3>Findings</h3>
+            <ul style="margin-top:10px; padding-left:18px; color:#8a93a8; font-size:0.9rem; line-height:1.7;">
+              <li>The per-90 efficiency board is topped by a mix of elite, established attackers and a few standout younger names.</li>
+              <li>Several players 21 or under recorded real goal or assist contributions &mdash; a legitimate breakout storyline.</li>
+              <li>A small group of players delivered multiple goal contributions despite starting half or fewer of their matches.</li>
+              <li>Discipline patterns differ by position once normalized per 90 minutes.</li>
+              <li>The Impact Score highlights attacking players who combined output with reliability, restricted to Forwards/Midfielders.</li>
+              <li>Predicting per-90 efficiency from age/position/role failed honestly (negative R&sup2;); predicting raw output using playing time worked, landing around R&sup2; = 0.2.</li>
+            </ul>
           </div>
-          <div class="chart-card chart-tall">
-            <h3>The Overvalued Watchlist</h3>
-            <div class="sub">Bottom 10 &mdash; priced above what the model projects for 2027</div>
-            <div class="chart-canvas-wrap"><canvas id="chart-overvalued"></canvas></div>
+          <div class="card">
+            <h3>What This Project Does NOT Claim</h3>
+            <ul style="margin-top:10px; padding-left:18px; color:#8a93a8; font-size:0.9rem; line-height:1.7;">
+              <li>No market value or transfer-price analysis &mdash; that data isn't available for this tournament from the source used here.</li>
+              <li>No defensive-contribution metric &mdash; no player-level tackles/interceptions data exists for this competition.</li>
+              <li>No physical or tracking data &mdash; no distance covered, sprint speed, etc.</li>
+              <li>No passing/creativity metric &mdash; no key passes or expected-assists data available.</li>
+              <li>This is tournament-aggregate data (one row per player), not match-by-match &mdash; no single-match storylines can be answered here.</li>
+            </ul>
           </div>
-        </div>
-        <div class="chart-card chart-tall" style="margin-bottom:20px;">
-          <h3>Today's Price vs. Tomorrow's Projection</h3>
-          <div class="sub">A sample of players &middot; anything above the dashed line is projected to gain value</div>
-          <div class="chart-canvas-wrap"><canvas id="chart-scatter"></canvas></div>
-        </div>
-        <div class="chart-card table-scroll">
-          <h3 style="margin-bottom:16px;">One Pick Per Team</h3>
-          <table class="data-table" id="table-best-deal-per-team">
-            <thead><tr><th>Team</th><th>Player</th><th>Pos</th><th>Age</th><th>Market Value</th><th>Projected 2027</th><th>Value Gap</th></tr></thead>
-            <tbody></tbody>
-          </table>
         </div>
       </div>
     </section>
