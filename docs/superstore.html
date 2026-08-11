@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Superstore Excel Analysis — Connor Chiu</title>
+  <title>Superstore Analysis: Excel &amp; Power BI — Connor Chiu</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -25,18 +25,18 @@
     <section class="case-hero">
       <div class="wrap">
         <a class="case-back" href="projects.html">&larr; Back to Projects</a>
-        <h1>Superstore Excel Analysis</h1>
+        <h1>Superstore Sales Analysis: Excel &amp; Power BI</h1>
         <p class="lead">
-          An Excel workbook analysis of Tableau's classic Sample Superstore dataset,
-          covering 9,994 orders from 2014 to 2017 across 4 regions, 3 product categories,
-          and 17 sub-categories. Pivot tables dig into how discounting actually affects
-          profit. The panels below are a Chart.js recreation of the workbook's own
-          Dashboard sheet, built directly off those same pivot tables.
+          The same 9,994-order Tableau Sample Superstore dataset (2014&ndash;2017, 4 regions, 3
+          categories, 17 sub-categories), analyzed two ways: an Excel pivot-table workbook
+          and a five-page Power BI report with DAX measures. Both dashboards below are
+          rebuilt in Chart.js off their original pivot tables / DAX output &mdash; use the
+          tabs to switch between them, the Power BI tab keeps its slicers live.
         </p>
-        <div class="stack">Excel &middot; Pivot Tables &middot; Chart.js</div>
+        <div class="stack">Excel &middot; Power BI &middot; DAX &middot; Pivot Tables &middot; Chart.js</div>
         <div class="case-links">
           <a class="primary" href="downloads/Sample_Superstore.xlsx" download>Download Workbook</a>
-          <a href="superstore-powerbi.html">View Power BI Version</a>
+          <a href="downloads/SuperStore_Dataset.pbix" download>Download .pbix</a>
         </div>
       </div>
     </section>
@@ -55,6 +55,16 @@
       </div>
     </section>
 
+    <section class="case-section" style="padding-top: 0; padding-bottom: 0;">
+      <div class="wrap">
+        <div class="tabs" id="version-tabs">
+          <button class="tab-btn active" data-version="excel">Excel Version</button>
+          <button class="tab-btn" data-version="powerbi">Power BI Version</button>
+        </div>
+      </div>
+    </section>
+
+    <div id="view-excel">
     <section class="case-section" style="padding-bottom: 24px;">
       <div class="wrap">
         <div class="grid grid-4" id="superstore-kpis">
@@ -199,6 +209,181 @@
         </div>
       </div>
     </section>
+    </div>
+
+    <div id="view-powerbi" style="display:none">
+    <section class="case-section" style="padding-top: 24px;">
+      <div class="wrap">
+        <div class="tabs" id="pbi-page-tabs">
+          <button class="tab-btn active" data-page="product">Product Analysis</button>
+          <button class="tab-btn" data-page="discount">Profit vs. Discount</button>
+          <button class="tab-btn" data-page="customer">Customer Analysis</button>
+        </div>
+        <p class="pbi-status" id="pbi-status">Loading dataset&hellip;</p>
+
+        <!-- ============================== PRODUCT ANALYSIS ============================== -->
+        <div class="pbi-layout" data-page-panel="product">
+          <aside class="pbi-sidebar">
+            <div class="slicer-panel">
+              <div class="slicer-title">Category</div>
+              <div class="slicer-list" id="slicer-product-category"></div>
+            </div>
+            <div class="slicer-panel">
+              <div class="slicer-title">Region</div>
+              <div class="slicer-list" id="slicer-product-region"></div>
+            </div>
+            <div class="slicer-panel">
+              <div class="slicer-title">Customer Segment</div>
+              <div class="slicer-list" id="slicer-product-segment"></div>
+            </div>
+            <div class="slicer-panel">
+              <div class="slicer-title">Year</div>
+              <div class="slicer-chips" id="slicer-product-year"></div>
+            </div>
+            <div class="slicer-panel">
+              <div class="slicer-title">Month</div>
+              <div class="slicer-chips" id="slicer-product-month"></div>
+            </div>
+            <button type="button" class="slicer-clear" data-clear="product">Clear Filters</button>
+          </aside>
+          <div class="pbi-main">
+            <div class="grid grid-4" id="pbi-product-kpis"></div>
+            <div class="grid grid-2">
+              <div class="chart-card chart-tall">
+                <h3>Total Sales by Category</h3>
+                <div class="sub">Sum of Sales, by quarter</div>
+                <div class="chart-canvas-wrap"><canvas id="pbi-product-sales-by-cat"></canvas></div>
+              </div>
+              <div class="chart-card chart-tall">
+                <h3>Units Sold by Category</h3>
+                <div class="sub">Sum of Quantity, by quarter</div>
+                <div class="chart-canvas-wrap"><canvas id="pbi-product-units-by-cat"></canvas></div>
+              </div>
+            </div>
+            <div class="chart-card chart-tall">
+              <h3>Total Sales by Sub-Category</h3>
+              <div class="sub">Sum of Sales, colored by parent Category</div>
+              <div class="chart-canvas-wrap"><canvas id="pbi-product-subcat-sales"></canvas></div>
+            </div>
+            <div class="chart-card table-scroll">
+              <h3 style="margin-bottom:16px;">Category &amp; Sub-Category Breakdown</h3>
+              <table class="data-table" id="pbi-product-table">
+                <thead><tr><th>Category</th><th>Sub-Category</th><th>Total Sales</th><th>Total Profit</th><th>Profit %</th><th>Qty Sold</th><th>Avg Discount %</th><th>Orders</th><th>Profit / Unit</th></tr></thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- =========================== PROFIT VS. DISCOUNT =========================== -->
+        <div class="pbi-layout" data-page-panel="discount" style="display:none;">
+          <aside class="pbi-sidebar">
+            <div class="slicer-panel">
+              <div class="slicer-title">Region</div>
+              <div class="slicer-list" id="slicer-discount-region"></div>
+            </div>
+            <div class="slicer-panel">
+              <div class="slicer-title">Customer Segment</div>
+              <div class="slicer-list" id="slicer-discount-segment"></div>
+            </div>
+            <div class="slicer-panel">
+              <div class="slicer-title">Category</div>
+              <div class="slicer-list" id="slicer-discount-category"></div>
+            </div>
+            <div class="slicer-panel">
+              <div class="slicer-title">Year</div>
+              <div class="slicer-chips" id="slicer-discount-year"></div>
+            </div>
+            <div class="slicer-panel">
+              <div class="slicer-title">Month</div>
+              <div class="slicer-chips" id="slicer-discount-month"></div>
+            </div>
+            <button type="button" class="slicer-clear" data-clear="discount">Clear Filters</button>
+          </aside>
+          <div class="pbi-main">
+            <div class="grid grid-4" id="pbi-discount-kpis"></div>
+            <div class="chart-card chart-tall">
+              <h3>Profit % by Discount</h3>
+              <div class="sub">Every discount tier that actually appears in the order data</div>
+              <div class="chart-canvas-wrap"><canvas id="pbi-discount-profitpct-bydiscount"></canvas></div>
+            </div>
+            <div class="chart-card chart-tall">
+              <h3>Profit % vs. Average Discount Over Time</h3>
+              <div class="sub">Profit % (left axis) against average discount rate (right axis), by quarter</div>
+              <div class="chart-canvas-wrap"><canvas id="pbi-discount-profitpct-vs-discount-time"></canvas></div>
+            </div>
+            <div class="chart-card table-scroll">
+              <h3 style="margin-bottom:16px;">Discount Tier Breakdown</h3>
+              <table class="data-table" id="pbi-discount-table">
+                <thead><tr><th>Discount</th><th>Total Sales</th><th>Total Profit</th><th>Profit %</th><th>Order Count</th></tr></thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- ============================== CUSTOMER ANALYSIS ============================== -->
+        <div class="pbi-layout" data-page-panel="customer" style="display:none;">
+          <aside class="pbi-sidebar">
+            <div class="slicer-panel">
+              <div class="slicer-title">Customer Segment</div>
+              <div class="slicer-list" id="slicer-customer-segment"></div>
+            </div>
+            <div class="slicer-panel">
+              <div class="slicer-title">Region</div>
+              <div class="slicer-list" id="slicer-customer-region"></div>
+            </div>
+            <div class="slicer-panel">
+              <div class="slicer-title">Category</div>
+              <div class="slicer-list" id="slicer-customer-category"></div>
+            </div>
+            <div class="slicer-panel">
+              <div class="slicer-title">Year</div>
+              <div class="slicer-chips" id="slicer-customer-year"></div>
+            </div>
+            <div class="slicer-panel">
+              <div class="slicer-title">Month</div>
+              <div class="slicer-chips" id="slicer-customer-month"></div>
+            </div>
+            <button type="button" class="slicer-clear" data-clear="customer">Clear Filters</button>
+          </aside>
+          <div class="pbi-main">
+            <div class="grid" id="pbi-customer-kpis"></div>
+            <div class="grid grid-2">
+              <div class="chart-card chart-tall">
+                <h3>New Customers by Date</h3>
+                <div class="sub">Customers making their first (filtered) purchase, by quarter</div>
+                <div class="chart-canvas-wrap"><canvas id="pbi-customer-newcustomers"></canvas></div>
+              </div>
+              <div class="chart-card chart-tall">
+                <h3>Sales by Customer Segment</h3>
+                <div class="sub">Sum of Sales, by quarter</div>
+                <div class="chart-canvas-wrap"><canvas id="pbi-customer-sales-by-segment"></canvas></div>
+              </div>
+            </div>
+            <div class="grid grid-2">
+              <div class="chart-card chart-tall">
+                <h3>Top 10 Customers by Profit</h3>
+                <div class="chart-canvas-wrap"><canvas id="pbi-customer-top10"></canvas></div>
+              </div>
+              <div class="chart-card chart-tall">
+                <h3>Bottom 10 Customers by Profit</h3>
+                <div class="chart-canvas-wrap"><canvas id="pbi-customer-bottom10"></canvas></div>
+              </div>
+            </div>
+            <div class="chart-card table-scroll table-scroll-v">
+              <h3 style="margin-bottom:4px;">Customer Breakdown</h3>
+              <div class="sub">Top 50 customers by Total Sales, within the current filters</div>
+              <table class="data-table" id="pbi-customer-table">
+                <thead><tr><th>Customer</th><th>Region</th><th>Segment</th><th>Total Sales</th><th>Total Profit</th><th>Profit %</th><th>Orders</th><th>Avg Order Value</th></tr></thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    </div>
 
     <section class="case-section" style="border-bottom: 1px solid var(--border);">
       <div class="wrap case-links">
@@ -222,5 +407,27 @@
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
   <script src="assets/js/superstore-dashboard.js"></script>
+  <script>
+    (function () {
+      var tabs = document.querySelectorAll("#version-tabs .tab-btn");
+      var panels = { excel: document.getElementById("view-excel"), powerbi: document.getElementById("view-powerbi") };
+      var powerbiLoaded = false;
+
+      function activate(version) {
+        tabs.forEach(function (btn) { btn.classList.toggle("active", btn.dataset.version === version); });
+        Object.keys(panels).forEach(function (key) { panels[key].style.display = key === version ? "" : "none"; });
+        if (version === "powerbi" && !powerbiLoaded) {
+          powerbiLoaded = true;
+          var script = document.createElement("script");
+          script.src = "assets/js/superstore-powerbi-dashboard.js";
+          document.body.appendChild(script);
+        }
+      }
+
+      tabs.forEach(function (btn) {
+        btn.addEventListener("click", function () { activate(btn.dataset.version); });
+      });
+    })();
+  </script>
 </body>
 </html>
