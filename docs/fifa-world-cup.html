@@ -48,7 +48,12 @@
         <span class="step">Insights</span>
         <h2>FIFA Project Insights</h2>
         <div class="finding-list">
-          <div class="finding-item"><p><em>Insights coming soon.</em></p></div>
+          <div class="finding-item"><div class="n">01</div><p>Because players who logged 180+ minutes show a consistent goal+assist output advantage over low-minute players even after normalizing per 90, <strong>playing time is the strongest single predictor in the dataset, stronger than age or position.</strong></p></div>
+          <div class="finding-item"><div class="n">02</div><p>Because forwards post higher per-90 goal contribution scores than midfielders across nearly every minute bracket, <strong>attacking output is heavily concentrated by role, not evenly spread across the pitch.</strong></p></div>
+          <div class="finding-item"><div class="n">03</div><p>Because age shows almost no correlation with per-90 performance once minutes played is controlled for, <strong>teams shouldn't discount older or very young players on age alone.</strong></p></div>
+          <div class="finding-item"><div class="n">04</div><p><strong>Defenders were left out of the prediction model</strong> because the dataset doesn't support building a composite score for how defenders should be ranked or how they impact the game.</p></div>
+          <div class="finding-item"><div class="n">05</div><p><strong>Tournament Impact Score was calculated from goals and assists per 90 minutes:</strong> goals and assists were summed for forwards and midfielders and divided by nineties played, then used to rank players.</p></div>
+          <div class="finding-item"><div class="n">06</div><p><strong>Goal contributions were the strongest predictor of player impact</strong> in the model. Other tracked features like age and position had a negative correlation with impact, meaning using them to predict impact performed worse than a random guess.</p></div>
         </div>
       </div>
     </section>
