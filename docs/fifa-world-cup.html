@@ -71,13 +71,6 @@
       <div class="wrap">
         <span class="step" style="color:#5b9dff;">Efficiency</span>
         <h2>Goal Contributions per 90 Minutes</h2>
-        <p>
-          Raw goal/assist totals reward players who simply played more minutes. Dividing by
-          minutes played (scaled to a 90-minute match) puts everyone on the same footing.
-          A minimum of 2.0 "nineties" (180 real minutes) is required to qualify &mdash; the
-          same logic as a qualifying-innings cutoff in other sports &mdash; so a player who
-          played 9 minutes and scored once doesn't dominate the board.
-        </p>
         <div class="chart-card chart-tall">
           <h3>Top 15 Real World Cup 2026 Performers</h3>
           <div class="sub">Goals + assists per 90 minutes, minimum 2.0 nineties played</div>
@@ -90,11 +83,6 @@
       <div class="wrap">
         <span class="step" style="color:#4ade80;">Storylines</span>
         <h2>Breakout Performers &mdash; Age 21 and Under</h2>
-        <p>
-          No minutes qualifier here &mdash; the question isn't "who was most efficient," it's
-          "which teenagers and very young players had any real impact at all" on the
-          tournament's biggest stage.
-        </p>
         <div class="chart-card table-scroll">
           <table class="data-table" id="table-breakout">
             <thead><tr><th>Player</th><th>Team</th><th>Position</th><th>Age</th><th>Goals</th><th>Assists</th><th>G+A</th></tr></thead>
@@ -108,11 +96,6 @@
       <div class="wrap">
         <span class="step" style="color:#f5a623;">Storylines</span>
         <h2>Impact vs. Opportunity</h2>
-        <p>
-          Who delivered despite a genuinely bench-heavy role? These players started
-          <strong>half or fewer</strong> of the matches they appeared in, played at least
-          twice, and still produced two or more goal contributions.
-        </p>
         <div class="chart-card table-scroll">
           <table class="data-table" id="table-impact-opportunity">
             <thead><tr><th>Player</th><th>Team</th><th>Position</th><th>Matches</th><th>Starts</th><th>G+A</th></tr></thead>
@@ -126,13 +109,6 @@
       <div class="wrap">
         <span class="step" style="color:#ff6b6b;">Discipline</span>
         <h2>Cards, Normalized Per 90 Minutes</h2>
-        <p>
-          A red card counts as two yellows &mdash; it ends a player's match outright and often
-          draws a suspension, a materially bigger cost than a single booking &mdash; then the
-          total is normalized per 90 minutes played (minimum 3.0 nineties) so a player who
-          played 30 minutes and picked up a card doesn't look the same as one who played 8
-          full matches cleanly.
-        </p>
         <div class="grid grid-2">
           <div class="chart-card chart-tall">
             <h3>Discipline by Position</h3>
@@ -155,18 +131,6 @@
       <div class="wrap">
         <span class="step" style="color:#a78bfa;">Custom Metric</span>
         <h2>Tournament Impact Score &mdash; and Its Honest Limits</h2>
-        <p>
-          A 0&ndash;100 composite of the two things this real dataset can actually measure well:
-          <strong>Attacking Output</strong> (goals + assists per 90, percentile-ranked within
-          position group) and <strong>Reliability</strong> (a blend of minutes share and a
-          clean disciplinary record, also percentile-ranked within position). It deliberately
-          does <em>not</em> claim to measure defensive contribution, physical output, or
-          creativity/passing &mdash; this tournament's public data doesn't include tackles,
-          interceptions, distance covered, or key passes at player level. For the same reason,
-          the leaderboard is restricted to <strong>Forwards and Midfielders</strong>: scoring
-          Defenders or Goalkeepers on attacking output alone would systematically and
-          misleadingly rank them low.
-        </p>
         <div class="chart-card chart-tall" style="margin-bottom:20px;">
           <h3>Tournament-Wide Top 15</h3>
           <div class="sub">Impact Score, 0&ndash;100, Forwards and Midfielders only</div>
@@ -189,15 +153,6 @@
       <div class="wrap">
         <span class="step" style="color:#f5a623;">Machine Learning</span>
         <h2>Predicting Player Output &mdash; A Real Regression</h2>
-        <p>
-          How much of a Forward or Midfielder's goal contribution can be explained by age,
-          position, and playing time? A single Linear Regression is used throughout &mdash;
-          not because a fancier model wouldn't run, but because its coefficients can be read
-          directly, which matters when the point is explaining the model, not just reporting
-          a score. Goalkeepers and Defenders are excluded: predicting "close to zero" for
-          players who aren't expected to score would trivially inflate accuracy without the
-          model learning anything real.
-        </p>
         <div class="grid grid-2" style="margin-bottom:20px;">
           <div class="card">
             <h3>Predicting a RATE</h3>
@@ -237,36 +192,6 @@
             <h3>Predicted vs. Actual</h3>
             <div class="sub">Test-set players &mdash; closer to the dashed line is a better prediction</div>
             <div class="chart-canvas-wrap"><canvas id="chart-scatter"></canvas></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="case-section" style="border-bottom: 1px solid var(--border);">
-      <div class="wrap">
-        <span class="step">Summary</span>
-        <h2>What This Project Honestly Does and Doesn't Show</h2>
-        <div class="grid grid-2">
-          <div class="card">
-            <h3>Findings</h3>
-            <ul style="margin-top:10px; padding-left:18px; color:#8a93a8; font-size:0.9rem; line-height:1.7;">
-              <li>The per-90 efficiency board is topped by a mix of elite, established attackers and a few standout younger names.</li>
-              <li>Several players 21 or under recorded real goal or assist contributions &mdash; a legitimate breakout storyline.</li>
-              <li>A small group of players delivered multiple goal contributions despite starting half or fewer of their matches.</li>
-              <li>Discipline patterns differ by position once normalized per 90 minutes.</li>
-              <li>The Impact Score highlights attacking players who combined output with reliability, restricted to Forwards/Midfielders.</li>
-              <li>Predicting per-90 efficiency from age/position/role failed honestly (negative R&sup2;); predicting raw output using playing time worked, landing around R&sup2; = 0.2.</li>
-            </ul>
-          </div>
-          <div class="card">
-            <h3>What This Project Does NOT Claim</h3>
-            <ul style="margin-top:10px; padding-left:18px; color:#8a93a8; font-size:0.9rem; line-height:1.7;">
-              <li>No market value or transfer-price analysis &mdash; that data isn't available for this tournament from the source used here.</li>
-              <li>No defensive-contribution metric &mdash; no player-level tackles/interceptions data exists for this competition.</li>
-              <li>No physical or tracking data &mdash; no distance covered, sprint speed, etc.</li>
-              <li>No passing/creativity metric &mdash; no key passes or expected-assists data available.</li>
-              <li>This is tournament-aggregate data (one row per player), not match-by-match &mdash; no single-match storylines can be answered here.</li>
-            </ul>
           </div>
         </div>
       </div>
